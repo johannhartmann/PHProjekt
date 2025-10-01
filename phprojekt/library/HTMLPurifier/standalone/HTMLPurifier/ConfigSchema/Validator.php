@@ -216,6 +216,27 @@ class HTMLPurifier_ConfigSchema_Validator
     /**
      * Returns a formatted context string.
      */
+    /**
+     * Returns a formatted context string..
+     *
+     * This method takes the context array stored in the `$context` property and joins the elements in reverse order using the ' in ' separator.
+     * The resulting string represents the full context path leading up to the current configuration validation step.
+     * @return string The formatted context string.
+     */
+    /**
+     * Returns a formatted context string representing the full path leading up to the current configuration validation step..
+     *
+     * This method takes the context array stored in the `$context` property and joins the elements in reverse order using the ' in ' separator.
+     * The resulting string represents the full context path leading up to the current configuration validation step.
+     * @return string The formatted context string.
+     */
+    /**
+     * Returns a formatted context string representing the full path leading up to the current configuration validation step..
+     *
+     * This method takes the context array stored in the `$context` property and joins the elements in reverse order using the ' in ' separator.
+     * The resulting string represents the full context path leading up to the current configuration validation step.
+     * @return string The formatted context string.
+     */
     protected function getFormattedContext() {
         return implode(' in ', array_reverse($this->context));
     }

@@ -196,6 +196,48 @@ class Phprojekt_Item_Rights extends Zend_Db_Table_Abstract
      *
      * @return array Array of user IDs.
      */
+    /**
+     * Retrieves a list of users with a given right on an item.
+     *
+     * This method retrieves a list of users who have a specified right on a given item.
+     * If no rights are provided, it will return all users who have any access rights on the item.
+     * The method can also be configured to return only users with the exact specified rights, rather than any users with at least the specified rights.
+     *
+     * @param string $moduleId The ID of the module containing the item
+     * @param integer $itemId The ID of the item
+     * @param int $rights A bitmask of rights (Constants in Phprojekt_Acl). If null or omitted, all users with any rights will be returned.
+     * @param bool $exact If true, only users with the exact specified rights will be returned. If false (the default), users with at least the specified rights will be returned.
+     * @return array An array of user IDs who have the specified rights on the item
+     * @note This method accesses database.
+     */
+    /**
+     * Retrieves a list of users with a given right on an item.
+     *
+     * This method retrieves a list of users who have a specified right on a given item.
+     * If no rights are provided, it will return all users who have any access rights on the item.
+     * The method can also be configured to return only users with the exact specified rights, rather than any users with at least the specified rights.
+     *
+     * @param string $moduleId The ID of the module containing the item
+     * @param integer $itemId The ID of the item
+     * @param int $rights A bitmask of rights (Constants in Phprojekt_Acl). If null or omitted, all users with any rights will be returned.
+     * @param bool $exact If true, only users with the exact specified rights will be returned. If false (the default), users with at least the specified rights will be returned.
+     * @return array An array of user IDs who have the specified rights on the item
+     * @note This method accesses database.
+     */
+    /**
+     * Retrieves a list of users with a given right on an item..
+     *
+     * This method retrieves a list of users who have a specified right on a given item.
+     * If no rights are provided, it will return all users who have any access rights on the item.
+     * The method can also be configured to return only users with the exact specified rights, rather than any users with at least the specified rights.
+     *
+     * @param string $moduleId The ID of the module containing the item.
+     * @param integer $itemId The ID of the item.
+     * @param int $rights A bitmask of rights (Constants in Phprojekt_Acl). If null or omitted, all users with any rights will be returned.
+     * @param bool $exact If true, only users with the exact specified rights will be returned. If false (the default), users with at least the specified rights will be returned.
+     * @return array An array of user IDs who have the specified rights on the item.
+     * @note This method accesses database.
+     */
     public function getUsersWithRight($moduleId, $itemId, $rights = null, $exact = false)
     {
         $db     = Phprojekt::getInstance()->getDb();

@@ -1,5 +1,29 @@
 <?php
 
+/**
+ * Provides English language messages for HTML Purifier.
+ *
+ * This module contains the English language message strings used by the HTML Purifier library.
+ * It defines the default messages for various error conditions and other user-facing text.
+ * @see HTMLPurifier
+ */
+
+/**
+ * Provides English language messages for HTML Purifier.
+ *
+ * This module contains the English language message translations for the HTML Purifier library.
+ * It defines the default messages used for various validation and sanitization errors.
+ * @see HTMLPurifier
+ */
+
+/**
+ * Provides English language messages for HTML Purifier.
+ *
+ * This module contains the English language message strings used by the HTML Purifier library.
+ * It defines the default messages for various error conditions and other user-facing text.
+ * @see HTMLPurifier
+ */
+
 $fallback = false;
 
 $messages = array(

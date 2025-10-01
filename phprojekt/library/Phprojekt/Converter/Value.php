@@ -71,12 +71,16 @@ class Phprojekt_Converter_Value
     }
 
     /**
-     * Return a value for get, using some validations from the table data.
+     * Converts a value from database storage format to API/display format.
      *
-     * @param string $type  Type of field.
-     * @param mixed  $value Value to transform.
+     * This method takes a value and a type, and applies type-specific transformations
+     * to the value. It handles conversions for float, time, datetime, timestamp, and
+     * text data types, applying timezone conversions and formatting as needed.
      *
-     * @return mixed Value of the var.
+     * @param string $type  The data type to convert the value to.
+     * @param mixed  $value The value to be converted.
+     *
+     * @return mixed The converted value.
      */
     public static function get($type, $value)
     {

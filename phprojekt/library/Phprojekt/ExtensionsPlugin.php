@@ -25,6 +25,15 @@ class Phprojekt_ExtensionsPlugin extends Zend_Controller_Plugin_Abstract
 {
     private $_extensions;
 
+    /**
+     * Initializes the Phprojekt_Extensions object for the ExtensionsPlugin class..
+     *
+     * The __construct() method is the constructor for the Phprojekt_ExtensionsPlugin class.
+     * It initializes the _extensions property by creating a new instance of the Phprojekt_Extensions class, passing the PHPR_CORE_PATH constant as an argument.
+     * @return void The constructor does not return anything, it only initializes the _extensions property.
+     * @note This method modifies global state.
+     * @see Phprojekt_Extensions
+     */
     public function __construct()
     {
         /* initialize PHPRojekt Extensions */
@@ -48,6 +57,24 @@ class Phprojekt_ExtensionsPlugin extends Zend_Controller_Plugin_Abstract
         }
     }
 
+    /**
+     * Initializes all registered extensions before the main controller dispatch..
+     *
+     * This method is called before the main controller dispatch.
+     * It iterates through all registered extensions and calls their `init()` method, allowing the extensions to perform any necessary initialization tasks.
+     *
+     * @param Zend_Controller_Request_Abstract $request The current controller request object.
+     * @note This method modifies global state.
+     */
+    /**
+     * Initializes all registered extensions before the main controller dispatch..
+     *
+     * This method is called before the main controller dispatch.
+     * It iterates through all registered extensions and calls their `init()` method, allowing the extensions to perform any necessary initialization tasks.
+     *
+     * @param Zend_Controller_Request_Abstract $request The current controller request object.
+     * @note This method modifies global state.
+     */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
         // Call the init method on every extension

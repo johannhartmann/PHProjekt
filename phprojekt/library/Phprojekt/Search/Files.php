@@ -56,6 +56,36 @@ class Phprojekt_Search_Files
      *
      * @return string Extension.
      */
+    /**
+     * Extracts the file extension from a given filename.
+     *
+     * This method takes a filename as input and returns the file extension in uppercase.
+     * It does this by splitting the filename on the '.' character and returning the last element of the resulting array.
+     *
+     * @param string $filename The name of the file to extract the extension from
+     * @return string The file extension in uppercase
+     * @note This method modifies filesystem.
+     */
+    /**
+     * Extracts the file extension from a given filename.
+     *
+     * This private method takes a filename as input and returns the file extension in uppercase.
+     * It does this by splitting the filename on the '.' character and returning the last element of the resulting array.
+     *
+     * @param string $filename The name of the file to extract the extension from
+     * @return string The file extension in uppercase
+     * @note This method modifies filesystem.
+     */
+    /**
+     * Extracts the file extension from a given filename..
+     *
+     * This private method takes a filename as input and returns the file extension in uppercase.
+     * It does this by splitting the filename on the '.' character and returning the last element of the resulting array.
+     *
+     * @param string $filename The name of the file to extract the extension from
+     * @return string The file extension in uppercase
+     * @note This method modifies filesystem.
+     */
     private function _getFileType($filename)
     {
         $type = explode(".", $filename);

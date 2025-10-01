@@ -94,9 +94,13 @@ class Phprojekt_Filter
     }
 
     /**
-     * Return the where clause for use in the fetchAll.
+     * Retrieves the WHERE clause for a database query.
      *
-     * @return string Where clause.
+     * This method combines the internal _where and _userWhere properties to generate a complete
+     * WHERE clause for use in a database query. The resulting string includes the appropriate
+     * boolean operators (AND) to combine the clauses.
+     *
+     * @return string|null The complete WHERE clause, or null if no clauses are defined.
      */
     public function getWhere()
     {
@@ -118,14 +122,19 @@ class Phprojekt_Filter
     }
 
     /**
-     * Convert the rule and value into a real where clause.
+     * Converts a filter rule and value into a SQL WHERE clause.
      *
-     * @param string $field      Field for filter.
-     * @param string $identifier Converted field for filter.
-     * @param string $rule       Rule for apply the filter.
-     * @param string $keyword    Value used for filter.
+     * This method takes a field name, identifier, filter rule, and keyword value, and generates
+     * a SQL WHERE clause that can be used to apply the specified filter. It handles different
+     * data types like time, datetime, and strings, and applies the appropriate SQL operators
+     * based on the filter rule.
      *
-     * @return string Where clause.
+     * @param string $field      The name of the field being filtered.
+     * @param string $identifier The quoted, fully-qualified identifier for the field.
+     * @param string $rule       The type of filter rule to apply (e.g. 'equal', 'notEqual', 'begins').
+     * @param string $keyword    The value to use for the filter.
+     *
+     * @return string The generated SQL WHERE clause.
      */
     private function _convertRule($field, $identifier, $rule, $keyword)
     {

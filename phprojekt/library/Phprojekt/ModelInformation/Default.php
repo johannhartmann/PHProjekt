@@ -265,6 +265,39 @@ class Phprojekt_ModelInformation_Default implements Phprojekt_ModelInformation_I
      *
      * @return integer Comparation value.
      */
+    /**
+     * Sorts an array of associative arrays by the 'formPosition' key in ascending order..
+     *
+     * This method takes two arrays as input and compares the 'formPosition' values of the elements in each array.
+     * It returns an integer value indicating the relative order of the two arrays based on the 'formPosition' values.
+     * This can be used to sort an array of associative arrays by the 'formPosition' key in ascending order.
+     *
+     * @param array $a The first array to be compared.
+     * @param array $b The second array to be compared.
+     * @return integer An integer value indicating the relative order of the two arrays based on the 'formPosition' values. Returns -1 if 'a' should come before 'b', 0 if they are equal, and 1 if 'a' should come after 'b'.
+     */
+    /**
+     * Sorts an array of associative arrays by the 'formPosition' key in ascending order.
+     *
+     * This method takes two arrays as input and compares the 'formPosition' values of the elements in each array.
+     * It returns an integer value indicating the relative order of the two arrays based on the 'formPosition' values.
+     * This can be used to sort an array of associative arrays by the 'formPosition' key in ascending order.
+     *
+     * @param array $a The first array to be compared
+     * @param array $b The second array to be compared
+     * @return integer An integer value indicating the relative order of the two arrays based on the 'formPosition' values. Returns -1 if 'a' should come before 'b', 0 if they are equal, and 1 if 'a' should come after 'b'.
+     */
+    /**
+     * Sorts an array of associative arrays by the 'formPosition' key in ascending order.
+     *
+     * This method takes two arrays as input and compares the 'formPosition' values of the elements in each array.
+     * It returns an integer value indicating the relative order of the two arrays based on the 'formPosition' values.
+     * This can be used to sort an array of associative arrays by the 'formPosition' key in ascending order.
+     *
+     * @param array $a The first array to be compared
+     * @param array $b The second array to be compared
+     * @return integer An integer value indicating the relative order of the two arrays based on the 'formPosition' values. Returns -1 if 'a' should come before 'b', 0 if they are equal, and 1 if 'a' should come after 'b'.
+     */
     public static function sortByFormPosition($a, $b)
     {
         if ($a['formPosition'] == $b['formPosition']) {

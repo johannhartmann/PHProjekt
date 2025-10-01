@@ -262,12 +262,14 @@ class Phprojekt_Converter_Json
     }
 
     /**
-     * Enclose the json result in comments for security reasons, see "json-comment-filtered dojo"
-     * the content-type dojo expects is: json-comment-filtered.
+     * Encodes data as a JSON string.
      *
-     * @param array $data Data to convert.
+     * This method takes an array of data and encodes it into a JSON string using
+     * the Zend_Json::encode() function. The resulting JSON string is returned.
      *
-     * @return string Data in JSON format.
+     * @param array $data The data to be encoded as a JSON string.
+     *
+     * @return string The data encoded as a JSON string.
      */
     private static function _makeJsonString($data)
     {

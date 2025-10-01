@@ -747,6 +747,36 @@ class Phprojekt_Notification
      *
      * @return array Filter array.
      */
+    /**
+     * Filters the recipients list based on their notification settings.
+     *
+     * This method takes an array of user IDs as recipients and filters out those users who have disabled the notification setting.
+     * It retrieves the notification setting for each user and removes them from the recipients list if the setting is disabled.
+     *
+     * @param array $recipients An array of user IDs to be filtered
+     * @return array The filtered array of user IDs that have the notification setting enabled
+     * @note This method accesses database.
+     */
+    /**
+     * Filters a list of recipients based on their notification settings.
+     *
+     * This method takes an array of user IDs as recipients and filters out those users who have disabled the notification setting.
+     * It retrieves the notification setting for each user and removes them from the recipients list if the setting is disabled.
+     *
+     * @param array $recipients An array of user IDs to be filtered
+     * @return array The filtered array of user IDs that have the notification setting enabled
+     * @note This method accesses database.
+     */
+    /**
+     * Filters a list of recipients based on their notification settings.
+     *
+     * This method takes an array of user IDs as recipients and filters out those users who have disabled the notification setting.
+     * It retrieves the notification setting for each user and removes them from the recipients list if the setting is disabled.
+     *
+     * @param array $recipients An array of user IDs to be filtered
+     * @return array The filtered array of user IDs that have the notification setting enabled
+     * @note This method accesses database.
+     */
     public function filterRecipientsToSettings(array $recipients)
     {
         $users = $recipients;

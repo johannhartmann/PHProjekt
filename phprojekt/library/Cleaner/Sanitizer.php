@@ -447,6 +447,39 @@ class Cleaner_Sanitizer
      *
      * @return mixed Sanitized value.
      */
+    /**
+     * Sanitizes an array of values using a separator and a type cast.
+     *
+     * This method takes a string value, splits it into an array using the provided separator, and then casts each element to the specified type (default is integer).
+     * The resulting sanitized array is returned.
+     *
+     * @param mixed $value The value to be sanitized and converted to an array
+     * @param string $separator The character or string used to split the input value into an array
+     * @param string $cast The type to cast each array element to (default is 'int')
+     * @return array The sanitized array of values
+     */
+    /**
+     * Sanitizes an array of values using a separator and a type cast.
+     *
+     * This method takes a string value, splits it into an array using the provided separator, and then casts each element to the specified type (default is integer).
+     * The resulting sanitized array is returned.
+     *
+     * @param mixed $value The value to be sanitized and converted to an array
+     * @param string $separator The character or string used to split the input value into an array
+     * @param string $cast The type to cast each array element to (default is 'int')
+     * @return array The sanitized array of values
+     */
+    /**
+     * Sanitizes an array of values using a separator and a type cast.
+     *
+     * This method takes a string value, splits it into an array using the provided separator, and then casts each element to the specified type (default is integer).
+     * The resulting sanitized array is returned.
+     *
+     * @param mixed $value The value to be sanitized and converted to an array
+     * @param string $separator The character or string used to split the input value into an array
+     * @param string $cast The type to cast each array element to (default is 'int')
+     * @return array The sanitized array of values
+     */
     public function sanitizeToArray($value, $separator, $cast = 'int')
     {
         $array = explode($separator, $value);

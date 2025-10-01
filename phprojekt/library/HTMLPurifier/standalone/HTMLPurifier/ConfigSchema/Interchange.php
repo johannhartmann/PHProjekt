@@ -47,6 +47,30 @@ class HTMLPurifier_ConfigSchema_Interchange
      * Convenience function to perform standard validation. Throws exception
      * on failed validation.
      */
+    /**
+     * Validates the current HTMLPurifier_ConfigSchema_Interchange object..
+     *
+     * This method creates a new HTMLPurifier_ConfigSchema_Validator object and uses it to validate the current HTMLPurifier_ConfigSchema_Interchange instance.
+     * If the validation fails, an exception will be thrown.
+     * @return bool True if the validation was successful, False otherwise.
+     * @throws HTMLPurifier_Exception The validation of the HTMLPurifier_ConfigSchema_Interchange object fails.
+     */
+    /**
+     * Validates the current HTMLPurifier_ConfigSchema_Interchange object..
+     *
+     * This method creates a new HTMLPurifier_ConfigSchema_Validator object and uses it to validate the current HTMLPurifier_ConfigSchema_Interchange instance.
+     * If the validation fails, an exception will be thrown.
+     * @return bool True if the validation was successful, False otherwise.
+     * @throws HTMLPurifier_Exception The validation of the HTMLPurifier_ConfigSchema_Interchange object fails.
+     */
+    /**
+     * Validates the current HTMLPurifier_ConfigSchema_Interchange object..
+     *
+     * This method creates a new HTMLPurifier_ConfigSchema_Validator object and uses it to validate the current HTMLPurifier_ConfigSchema_Interchange instance.
+     * If the validation fails, an exception will be thrown.
+     * @return bool True if the validation was successful, False otherwise.
+     * @throws HTMLPurifier_Exception The validation of the HTMLPurifier_ConfigSchema_Interchange object fails.
+     */
     public function validate() {
         $validator = new HTMLPurifier_ConfigSchema_Validator();
         return $validator->validate($this);

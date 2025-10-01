@@ -218,6 +218,36 @@ class Phprojekt_Tags_TagsTableMapper
      * combination matched all the searched words.
      * The tagGroupList format is [search word1->[matching tag1, ..], ..]
      */
+    /**
+     * Retrieves a map of module IDs and item IDs associated with the provided tag group IDs..
+     *
+     * This method takes a list of tag group IDs and queries the tags_relation table to find all module and item IDs associated with those tag groups.
+     * The results are organized into a nested array, where the outer keys are module IDs and the inner keys are item IDs, with the values being the indices of the corresponding tag groups.
+     *
+     * @param array $tagGroupList A list of tag group IDs to retrieve module and item associations for.
+     * @return array A nested array mapping module IDs to item IDs, with the values being the indices of the corresponding tag groups.
+     * @note This method accesses database.
+     */
+    /**
+     * Retrieves a map of module IDs and item IDs associated with the provided tag group IDs..
+     *
+     * This method takes a list of tag group IDs and queries the tags_relation table to find all module and item IDs associated with those tag groups.
+     * The results are organized into a nested array, where the outer keys are module IDs and the inner keys are item IDs, with the values being the indices of the corresponding tag groups.
+     *
+     * @param array $tagGroupList A list of tag group IDs to retrieve module and item associations for.
+     * @return array A nested array mapping module IDs to item IDs, with the values being the indices of the corresponding tag groups.
+     * @note This method accesses database.
+     */
+    /**
+     * Retrieves a map of module IDs and item IDs associated with the provided tag group IDs..
+     *
+     * This method takes a list of tag group IDs and queries the tags_relation table to find all module and item IDs associated with those tag groups.
+     * The results are organized into a nested array, where the outer keys are module IDs and the inner keys are item IDs, with the values being the indices of the corresponding tag groups.
+     *
+     * @param array $tagGroupList A list of tag group IDs to retrieve module and item associations for.
+     * @return array A nested array mapping module IDs to item IDs, with the values being the indices of the corresponding tag groups.
+     * @note This method accesses database.
+     */
     private function getModuleItemPairsForTagGroups($tagGroupList) {
         $moduleItemTagMap = array();
 

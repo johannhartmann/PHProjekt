@@ -36,6 +36,15 @@ class Phprojekt_Exception_Published extends Phprojekt_Exception
         return $this->_httpCode;
     }
 
+    /**
+     * Converts the exception object to an associative array representation.
+     *
+     * This method takes the current exception object and returns an associative array containing
+     * the exception type, message, and optionally additional error information. The array can be
+     * used to inspect and work with the exception details in a more structured format.
+     *
+     * @return array An associative array with keys 'type', 'message', and optionally 'error'.
+     */
     public function toArray()
     {
         $ret = array(

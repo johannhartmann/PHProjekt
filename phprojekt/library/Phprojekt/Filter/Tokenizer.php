@@ -167,11 +167,16 @@ class Phprojekt_Filter_Tokenizer
     }
 
     /**
-     * Parse string, removes token from string and returns first token.
+     * Parses a string and returns the first token found.
      *
-     * @param boolean $remove
+     * This method takes a string input and attempts to find the first token in the string based
+     * on a set of regular expressions defined in the _token property. If a token is found, it is
+     * returned as an array containing the token type and the matched string. Optionally, the
+     * matched token can be removed from the input string.
      *
-     * @return array
+     * @param boolean $remove If true, the matched token will be removed from the input string.
+     *
+     * @return array|null Array with token type and value if found, null otherwise.
      */
     private function parseString($remove = true)
     {

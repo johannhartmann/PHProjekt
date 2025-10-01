@@ -65,9 +65,12 @@ class Phprojekt_DatabaseManager_Field
     }
 
     /**
-     * Function to print this class.
+     * Returns the string representation of the Phprojekt_DatabaseManager_Field object.
      *
-     * @return string Class in a print format.
+     * This method is used to convert the Phprojekt_DatabaseManager_Field object to a string representation.
+     * It simply returns the value property of the object, which represents the value of the database field.
+     *
+     * @return string The value of the database field as a string.
      */
     public function __toString()
     {

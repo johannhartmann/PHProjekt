@@ -133,11 +133,15 @@ class Phprojekt_Converter_Csv
     }
 
     /**
-     * Writes header and content of the CSV file based on data array.
+     * Converts a data array into a CSV-formatted string.
      *
-     * @param array $data Data to write on file.
+     * This method takes a data array and converts it into a CSV-formatted string.
+     * It iterates through the rows and columns, escaping any double quotes in the data
+     * by doubling them. The resulting CSV string is returned.
      *
-     * @return string Data in CSV format.
+     * @param array $data The data to be written to the CSV string.
+     *
+     * @return string The CSV-formatted string representation of the input data array.
      */
     private static function _writeFile($data)
     {

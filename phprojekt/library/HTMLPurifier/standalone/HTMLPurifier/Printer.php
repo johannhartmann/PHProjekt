@@ -127,9 +127,15 @@ class HTMLPurifier_Printer
     }
     
     /**
-     * Retrieves the class of an object without prefixes, as well as metadata
-     * @param $obj Object to determine class of
-     * @param $prefix Further prefix to remove
+     * Retrieves the class name of an object without prefixes, and includes additional metadata about the class.
+     *
+     * This method takes an object and an optional prefix string as input.
+     * It determines the class of the object, removes the specified prefix from the class name, and returns the class name with additional metadata about the class.
+     * The metadata includes information about the class, such as the values of an enum class or the components of a CSS composite class.
+     *
+     * @param object $obj The object to determine the class of
+     * @param string $sec_prefix An optional prefix to remove from the class name
+     * @return string The class name of the object, with any specified prefix removed, and additional metadata about the class
      */
     protected function getClass($obj, $sec_prefix = '') {
         static $five = null;

@@ -248,6 +248,25 @@ class Phprojekt_RoleRights
      *
      * @return string $_role Current role Id.
      */
+    /**
+     * Retrieves the current user's role ID..
+     *
+     * This method returns the role ID associated with the current user.
+     * It is a simple getter that returns the value of the `_role` property.
+     * @return string The current user's role ID.
+     */
+    /**
+     * Retrieves the current user's role ID.
+     *
+     * This method is a simple getter that returns the value of the `_role` property, which represents the role ID associated with the current user.
+     * @return string The current user's role ID
+     */
+    /**
+     * Retrieves the current user's role ID..
+     *
+     * This method is a simple getter that returns the value of the `_role` property, which represents the role ID associated with the current user.
+     * @return string The current user's role ID.
+     */
     public function getUserRole()
     {
         return $this->_role;

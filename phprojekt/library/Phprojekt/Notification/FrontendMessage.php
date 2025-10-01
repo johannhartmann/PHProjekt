@@ -306,6 +306,30 @@ class Phprojekt_Notification_FrontendMessage extends Phprojekt_ActiveRecord_Abst
      *
      * @return boolean True on a sucessful save.
      */
+    /**
+     * Saves a frontend message to the database using the abstract record pattern..
+     *
+     * This method saves a frontend message to the database.
+     * It sets the actor ID to the current user's ID and then either saves the message directly or creates a copy of the message for each recipient in the recipientId array and saves each one.
+     * @return boolean True on a successful save.
+     * @note This method accesses database.
+     */
+    /**
+     * Saves a frontend message to the database.
+     *
+     * This method saves a frontend message to the database.
+     * It sets the actor ID to the current user's ID and then either saves the message directly or creates a copy of the message for each recipient in the recipientId array and saves each one.
+     * @return boolean True on a successful save
+     * @note This method accesses database.
+     */
+    /**
+     * Saves a frontend message to the database.
+     *
+     * This method saves a frontend message to the database.
+     * It sets the actor ID to the current user's ID and then either saves the message directly or creates a copy of the message for each recipient in the recipientId array and saves each one.
+     * @return boolean True on a successful save
+     * @note This method accesses database.
+     */
     public function saveFrontendMessage()
     {
         $return        = '';

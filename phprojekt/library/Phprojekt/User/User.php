@@ -391,6 +391,39 @@ class Phprojekt_User_User extends Phprojekt_ActiveRecord_Abstract implements Php
         return $values;
     }
 
+    /**
+     * Retrieves a holiday calculator based on the user's configured holiday region.
+     *
+     * This method retrieves a holiday calculator object based on the user's configured holiday region.
+     * It first checks the 'holidayIdentifier' setting, and if it is not set, throws an exception.
+     * It then creates the appropriate holiday calculator object (either Bavaria or Germany) based on the identifier, and returns it.
+     * @return \Holiday\Bavaria|\Holiday\Germany The holiday calculator object for the user's configured region
+     * @throws Phprojekt_Exception_HolidayRegionNotSet The 'holidayIdentifier' setting is not configured
+     * @throws Zend_Controller_Action_Exception The 'holidayIdentifier' setting is not a valid identifier
+     * @note This method depends on current time.
+     */
+    /**
+     * Retrieves a holiday calculator based on the user's configured holiday region..
+     *
+     * This method retrieves a holiday calculator object based on the user's configured holiday region.
+     * It first checks the 'holidayIdentifier' setting, and if it is not set, throws an exception.
+     * It then creates the appropriate holiday calculator object (either Bavaria or Germany) based on the identifier, and returns it.
+     * @return \Holiday\Bavaria|\Holiday\Germany The holiday calculator object for the user's configured region.
+     * @throws Phprojekt_Exception_HolidayRegionNotSet The 'holidayIdentifier' setting is not configured.
+     * @throws Zend_Controller_Action_Exception The 'holidayIdentifier' setting is not a valid identifier.
+     * @note This method depends on current time.
+     */
+    /**
+     * Retrieves a holiday calculator object based on the user's configured holiday region..
+     *
+     * This method retrieves a holiday calculator object based on the user's configured holiday region.
+     * It first checks the 'holidayIdentifier' setting, and if it is not set, throws a Phprojekt_Exception_HolidayRegionNotSet exception.
+     * It then creates the appropriate holiday calculator object (either Bavaria or Germany) based on the identifier, and returns it.
+     * @return \Holiday\Bavaria|\Holiday\Germany The holiday calculator object for the user's configured region.
+     * @throws Phprojekt_Exception_HolidayRegionNotSet The 'holidayIdentifier' setting is not configured.
+     * @throws Zend_Controller_Action_Exception The 'holidayIdentifier' setting is not a valid identifier.
+     * @note This method depends on current time.
+     */
     public function getHolidayCalculator()
     {
         $timezone = new \DateTimeZone('UTC');

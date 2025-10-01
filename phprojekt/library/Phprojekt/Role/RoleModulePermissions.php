@@ -75,6 +75,36 @@ class Phprojekt_Role_RoleModulePermissions extends Phprojekt_ActiveRecord_Abstra
      *
      * @return void
      */
+    /**
+     * Deletes all role-module relations for the specified module ID..
+     *
+     * This method retrieves all role-module relations for the given module ID and deletes each one individually.
+     * It is used to remove all permissions associated with a module when that module is deleted or its permissions need to be reset.
+     *
+     * @param integer $moduleId The ID of the module for which to delete all role-module relations.
+     * @return void This method does not return a value, it simply performs the deletion operation.
+     * @note This method accesses database.
+     */
+    /**
+     * Deletes all role-module relations for the specified module ID..
+     *
+     * This method retrieves all role-module relations for the given module ID and deletes each one individually.
+     * It is used to remove all permissions associated with a module when that module is deleted or its permissions need to be reset.
+     *
+     * @param integer $moduleId The ID of the module for which to delete all role-module relations.
+     * @return void This method does not return a value, it simply performs the deletion operation.
+     * @note This method accesses database.
+     */
+    /**
+     * Deletes all role-module relations for the specified module ID..
+     *
+     * This method retrieves all role-module relations for the given module ID and deletes each one individually.
+     * It is used to remove all permissions associated with a module when that module is deleted or its permissions need to be reset.
+     *
+     * @param integer $moduleId The ID of the module for which to delete all role-module relations.
+     * @return void This method does not return a value, it simply performs the deletion operation.
+     * @note This method accesses database.
+     */
     public function deleteModuleRelation($moduleId)
     {
         $where = sprintf('module_id = %d', (int) $moduleId);

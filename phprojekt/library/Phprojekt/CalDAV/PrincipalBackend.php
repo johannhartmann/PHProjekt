@@ -58,11 +58,42 @@ class Phprojekt_CalDAV_PrincipalBackend implements Sabre_DAVACL_IPrincipalBacken
         throw new Exception('not implemented. $principal = ' . $principal);
     }
 
+    /**
+     * Updates a CalDAV principal.
+     *
+     * This method is a placeholder implementation that always returns false.
+     * It is intended to be overridden by a concrete implementation that updates the properties of a CalDAV principal based on the provided mutations.
+     *
+     * @param string $path The path of the principal to be updated
+     * @param array $mutations An array of property mutations to apply to the principal
+     * @return bool Always returns false in this implementation
+     */
     public function updatePrincipal($path, $mutations)
     {
         return false;
     }
 
+    /**
+     * Searches for principals (users or groups) matching the given search properties..
+     *
+     * This method searches for principals (users or groups) in the CalDAV backend that match the provided search properties.
+     * The search is performed on the prefix path specified, and the results are returned as an array.
+     *
+     * @param string $prefixPath The prefix path to search within
+     * @param array $searchProperties An array of search properties to match against
+     * @return array An array of principals (users or groups) matching the search criteria
+     */
+    /**
+     * Searches for principals (users or groups) matching the given search properties.
+     *
+     * This method searches for principals (users or groups) in the CalDAV backend that match the provided search properties.
+     * The search is performed on the prefix path specified, and the results are returned as an array.
+     *
+     * @param string $prefixPath The prefix path to search within
+     * @param array $searchProperties An array of search properties to match against
+     * @return array An array of principals (users or groups) matching the search criteria
+     * @note This method accesses database.
+     */
     public function searchPrincipals($prefixPath, array $searchProperties)
     {
         return array();

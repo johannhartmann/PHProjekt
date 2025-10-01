@@ -20,11 +20,31 @@ class HTMLPurifier_ConfigSchema_Builder_Xml extends XMLWriter
         $this->endElement(); // div
     }
     
+    /**
+     * Exports a variable as a string representation.
+     *
+     * This protected method takes a variable and exports it as a string representation.
+     * If the variable is an empty array, it returns the string 'array()'.
+     * Otherwise, it uses the var_export() function to generate a string representation of the variable.
+     *
+     * @param mixed $var The variable to be exported as a string
+     * @return string A string representation of the input variable
+     * @note This method modifies global state.
+     */
     protected function export($var) {
         if ($var === array()) return 'array()';
         return var_export($var, true);
     }
     
+    /**
+     * Builds an XML configuration document from the provided interchange object..
+     *
+     * This method takes an HTMLPurifier_ConfigSchema_Interchange object and generates an XML document representing the configuration schema.
+     * It writes the document title, then iterates through the namespaces in the interchange and calls the buildNamespace method to generate the XML for each namespace.
+     *
+     * @param HTMLPurifier_ConfigSchema_Interchange $interchange The interchange object containing the configuration schema information to be documented.
+     * @note This method modifies filesystem and modifies global state.
+     */
     public function build($interchange) {
         // global access, only use as last resort
         $this->interchange = $interchange;
@@ -42,6 +62,15 @@ class HTMLPurifier_ConfigSchema_Builder_Xml extends XMLWriter
         $this->flush();
     }
     
+    /**
+     * Builds an XML representation of a configuration namespace..
+     *
+     * This method is responsible for generating an XML representation of a configuration namespace, including its name, description, and the directives it contains.
+     * It iterates through the directives in the interchange and adds them to the namespace element if they belong to the specified namespace.
+     *
+     * @param HTMLPurifier_ConfigSchema_Interchange_Namespace $namespace The configuration namespace to be represented in XML.
+     * @note This method modifies global state.
+     */
     public function buildNamespace($namespace) {
         $this->startElement('namespace');
         $this->writeAttribute('id', $namespace->namespace);

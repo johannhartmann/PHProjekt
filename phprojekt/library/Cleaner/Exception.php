@@ -36,11 +36,13 @@
 class Cleaner_Exception extends Exception
 {
     /**
-     * Constructor of Exception.
+     * Constructs a new Cleaner_Exception instance.
      *
-     * @param string $message Message describing cause of exception.
+     * This is the constructor method for the Cleaner_Exception class.
+     * It simply calls the constructor of the parent Exception class, passing along the provided error message.
      *
-     * @return void
+     * @param string $message The error message describing the exception
+     * @return void The constructor does not return a value
      */
     public function __construct($message)
     {

@@ -17,6 +17,29 @@
  * This Exception should be thrown by a Migration object after a failed upgrade
  * when the original state cannot be recovered.
  */
+/**
+ * Exception thrown when a database migration fails and the original state cannot be recovered..
+ *
+ * This exception should be thrown by a Migration object when a database upgrade fails and the original state of the database cannot be restored.
+ * This indicates a critical failure in the migration process that requires manual intervention to resolve.
+ * @note This method accesses database.
+ */
+/**
+ * Exception thrown when a database migration fails and the original state cannot be recovered..
+ *
+ * This exception should be thrown by a Migration object when a database upgrade fails and the original state of the database cannot be restored.
+ * This indicates a critical failure in the migration process that requires manual intervention to resolve.
+ * @throws Exception A database migration fails and the original state cannot be recovered.
+ * @note This method accesses database.
+ */
+/**
+ * Exception thrown when a database migration fails and the original state cannot be recovered..
+ *
+ * This exception should be thrown by a Migration object when a database upgrade fails and the original state of the database cannot be restored.
+ * This indicates a critical failure in the migration process that requires manual intervention to resolve.
+ * @throws Exception A database migration fails and the original state cannot be recovered.
+ * @note This method accesses database.
+ */
 class Phprojekt_Migration_IKilledTheDatabaseException extends Exception
 {
 }

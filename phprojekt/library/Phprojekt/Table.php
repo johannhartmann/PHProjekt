@@ -605,6 +605,48 @@ class Phprojekt_Table
      * @param array  $options   Optional parameters, may contain the keys 'name' (string) and'unique' (boolean).
      * @author Simon Kohlmeyer
      **/
+    /**
+     * Creates a new index on a database table..
+     *
+     * This method creates a new index on the specified table, using the provided columns.
+     * The index can be unique or non-unique, and the name of the index can be customized.
+     * The method executes the necessary SQL query to create the index on the database.
+     *
+     * @param string $tableName The name of the table on which the index should be created.
+     * @param array $columns An array of column names that should be included in the index.
+     * @param array $options An optional array of additional options for the index, including the 'name' (string) and 'unique' (boolean) keys.
+     * @return void This method does not return a value, it only creates the index on the database.
+     * @throws Exception If there is an error executing the SQL query to create the index.
+     * @note This method accesses database.
+     */
+    /**
+     * Creates a new index on a database table..
+     *
+     * This method creates a new index on the specified table, using the provided columns.
+     * The index can be unique or non-unique, and the name of the index can be customized.
+     * The method executes the necessary SQL query to create the index on the database.
+     *
+     * @param string $tableName The name of the table on which the index should be created.
+     * @param array $columns An array of column names that should be included in the index.
+     * @param array $options An optional array of additional options for the index, including the 'name' (string) and 'unique' (boolean) keys.
+     * @return void This method does not return a value, it only creates the index on the database.
+     * @throws Exception If there is an error executing the SQL query to create the index.
+     * @note This method accesses database.
+     */
+    /**
+     * Creates a new index on a database table..
+     *
+     * This method creates a new index on the specified table, using the provided columns.
+     * The index can be unique or non-unique, and the name of the index can be customized.
+     * The method executes the necessary SQL query to create the index on the database.
+     *
+     * @param string $tableName The name of the table on which the index should be created.
+     * @param array $columns An array of column names that should be included in the index.
+     * @param array $options An optional array of additional options for the index, including the 'name' (string) and 'unique' (boolean) keys.
+     * @return void This method does not return a value, it only creates the index on the database.
+     * @throws Exception If there is an error executing the SQL query to create the index.
+     * @note This method accesses database.
+     */
     public function createIndex($tableName, array $columns, array $options = array())
     {
         $defaults = array(

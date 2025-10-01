@@ -285,6 +285,66 @@ class Cleaner
      *
      * @return void
      */
+    /**
+     * Initializes the Cleaner singleton instance by creating input cages for all PHP superglobals and nullifying deprecated HTTP_*_VARS globals..
+     *
+     * This protected constructor implements the singleton pattern for the Cleaner class.
+     * It retrieves the Cleaner_Engine configuration instance and creates Cleaner_Cage wrappers for all PHP superglobal arrays ($_GET, $_POST, $_REQUEST, $_COOKIE, $_FILES, $_SESSION, $_ENV, $_SERVER).
+     * After wrapping the superglobals, it explicitly nullifies all deprecated HTTP_*_VARS global variables (HTTP_SERVER_VARS, HTTP_GET_VARS, HTTP_POST_VARS, HTTP_COOKIE_VARS, HTTP_ENV_VARS, HTTP_SESSION_VARS, HTTP_REQUEST_VARS, HTTP_FILES_VARS) to prevent their use and improve security.
+     * This ensures all input data is accessed through the controlled Cleaner_Cage interface rather than directly from superglobals or deprecated variables.
+     * @return void This constructor does not return a value
+     * @note This method modifies global state.
+     * @see Cleaner_Engine::_getInstance
+     * @see Cleaner_Cage::getInstance
+     */
+    /**
+     * Initializes the Cleaner singleton instance by creating input cages for all PHP superglobals and nullifying deprecated HTTP_*_VARS globals..
+     *
+     * This protected constructor implements the singleton pattern for the Cleaner class.
+     * It retrieves the Cleaner_Engine configuration instance and creates Cleaner_Cage wrappers for all PHP superglobal arrays ($_GET, $_POST, $_REQUEST, $_COOKIE, $_FILES, $_SESSION, $_ENV, $_SERVER).
+     * After wrapping the superglobals, it explicitly nullifies all deprecated HTTP_*_VARS global variables to prevent their use and improve security.
+     * This ensures all input data is accessed through the controlled Cleaner_Cage interface rather than directly from superglobals or deprecated variables.
+     * @return void This constructor does not return a value
+     * @note This method modifies global state.
+     * @see Cleaner_Engine::_getInstance
+     * @see Cleaner_Cage::getInstance
+     */
+    /**
+     * Initializes the Cleaner singleton instance by creating input cages for all PHP superglobals and nullifying deprecated HTTP_*_VARS globals..
+     *
+     * This protected constructor implements the singleton pattern for the Cleaner class.
+     * It retrieves the Cleaner_Engine configuration instance and creates Cleaner_Cage wrappers for all PHP superglobal arrays ($_GET, $_POST, $_REQUEST, $_COOKIE, $_FILES, $_SESSION, $_ENV, $_SERVER).
+     * After wrapping the superglobals, it explicitly nullifies all deprecated HTTP_*_VARS global variables to prevent their use and improve security.
+     * This ensures all input data is accessed through the controlled Cleaner_Cage interface rather than directly from superglobals or deprecated variables.
+     * @return void This constructor does not return a value
+     * @note This method modifies global state.
+     * @see Cleaner_Engine::_getInstance
+     * @see Cleaner_Cage::getInstance
+     */
+    /**
+     * Initializes the Cleaner singleton instance and creates input cages for all PHP superglobals..
+     *
+     * The protected __construct() method implements the singleton pattern for the Cleaner class.
+     * It retrieves the Cleaner_Engine configuration instance and creates Cleaner_Cage wrappers for all PHP superglobal arrays ($_GET, $_POST, $_REQUEST, $_COOKIE, $_FILES, $_SESSION, $_ENV, $_SERVER).
+     * After wrapping the superglobals, it explicitly nullifies all deprecated HTTP_*_VARS global variables to prevent their use and improve security.
+     * This ensures all input data is accessed through the controlled Cleaner_Cage interface rather than directly from superglobals or deprecated variables.
+     * @return void This constructor does not return a value
+     * @note This method modifies global state.
+     * @see Cleaner_Engine::_getInstance
+     * @see Cleaner_Cage::getInstance
+     */
+    /**
+     * Initializes the Cleaner singleton instance and creates input cages for all PHP superglobals..
+     *
+     * The protected __construct() method implements the singleton pattern for the Cleaner class.
+     * It retrieves the Cleaner_Engine configuration instance and creates Cleaner_Cage wrappers for all PHP superglobal arrays ($_GET, $_POST, $_REQUEST, $_COOKIE, $_FILES, $_SESSION, $_ENV, $_SERVER).
+     * After wrapping the superglobals, it explicitly nullifies all deprecated HTTP_*_VARS global variables to prevent their use and improve security.
+     * This ensures all input data is accessed through the controlled Cleaner_Cage interface rather than directly from superglobals or deprecated variables.
+     * @return void This constructor does not return a value
+     * @note This method modifies global state.
+     * @see Cleaner_Engine::_getInstance
+     * @see Cleaner_Cage::getInstance
+     */
     protected function __construct()
     {
         $this->_configuration = Cleaner_Engine::_getInstance();

@@ -36,6 +36,14 @@ class Phprojekt_Exception_Validation extends Phprojekt_Exception_Published
         $this->_label = $error['label'];
     }
 
+    /**
+     * Returns an associative array representation of the Validation exception object.
+     *
+     * This method overrides the parent's toArray() method to include the _field and _label
+     * properties of the Validation exception. It returns an array containing the exception properties.
+     *
+     * @return array An associative array containing the exception properties.
+     */
     public function toArray()
     {
         $ret = parent::toArray();

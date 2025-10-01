@@ -200,6 +200,35 @@ class Phprojekt_Search
      *
      * @return array Array with allowed values.
      */
+    /**
+     * Extracts the allowed string values from an object's metadata.
+     *
+     * This method iterates through the metadata of the provided object and extracts the values of fields with data types that are allowed (varchar, text, tinytext, longtext).
+     * The extracted values are returned in an associative array, with the field names as the keys.
+     *
+     * @param Phprojekt_Item_Abstract $object The object from which to extract the allowed string values
+     * @return array An associative array containing the allowed string values from the object's metadata
+     */
+    /**
+     * Extracts the allowed string values from an object's metadata..
+     *
+     * This method iterates through the metadata of the provided object and extracts the values of fields with data types that are allowed (varchar, text, tinytext, longtext).
+     * The extracted values are returned in an associative array, with the field names as the keys.
+     *
+     * @param Phprojekt_Item_Abstract $object The object from which to extract the allowed string values
+     * @return array An associative array containing the allowed string values from the object's metadata
+     * @note This method modifies global state.
+     */
+    /**
+     * Extracts the allowed string values from an object's metadata..
+     *
+     * This method iterates through the metadata of the provided object and extracts the values of fields with data types that are allowed (varchar, text, tinytext, longtext).
+     * The extracted values are returned in an associative array, with the field names as the keys.
+     *
+     * @param Phprojekt_Item_Abstract $object The object from which to extract the allowed string values
+     * @return array An associative array containing the allowed string values from the object's metadata
+     * @note This method modifies global state.
+     */
     private function _getObjectDataToIndex($object)
     {
         $allow    = array();

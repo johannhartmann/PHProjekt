@@ -83,6 +83,36 @@ class Cleaner_Escaper
      *
      * @return string Escaped value.
      */
+    /**
+     * Escapes a SQL value to prevent SQL injection attacks..
+     *
+     * This method takes a string value and escapes it by adding backslashes to any special characters, such as single quotes, double quotes, backslashes, and null characters.
+     * This helps prevent SQL injection vulnerabilities when the value is used in a SQL query.
+     *
+     * @param string $value The value to be escaped for use in a SQL query.
+     * @return string The escaped value, which can be safely used in a SQL query.
+     * @note This method modifies global state.
+     */
+    /**
+     * Escapes a SQL value to prevent SQL injection attacks..
+     *
+     * This method takes a string value and escapes it by adding backslashes to any special characters, such as single quotes, double quotes, backslashes, and null characters.
+     * This helps prevent SQL injection vulnerabilities when the value is used in a SQL query.
+     *
+     * @param string $value The value to be escaped for use in a SQL query.
+     * @return string The escaped value, which can be safely used in a SQL query.
+     * @note This method modifies global state.
+     */
+    /**
+     * Escapes a SQL value to prevent SQL injection attacks.
+     *
+     * This method takes a string value and escapes it by adding backslashes to any special characters, such as single quotes, double quotes, backslashes, and null characters.
+     * This helps prevent SQL injection vulnerabilities when the value is used in a SQL query.
+     *
+     * @param string $value The value to be escaped for use in a SQL query
+     * @return string The escaped value, which can be safely used in a SQL query
+     * @note This method modifies global state.
+     */
     public function escapeSqlValue($value)
     {
         return addslashes($value);

@@ -159,6 +159,45 @@ class Phprojekt_Migration
      * @throws Phprojekt_Migration_IKilledTheDatabaseException
      * @throws Exception If we could recover.
      */
+    /**
+     * Performs the necessary upgrades for the given module..
+     *
+     * This method checks if a migration object exists for the given module, and if the module needs upgrading.
+     * If so, it retrieves the database connection, gets the module data needing upgrade, and calls the upgrade method on the migration object.
+     * Finally, it updates the module version in the database and clears the application cache.
+     *
+     * @param string $module The name of the module to be upgraded.
+     * @return void This method does not return a value.
+     * @throws Exception No migration object is found for the given module or the module does not need upgrading.
+     * @throws Phprojekt_Migration_IKilledTheDatabaseException An exception occurs during the upgrade process.
+     * @note This method accesses database and modifies global state.
+     */
+    /**
+     * Performs the necessary upgrades for the given module..
+     *
+     * This method checks if a migration object exists for the given module, and if the module needs upgrading.
+     * If so, it retrieves the database connection, gets the module data needing upgrade, and calls the upgrade method on the migration object.
+     * Finally, it updates the module version in the database and clears the application cache.
+     *
+     * @param string $module The name of the module to be upgraded.
+     * @return void This method does not return a value.
+     * @throws Exception No migration object is found for the given module or the module does not need upgrading.
+     * @throws Phprojekt_Migration_IKilledTheDatabaseException An exception occurs during the upgrade process.
+     * @note This method accesses database and modifies global state.
+     */
+    /**
+     * Performs the necessary upgrades for the given module..
+     *
+     * This method checks if a migration object exists for the given module, and if the module needs upgrading.
+     * If so, it retrieves the database connection, gets the module data needing upgrade, and calls the upgrade method on the migration object.
+     * Finally, it updates the module version in the database and clears the application cache.
+     *
+     * @param string $module The name of the module to be upgraded.
+     * @return void This method does not return a value.
+     * @throws Exception No migration object is found for the given module or the module does not need upgrading.
+     * @throws Phprojekt_Migration_IKilledTheDatabaseException An exception occurs during the upgrade process.
+     * @note This method accesses database and modifies global state.
+     */
     public function performUpgrade($module)
     {
         if (!array_key_exists($module, $this->_migrations)) {

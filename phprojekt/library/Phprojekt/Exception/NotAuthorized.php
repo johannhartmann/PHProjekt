@@ -14,7 +14,11 @@
  */
 
 /**
- * An exception thrown when the user is not authorized to access the given resource
+ * Exception thrown when the user is not authorized to access a resource.
+ *
+ * This exception represents a security violation that occurs when a user attempts to access
+ * a resource they are not authorized to access. It extends Phprojekt_Exception_Published and
+ * should be handled appropriately by the application.
  */
 class Phprojekt_Exception_NotAuthorized extends Phprojekt_Exception_Published
 {

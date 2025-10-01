@@ -14,7 +14,11 @@
  */
 
 /**
- * General PHProjekt Exception Superclass
+ * Base exception class for the PHProjekt framework.
+ *
+ * This class serves as the base exception class for all exceptions raised within the PHProjekt
+ * framework. It extends the built-in PHP Exception class, providing a common base for handling
+ * and managing exceptions across the application.
  */
 class Phprojekt_Exception extends Exception
 {

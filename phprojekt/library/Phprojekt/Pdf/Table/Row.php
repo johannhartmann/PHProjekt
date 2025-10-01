@@ -135,7 +135,10 @@ class Phprojekt_Pdf_Table_Row
     }
 
     /**
-     * Set true value of the protected property for the current row.
+     * Sets the current row as a header row in the PDF table.
+     *
+     * This method sets the _isHeader protected property to true, indicating that this row should
+     * be treated as a header row with special formatting (typically a gray background).
      *
      * @return void
      */

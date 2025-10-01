@@ -67,6 +67,45 @@ abstract class Phprojekt_Migration_Abstract
      * @TODO Provide a way to ask for additional tasks (conversion etc)
      * @TODO Provide a way to allow the callee to show messages and status.
      */
+    /**
+     * Performs the upgrade to the current version of the module..
+     *
+     * This abstract method is intended to be implemented by concrete migration classes to handle the upgrade process for a specific module.
+     * It should use database transactions to ensure the upgrade can be rolled back if any errors occur.
+     *
+     * @param string $currentVersion The current version of the module, or null if the module is not yet installed.
+     * @param Zend_Db_Adapter_Abstract $db The database adapter to use for the upgrade process.
+     * @return void This method does not return a value, but may throw an exception on error.
+     * @throws exception Any error occurs during the upgrade process.
+     * @throws Phprojekt_Migration_IKilledTheDatabaseException The upgrade process fails in a way that makes it impossible to recover the old state of the database.
+     * @note This method accesses database.
+     */
+    /**
+     * Upgrades the database schema to the current version of the module..
+     *
+     * This abstract method is intended to be implemented by concrete migration classes to handle the upgrade process for a specific module.
+     * It should use database transactions to ensure the upgrade can be rolled back if any errors occur.
+     *
+     * @param string $currentVersion The current version of the module, or null if the module is not yet installed.
+     * @param Zend_Db_Adapter_Abstract $db The database adapter to use for the upgrade process.
+     * @return void This method does not return a value, but may throw an exception on error.
+     * @throws Exception Any error occurs during the upgrade process.
+     * @throws Phprojekt_Migration_IKilledTheDatabaseException The upgrade process fails in a way that makes it impossible to recover the old state of the database.
+     * @note This method accesses database.
+     */
+    /**
+     * Upgrades the database schema to the current version of the module..
+     *
+     * This abstract method is intended to be implemented by concrete migration classes to handle the upgrade process for a specific module.
+     * It should use database transactions to ensure the upgrade can be rolled back if any errors occur.
+     *
+     * @param string $currentVersion The current version of the module, or null if the module is not yet installed.
+     * @param Zend_Db_Adapter_Abstract $db The database adapter to use for the upgrade process.
+     * @return void This method does not return a value, but may throw an exception on error.
+     * @throws Exception Any error occurs during the upgrade process.
+     * @throws Phprojekt_Migration_IKilledTheDatabaseException The upgrade process fails in a way that makes it impossible to recover the old state of the database.
+     * @note This method accesses database.
+     */
     public abstract function upgrade($currentVersion, Zend_Db_Adapter_Abstract $db);
 
     /**

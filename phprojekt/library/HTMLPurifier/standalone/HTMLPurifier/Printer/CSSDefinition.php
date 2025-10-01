@@ -5,6 +5,36 @@ class HTMLPurifier_Printer_CSSDefinition extends HTMLPurifier_Printer
     
     protected $def;
     
+    /**
+     * Renders a table displaying the CSS definition properties and their corresponding class names..
+     *
+     * This method takes a configuration object, retrieves the CSS definition from it, and generates an HTML table to display the properties and their associated class names.
+     * The table is wrapped in a 'div' element with the class 'HTMLPurifier_Printer'.
+     *
+     * @param HTMLPurifier_Config $config The configuration object containing the CSS definition.
+     * @return string The rendered HTML table as a string.
+     * @note This method modifies filesystem and modifies global state.
+     */
+    /**
+     * Renders an HTML table displaying the CSS definition properties and their corresponding class names..
+     *
+     * This method takes a configuration object, retrieves the CSS definition from it, and generates an HTML table to display the properties and their associated class names.
+     * The table is wrapped in a 'div' element with the class 'HTMLPurifier_Printer'.
+     *
+     * @param HTMLPurifier_Config $config The configuration object containing the CSS definition.
+     * @return string The rendered HTML table as a string.
+     * @note This method modifies filesystem and modifies global state.
+     */
+    /**
+     * Renders an HTML table displaying the CSS definition properties and their corresponding class names..
+     *
+     * This method takes a configuration object, retrieves the CSS definition from it, and generates an HTML table to display the properties and their associated class names.
+     * The table is wrapped in a 'div' element with the class 'HTMLPurifier_Printer'.
+     *
+     * @param HTMLPurifier_Config $config The configuration object containing the CSS definition.
+     * @return string The rendered HTML table as a string.
+     * @note This method modifies filesystem and modifies global state.
+     */
     public function render($config) {
         $this->def = $config->getCSSDefinition();
         $ret = '';

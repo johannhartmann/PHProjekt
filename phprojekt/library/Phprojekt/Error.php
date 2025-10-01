@@ -59,6 +59,30 @@ class Phprojekt_Error
      *
      * @return array Array with errors.
      */
+    /**
+     * Retrieves and clears the error data..
+     *
+     * This method retrieves the current error data stored in the `_errors` property and returns it as an array.
+     * After retrieving the errors, the `_errors` property is reset to an empty array, effectively clearing the stored errors.
+     * @return array An array containing the current error data.
+     * @note This method modifies global state.
+     */
+    /**
+     * Retrieves and clears the current error data..
+     *
+     * This method retrieves the error data stored in the `_errors` property and returns it as an array.
+     * After retrieving the errors, the `_errors` property is reset to an empty array, effectively clearing the stored errors.
+     * @return array An array containing the current error data.
+     * @note This method modifies global state.
+     */
+    /**
+     * Retrieves and clears the current error data.
+     *
+     * This method retrieves the error data stored in the `_errors` property and returns it as an array.
+     * After retrieving the errors, the `_errors` property is reset to an empty array, effectively clearing the stored errors.
+     * @return array An array containing the current error data
+     * @note This method modifies global state.
+     */
     public function getError()
     {
         // TODO: Fix, what if I want to have retrieve it twice.

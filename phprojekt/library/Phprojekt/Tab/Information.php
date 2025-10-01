@@ -25,6 +25,29 @@ class Phprojekt_Tab_Information extends Phprojekt_ModelInformation_Default
      *
      * @return void
      */
+    /**
+     * Sets the field definitions for the 'label' field..
+     *
+     * This method sets the field definition for the 'label' field, which is a required text field with a maximum length of 255 characters.
+     * @return void This method does not return a value.
+     * @note This method modifies global state.
+     */
+    /**
+     * Sets the field definition for the 'label' field in the form..
+     *
+     * This method sets the field definition for the 'label' field, which is a required text field with a maximum length of 255 characters.
+     * It is used to configure the form fields for the 'label' field.
+     * @return void This method does not return a value.
+     * @note This method modifies global state.
+     */
+    /**
+     * Sets the field definition for the 'label' field in the form..
+     *
+     * This method sets the field definition for the 'label' field, which is a required text field with a maximum length of 255 characters.
+     * It is used to configure the form fields for the 'label' field.
+     * @return void This method does not return a value.
+     * @note This method modifies global state.
+     */
     public function setFields()
     {
         // label

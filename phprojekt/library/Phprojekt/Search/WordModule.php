@@ -187,6 +187,45 @@ class Phprojekt_Search_WordModule extends Zend_Db_Table_Abstract
      *
      * @return void
      */
+    /**
+     * Saves a new word association in the database..
+     *
+     * This method inserts a new record into the database table, associating a module ID, item ID, and word ID.
+     * It is used to store information about words related to specific items in the system.
+     *
+     * @param integer $moduleId The ID of the module to associate the word with.
+     * @param integer $itemId The ID of the item to associate the word with.
+     * @param integer $wordId The ID of the word to associate with the module and item.
+     * @return void This method does not return a value.
+     * @throws Exception If there is an error inserting the record into the database.
+     * @note This method accesses database.
+     */
+    /**
+     * Saves a new word association in the database..
+     *
+     * This method inserts a new record into the database table, associating a module ID, item ID, and word ID.
+     * It is used to store information about words related to specific items in the system.
+     *
+     * @param integer $moduleId The ID of the module to associate the word with.
+     * @param integer $itemId The ID of the item to associate the word with.
+     * @param integer $wordId The ID of the word to associate with the module and item.
+     * @return void This method does not return a value.
+     * @throws Exception If there is an error inserting the record into the database.
+     * @note This method accesses database.
+     */
+    /**
+     * Saves a new word association in the database..
+     *
+     * This method inserts a new record into the database table, associating a module ID, item ID, and word ID.
+     * It is used to store information about words related to specific items in the system.
+     *
+     * @param integer $moduleId The ID of the module to associate the word with.
+     * @param integer $itemId The ID of the item to associate the word with.
+     * @param integer $wordId The ID of the word to associate with the module and item.
+     * @return void This method does not return a value.
+     * @throws Exception If there is an error inserting the record into the database.
+     * @note This method accesses database.
+     */
     private function _save($moduleId, $itemId, $wordId)
     {
         $data['module_id'] = (int) $moduleId;

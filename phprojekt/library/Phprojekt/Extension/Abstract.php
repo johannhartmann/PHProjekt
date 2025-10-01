@@ -35,6 +35,32 @@ abstract class PHProjekt_Extension_Abstract {
      * null. If it is null, Phprojekt will assume that this module never needs
      * to upgrade.
      */
+    /**
+     * Returns the migration object for the current module, if any..
+     *
+     * This method is used to retrieve the migration object for the current module.
+     * If the module needs to upgrade the database between minor changes, this method should return a subclass of `Phprojekt_Migration_Abstract`.
+     * If the module does not require any database migrations, this method should return `null`.
+     * @return Phprojekt_Migration_Abstract|null The migration object for the current module, or `null` if no migration is required.
+     */
+    /**
+     * Returns the migration object for the current module, if any..
+     *
+     * This method is used to retrieve the migration object for the current module.
+     * If the module needs to upgrade the database between minor changes, this method should return a subclass of `Phprojekt_Migration_Abstract`.
+     * If the module does not require any database migrations, this method should return `null`.
+     * @return Phprojekt_Migration_Abstract|null The migration object for the current module, or `null` if no migration is required.
+     * @note This method accesses database.
+     */
+    /**
+     * Returns the migration object for the current module, if any..
+     *
+     * This method is used to retrieve the migration object for the current module.
+     * If the module needs to upgrade the database between minor changes, this method should return a subclass of `Phprojekt_Migration_Abstract`.
+     * If the module does not require any database migrations, this method should return `null`.
+     * @return Phprojekt_Migration_Abstract|null The migration object for the current module, or `null` if no migration is required.
+     * @note This method accesses database.
+     */
     public function getMigration()
     {
         return null;

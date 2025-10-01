@@ -275,6 +275,27 @@ class Cleaner_Parameter
      *
      * @return mixed Value.
      */
+    /**
+     * Returns the value of the Cleaner_Parameter object as a string.
+     *
+     * This method returns the value of the Cleaner_Parameter object as a string.
+     * It is used to provide a string representation of the object, which can be useful for debugging or logging purposes.
+     * @return mixed The value of the Cleaner_Parameter object, which can be of any type.
+     */
+    /**
+     * Returns the string representation of the Cleaner_Parameter object.
+     *
+     * This method returns the string value of the Cleaner_Parameter object.
+     * It is commonly used for debugging or logging purposes to provide a textual representation of the object.
+     * @return string The string value of the Cleaner_Parameter object
+     */
+    /**
+     * Returns the string representation of the Cleaner_Parameter object.
+     *
+     * This method returns the string value of the Cleaner_Parameter object.
+     * It is commonly used for debugging or logging purposes to provide a textual representation of the object.
+     * @return string The string value of the Cleaner_Parameter object
+     */
     public function __toString()
     {
         return $this->getValue();

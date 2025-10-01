@@ -19,12 +19,17 @@
 class Phprojekt_Converter_Text
 {
     /**
-     * Convert a value of the field in a readable format for users.
+     * Converts a field value from a model into a user-readable format.
      *
-     * @param Phprojekt_Model_Interface $model The record model.
-     * @param array                     $field Array with the field data.
+     * This method takes a model object and a field definition array, and converts
+     * the field value into a human-readable string based on the field type. It handles
+     * various field types such as selectbox, percentage, upload, time, and textarea,
+     * performing the necessary transformations to present the data in a user-friendly way.
      *
-     * @return string User readable value.
+     * @param Phprojekt_Model_Interface $model The record model containing the field value.
+     * @param array                     $field Array with the field data, including type and key.
+     *
+     * @return string The converted, user-readable value of the field.
      */
     public static function convert($model, $field)
     {

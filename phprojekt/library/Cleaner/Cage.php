@@ -119,16 +119,19 @@ class Cleaner_Cage
     }
 
     /**
-     * Validates an item in the wrapped scope for a certain type and if
-     * invalid sanitizes the value of the parameter/item.
+     * Retrieves a parameter from the wrapped scope, validating and optionally sanitizing the value.
      *
-     * @param string  $type     Type of parameter/item to validate and/or sanitize.
-     * @param string  $name     Name of parameter / Name of item in scope.
-     * @param boolean $empty    Must parameter/item be not null or empty.
-     * @param mixed   $default  Return value, if parameter/item and/or sanitizesparameter/item is null/empty/notset/...
-     * @param boolean $sanitize Wheather sanitize value of parameter/item, when value is invalid.
+     * This method retrieves a parameter from the wrapped scope, validates the value based on the specified type, and optionally sanitizes the value if it is invalid.
+     * It returns a Cleaner_Parameter instance representing the parameter, including the validated/sanitized value, default value, and other metadata.
      *
-     * @return Cleaner_Parameter Instance, representing selected parameter/item in Scope.
+     * @param string $type The type of parameter to validate and/or sanitize
+     * @param string $name The name of the parameter to retrieve from the scope
+     * @param boolean $empty Whether the parameter must not be null or empty
+     * @param mixed $default The default value to return if the parameter is null, empty, or invalid
+     * @param boolean $sanitize Whether to sanitize the parameter value if it is invalid
+     * @return Cleaner_Parameter A Cleaner_Parameter instance representing the retrieved parameter, including the validated/sanitized value, default value, and other metadata
+     * @see Cleaner_Engine::validate
+     * @see Cleaner_Engine::sanitze
      */
     public function getParameter($type, $name, $empty = false, $default = null, $sanitize = true)
     {

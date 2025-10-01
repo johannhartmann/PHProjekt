@@ -38,6 +38,14 @@ class Phprojekt_Exception_InvalidParameter extends Phprojekt_Exception_Published
         $this->_shouldMatch = $shouldMatch;
     }
 
+    /**
+     * Converts the InvalidParameter exception object into an associative array representation.
+     *
+     * This method returns an associative array containing the exception message, the invalid
+     * field name, the invalid value, and whether the value should have matched a specific pattern.
+     *
+     * @return array An associative array containing the exception details.
+     */
     public function toArray()
     {
         $ret = parent::toArray();

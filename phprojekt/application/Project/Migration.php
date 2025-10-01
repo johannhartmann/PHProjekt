@@ -118,6 +118,18 @@ HERE
 );
     }
 
+    /**
+     * Patches old module grids by updating modules with versions older than 6.2.1 to the new grid format.
+     *
+     * Scans all module directories in the application path and checks each module's version in the database.
+     * For modules with versions older than 6.2.1, it applies grid patches using patchOldModuleGrid() and updates the module version to 6.2.1 in the database.
+     * This is a migration method that ensures all modules are upgraded to use the newer grid system introduced in version 6.2.1.
+     * The method skips the current and parent directory entries ('.' and '..') when scanning.
+     * @return void This method does not return a value
+     * @note This method modifies filesystem, accesses database, and modifies global state.
+     * @see Project\Migration::patchOldModuleGrid
+     * @see Phprojekt::compareVersion
+     */
     private function patchOldModuleGrids() {
         $applicationPath = Phprojekt::getInstance()->getConfig()->applicationPath;
         $moduleDirs = scandir($applicationPath);
@@ -143,6 +155,30 @@ HERE
         }
     }
 
+    /**
+     * Patches legacy Grid.js files by replacing old grid class references with legacy grid class references.
+     *
+     * This method modifies the Grid.js file for a specified module by replacing all occurrences of 'phpr.Default.Grid' with 'phpr.Default.LegacyGrid'.
+     * It constructs the file path to the module's Grid.js file located in the Views/dojo/scripts directory, reads its contents, performs the string replacement, and writes the modified content back to the file.
+     * The operation only executes if the Grid.js file exists at the expected location.
+     * This is part of a migration process to update older module implementations to use the legacy grid component.
+     *
+     * @param string $moduleName The name of the module whose Grid.js file should be patched
+     * @return void This method does not return a value
+     * @note This method modifies filesystem.
+     */
+    /**
+     * Patches a module's Grid.js file by replacing legacy grid class references with the new legacy grid component..
+     *
+     * This private method modifies the Grid.js file for a specified module by replacing all occurrences of 'phpr.Default.Grid' with 'phpr.Default.LegacyGrid'.
+     * It constructs the file path to the module's Grid.js file located in the Views/dojo/scripts directory within the application path, reads the file contents if it exists, performs a string replacement, and writes the modified content back to the file.
+     * This operation is part of a migration process to update older module implementations to use the legacy grid component.
+     * The method silently does nothing if the Grid.js file does not exist at the expected location.
+     *
+     * @param string $moduleName The name of the module whose Grid.js file should be patched. This is used to construct the file path to the module's Views/dojo/scripts/Grid.js file.
+     * @return void This method does not return a value.
+     * @note This method modifies filesystem.
+     */
     private function patchOldModuleGrid($moduleName) {
         $applicationPath = Phprojekt::getInstance()->getConfig()->applicationPath;
         $pathFragments = array($applicationPath, $moduleName, "Views", "dojo", "scripts", "Grid.js");

@@ -91,6 +91,45 @@ class Phprojekt_Log extends Zend_Log
      *
      * @return void
      */
+    /**
+     * Logs a message with the specified priority to all registered loggers..
+     *
+     * This method logs a message with the specified priority to all loggers registered in the `_loggers` array.
+     * If the priority is DEBUG or higher, it also includes the line number, class, and function name from the call stack in the log message.
+     * The message is then passed to each logger, which can decide whether to actually log the message based on their own priority filtering.
+     *
+     * @param string $message The message to be logged.
+     * @param string $priority The priority or severity level of the log message.
+     * @param mixed $extras Additional data to be logged along with the message (optional).
+     * @return void This method does not return a value.
+     * @note This method modifies filesystem and modifies global state.
+     */
+    /**
+     * Logs a message with the specified priority to all registered loggers..
+     *
+     * This method logs a message with the specified priority to all loggers registered in the `_loggers` array.
+     * If the priority is DEBUG or higher, it also includes the line number, class, and function name from the call stack in the log message.
+     * The message is then passed to each logger, which can decide whether to actually log the message based on their own priority filtering.
+     *
+     * @param string $message The message to be logged.
+     * @param string $priority The priority or severity level of the log message.
+     * @param mixed $extras Additional data to be logged along with the message (optional).
+     * @return void This method does not return a value.
+     * @note This method modifies filesystem and modifies global state.
+     */
+    /**
+     * Logs a message with the specified priority to all registered loggers..
+     *
+     * This method logs a message with the specified priority to all loggers registered in the `_loggers` array.
+     * If the priority is DEBUG or higher, it also includes the line number, class, and function name from the call stack in the log message.
+     * The message is then passed to each logger, which can decide whether to actually log the message based on their own priority filtering.
+     *
+     * @param string $message The message to be logged.
+     * @param string $priority The priority or severity level of the log message.
+     * @param mixed $extras Additional data to be logged along with the message (optional).
+     * @return void This method does not return a value.
+     * @note This method modifies filesystem and modifies global state.
+     */
     public function log($message, $priority, $extras = null)
     {
         if ($priority >= Zend_Log::DEBUG) {

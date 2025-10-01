@@ -207,6 +207,48 @@ class Phprojekt_Configuration extends Phprojekt_ActiveRecord_Abstract
      *
      * @return void
      */
+    /**
+     * Saves the configuration parameters to the database..
+     *
+     * This method is responsible for persisting the configuration parameters provided in the `$params` array to the database.
+     * It first checks if the model has a `setConfigurations` method, and if so, calls that.
+     * Otherwise, it iterates through the form fields defined for the module and updates or creates new records in the configuration table based on the provided parameters.
+     *
+     * @param array $params An associative array of configuration parameters to be saved.
+     * @return void This method does not return a value, it modifies the database directly.
+     * @throws Exception If there is an error fetching or saving the configuration data.
+     * @note This method accesses database.
+     * @see Phprojekt_Configuration.getModel
+     * @see Phprojekt_ModelInformation_Default::ORDERING_FORM
+     */
+    /**
+     * Saves the configuration parameters to the database..
+     *
+     * This method is responsible for persisting the configuration parameters provided in the `$params` array to the database.
+     * It first checks if the model has a `setConfigurations` method, and if so, calls that.
+     * Otherwise, it iterates through the form fields defined for the module and updates or creates new records in the configuration table based on the provided parameters.
+     *
+     * @param array $params An associative array of configuration parameters to be saved.
+     * @return void This method does not return a value, it modifies the database directly.
+     * @throws Exception If there is an error fetching or saving the configuration data.
+     * @note This method accesses database.
+     * @see Phprojekt_Configuration.getModel
+     * @see Phprojekt_ModelInformation_Default::ORDERING_FORM
+     */
+    /**
+     * Saves the configuration parameters to the database..
+     *
+     * This method is responsible for persisting the configuration parameters provided in the `$params` array to the database.
+     * It first checks if the model has a `setConfigurations` method, and if so, calls that.
+     * Otherwise, it iterates through the form fields defined for the module and updates or creates new records in the configuration table based on the provided parameters.
+     *
+     * @param array $params An associative array of configuration parameters to be saved.
+     * @return void This method does not return a value, it modifies the database directly.
+     * @throws Exception If there is an error fetching or saving the configuration data.
+     * @note This method accesses database.
+     * @see Phprojekt_Configuration.getModel
+     * @see Phprojekt_ModelInformation_Default::ORDERING_FORM
+     */
     public function setConfigurations($params)
     {
         if (method_exists($this->getModel(), 'setConfigurations')) {

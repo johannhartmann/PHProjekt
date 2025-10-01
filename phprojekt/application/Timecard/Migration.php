@@ -49,6 +49,42 @@ class Timecard_Migration extends Phprojekt_Migration_Abstract
      * @return void
      * @throws Exception On Errors
      */
+    /**
+     * Performs database schema and data migrations for the Timecard module based on the current version.
+     *
+     * This method handles incremental database upgrades for the Timecard module by comparing the current version against specific version thresholds and executing appropriate migration queries.
+     * For versions prior to 6.1.4, it generates unique URIs and UIDs for timecard records using the HTTP host.
+     * For versions prior to 6.3.0, it performs cleanup operations by removing item rights, role module permissions, and module entries that are not in the whitelist (Timecard, Project, Calendar2), and removes a specific database_manager entry for the Project contact_id field.
+     * The method sets the timezone to UTC before performing any operations.
+     *
+     * @param string $currentVersion The current version string of Phprojekt being upgraded from, used to determine which migration steps to execute
+     * @param Zend_Db_Adapter_Abstract $db The database adapter instance used for executing migration queries
+     * @return void This method does not return a value
+     * @throws Exception Database query execution fails or other errors occur during the migration process
+     * @note This method accesses database, modifies global state, depends on current time, and makes network calls.
+     * @see Phprojekt::compareVersion
+     * @see Timecard.Migration.parseDbFile
+     * @see Zend_Controller_Request_Http::getHttpHost
+     */
+    /**
+     * Performs incremental database schema and data migrations for the Timecard module based on version comparisons.
+     *
+     * This method executes version-specific database migrations for the Timecard module by comparing the current version against known upgrade thresholds.
+     * For versions prior to 6.1.4, it generates unique URIs and UIDs for timecard records using UUID and the HTTP host suffix, then adds a unique constraint on the uri column.
+     * For versions prior to 6.3.0, it performs cleanup operations by removing item rights, role module permissions, and module entries that are not in a whitelist (Timecard, Project, Calendar2), and deletes a specific database_manager entry for the Project contact_id field.
+     * The method sets the default timezone to UTC before performing any operations and parses the Timecard database file.
+     *
+     * @param string $currentVersion The current version string of PHProjekt being upgraded from, used to determine which migration steps to execute through version comparison
+     * @param Zend_Db_Adapter_Abstract $db The database adapter instance used for executing migration queries and stored in the instance variable $_db
+     * @return void This method does not return a value
+     * @throws Zend_Db_Exception Database query execution fails during migration operations
+     * @throws Exception HTTP request initialization fails or other runtime errors occur during migration
+     * @note This method accesses database, modifies global state, depends on current time, and makes network calls.
+     * @see Phprojekt::compareVersion
+     * @see Timecard_Migration::parseDbFile
+     * @see Zend_Controller_Request_Http::getHttpHost
+     * @see Phprojekt::getInstance
+     */
     public function upgrade($currentVersion, Zend_Db_Adapter_Abstract $db)
     {
         date_default_timezone_set('UTC');

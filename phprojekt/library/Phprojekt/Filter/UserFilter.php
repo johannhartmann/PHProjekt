@@ -95,9 +95,12 @@ class Phprojekt_Filter_UserFilter extends Phprojekt_Filter_Abstract
     }
 
     /**
-     * Backing store pair to safe to database.
+     * Retrieves the key-value pair for the backing store.
      *
-     * @return array Array with 'key' and 'value'.
+     * This method returns an associative array containing the identifier and value properties
+     * of the UserFilter object. This pair is used to save the filter settings to the database.
+     *
+     * @return array An associative array with 'key' and 'value' keys.
      */
     protected function _getBackingStorePair()
     {

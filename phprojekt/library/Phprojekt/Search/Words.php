@@ -218,6 +218,33 @@ class Phprojekt_Search_Words extends Zend_Db_Table_Abstract
      *
      * @return boolean True for valid string.
      */
+    /**
+     * Checks if a given string is not a stop word..
+     *
+     * This private method takes a string as input and returns a boolean value indicating whether the string is not a stop word.
+     * Stop words are common words that are typically excluded from search indexes or text analysis.
+     *
+     * @param string $string The string to check for stop word status.
+     * @return boolean True if the input string is not a stop word, false otherwise.
+     */
+    /**
+     * Checks if a given string is not a stop word..
+     *
+     * This private method takes a string as input and returns a boolean value indicating whether the string is not a stop word.
+     * Stop words are common words that are typically excluded from search indexes or text analysis.
+     *
+     * @param string $string The string to check for stop word status.
+     * @return boolean True if the input string is not a stop word, false otherwise.
+     */
+    /**
+     * Checks if a given string is not a stop word..
+     *
+     * This private method takes a string as input and returns a boolean value indicating whether the string is not a stop word.
+     * Stop words are common words that are typically excluded from search indexes or text analysis.
+     *
+     * @param string $string The string to check for stop word status.
+     * @return boolean True if the input string is not a stop word, false otherwise.
+     */
     private function _stripStops($string)
     {
         return (!in_array($string, $this->_stopWords));

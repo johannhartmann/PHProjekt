@@ -238,6 +238,39 @@ class Phprojekt_Loader
      *
      * @return void;
      */
+    /**
+     * Loads a view script for the current module.
+     *
+     * This method is responsible for loading a view script for the current module.
+     * It first tries to load the view script from the system module's 'Views/dojo' directory, and if that fails, it tries to load it from the user module's 'Views/dojo' directory.
+     * The loaded view script is then added to the view object's script path.
+     *
+     * @param Zend_View|null $view The view object to which the script path should be added. If not provided, the method will use the view object from the Phprojekt instance.
+     * @return void This method does not return anything, it only modifies the view object's script path.
+     * @note This method modifies filesystem.
+     */
+    /**
+     * Loads a view script for the current module.
+     *
+     * This method is responsible for loading a view script for the current module.
+     * It first tries to load the view script from the system module's 'Views/dojo' directory, and if that fails, it tries to load it from the user module's 'Views/dojo' directory.
+     * The loaded view script is then added to the view object's script path.
+     *
+     * @param Zend_View|null $view The view object to which the script path should be added. If not provided, the method will use the view object from the Phprojekt instance.
+     * @return void This method does not return anything, it only modifies the view object's script path.
+     * @note This method modifies filesystem.
+     */
+    /**
+     * Loads a view script for the current module.
+     *
+     * This method is responsible for loading a view script for the current module.
+     * It first tries to load the view script from the system module's 'Views/dojo' directory, and if that fails, it tries to load it from the user module's 'Views/dojo' directory.
+     * The loaded view script is then added to the view object's script path.
+     *
+     * @param Zend_View|null $view The view object to which the script path should be added. If not provided, the method will use the view object from the Phprojekt instance.
+     * @return void This method does not return anything, it only modifies the view object's script path.
+     * @note This method modifies filesystem.
+     */
     public static function loadViewScript($view = null)
     {
         $module = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();

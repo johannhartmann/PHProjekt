@@ -318,6 +318,20 @@ class HTMLPurifier_Printer_ConfigForm_default extends HTMLPurifier_Printer {
  * Bool form field printer
  */
 class HTMLPurifier_Printer_ConfigForm_bool extends HTMLPurifier_Printer {
+    /**
+     * Renders a boolean configuration form field.
+     *
+     * This method generates an HTML form field for a boolean configuration directive.
+     * It creates a pair of radio buttons labeled 'Yes' and 'No' with the appropriate one selected based on the provided value.
+     * If the value is null, the radio buttons are disabled.
+     *
+     * @param string $ns The namespace of the configuration directive
+     * @param string $directive The name of the configuration directive
+     * @param bool|null $value The current value of the configuration directive
+     * @param string $name The name of the form field
+     * @param array|mixed $config The configuration object, which may be an array with a generator config and the actual config
+     * @return string The HTML markup for the form field
+     */
     public function render($ns, $directive, $value, $name, $config) {
         if (is_array($config) && isset($config[0])) {
             $gen_config = $config[0];

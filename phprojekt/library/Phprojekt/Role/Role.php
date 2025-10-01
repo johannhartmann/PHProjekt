@@ -142,6 +142,30 @@ class Phprojekt_Role_Role extends Phprojekt_ActiveRecord_Abstract implements Php
      *
      * @return void
      */
+    /**
+     * Deletes a role and its associated relations..
+     *
+     * This method deletes the current role from the system, except for the admin role (ID 1).
+     * It calls the parent class's delete() method to perform the actual deletion.
+     * @return void This method does not return a value.
+     * @note This method accesses database.
+     */
+    /**
+     * Deletes the current role from the system, except for the admin role..
+     *
+     * This method deletes the current role from the database, except for the admin role (ID 1).
+     * It calls the parent class's delete() method to perform the actual deletion.
+     * @return void This method does not return a value.
+     * @note This method accesses database.
+     */
+    /**
+     * Deletes the current role from the database, except for the admin role..
+     *
+     * This method deletes the current role from the database, except for the admin role (ID 1).
+     * It calls the parent class's delete() method to perform the actual deletion.
+     * @return void This method does not return a value.
+     * @note This method accesses database.
+     */
     public function delete()
     {
         if ($this->id > 1) {

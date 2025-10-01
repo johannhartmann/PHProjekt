@@ -71,11 +71,12 @@ interface Phprojekt_Model_Interface extends Iterator
     public function recordValidate();
 
     /**
-     * Returns the errors found by recordValidate().
+     * Retrieves the errors recorded by the recordValidate() method.
      *
-     * Before a call to recordValidate(), the returned value is undefined.
+     * This method returns the errors that were recorded by the recordValidate() method.
+     * Before calling recordValidate(), the returned value is undefined.
      *
-     * @return array as returned by Phprojekt_Error->getError
+     * @return array The errors as returned by Phprojekt_Error->getError().
      */
     public function getError();
 }

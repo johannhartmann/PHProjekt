@@ -664,6 +664,39 @@ class Phprojekt_Tree_Node_Database implements IteratorAggregate
     /**
      * Pass-through to hasField method of active record.
      */
+    /**
+     * Checks if the active record has the specified field..
+     *
+     * This method is a pass-through to the hasField method of the active record object.
+     * It allows you to determine if the current node in the tree has a specific field defined.
+     *
+     * @param string $field The name of the field to check for.
+     * @return bool True if the active record has the specified field, false otherwise.
+     * @note This method accesses database.
+     * @see Phprojekt_Tree_Node_Database.getActiveRecord
+     */
+    /**
+     * Checks if the active record has the specified field..
+     *
+     * This method is a pass-through to the hasField method of the active record object.
+     * It allows you to determine if the current node in the tree has a specific field defined.
+     *
+     * @param string $field The name of the field to check for.
+     * @return bool True if the active record has the specified field, false otherwise.
+     * @note This method accesses database.
+     * @see Phprojekt_Tree_Node_Database.getActiveRecord
+     */
+    /**
+     * Checks if the active record has the specified field..
+     *
+     * This method is a pass-through to the hasField method of the active record object.
+     * It allows you to determine if the current node in the tree has a specific field defined.
+     *
+     * @param string $field The name of the field to check for.
+     * @return bool True if the active record has the specified field, false otherwise.
+     * @note This method accesses database.
+     * @see Phprojekt_Tree_Node_Database.getActiveRecord
+     */
     public function hasField($field)
     {
         return $this->getActiveRecord()->hasField($field);

@@ -203,6 +203,33 @@ class Phprojekt_Auth_ProxyTable
         $this->_proxyTable->delete($where);
     }
 
+    /**
+     * Inserts an array of rows into the proxy table..
+     *
+     * This protected method takes an array of rows and inserts each one into the proxy table.
+     * It is used to populate the proxy table with data from the main user table.
+     *
+     * @param array $rows An array of row data to be inserted into the proxy table.
+     * @note This method accesses database.
+     */
+    /**
+     * Inserts an array of rows into the proxy table.
+     *
+     * This protected method takes an array of row data and inserts each row into the proxy table.
+     * It is used to populate the proxy table with data from the main user table.
+     *
+     * @param array $rows An array of row data to be inserted into the proxy table
+     * @note This method accesses database.
+     */
+    /**
+     * Inserts an array of rows into the proxy table..
+     *
+     * This protected method takes an array of row data and inserts each row into the proxy table.
+     * It is used to populate the proxy table with data from the main user table.
+     *
+     * @param array $rows An array of row data to be inserted into the proxy table.
+     * @note This method accesses database.
+     */
     protected function _insertRowsIntoProxyTable($rows = array()) {
         foreach ($rows as $row) {
             $this->_proxyTable->insert($row);

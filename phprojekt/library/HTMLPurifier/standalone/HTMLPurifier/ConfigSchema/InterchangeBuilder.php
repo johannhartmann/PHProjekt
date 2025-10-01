@@ -158,9 +158,13 @@ class HTMLPurifier_ConfigSchema_InterchangeBuilder
     }
     
     /**
-     * Triggers errors for any unused keys passed in the hash; such keys
-     * may indicate typos, missing values, etc.
-     * @param $hash Instance of ConfigSchema_StringHash to check.
+     * Finds and reports any unused keys in the provided hash.
+     *
+     * This protected method iterates through the provided ConfigSchema_StringHash object and checks if each key has been accessed.
+     * If any keys are found to be unused, it triggers a user notice error to alert the developer of potential issues such as typos or missing values.
+     *
+     * @param HTMLPurifier_ConfigSchema_StringHash $hash The hash object to check for unused keys
+     * @return void This method does not return a value, it only triggers error messages as a side effect
      */
     protected function _findUnused($hash) {
         $accessed = $hash->getAccessed();

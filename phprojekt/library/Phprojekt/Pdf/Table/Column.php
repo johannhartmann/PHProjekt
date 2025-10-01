@@ -104,9 +104,12 @@ class Phprojekt_Pdf_Table_Column
     }
 
     /**
-     * Set protected value.
+     * Sets the alignment for the table column.
      *
-     * @param string $align Value to use.
+     * This method sets the alignment property of the table column. If a non-null value is
+     * provided, it will be used to update the internal _align property.
+     *
+     * @param string $align The alignment value to set (left, right, or center).
      *
      * @return void
      */
@@ -136,11 +139,15 @@ class Phprojekt_Pdf_Table_Column
     }
 
     /**
-     * Test function.
+     * Tests rendering of a table column to calculate dimensions.
      *
-     * @param Phprojekt_Pdf_Page $page Current page.
-     * @param integer            $x    Start position x.
-     * @param integer            $y    Start position y.
+     * This method calculates the height and width of a table column based on the provided text,
+     * font size, and page dimensions. It sets the calculated height and width properties without
+     * actually drawing the column, enabling layout calculations before rendering.
+     *
+     * @param Phprojekt_Pdf_Page $page The current PDF page object.
+     * @param integer            $x    The x-coordinate position on the page.
+     * @param integer            $y    The y-coordinate position on the page.
      *
      * @return void
      */
@@ -154,13 +161,17 @@ class Phprojekt_Pdf_Table_Column
     }
 
     /**
-     * Add border.
+     * Renders a border for a table column on a PDF page.
      *
-     * @param Phprojekt_Pdf_Page $page     Current page.
-     * @param integer            $x        Start position x.
-     * @param integer            $y        Start position y.
-     * @param integer            $height   Current height.
-     * @param boolean            $isHeader True if is a header.
+     * This method draws a rectangle border around a table column on the specified PDF page.
+     * If the column is a header, the background is filled with a gray color before drawing
+     * the border stroke.
+     *
+     * @param Phprojekt_Pdf_Page $page     The current PDF page on which to render the border.
+     * @param integer            $x        The starting x-coordinate of the border.
+     * @param integer            $y        The starting y-coordinate of the border.
+     * @param integer            $height   The height of the border.
+     * @param boolean            $isHeader Indicates whether the column is a header or not.
      *
      * @return void
      */

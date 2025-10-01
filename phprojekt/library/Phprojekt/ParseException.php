@@ -47,6 +47,27 @@ class Phprojekt_ParseException extends Exception
      *
      * @return string Parsed string.
      */
+    /**
+     * Retrieves the last parsed string from the exception..
+     *
+     * This method returns the last parsed string that was associated with the Phprojekt_ParseException instance.
+     * This can be useful for debugging or providing more context about the exception that was thrown.
+     * @return string The last parsed string that was associated with the exception.
+     */
+    /**
+     * Retrieves the last parsed string from the exception..
+     *
+     * This method returns the last parsed string that was associated with the Phprojekt_ParseException instance.
+     * This can be useful for debugging or providing more context about the exception that was thrown.
+     * @return string The last parsed string that was associated with the exception.
+     */
+    /**
+     * Retrieves the last parsed string from the exception..
+     *
+     * This method returns the last parsed string that was associated with the Phprojekt_ParseException instance.
+     * This can be useful for debugging or providing more context about the exception that was thrown.
+     * @return string The last parsed string that was associated with the exception.
+     */
     public function getParsedString()
     {
         return $this->_parsedString;

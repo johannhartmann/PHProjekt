@@ -35,11 +35,15 @@ class Phprojekt_Converter_String
     }
 
     /**
-     * Remove the short or long words from the index.
+     * Checks if a string has a length between 3 and 256 characters.
      *
-     * @param array $string String to check.
+     * This method takes a string as input and returns a boolean value indicating
+     * whether the length of the string is between 3 and 256 characters (inclusive).
+     * It uses the mb_strlen() function to determine the length of the string in UTF-8 encoding.
      *
-     * @return boolean True for words between 3 and 256.
+     * @param string $string The input string to be checked for length.
+     *
+     * @return boolean True if the length is between 3 and 256 characters, false otherwise.
      */
     public static function stripLengthWords($string)
     {

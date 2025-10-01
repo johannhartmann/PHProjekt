@@ -300,6 +300,42 @@ class Phprojekt_Date_Collection
      *
      * @return integer The new timestamp.
      */
+    /**
+     * Applies a date manipulation method to a given date.
+     *
+     * This private method is used to apply a specified date manipulation method (such as `add()` or `sub()`) to a given date value.
+     * It sets the internal date object to the provided date, calls the specified method on the date object, and returns the new timestamp value.
+     *
+     * @param string $method The name of the date manipulation method to apply (e.g. 'add', 'sub')
+     * @param mixed $value The parameter(s) to pass to the date manipulation method
+     * @param integer $date The timestamp of the date to manipulate
+     * @return integer The new timestamp value after applying the date manipulation method
+     * @note This method depends on current time.
+     */
+    /**
+     * Applies a date manipulation method to a given date..
+     *
+     * This private method is used to apply a specified date manipulation method (such as `add()` or `sub()`) to a given date value.
+     * It sets the internal date object to the provided date, calls the specified method on the date object, and returns the new timestamp value.
+     *
+     * @param string $method The name of the date manipulation method to apply (e.g. 'add', 'sub')
+     * @param mixed $value The parameter(s) to pass to the date manipulation method
+     * @param integer $date The timestamp of the date to manipulate
+     * @return integer The new timestamp value after applying the date manipulation method
+     * @note This method depends on current time.
+     */
+    /**
+     * Applies a date manipulation method to a given date..
+     *
+     * This private method is used to apply a specified date manipulation method (such as `add()` or `sub()`) to a given date value.
+     * It sets the internal date object to the provided date, calls the specified method on the date object, and returns the new timestamp value.
+     *
+     * @param string $method The name of the date manipulation method to apply (e.g. 'add', 'sub')
+     * @param mixed $value The parameter(s) to pass to the date manipulation method
+     * @param integer $date The timestamp of the date to manipulate
+     * @return integer The new timestamp value after applying the date manipulation method
+     * @note This method depends on current time.
+     */
     private function _applyMethod($method, $value, $date)
     {
         $this->_date->set($date);

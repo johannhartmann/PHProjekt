@@ -90,9 +90,14 @@ class Phprojekt_Converter_Time
     }
 
     /**
-     * Return the timeZones with the P6 values.
+     * Retrieves an associative array of time zone information.
      *
-     * @return array Array with the P6 timeZones.
+     * This method returns an associative array that maps time zone offsets to their
+     * corresponding time zone names. The time zone offsets are represented as strings,
+     * and the names provide a human-readable description of each time zone.
+     *
+     * @return array Associative array of time zone information where keys are offsets
+     *               and values are corresponding time zone names.
      */
     public static function getTimeZones()
     {

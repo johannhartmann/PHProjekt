@@ -144,6 +144,33 @@ class Phprojekt_Acl extends Zend_Acl
      *
      * @return integer The number of the bitmask.
      */
+    /**
+     * Converts an array of boolean access rights into a bitmask integer..
+     *
+     * This method takes an associative array of boolean values representing different access rights (read, write, access, create, copy, delete, download, admin) and converts them into a single integer bitmask value.
+     * The bitmask can then be used to efficiently store and check access permissions.
+     *
+     * @param array $rights An associative array with boolean values for each access right. The keys in the array must match the access right names (read, write, access, create, copy, delete, download, admin).
+     * @return integer An integer bitmask representing the combined access rights. Each access right is represented by a bit in the bitmask.
+     */
+    /**
+     * Converts an array of boolean access rights into a bitmask integer.
+     *
+     * This method takes an associative array of boolean values representing different access rights (read, write, access, create, copy, delete, download, admin) and converts them into a single integer bitmask value.
+     * The bitmask can then be used to efficiently store and check access permissions.
+     *
+     * @param array $rights An associative array with boolean values for each access right. The keys in the array must match the access right names (read, write, access, create, copy, delete, download, admin).
+     * @return integer An integer bitmask representing the combined access rights. Each access right is represented by a bit in the bitmask.
+     */
+    /**
+     * Converts an array of boolean access rights into a bitmask integer.
+     *
+     * This method takes an associative array of boolean values representing different access rights (read, write, access, create, copy, delete, download, admin) and converts them into a single integer bitmask value.
+     * The bitmask can then be used to efficiently store and check access permissions.
+     *
+     * @param array $rights An associative array with boolean values for each access right. The keys in the array must match the access right names (read, write, access, create, copy, delete, download, admin).
+     * @return integer An integer bitmask representing the combined access rights. Each access right is represented by a bit in the bitmask.
+     */
     public static function convertArrayToBitmask($rights)
     {
         $right = self::NONE;

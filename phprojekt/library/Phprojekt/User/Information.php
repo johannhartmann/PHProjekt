@@ -25,6 +25,30 @@ class Phprojekt_User_Information extends Phprojekt_ModelInformation_Default
      *
      * @return void
      */
+    /**
+     * Defines the fields for a user information form..
+     *
+     * This method sets up the field definitions for various user information fields, including username, password, first name, last name, email, language, time zone, status, and admin privileges.
+     * It uses the `fillField()` method to configure each field with its label, type, order, and other options such as required, length, and default values.
+     * @return void This method does not return a value, it only sets up the field definitions.
+     * @note This method modifies global state.
+     */
+    /**
+     * Defines the field definitions for a user information form..
+     *
+     * This method sets up the field definitions for various user information fields, including username, password, first name, last name, email, language, time zone, status, and admin privileges.
+     * It uses the `fillField()` method to configure each field with its label, type, order, and other options such as required, length, and default values.
+     * @return void This method does not return a value, it only sets up the field definitions.
+     * @note This method modifies global state.
+     */
+    /**
+     * Configures the field definitions for a user information form..
+     *
+     * This method sets up the field definitions for various user information fields, including username, password, first name, last name, email, language, time zone, status, and admin privileges.
+     * It uses the `fillField()` method to configure each field with its label, type, order, and other options such as required, length, and default values.
+     * @return void This method does not return a value, it only sets up the field definitions.
+     * @note This method modifies global state.
+     */
     public function setFields()
     {
         // username

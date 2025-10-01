@@ -314,6 +314,27 @@ class Cleaner_Validator
      *
      * @return boolean True for valid.
      */
+    /**
+     * Validates if a given value is a scalar (string, integer, float, boolean).
+     *
+     * This method checks if the provided `$value` is a scalar type (string, integer, float, or boolean).
+     * If the value is not a scalar, it adds an 'INVALID_NUMERIC' message to the provided `$messages` object.
+     *
+     * @param mixed $value The value to be validated
+     * @param mixed $messages An object to store validation messages
+     * @return boolean True if the value is a scalar, false otherwise
+     */
+    /**
+     * Validates if a given value is a scalar (string, integer, float, boolean).
+     *
+     * This method checks if the provided `$value` is a scalar type (string, integer, float, or boolean).
+     * If the value is not a scalar, it adds an 'INVALID_NUMERIC' message to the provided `$messages` object.
+     *
+     * @param mixed $value The value to be validated
+     * @param mixed $messages An object to store validation messages
+     * @return boolean True if the value is a scalar, false otherwise
+     * @note This method modifies global state.
+     */
     public function validateString($value, $messages)
     {
         $valid = is_scalar($value);
@@ -332,6 +353,17 @@ class Cleaner_Validator
      * @param mixed $messages Messages generated while validation.
      *
      * @return boolean True for valid.
+     */
+    /**
+     * Validates if a given value is a valid word.
+     *
+     * This method checks if the provided value matches the regular expression pattern '/^\w+$/D', which ensures that the value consists only of word characters (letters, digits, and underscores).
+     * If the value is valid, the method returns true.
+     * Otherwise, it adds an 'INVALID_ISOTIME' message to the provided $messages object and returns false.
+     *
+     * @param mixed $value The value to be validated
+     * @param mixed $messages An object to store validation messages
+     * @return boolean True if the value is a valid word, false otherwise
      */
     public function validateWord($value, $messages)
     {

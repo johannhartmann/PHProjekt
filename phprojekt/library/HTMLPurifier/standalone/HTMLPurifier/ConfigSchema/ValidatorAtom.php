@@ -57,6 +57,36 @@ class HTMLPurifier_ConfigSchema_ValidatorAtom
         return $this;
     }
     
+    /**
+     * Throws a configuration schema exception with a formatted error message..
+     *
+     * This protected method is used internally to throw a new HTMLPurifier_ConfigSchema_Exception with a formatted error message.
+     * The error message includes the name of the configuration directive member and the context in which the error occurred.
+     *
+     * @param string $msg The error message to include in the exception.
+     * @throws HTMLPurifier_ConfigSchema_Exception Whenever this method is called.
+     * @note This method modifies global state.
+     */
+    /**
+     * Throws a configuration schema exception with a formatted error message..
+     *
+     * This protected method is used internally to throw a new HTMLPurifier_ConfigSchema_Exception with a formatted error message.
+     * The error message includes the name of the configuration directive member and the context in which the error occurred.
+     *
+     * @param string $msg The error message to include in the exception.
+     * @throws HTMLPurifier_ConfigSchema_Exception Whenever this method is called.
+     * @note This method modifies global state.
+     */
+    /**
+     * Throws a configuration schema exception with a formatted error message..
+     *
+     * This protected method is used internally to throw a new HTMLPurifier_ConfigSchema_Exception with a formatted error message.
+     * The error message includes the name of the configuration directive member and the context in which the error occurred.
+     *
+     * @param string $msg The error message to include in the exception.
+     * @throws HTMLPurifier_ConfigSchema_Exception Whenever this method is called.
+     * @note This method modifies global state.
+     */
     protected function error($msg) {
         throw new HTMLPurifier_ConfigSchema_Exception(ucfirst($this->member) . ' in ' . $this->context . ' ' . $msg);
     }

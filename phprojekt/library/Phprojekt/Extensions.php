@@ -165,6 +165,39 @@ class PHProjekt_Extensions {
      * @param PHProjekt_Extension_Abstract $extensionObject The extension
      * @return boolean
      */
+    /**
+     * Verifies the version of an extension object..
+     *
+     * This method checks the version string of the provided extension object to ensure it matches the expected format of a major.minor.patch version number.
+     * If the version is not in the correct format, a warning is logged and the method returns false.
+     * Otherwise, it returns true to indicate the extension is valid.
+     *
+     * @param PHProjekt_Extension_Abstract $extensionObject The extension object to verify
+     * @return boolean True if the extension version is valid, false otherwise
+     * @note This method has log effects.
+     */
+    /**
+     * Verifies the version format of an extension object..
+     *
+     * This method checks the version string of the provided extension object to ensure it matches the expected format of a major.minor.patch version number.
+     * If the version is not in the correct format, a warning is logged and the method returns false.
+     * Otherwise, it returns true to indicate the extension is valid.
+     *
+     * @param PHProjekt_Extension_Abstract $extensionObject The extension object to verify
+     * @return boolean True if the extension version is valid, false otherwise
+     * @note This method has log effects.
+     */
+    /**
+     * Verifies the version format of an extension object..
+     *
+     * This method checks the version string of the provided extension object to ensure it matches the expected format of a major.minor.patch version number.
+     * If the version is not in the correct format, a warning is logged and the method returns false.
+     * Otherwise, it returns true to indicate the extension is valid.
+     *
+     * @param PHProjekt_Extension_Abstract $extensionObject The extension object to verify
+     * @return boolean True if the extension version is valid, false otherwise
+     * @note This method has log effects.
+     */
     private function verifyExtension($extensionObject) {
         if (!preg_match('/^[0-9]\.[0-9]{1,2}\.[0-9]{1,2}$/', $extensionObject->getVersion())) {
             $this->_log->warn("Extension " . get_class($extensionObject) . " not verified");

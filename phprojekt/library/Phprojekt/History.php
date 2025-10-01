@@ -319,6 +319,45 @@ class Phprojekt_History extends Phprojekt_ActiveRecord_Abstract
 
      * @return string Date or Time format.
      */
+    /**
+     * Converts date and time values to the appropriate format based on the user or UTC time zone..
+     *
+     * This method takes a date or time value, the type of the field (datetime or time), and a direction (utcToUser or userToUtc) to convert the value to the appropriate format.
+     * It uses the Phprojekt_Converter_Time class to perform the conversion and returns the formatted date or time string.
+     *
+     * @param mixed $value The current value to be converted.
+     * @param string $type The type of the field, either 'datetime' or 'time'.
+     * @param string $side The direction of the conversion, either 'utcToUser' or 'userToUtc'.
+     * @return string The converted date or time value in the appropriate format.
+     * @note This method depends on current time.
+     * @see Phprojekt_Converter_Time
+     */
+    /**
+     * Converts date and time values to the appropriate format based on the user or UTC time zone..
+     *
+     * This method takes a date or time value, the type of the field (datetime or time), and a direction (utcToUser or userToUtc) to convert the value to the appropriate format.
+     * It uses the Phprojekt_Converter_Time class to perform the conversion and returns the formatted date or time string.
+     *
+     * @param mixed $value The current value to be converted.
+     * @param string $type The type of the field, either 'datetime' or 'time'.
+     * @param string $side The direction of the conversion, either 'utcToUser' or 'userToUtc'.
+     * @return string The converted date or time value in the appropriate format.
+     * @note This method depends on current time.
+     * @see Phprojekt_Converter_Time
+     */
+    /**
+     * Converts date and time values to the appropriate format based on the user or UTC time zone..
+     *
+     * This method takes a date or time value, the type of the field (datetime or time), and a direction (utcToUser or userToUtc) to convert the value to the appropriate format.
+     * It uses the Phprojekt_Converter_Time class to perform the conversion and returns the formatted date or time string.
+     *
+     * @param mixed $value The current value to be converted.
+     * @param string $type The type of the field, either 'datetime' or 'time'.
+     * @param string $side The direction of the conversion, either 'utcToUser' or 'userToUtc'.
+     * @return string The converted date or time value in the appropriate format.
+     * @note This method depends on current time.
+     * @see Phprojekt_Converter_Time
+     */
     private function _convertDateTimes($value, $type, $side)
     {
         if ($type == 'datetime') {

@@ -26,6 +26,36 @@ class Phprojekt_ActiveRecord_Exception extends Exception
      *
      * @return void
      */
+    /**
+     * Constructs a new instance of the Phprojekt_ActiveRecord_Exception class..
+     *
+     * This method is the constructor for the Phprojekt_ActiveRecord_Exception class.
+     * It calls the constructor of the parent Exception class, passing the provided message and code parameters.
+     *
+     * @param string $message The error message to be associated with this exception.
+     * @param integer $code The error code to be associated with this exception. Can be null.
+     * @return void This method does not return a value.
+     */
+    /**
+     * Constructs a new instance of the Phprojekt_ActiveRecord_Exception class..
+     *
+     * This method is the constructor for the Phprojekt_ActiveRecord_Exception class.
+     * It calls the constructor of the parent Exception class, passing the provided message and code parameters.
+     *
+     * @param string $message The error message to be associated with this exception.
+     * @param integer $code The error code to be associated with this exception. Can be null.
+     * @return void This method does not return a value.
+     */
+    /**
+     * Constructs a new instance of the Phprojekt_ActiveRecord_Exception class..
+     *
+     * This method is the constructor for the Phprojekt_ActiveRecord_Exception class.
+     * It calls the constructor of the parent Exception class, passing the provided message and code parameters.
+     *
+     * @param string $message The error message to be associated with this exception.
+     * @param integer $code The error code to be associated with this exception. Can be null.
+     * @return void This method does not return a value.
+     */
     function __construct($message, $code = null)
     {
         parent::__construct($message, $code);

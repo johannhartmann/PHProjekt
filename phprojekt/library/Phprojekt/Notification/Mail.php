@@ -181,6 +181,33 @@ class Phprojekt_Notification_Mail extends Phprojekt_Mail
      *
      * @return void
      */
+    /**
+     * Sends an email notification using the configured SMTP transport..
+     *
+     * This method creates an SMTP transport object using the `setTransport()` method, and then sends the email notification using the `send()` method.
+     * It handles any exceptions that may occur during the email sending process.
+     * @return void This method does not return a value.
+     * @throws Zend_Controller_Action_Exception An exception occurs while sending the email notification.
+     * @note This method makes network calls.
+     */
+    /**
+     * Sends an email notification using the configured SMTP transport..
+     *
+     * This method creates an SMTP transport object using the `setTransport()` method, and then sends the email notification using the `send()` method.
+     * It handles any exceptions that may occur during the email sending process.
+     * @return void This method does not return a value.
+     * @throws Zend_Controller_Action_Exception An exception occurs while sending the email notification.
+     * @note This method makes network calls.
+     */
+    /**
+     * Sends an email notification using the configured SMTP transport..
+     *
+     * This method creates an SMTP transport object using the `setTransport()` method, and then sends the email notification using the `send()` method.
+     * It handles any exceptions that may occur during the email sending process.
+     * @return void This method does not return a value.
+     * @throws Zend_Controller_Action_Exception An exception occurs while sending the email notification.
+     * @note This method makes network calls.
+     */
     public function sendNotification()
     {
         // Creates the Zend_Mail_Transport_<Smtp/SendMail> object

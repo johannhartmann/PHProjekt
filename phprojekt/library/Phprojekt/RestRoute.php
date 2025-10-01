@@ -25,6 +25,45 @@ class Phprojekt_RestRoute extends Zend_Rest_Route
      * To find out if a controller ist restful, we need to check it's class. So, instead of checking all Controllers on
      * Startup, we just overwrite this function to check it on demand.
      */
+    /**
+     * Checks if the given controller is a RESTful controller..
+     *
+     * This method checks if the controller class specified by the `$moduleName` and `$controllerName` parameters is a subclass of `Phprojekt_RestController`.
+     * If the class exists and is a subclass, the method returns `true`, indicating that the controller is RESTful.
+     * Otherwise, it returns `false`.
+     *
+     * @param string $moduleName The name of the module containing the controller.
+     * @param string $controllerName The name of the controller to check.
+     * @return bool True if the controller is a RESTful controller, false otherwise.
+     * @throws ReflectionException The controller class cannot be loaded or inspected.
+     * @note This method modifies global state.
+     */
+    /**
+     * Checks if a given controller is a RESTful controller..
+     *
+     * This method checks if the controller class specified by the `$moduleName` and `$controllerName` parameters is a subclass of `Phprojekt_RestController`.
+     * If the class exists and is a subclass, the method returns `true`, indicating that the controller is RESTful.
+     * Otherwise, it returns `false`.
+     *
+     * @param string $moduleName The name of the module containing the controller.
+     * @param string $controllerName The name of the controller to check.
+     * @return bool True if the controller is a RESTful controller, false otherwise.
+     * @throws ReflectionException The controller class cannot be loaded or inspected.
+     * @note This method modifies global state.
+     */
+    /**
+     * Checks if a given controller is a RESTful controller..
+     *
+     * This method checks if the controller class specified by the `$moduleName` and `$controllerName` parameters is a subclass of `Phprojekt_RestController`.
+     * If the class exists and is a subclass, the method returns `true`, indicating that the controller is RESTful.
+     * Otherwise, it returns `false`.
+     *
+     * @param string $moduleName The name of the module containing the controller.
+     * @param string $controllerName The name of the controller to check.
+     * @return bool True if the controller is a RESTful controller, false otherwise.
+     * @throws ReflectionException The controller class cannot be loaded or inspected.
+     * @note This method modifies global state.
+     */
     protected function _checkRestfulController($moduleName, $controllerName)
     {
         $controllerName = ucfirst($moduleName) . '_' . ucfirst($controllerName) . 'Controller';

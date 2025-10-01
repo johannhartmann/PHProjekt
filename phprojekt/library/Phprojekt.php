@@ -722,7 +722,7 @@ class Phprojekt
      */
     public static function errorHandler($errNumber, $errStr, $errFile, $errLine)
     {
-        // Don´t treat the silenced errors
+        // DonÂ´t treat the silenced errors
         if (error_reporting() == 0) {
             return;
         }
@@ -762,7 +762,7 @@ class Phprojekt
                 break;
             case E_STRICT:
                 // Log error and continue script execution
-                // Skip the only error that we can´t resolve now
+                // Skip the only error that we canÂ´t resolve now
                 // @TODO: fix it
                 if (!strpos($errStr, 'Phprojekt_ActiveRecord_Abstract::delete()') &&
                     !strpos($errStr, 'Zend_Db_Table_Abstract::delete()')) {
@@ -1018,6 +1018,20 @@ class Phprojekt
         die();
     }
 
+    /**
+     * Redirects the user to the setup page and exits the application..
+     *
+     * This private method is responsible for handling the case where no configuration file is found.
+     * It creates a new HTTP response object, sets the redirect location to 'setup.php', sets the response body with a message indicating that the user is being redirected to the setup page, sends the response, and then terminates the script execution.
+     * @note This method modifies filesystem and makes network calls.
+     */
+    /**
+     * Redirects the user to the setup page and exits the application..
+     *
+     * This private method is responsible for handling the case where no configuration file is found.
+     * It creates a new HTTP response object, sets the redirect location to 'setup.php', sets the response body to a message indicating that the user is being redirected to the setup page, sends the response, and then terminates the script execution.
+     * @note This method modifies filesystem and makes network calls.
+     */
     private function _redirectToSetupAndDie()
     {
         $response = new Zend_Controller_Response_Http();

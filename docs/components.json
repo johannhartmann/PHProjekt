@@ -1,0 +1,146 @@
+[
+  {
+    "name": "Core",
+    "path": "phprojekt/application/Core",
+    "type": "module",
+    "description": "Administrative module handling user management, role definition, module administration, and system configuration."
+  },
+  {
+    "name": "Default",
+    "path": "phprojekt/application/Default",
+    "type": "module",
+    "description": "Base module providing authentication, global search, tagging, file upload handling, and standardized CRUD operations."
+  },
+  {
+    "name": "Project",
+    "path": "phprojekt/application/Project",
+    "type": "module",
+    "description": "Project management module implementing hierarchical project structures with permissions and tree operations."
+  },
+  {
+    "name": "Calendar2",
+    "path": "phprojekt/application/Calendar2",
+    "type": "module",
+    "description": "Calendar module with scheduling capabilities, recurring events, and CalDAV synchronization support."
+  },
+  {
+    "name": "Timecard",
+    "path": "phprojekt/application/Timecard",
+    "type": "module",
+    "description": "Time tracking module enabling project time logging, vacation management, and timesheet reporting."
+  },
+  {
+    "name": "Phprojekt",
+    "path": "phprojekt/library/Phprojekt",
+    "type": "core",
+    "description": "Core framework library providing Active Record ORM, controllers, models, and infrastructure services."
+  },
+  {
+    "name": "ActiveRecord",
+    "path": "phprojekt/library/Phprojekt/ActiveRecord",
+    "type": "library",
+    "description": "Active Record implementation providing ORM capabilities with relationship mapping and lifecycle hooks."
+  },
+  {
+    "name": "Auth",
+    "path": "phprojekt/library/Phprojekt/Auth",
+    "type": "library",
+    "description": "Authentication system managing user sessions, credential validation, and identity resolution."
+  },
+  {
+    "name": "User",
+    "path": "phprojekt/library/Phprojekt/User",
+    "type": "library",
+    "description": "User management library handling user models, settings, and profile information."
+  },
+  {
+    "name": "Role",
+    "path": "phprojekt/library/Phprojekt/Role",
+    "type": "library",
+    "description": "Role-based access control library managing roles and module permissions."
+  },
+  {
+    "name": "Search",
+    "path": "phprojekt/library/Phprojekt/Search",
+    "type": "library",
+    "description": "Full-text search engine providing indexing and search capabilities across all modules."
+  },
+  {
+    "name": "Tree",
+    "path": "phprojekt/library/Phprojekt/Tree",
+    "type": "library",
+    "description": "Hierarchical tree structure library for managing nested data like project hierarchies."
+  },
+  {
+    "name": "Notification",
+    "path": "phprojekt/library/Phprojekt/Notification",
+    "type": "library",
+    "description": "Notification system delivering messages via email and frontend channels."
+  },
+  {
+    "name": "DatabaseManager",
+    "path": "phprojekt/library/Phprojekt/DatabaseManager",
+    "type": "library",
+    "description": "Database schema management handling migrations, table creation, and schema inspection."
+  },
+  {
+    "name": "Migration",
+    "path": "phprojekt/library/Phprojekt/Migration",
+    "type": "library",
+    "description": "Database migration system managing schema versioning and upgrades."
+  },
+  {
+    "name": "CalDAV",
+    "path": "phprojekt/library/Phprojekt/CalDAV",
+    "type": "library",
+    "description": "CalDAV protocol implementation enabling calendar synchronization with external clients."
+  },
+  {
+    "name": "Converter",
+    "path": "phprojekt/library/Phprojekt/Converter",
+    "type": "library",
+    "description": "Data conversion utilities for transforming between formats like JSON, CSV, and internal representations."
+  },
+  {
+    "name": "Exception",
+    "path": "phprojekt/library/Phprojekt/Exception",
+    "type": "library",
+    "description": "Exception hierarchy providing specialized exception types for various error conditions."
+  },
+  {
+    "name": "Filter",
+    "path": "phprojekt/library/Phprojekt/Filter",
+    "type": "library",
+    "description": "Input filtering and tokenization for search queries and data validation."
+  },
+  {
+    "name": "Model",
+    "path": "phprojekt/library/Phprojekt/Model",
+    "type": "library",
+    "description": "Model utilities for data conversion and validation across the application."
+  },
+  {
+    "name": "Pdf",
+    "path": "phprojekt/library/Phprojekt/Pdf",
+    "type": "library",
+    "description": "PDF generation library for creating reports and document exports."
+  },
+  {
+    "name": "Setup",
+    "path": "phprojekt/htdocs/Setup",
+    "type": "service",
+    "description": "Installation and configuration module for initial system setup and database initialization."
+  },
+  {
+    "name": "HTMLPurifier",
+    "path": "phprojekt/library/HTMLPurifier",
+    "type": "library",
+    "description": "HTML sanitization library providing XSS protection for user-generated content."
+  },
+  {
+    "name": "Cleaner",
+    "path": "phprojekt/library/Cleaner",
+    "type": "library",
+    "description": "Data cleaning and maintenance utilities for database operations."
+  }
+]

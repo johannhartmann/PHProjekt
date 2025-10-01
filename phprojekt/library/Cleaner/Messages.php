@@ -129,11 +129,15 @@ class Cleaner_Messages
     }
 
     /**
-     * Load messages for a certain locale.
+     * Loads locale-specific messages from a file.
      *
-     * @param string $locale Name oflocale (for example de_DE, en_US).
+     * This protected static method loads locale-specific messages from a file located in the 'Locale/' directory.
+     * The file name is constructed using the provided locale parameter (e.g. 'de_DE.php').
+     * If the file does not exist, a Cleaner_SystemException is thrown.
      *
-     * @return string
+     * @param string $locale The name of the locale for which to load messages (e.g. 'de_DE', 'en_US')
+     * @return array An associative array containing the loaded locale messages
+     * @throws Cleaner_SystemException The specified locale file does not exist
      */
     protected static function _load($locale)
     {

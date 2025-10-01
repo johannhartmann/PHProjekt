@@ -259,6 +259,51 @@ class Phprojekt_Setting extends Phprojekt_ActiveRecord_Abstract
      *
      * @return void
      */
+    /**
+     * Saves the user settings for the current module into the database and session..
+     *
+     * This method takes an array of settings parameters and a user ID, and saves the settings for the current module into the database and the user's session.
+     * If no user ID is provided, the current user's ID is used.
+     * The method first checks if the model has a custom 'setSettings' method, and if so, calls that.
+     * Otherwise, it iterates through the module's field definitions, finds any matching settings parameters, and saves them to the database and session.
+     *
+     * @param array $params An associative array of settings parameters, where the keys are the setting keys and the values are the setting values.
+     * @param integer $userId The ID of the user whose settings should be saved. If not provided, the current user's ID is used.
+     * @return void This method does not return a value.
+     * @throws Zend_Db_Exception An error occurs while saving the settings to the database.
+     * @note This method accesses database and modifies global state.
+     * @see Phprojekt_Setting.getSettings
+     */
+    /**
+     * Saves the user settings for the current module into the database and session..
+     *
+     * This method takes an array of settings parameters and a user ID, and saves the settings for the current module into the database and the user's session.
+     * If no user ID is provided, the current user's ID is used.
+     * The method first checks if the model has a custom 'setSettings' method, and if so, calls that.
+     * Otherwise, it iterates through the module's field definitions, finds any matching settings parameters, and saves them to the database and session.
+     *
+     * @param array $params An associative array of settings parameters, where the keys are the setting keys and the values are the setting values.
+     * @param integer $userId The ID of the user whose settings should be saved. If not provided, the current user's ID is used.
+     * @return void This method does not return a value.
+     * @throws Zend_Db_Exception An error occurs while saving the settings to the database.
+     * @note This method accesses database and modifies global state.
+     * @see Phprojekt_Setting.getSettings
+     */
+    /**
+     * Saves the user settings for the current module into the database and session..
+     *
+     * This method takes an array of settings parameters and a user ID, and saves the settings for the current module into the database and the user's session.
+     * If no user ID is provided, the current user's ID is used.
+     * The method first checks if the model has a custom 'setSettings' method, and if so, calls that.
+     * Otherwise, it iterates through the module's field definitions, finds any matching settings parameters, and saves them to the database and session.
+     *
+     * @param array $params An associative array of settings parameters, where the keys are the setting keys and the values are the setting values.
+     * @param integer $userId The ID of the user whose settings should be saved. If not provided, the current user's ID is used.
+     * @return void This method does not return a value.
+     * @throws Zend_Db_Exception An error occurs while saving the settings to the database.
+     * @note This method accesses database and modifies global state.
+     * @see Phprojekt_Setting.getSettings
+     */
     public function setSettings($params, $userId = 0)
     {
         if (!$userId) {

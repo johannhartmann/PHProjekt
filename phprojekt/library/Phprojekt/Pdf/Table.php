@@ -96,9 +96,13 @@ class Phprojekt_Pdf_Table
     }
 
     /**
-     * Parse and draw table on the page.
+     * Renders the table on the PDF page.
      *
-     * @return array List of pages with table.
+     * This method is responsible for drawing the table on the PDF page. It iterates through
+     * the rows of the table, rendering each row on the current page. If a row does not fit
+     * on the current page, a new page is created and the row is rendered on the new page.
+     *
+     * @return array An array of Phprojekt_Pdf_Page objects, each containing a portion of the table.
      */
     public function render()
     {

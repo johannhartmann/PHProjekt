@@ -26,6 +26,36 @@ class Phprojekt_User_Exception extends Exception
      *
      * @return void
      */
+    /**
+     * Constructs a new Phprojekt_User_Exception instance..
+     *
+     * This is the constructor method for the Phprojekt_User_Exception class.
+     * It calls the constructor of the parent Exception class, passing along the provided message and code parameters.
+     *
+     * @param string $message The error message to be associated with this exception.
+     * @param integer $code The error code to be associated with this exception. Can be null.
+     * @return void The constructor does not return a value, it only initializes the exception object.
+     */
+    /**
+     * Constructs a new Phprojekt_User_Exception instance..
+     *
+     * This is the constructor method for the Phprojekt_User_Exception class.
+     * It calls the constructor of the parent Exception class, passing along the provided message and code parameters.
+     *
+     * @param string $message The error message to be associated with this exception.
+     * @param integer $code The error code to be associated with this exception. Can be null.
+     * @return void The constructor does not return a value, it only initializes the exception object.
+     */
+    /**
+     * Constructs a new Phprojekt_User_Exception instance..
+     *
+     * This is the constructor method for the Phprojekt_User_Exception class.
+     * It calls the constructor of the parent Exception class, passing along the provided message and code parameters.
+     *
+     * @param string $message The error message to be associated with this exception.
+     * @param integer $code The error code to be associated with this exception. Can be null.
+     * @return void The constructor does not return a value, it only initializes the exception object.
+     */
     function __construct($message, $code = null)
     {
         parent::__construct($message, $code);

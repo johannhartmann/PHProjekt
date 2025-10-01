@@ -14,7 +14,10 @@
  */
 
 /**
- * Exception thrown when trying to retrieve the user's holiday region, but it is not set
+ * Exception raised when the user's holiday region is not set.
+ *
+ * This exception is raised when attempting to retrieve the user's holiday region, but it has
+ * not been set. This can occur if the necessary configuration or data is missing or incorrect.
  */
 class Phprojekt_Exception_HolidayRegionNotSet extends Phprojekt_Exception_Published
 {

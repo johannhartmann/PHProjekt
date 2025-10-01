@@ -467,6 +467,39 @@ abstract class Phprojekt_Item_Abstract extends Phprojekt_ActiveRecord_Abstract i
      *
      * @return array of User The users with the given right.
      */
+    /**
+     * Retrieves a list of users with the specified rights.
+     *
+     * This method retrieves a list of users who have the specified rights on the current item.
+     * The rights can be provided as a bitmask, and the method can be configured to return only users with the exact specified rights.
+     *
+     * @param int $rights The bitmask of rights to filter by. If omitted or null, all users with any rights will be returned.
+     * @param bool $exact If true, only users with the exact specified rights will be returned. If false or omitted, users with any of the specified rights will be returned.
+     * @return array of User A list of users who have the specified rights on the current item.
+     * @note This method accesses database.
+     */
+    /**
+     * Retrieves a list of users with the specified rights on the current item..
+     *
+     * This method retrieves a list of users who have the specified rights on the current item.
+     * The rights can be provided as a bitmask, and the method can be configured to return only users with the exact specified rights.
+     *
+     * @param int $rights The bitmask of rights to filter by. If omitted or null, all users with any rights will be returned.
+     * @param bool $exact If true, only users with the exact specified rights will be returned. If false or omitted, users with any of the specified rights will be returned.
+     * @return array of User A list of users who have the specified rights on the current item.
+     * @note This method accesses database.
+     */
+    /**
+     * Retrieves a list of users with the specified rights on the current item..
+     *
+     * This method retrieves a list of users who have the specified rights on the current item.
+     * The rights can be provided as a bitmask, and the method can be configured to return only users with the exact specified rights.
+     *
+     * @param int $rights The bitmask of rights to filter by. If omitted or null, all users with any rights will be returned.
+     * @param bool $exact If true, only users with the exact specified rights will be returned. If false or omitted, users with any of the specified rights will be returned.
+     * @return array of User A list of users who have the specified rights on the current item.
+     * @note This method accesses database.
+     */
     public function getUsersWithRights($rights = null, $exact = false) {
         return $this->_rights->getUsersWithRight(
             Phprojekt_Module::getId($this->getModelName()),

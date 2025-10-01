@@ -192,13 +192,15 @@ class Phprojekt_Model_Validate
     }
 
     /**
-     * Validate required fields.
+     * Validates if a given value is required and returns an error message if it is empty.
      *
-     * Return the msg error if exists.
+     * This method checks if the provided value is empty. If the value is empty, it returns
+     * an error message indicating that the field is required. Otherwise, it returns null to
+     * indicate that the value is valid.
      *
-     * @param mix $value The value to check.
+     * @param mixed $value The value to be validated as required.
      *
-     * @return string Error string or null.
+     * @return string|null An error message if the value is empty, or null if the value is not empty.
      */
     public function validateIsRequired($value)
     {
@@ -211,12 +213,16 @@ class Phprojekt_Model_Validate
     }
 
     /**
-     * Validate that $start is before $end.
+     * Validates that the end date is not before the start date.
      *
-     * @param string $start Start date value.
-     * @param string $end   End date value.
+     * This method takes two date strings, start and end, and checks that the end date is not
+     * earlier than the start date. If the end date is earlier, an error is added to the error
+     * object and the method returns false. Otherwise, it returns true.
      *
-     * @return boolean True for valid.
+     * @param string $start The start date value to validate.
+     * @param string $end   The end date value to validate.
+     *
+     * @return boolean True if the date range is valid, false otherwise.
      */
     public function validateDateRange($start, $end)
     {

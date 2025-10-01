@@ -123,6 +123,39 @@ class Phprojekt_Tabs
      *
      * @return void
      */
+    /**
+     * Saves the relationship between a module and one or more tabs..
+     *
+     * This method updates the module-tab relationship in the database.
+     * It first deletes any existing relationships for the given module ID, then inserts new relationships for each of the provided tab IDs.
+     *
+     * @param array $tabIds An array of tab IDs to associate with the module.
+     * @param integer $moduleId The ID of the module to update the tab relationships for.
+     * @return void This method does not return a value.
+     * @note This method accesses database.
+     */
+    /**
+     * Saves the relationship between a module and one or more tabs..
+     *
+     * This method updates the module-tab relationship in the database.
+     * It first deletes any existing relationships for the given module ID, then inserts new relationships for each of the provided tab IDs.
+     *
+     * @param array $tabIds An array of tab IDs to associate with the module.
+     * @param integer $moduleId The ID of the module to update the tab relationships for.
+     * @return void This method does not return a value.
+     * @note This method accesses database.
+     */
+    /**
+     * Saves the relationship between a module and one or more tabs..
+     *
+     * This method updates the module-tab relationship in the database.
+     * It first deletes any existing relationships for the given module ID, then inserts new relationships for each of the provided tab IDs.
+     *
+     * @param array $tabIds An array of tab IDs to associate with the module.
+     * @param integer $moduleId The ID of the module to update the tab relationships for.
+     * @return void This method does not return a value.
+     * @note This method accesses database.
+     */
     public function saveModuleTabRelation($tabIds, $moduleId)
     {
         $db = Phprojekt::getInstance()->getDb();

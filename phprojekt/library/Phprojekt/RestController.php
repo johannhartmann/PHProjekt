@@ -368,6 +368,33 @@ abstract class Phprojekt_RestController extends Zend_Rest_Controller
         return $dt->format('Y-m-d H:i:s');
     }
 
+    /**
+     * Sends a 404 Not Found HTTP response with a JSON-encoded error message..
+     *
+     * This protected method is used to generate a standardized 404 Not Found HTTP response with a JSON-encoded error message.
+     * It sets the HTTP response code to 404 and outputs the provided error message as a JSON object.
+     *
+     * @param string $message The error message to include in the JSON response. Defaults to 'Not found' if not provided.
+     * @note This method makes network calls.
+     */
+    /**
+     * Sends a 404 Not Found HTTP response with a JSON-encoded error message..
+     *
+     * This protected method is used to generate a standardized 404 Not Found HTTP response with a JSON-encoded error message.
+     * It sets the HTTP response code to 404 and outputs the provided error message as a JSON object.
+     *
+     * @param string $message The error message to include in the JSON response. Defaults to 'Not found' if not provided.
+     * @note This method makes network calls.
+     */
+    /**
+     * Sends a 404 Not Found HTTP response with a JSON-encoded error message..
+     *
+     * This protected method is used to generate a standardized 404 Not Found HTTP response with a JSON-encoded error message.
+     * It sets the HTTP response code to 404 and outputs the provided error message as a JSON object.
+     *
+     * @param string $message The error message to include in the JSON response. Defaults to 'Not found' if not provided.
+     * @note This method makes network calls.
+     */
     protected function _httpNotFound($message = "Not found")
     {
         $this->getResponse()->setHttpResponseCode(404);

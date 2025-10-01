@@ -32,6 +32,42 @@ class Phprojekt_Dispatcher extends Zend_Controller_Dispatcher_Standard
      *
      * @return string
      */
+    /**
+     * Formats a string into a PHP-friendly name..
+     *
+     * This method takes an unformatted string and formats it into a PHP-friendly name.
+     * By default, it replaces words separated by the word separator character(s) with camelCaps.
+     * If `$isAction` is false, it also preserves words separated by the path separation character with an underscore, making the following word Title cased.
+     * All non-alphanumeric characters are removed.
+     *
+     * @param string $unformatted The unformatted string to be formatted.
+     * @param boolean $isAction Defaults to false. If true, the method will not preserve words separated by the path separation character with an underscore.
+     * @return string The formatted string.
+     */
+    /**
+     * Formats a string into a PHP-friendly name.
+     *
+     * This method takes an unformatted string and formats it into a PHP-friendly name.
+     * By default, it replaces words separated by the word separator character(s) with camelCaps.
+     * If `$isAction` is false, it also preserves words separated by the path separation character with an underscore, making the following word Title cased.
+     * All non-alphanumeric characters are removed.
+     *
+     * @param string $unformatted The unformatted string to be formatted
+     * @param boolean $isAction Defaults to false. If true, the method will not preserve words separated by the path separation character with an underscore
+     * @return string The formatted string
+     */
+    /**
+     * Formats a string into a PHP-friendly name..
+     *
+     * This method takes an unformatted string and formats it into a PHP-friendly name.
+     * By default, it replaces words separated by the word separator character(s) with camelCaps.
+     * If `$isAction` is false, it also preserves words separated by the path separation character with an underscore, making the following word Title cased.
+     * All non-alphanumeric characters are removed.
+     *
+     * @param string $unformatted The unformatted string to be formatted.
+     * @param boolean $isAction Defaults to false. If true, the method will not preserve words separated by the path separation character with an underscore.
+     * @return string The formatted string.
+     */
     protected function _formatName($unformatted, $isAction = false)
     {
         return $unformatted;

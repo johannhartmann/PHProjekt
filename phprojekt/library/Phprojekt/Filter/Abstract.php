@@ -85,9 +85,13 @@ abstract class Phprojekt_Filter_Abstract
     abstract public function filter(Zend_Db_Select $select);
 
     /**
-     * Backing store pair to safe to database.
+     * Retrieves the backing store pair for the current filter.
      *
-     * @return array
+     * This protected method is used to get the backing store pair that will be used to save
+     * the filter data to the database. The backing store pair consists of a 'key' and 'value'
+     * that represent the filter settings.
+     *
+     * @return array An array with 'key' and 'value' keys for the backing store.
      */
     abstract protected function _getBackingStorePair();
 }

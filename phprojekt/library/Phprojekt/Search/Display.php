@@ -153,6 +153,28 @@ class Phprojekt_Search_Display extends Zend_Db_Table_Abstract
      *
      * @return boolean True if exists.
      */
+    /**
+     * Checks if a module-item pair has already been inserted..
+     *
+     * This private method checks if the provided module ID and item ID combination has already been inserted into the system.
+     * It does this by calling the `find()` method and checking if the result set has any rows.
+     *
+     * @param integer $moduleId The ID of the module to check.
+     * @param integer $itemId The ID of the item to check.
+     * @return boolean True if the module-item pair has already been inserted, false otherwise.
+     * @note This method accesses database.
+     */
+    /**
+     * Checks if a module-item pair has already been inserted..
+     *
+     * This private method checks if the provided module ID and item ID combination has already been inserted into the system.
+     * It does this by calling the `find()` method and checking if the result set has any rows.
+     *
+     * @param integer $moduleId The ID of the module to check.
+     * @param integer $itemId The ID of the item to check.
+     * @return boolean True if the module-item pair has already been inserted, false otherwise.
+     * @note This method accesses database.
+     */
     private function _exists($moduleId, $itemId)
     {
         return ($this->find($moduleId, $itemId)->count() > 0);
@@ -193,6 +215,22 @@ class Phprojekt_Search_Display extends Zend_Db_Table_Abstract
      * @param string  $secondDisplay Text for the second display.
      *
      * @return void
+     */
+    /**
+     * Updates the display settings for a module-item pair..
+     *
+     * This method updates the 'first_display' and 'second_display' fields for a specific module-item pair identified by the provided moduleId, itemId, and projectId.
+     * It uses the Zend_DB update() method to perform the database update.
+     *
+     * @param integer $moduleId The ID of the module to update.
+     * @param integer $itemId The ID of the item to update.
+     * @param integer $projectId The ID of the parent project.
+     * @param string $firstDisplay The new value for the 'first_display' field.
+     * @param string $secondDisplay The new value for the 'second_display' field.
+     * @return void This method does not return a value.
+     * @throws null No exceptions are explicitly raised or documented.
+     * @note This method accesses database.
+     * @see null
      */
     private function _update($moduleId, $itemId, $projectId, $firstDisplay, $secondDisplay)
     {

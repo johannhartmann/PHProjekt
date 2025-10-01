@@ -114,11 +114,15 @@ class Phprojekt_Tree_Node_Iterator implements RecursiveIterator
     }
 
     /**
-     * Returns an new iterator for the children of the current node.
+     * Returns a new iterator for the children of the current node.
+     *
+     * This method creates a new instance of the current Phprojekt_Tree_Node_Iterator class,
+     * passing the children of the current node as the argument. This allows the caller to
+     * iterate over the child nodes of the current node.
      *
      * @see RecursiveIterator::getChildren()
      *
-     * @return RecursiveIterator
+     * @return Phprojekt_Tree_Node_Iterator A new iterator for the children of the current node.
      */
     public function getChildren()
     {

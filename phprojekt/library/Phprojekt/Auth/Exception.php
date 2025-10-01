@@ -26,6 +26,36 @@ class Phprojekt_Auth_Exception extends Exception
      *
      * @return void
      */
+    /**
+     * Constructs a new instance of the Phprojekt_Auth_Exception class..
+     *
+     * This method is the constructor for the Phprojekt_Auth_Exception class.
+     * It calls the constructor of the parent Exception class, passing along the provided message and code parameters.
+     *
+     * @param string $message The error message to be associated with this exception.
+     * @param integer $code The error code to be associated with this exception. Can be null.
+     * @return void The constructor does not return a value, it only initializes the exception object.
+     */
+    /**
+     * Constructs a new instance of the Phprojekt_Auth_Exception class..
+     *
+     * This method is the constructor for the Phprojekt_Auth_Exception class.
+     * It calls the constructor of the parent Exception class, passing along the provided message and code parameters.
+     *
+     * @param string $message The error message to be associated with this exception.
+     * @param integer $code The error code to be associated with this exception. Can be null.
+     * @return void The constructor does not return a value, it only initializes the exception object.
+     */
+    /**
+     * Constructs a new instance of the Phprojekt_Auth_Exception class..
+     *
+     * This method is the constructor for the Phprojekt_Auth_Exception class.
+     * It calls the constructor of the parent Exception class, passing along the provided message and code parameters.
+     *
+     * @param string $message The error message to be associated with this exception.
+     * @param integer $code The error code to be associated with this exception. Can be null.
+     * @return void The constructor does not return a value, it only initializes the exception object.
+     */
     function __construct($message, $code = null)
     {
         parent::__construct($message, $code);

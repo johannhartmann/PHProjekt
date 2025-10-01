@@ -668,6 +668,42 @@ class Phprojekt_Auth extends Zend_Auth
      *
      * @return void
      */
+    /**
+     * Sets the authentication cookies for the current user session..
+     *
+     * This method sets two cookies on the client-side: one for the user's hash and one for the user's ID.
+     * The cookies are set with the specified expiration timestamp and a partial path based on the application's web path configuration.
+     *
+     * @param string $hash The user's authentication hash to be stored in the cookie.
+     * @param integer $userId The ID of the current user to be stored in the cookie.
+     * @param integer $expires The timestamp representing the expiration time for the cookies.
+     * @return void This method does not return a value, it only sets the cookies on the client-side.
+     * @note This method modifies filesystem and modifies global state.
+     */
+    /**
+     * Sets the authentication cookies for the current user session..
+     *
+     * This method sets two cookies on the client-side: one for the user's authentication hash and one for the user's ID.
+     * The cookies are set with the specified expiration timestamp and a partial path based on the application's web path configuration.
+     *
+     * @param string $hash The user's authentication hash to be stored in the cookie.
+     * @param integer $userId The ID of the current user to be stored in the cookie.
+     * @param integer $expires The timestamp representing the expiration time for the cookies.
+     * @return void This method does not return a value, it only sets the cookies on the client-side.
+     * @note This method modifies filesystem and modifies global state.
+     */
+    /**
+     * Sets the authentication cookies for the current user session..
+     *
+     * This method sets two cookies on the client-side: one for the user's authentication hash and one for the user's ID.
+     * The cookies are set with the specified expiration timestamp and a partial path based on the application's web path configuration.
+     *
+     * @param string $hash The user's authentication hash to be stored in the cookie.
+     * @param integer $userId The ID of the current user to be stored in the cookie.
+     * @param integer $expires The timestamp representing the expiration time for the cookies.
+     * @return void This method does not return a value, it only sets the cookies on the client-side.
+     * @note This method modifies filesystem and modifies global state.
+     */
     private static function _setCookies($hash, $userId, $expires)
     {
         // Set cookies

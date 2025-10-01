@@ -27,6 +27,40 @@ class Phprojekt_CompressedSender {
      *
      * @param String $data - The string to send.
      */
+    /**
+     * Sends compressed data to the client if the client supports compression..
+     *
+     * This method checks the client's `Accept-Encoding` header to determine if the client supports gzip or x-gzip compression.
+     * If the data to be sent is larger than 2048 bytes and compression is supported, the method compresses the data using `gzencode()` and sets the appropriate `Content-Encoding` header.
+     * Finally, the method outputs the (possibly compressed) data to the client.
+     *
+     * @param string $data The data to be sent to the client.
+     * @return void This method does not return a value, it outputs the data directly to the client.
+     * @throws None This method does not explicitly raise any exceptions.
+     * @note This method makes network calls and modifies global state.
+     */
+    /**
+     * Sends compressed data to the client if the client supports compression..
+     *
+     * This method checks the client's Accept-Encoding header to determine if the client supports gzip or x-gzip compression.
+     * If the data to be sent is larger than 2048 bytes and compression is supported, the method compresses the data using gzencode() and sets the appropriate Content-Encoding header.
+     * Finally, the method outputs the (possibly compressed) data to the client.
+     *
+     * @param string $data The data to be sent to the client.
+     * @return void This method does not return a value, it outputs the data directly to the client.
+     * @note This method makes network calls and modifies global state.
+     */
+    /**
+     * Sends compressed data to the client if the client supports compression..
+     *
+     * This method checks the client's Accept-Encoding header to determine if the client supports gzip or x-gzip compression.
+     * If the data to be sent is larger than 2048 bytes and compression is supported, the method compresses the data using gzencode() and sets the appropriate Content-Encoding header.
+     * Finally, the method outputs the (possibly compressed) data to the client.
+     *
+     * @param string $data The data to be sent to the client.
+     * @return void This method does not return a value, it outputs the data directly to the client.
+     * @note This method makes network calls and modifies global state.
+     */
     public static function send($data = '')
     {
         if (!headers_sent()) {

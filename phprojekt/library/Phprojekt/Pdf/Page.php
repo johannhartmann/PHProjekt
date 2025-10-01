@@ -570,10 +570,14 @@ class Phprojekt_Pdf_Page extends Zend_Pdf_Page
     }
 
     /**
-     * Set free position coordinates.
+     * Sets the starting position for drawing on the PDF page.
      *
-     * @param integer $x Position in pt.
-     * @param integer $y Position in pt.
+     * This method sets the free position coordinates for drawing on the PDF page. If no x or y
+     * coordinate is provided, the method will use the default border left and top positions as
+     * the starting point.
+     *
+     * @param integer $x The x-coordinate position in points (pt) where drawing should start.
+     * @param integer $y The y-coordinate position in points (pt) where drawing should start.
      *
      * @return void
      */

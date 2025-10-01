@@ -21,6 +21,12 @@ class Phprojekt_Exception_ContractNotSet extends Phprojekt_Exception_Published
     protected $_type     = 'contractNotSet';
     protected $_httpCode = 500;
 
+    /**
+     * Constructs a new ContractNotSet exception.
+     *
+     * This constructor initializes a new instance of the ContractNotSet exception with a
+     * default error message indicating that the user does not have an associated contract.
+     */
     public function __construct()
     {
         parent::__construct("You don't have an associated contract.");

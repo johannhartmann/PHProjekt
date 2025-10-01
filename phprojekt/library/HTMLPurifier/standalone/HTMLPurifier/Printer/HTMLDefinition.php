@@ -259,6 +259,39 @@ class HTMLPurifier_Printer_HTMLDefinition extends HTMLPurifier_Printer
     /**
      * Creates a heavy header row
      */
+    /**
+     * Creates a heavy header row in an HTML table.
+     *
+     * This method generates an HTML table row with a single cell that spans the specified number of columns.
+     * The cell has a 'heavy' class applied, which can be used for styling purposes.
+     *
+     * @param string $text The text to be displayed in the header cell
+     * @param int $num The number of columns the header cell should span (default is 1)
+     * @return string The HTML markup for the header row
+     * @note This method modifies filesystem, makes network calls, accesses database, modifies global state, depends on current time, and uses random values.
+     */
+    /**
+     * Creates a heavy header row in an HTML table..
+     *
+     * This method generates an HTML table row with a single cell that spans the specified number of columns.
+     * The cell has a 'heavy' class applied, which can be used for styling purposes.
+     *
+     * @param string $text The text to be displayed in the header cell.
+     * @param int $num The number of columns the header cell should span (default is 1).
+     * @return string The HTML markup for the header row.
+     * @note This method modifies filesystem, makes network calls, accesses database, modifies global state, depends on current time, and uses random values.
+     */
+    /**
+     * Creates a heavy header row in an HTML table..
+     *
+     * This method generates an HTML table row with a single cell that spans the specified number of columns.
+     * The cell has a 'heavy' class applied, which can be used for styling purposes.
+     *
+     * @param string $text The text to be displayed in the header cell.
+     * @param int $num The number of columns the header cell should span (default is 1).
+     * @return string The HTML markup for the header row.
+     * @note This method modifies filesystem, makes network calls, accesses database, modifies global state, depends on current time, and uses random values.
+     */
     protected function heavyHeader($text, $num = 1) {
         $ret = '';
         $ret .= $this->start('tr');

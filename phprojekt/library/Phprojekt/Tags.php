@@ -168,6 +168,27 @@ class Phprojekt_Tags
      *
      * @return array Array with the tags fields.
      */
+    /**
+     * Returns the field definition for tags..
+     *
+     * This method returns an array containing the field definitions for the 'tags' field.
+     * The array includes the field key and label for the 'string' and 'count' fields.
+     * @return array An array of field definition arrays, each containing a 'key' and 'label' element.
+     */
+    /**
+     * Returns the field definition for the 'tags' field..
+     *
+     * This method returns an array containing the field definitions for the 'tags' field.
+     * The array includes the field key and label for the 'string' and 'count' fields.
+     * @return array An array of field definition arrays, each containing a 'key' and 'label' element.
+     */
+    /**
+     * Returns the field definition for the 'tags' field..
+     *
+     * This method returns an array containing the field definitions for the 'tags' field.
+     * The array includes the field key and label for the 'string' and 'count' fields.
+     * @return array An array of field definition arrays, each containing a 'key' and 'label' element.
+     */
     public function getFieldDefinition()
     {
         $fields   = array();

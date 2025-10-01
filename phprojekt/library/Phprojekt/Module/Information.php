@@ -25,6 +25,30 @@ class Phprojekt_Module_Information extends Phprojekt_ModelInformation_Default
      *
      * @return void
      */
+    /**
+     * Sets the field definitions for the module information..
+     *
+     * This method defines the fields that will be used to store information about a module.
+     * It sets the name, label, save type, and active status for each field, and specifies various properties such as whether the field is required, the maximum length, and the default value.
+     * @return void This method does not return anything, it only sets the field definitions.
+     * @note This method modifies global state.
+     */
+    /**
+     * Sets the field definitions for the module information..
+     *
+     * This method defines the fields that will be used to store information about a module.
+     * It sets the name, label, save type, and active status for each field, and specifies various properties such as whether the field is required, the maximum length, and the default value.
+     * @return void This method does not return anything, it only sets the field definitions.
+     * @note This method modifies global state.
+     */
+    /**
+     * Sets the field definitions for the module information..
+     *
+     * This method defines the fields that will be used to store information about a module.
+     * It sets the name, label, save type, and active status for each field, and specifies various properties such as whether the field is required, the maximum length, and the default value.
+     * @return void This method does not return anything, it only sets the field definitions.
+     * @note This method modifies global state.
+     */
     public function setFields()
     {
         // name

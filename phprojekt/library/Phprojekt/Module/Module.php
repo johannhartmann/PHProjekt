@@ -395,6 +395,45 @@ class Phprojekt_Module_Module extends Phprojekt_ActiveRecord_Abstract implements
      *
      * @return boolean True for a sucessful delete.
      */
+    /**
+     * Recursively delete a folder and its contents.
+     *
+     * This method deletes a folder and all its subfolders and files.
+     * It first checks if the given path is a directory, and if so, it opens the directory and recursively deletes each file and subfolder.
+     * If the path is a file, it simply deletes the file.
+     * The method returns true if the deletion was successful, and false otherwise.
+     *
+     * @param string $path The full path of the folder to be deleted
+     * @return boolean True if the folder and its contents were successfully deleted, false otherwise
+     * @throws RuntimeException If the folder or any of its contents could not be deleted
+     * @note This method modifies filesystem.
+     */
+    /**
+     * Recursively delete a folder and its contents.
+     *
+     * This method deletes a folder and all its subfolders and files.
+     * It first checks if the given path is a directory, and if so, it opens the directory and recursively deletes each file and subfolder.
+     * If the path is a file, it simply deletes the file.
+     * The method returns true if the deletion was successful, and false otherwise.
+     *
+     * @param string $path The full path of the folder to be deleted
+     * @return boolean True if the folder and its contents were successfully deleted, false otherwise
+     * @throws RuntimeException If the folder or any of its contents could not be deleted
+     * @note This method modifies filesystem.
+     */
+    /**
+     * Recursively delete a folder and its contents.
+     *
+     * This method deletes a folder and all its subfolders and files.
+     * It first checks if the given path is a directory, and if so, it opens the directory and recursively deletes each file and subfolder.
+     * If the path is a file, it simply deletes the file.
+     * The method returns true if the deletion was successful, and false otherwise.
+     *
+     * @param string $path The full path of the folder to be deleted
+     * @return boolean True if the folder and its contents were successfully deleted, false otherwise
+     * @throws RuntimeException If the folder or any of its contents could not be deleted
+     * @note This method modifies filesystem.
+     */
     private function _deleteFolder($path)
     {
         if (is_dir($path) && !is_link($path)) {

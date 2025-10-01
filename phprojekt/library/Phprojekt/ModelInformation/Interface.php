@@ -32,5 +32,32 @@ interface Phprojekt_ModelInformation_Interface
      *
      * @return string Type of the field.
      */
+    /**
+     * Returns the type of a specified field.
+     *
+     * This method retrieves the data type of a field in the model.
+     * It is part of the ModelInformation interface, which provides information about the structure and properties of a data model.
+     *
+     * @param string $fieldName The name of the field to retrieve the type for
+     * @return string The data type of the specified field
+     */
+    /**
+     * Retrieves the data type of a specified field in the model..
+     *
+     * This method is part of the ModelInformation interface, which provides information about the structure and properties of a data model.
+     * It allows you to get the data type of a field in the model by providing the field name.
+     *
+     * @param string $fieldName The name of the field to retrieve the type for.
+     * @return string The data type of the specified field.
+     */
+    /**
+     * Retrieves the data type of a specified field in the model..
+     *
+     * This method is part of the ModelInformation interface, which provides information about the structure and properties of a data model.
+     * It allows you to get the data type of a field in the model by providing the field name.
+     *
+     * @param string $fieldName The name of the field to retrieve the type for.
+     * @return string The data type of the specified field.
+     */
     public function getType($fieldName);
 }

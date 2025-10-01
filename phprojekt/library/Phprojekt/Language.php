@@ -59,6 +59,19 @@ class Phprojekt_Language extends Zend_Translate
      *
      * @return string Translated string.
      */
+    /**
+     * Translates a message using the configured language adapter and locale..
+     *
+     * This method translates the provided message using the language adapter and locale configured for the Phprojekt_Language instance.
+     * If a specific locale is provided, it will first attempt to load the corresponding language file before performing the translation.
+     *
+     * @param string $message The message to be translated.
+     * @param string $moduleName The name of the module for which the translation should be performed. Defaults to 'Default'.
+     * @param string $locale The locale for which the translation should be performed. If not provided, the currently configured locale will be used.
+     * @return string The translated message.
+     * @throws null No exceptions are explicitly raised in the provided code.
+     * @note This method modifies filesystem.
+     */
     public function translate($message, $moduleName = 'Default', $locale = null)
     {
         if (null !== $locale) {
@@ -96,6 +109,29 @@ class Phprojekt_Language extends Zend_Translate
      *                                   see Zend_Locale for more information.
      *
      * @return array Array with all the trasnlated strings.
+     */
+    /**
+     * Retrieves the translated strings for the specified locale.
+     *
+     * This method loads the language file for the given locale and returns an array containing all the translated strings.
+     * If no locale is provided, the method will use the currently set locale.
+     *
+     * @param string|Zend_Locale $locale The locale or language to retrieve the translated strings for. This should be a valid Locale identifier.
+     * @return array An array containing all the translated strings for the specified locale.
+     * @throws null No exceptions are explicitly raised by this method.
+     * @note This method modifies filesystem.
+     * @see Phprojekt_Language::_loadLangFile
+     */
+    /**
+     * Retrieves the translated strings for the specified locale..
+     *
+     * This method loads the language file for the given locale and returns an array containing all the translated strings.
+     * If no locale is provided, the method will use the currently set locale.
+     *
+     * @param string|Zend_Locale $locale The locale or language to retrieve the translated strings for. This should be a valid Locale identifier.
+     * @return array An array containing all the translated strings for the specified locale.
+     * @note This method modifies filesystem.
+     * @see Phprojekt_Language::_loadLangFile
      */
     public function getTranslatedStrings($locale)
     {

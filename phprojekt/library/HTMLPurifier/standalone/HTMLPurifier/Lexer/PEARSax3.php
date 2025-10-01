@@ -87,7 +87,16 @@ class HTMLPurifier_Lexer_PEARSax3 extends HTMLPurifier_Lexer
     }
     
     /**
-     * Escaped text handler, interface is defined by PEAR package.
+     * Handles escaped text in an HTML document.
+     *
+     * This method is responsible for processing escaped text in an HTML document, specifically handling comments.
+     * It checks if the input data starts with '--' and creates a new HTMLPurifier_Token_Comment token if so.
+     * Otherwise, it returns true to indicate that the input data has been successfully handled.
+     * Interface is defined by PEAR package.
+     *
+     * @param mixed $parser The parser object, passed by reference
+     * @param string $data The escaped text to be processed
+     * @return bool True to indicate that the input data has been successfully handled
      */
     public function escapeHandler(&$parser, $data) {
         if (strpos($data, '--') === 0) {

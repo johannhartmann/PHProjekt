@@ -87,6 +87,25 @@ class Phprojekt_Mail extends Zend_Mail
      *
      * @return string End of line characters.
      */
+    /**
+     * Retrieves the end-of-line character sequence based on the configured mail end-of-line setting..
+     *
+     * This protected method is responsible for determining the appropriate end-of-line character sequence to use for text-mode emails, based on the configuration setting `mailEndOfLine`.
+     * It returns either a newline character (`
+    `) or a carriage return and newline sequence (`
+    `) depending on the configuration.
+     * @return string The end-of-line character sequence to use for text-mode emails.
+     */
+    /**
+     * Retrieves the appropriate end-of-line character sequence for text-mode emails based on the configured mail end-of-line setting..
+     *
+     * This protected method is responsible for determining the end-of-line character sequence to use for text-mode emails, based on the configuration setting `mailEndOfLine`.
+     * It returns either a newline character (`
+    `) or a carriage return and newline sequence (`
+    `) depending on the configuration.
+     * @return string The end-of-line character sequence to use for text-mode emails.
+     * @note This method modifies global state.
+     */
     protected function getEndOfLine()
     {
         switch (Phprojekt::getInstance()->getConfig()->mailEndOfLine) {

@@ -14,7 +14,11 @@
  */
 
 /**
- * A simple exception showing that something in setup the nodes went wrong.
+ * Exception class for errors related to the Phprojekt tree node structure.
+ *
+ * This exception class is used to indicate that an error has occurred while setting up or manipulating
+ * the nodes in the Phprojekt tree structure. It extends the base Exception class and provides a simple
+ * way to identify and handle these types of errors.
  */
 class Phprojekt_Tree_Node_Exception extends Exception
 {

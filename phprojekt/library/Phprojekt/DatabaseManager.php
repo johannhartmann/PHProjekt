@@ -967,6 +967,39 @@ class Phprojekt_DatabaseManager extends Phprojekt_ActiveRecord_Abstract implemen
      *
      * @return string Converted name.
      */
+    /**
+     * Converts a table field value to a SQL-compatible format.
+     *
+     * This method takes a table field value and applies the necessary rules to convert it to a format that can be safely used in SQL queries.
+     * It delegates the actual conversion logic to the `Phprojekt_ActiveRecord_Abstract::convertVarToSql()` method.
+     *
+     * @param string $value The table field value to be converted
+     * @return string The converted table field value in a SQL-compatible format
+     * @note This method accesses database.
+     * @see Phprojekt_ActiveRecord_Abstract::convertVarToSql
+     */
+    /**
+     * Converts a table field value to a SQL-compatible format..
+     *
+     * This method takes a table field value and applies the necessary rules to convert it to a format that can be safely used in SQL queries.
+     * It delegates the actual conversion logic to the `Phprojekt_ActiveRecord_Abstract::convertVarToSql()` method.
+     *
+     * @param string $value The table field value to be converted
+     * @return string The converted table field value in a SQL-compatible format
+     * @note This method accesses database.
+     * @see Phprojekt_ActiveRecord_Abstract::convertVarToSql
+     */
+    /**
+     * Converts a table field value to a SQL-compatible format.
+     *
+     * This method takes a table field value and applies the necessary rules to convert it to a format that can be safely used in SQL queries.
+     * It delegates the actual conversion logic to the `Phprojekt_ActiveRecord_Abstract::convertVarToSql()` method.
+     *
+     * @param string $value The table field value to be converted
+     * @return string The converted table field value in a SQL-compatible format
+     * @note This method accesses database.
+     * @see Phprojekt_ActiveRecord_Abstract::convertVarToSql
+     */
     static public function convertTableField($value)
     {
         return Phprojekt_ActiveRecord_Abstract::convertVarToSql($value);

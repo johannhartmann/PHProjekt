@@ -55,7 +55,16 @@ class Phprojekt_Model_Converter
     }
 
     /**
-     * Converts the model with the given fields.
+     * Converts a Phprojekt_Model_Interface object to an associative array with the specified fields.
+     *
+     * This method takes a model object and an array of field definitions, and returns an
+     * associative array containing the values of the specified fields from the model. The 'id'
+     * field is always included in the returned array.
+     *
+     * @param Phprojekt_Model_Interface $model  The model object to be converted.
+     * @param array                     $fields Field definitions with 'key' elements for field names.
+     *
+     * @return array An associative array containing the field values plus the 'id' field.
      */
     private static function _convertModel(Phprojekt_Model_Interface $model, array $fields)
     {

@@ -14,7 +14,10 @@
  */
 
 /**
- * An IO Exception
+ * Represents an I/O-related exception in the Phprojekt application.
+ *
+ * This exception class is used to represent errors that occur during input/output operations,
+ * such as file or network access failures. It extends the built-in PHP Exception class.
  */
 class Phprojekt_Exception_IOException extends Exception
 {

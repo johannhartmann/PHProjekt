@@ -105,6 +105,30 @@ class Phprojekt_Auth_Proxy
         self::$_effectiveUser =  $user->findUserById($userId);
     }
 
+    /**
+     * Retrieves the singleton instance of the Phprojekt_Auth_ProxyTable class..
+     *
+     * This protected static method is responsible for providing a single, shared instance of the Phprojekt_Auth_ProxyTable class.
+     * If the instance has not been created yet, it will be instantiated and stored in the static $_proxyTable property.
+     * Subsequent calls to this method will return the same instance.
+     * @return Phprojekt_Auth_ProxyTable The singleton instance of the Phprojekt_Auth_ProxyTable class.
+     */
+    /**
+     * Retrieves the singleton instance of the Phprojekt_Auth_ProxyTable class..
+     *
+     * This protected static method is responsible for providing a single, shared instance of the Phprojekt_Auth_ProxyTable class.
+     * If the instance has not been created yet, it will be instantiated and stored in the static $_proxyTable property.
+     * Subsequent calls to this method will return the same instance.
+     * @return Phprojekt_Auth_ProxyTable The singleton instance of the Phprojekt_Auth_ProxyTable class.
+     */
+    /**
+     * Retrieves the singleton instance of the Phprojekt_Auth_ProxyTable class..
+     *
+     * This protected static method is responsible for providing a single, shared instance of the Phprojekt_Auth_ProxyTable class.
+     * If the instance has not been created yet, it will be instantiated and stored in the static $_proxyTable property.
+     * Subsequent calls to this method will return the same instance.
+     * @return Phprojekt_Auth_ProxyTable The singleton instance of the Phprojekt_Auth_ProxyTable class.
+     */
     protected static function _getProxyTable()
     {
         if (is_null(self::$_proxyTable)) {

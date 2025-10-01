@@ -504,6 +504,30 @@ class Phprojekt_LanguageAdapter extends Zend_Translate_Adapter
      *
      * @return array Array with all the languages.
      */
+    /**
+     * Retrieves a list of available languages with their names in English..
+     *
+     * This method retrieves a list of all the language files available in the 'Default/Languages' directory of the Phprojekt application.
+     * It then converts the language file names to their corresponding Zend Locale values, looks up the English language names, and returns an associative array mapping the language codes to their English names.
+     * @return array An associative array where the keys are the language codes and the values are the corresponding English language names.
+     * @note This method modifies filesystem and has cache effects.
+     */
+    /**
+     * Retrieves a list of available languages with their names in English..
+     *
+     * This method retrieves a list of all the language files available in the 'Default/Languages' directory of the Phprojekt application.
+     * It then converts the language file names to their corresponding Zend Locale values, looks up the English language names, and returns an associative array mapping the language codes to their English names.
+     * @return array An associative array where the keys are the language codes and the values are the corresponding English language names.
+     * @note This method modifies filesystem and has cache effects.
+     */
+    /**
+     * Retrieves a list of available languages with their names in English..
+     *
+     * This method retrieves a list of all the language files available in the 'Default/Languages' directory of the Phprojekt application.
+     * It then converts the language file names to their corresponding Zend Locale values, looks up the English language names, and returns an associative array mapping the language codes to their English names.
+     * @return array An associative array where the keys are the language codes and the values are the corresponding English language names.
+     * @note This method modifies filesystem and has cache effects.
+     */
     public static function getLanguageList()
     {
         $cacheId = "Phprojekt_LanguageAdapter__getLanguageList";
