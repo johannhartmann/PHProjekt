@@ -36,7 +36,14 @@
             "Phprojekt\\": "library/Phprojekt/",
             "Setup\\": "htdocs/",
             "Cleaner\\": "library/Cleaner/"
-        }
+        },
+        "psr-0": {
+            "Zend_": "library/"
+        },
+        "files": [
+            "library/Zend/Db/Table/Abstract.php",
+            "library/Zend/Db/Table/Row.php"
+        ]
     },
     "config": {
         "allow-plugins": {
