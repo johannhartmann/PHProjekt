@@ -41,8 +41,16 @@
             "Zend_": "library/"
         },
         "files": [
+            "library/Zend/Db.php",
             "library/Zend/Db/Table/Abstract.php",
-            "library/Zend/Db/Table/Row.php"
+            "library/Zend/Db/Table/Row.php",
+            "library/Zend/Config/Ini.php",
+            "library/Zend/Session.php",
+            "library/Zend/Registry.php",
+            "library/Zend/Controller/Front.php",
+            "library/Zend/Controller/Request/Http.php",
+            "library/Zend/Cache.php",
+            "library/Zend/Log.php"
         ]
     },
     "config": {
