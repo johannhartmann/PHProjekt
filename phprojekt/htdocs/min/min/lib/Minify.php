@@ -249,9 +249,8 @@ class Minify {
         
         if (self::$_options['contentType'] === self::TYPE_CSS
             && self::$_options['rewriteCssUris']) {
-            reset($controller->sources);
-            while (list($key, $source) = each($controller->sources)) {
-                if ($source->filepath 
+            foreach ($controller->sources as $key => $source) {
+                if ($source->filepath
                     && !isset($source->minifyOptions['currentDir'])
                     && !isset($source->minifyOptions['prependRelativePath'])
                 ) {

@@ -350,9 +350,9 @@
 		} else {
 			if ($rExp != null && is_string($possibleValue)) {
 				if ($ignoreCase) {
-					$matched = preg_match($rExp . 'i', $possibleValue);
+					$matched = preg_match('/' . $rExp . '/i', $possibleValue);
 				} else {
-					$matched = preg_match($rExp, $possibleValue);
+					$matched = preg_match('/' . $rExp . '/', $possibleValue);
 				}
 
 			} else {

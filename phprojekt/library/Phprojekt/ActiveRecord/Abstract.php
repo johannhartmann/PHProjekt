@@ -768,7 +768,7 @@ abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
         $im         = new $className($this->getAdapter());
         $tableName  = $im->getTableName();
         $keyName    = str_replace(':tableName', $tableName, self::FOREIGN_KEY_FORMAT);
-        $keyName{0} = strtolower($keyName{0});
+        $keyName[0] = strtolower($keyName[0]);
         if (null !== $this->_log) {
             $this->_log->debug(sprintf("%s translated to %s", $className, $keyName));
         }

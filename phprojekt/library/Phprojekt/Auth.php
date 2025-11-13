@@ -308,7 +308,7 @@ class Phprojekt_Auth extends Zend_Auth
 
             $admins = array();
             if (isset($integration['systemAdmins'])) {
-                $admins = split(",", $integration['systemAdmins']);
+                $admins = explode(",", $integration['systemAdmins']);
                 foreach ($admins as $key => $admin) {
                     $admins[$key] = trim($admin);
                 }

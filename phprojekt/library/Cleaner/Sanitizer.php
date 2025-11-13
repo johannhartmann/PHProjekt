@@ -263,10 +263,6 @@ class Cleaner_Sanitizer
         $config->set('Cache', 'SerializerPath', PHPR_TEMP_PATH);
         $purifier = new HTMLPurifier($config);
 
-        if (get_magic_quotes_gpc()) {
-            $value = stripslashes($value);
-        }
-
         return addslashes($purifier->purify($value));
     }
 
