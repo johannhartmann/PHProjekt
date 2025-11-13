@@ -11,12 +11,20 @@ class Zend_Db
     /**
      * Factory for Laminas Db Adapter
      *
-     * @param string|array $adapter Adapter name or config
-     * @param array $config Configuration array
+     * @param string|array|Zend_Config $adapter Adapter name or config
+     * @param array|Zend_Config $config Configuration array or Zend_Config
      * @return AdapterInterface
      */
     public static function factory($adapter, $config = [])
     {
+        // Convert Zend_Config to array
+        if ($adapter instanceof Zend_Config) {
+            $adapter = $adapter->toArray();
+        }
+        if ($config instanceof Zend_Config) {
+            $config = $config->toArray();
+        }
+
         // If $adapter is an array, it contains the config
         if (is_array($adapter)) {
             $config = $adapter;
@@ -41,6 +49,11 @@ class Zend_Db
         // Handle database parameters
         if (isset($config['params'])) {
             $params = $config['params'];
+
+            // Convert nested Zend_Config to array
+            if ($params instanceof Zend_Config) {
+                $params = $params->toArray();
+            }
 
             if (isset($params['host'])) {
                 $laminasConfig['hostname'] = $params['host'];

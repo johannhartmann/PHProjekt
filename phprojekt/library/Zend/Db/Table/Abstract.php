@@ -38,8 +38,8 @@ abstract class Zend_Db_Table_Abstract extends AbstractTableGateway
     protected $_dependentTables = [];
 
     /**
-     * Metadata cache
-     * @var StorageInterface
+     * Metadata cache (stores Zend_Cache_Core wrapper)
+     * @var Zend_Cache_Core
      */
     protected static $_metadataCache;
 
@@ -122,13 +122,11 @@ abstract class Zend_Db_Table_Abstract extends AbstractTableGateway
     {
         // Accept both Zend_Cache_Core and StorageInterface for compatibility
         if ($cache instanceof Zend_Cache_Core) {
-            // Extract the Laminas storage from Zend_Cache_Core
-            $reflection = new \ReflectionClass($cache);
-            $property = $reflection->getProperty('_storage');
-            $property->setAccessible(true);
-            self::$_metadataCache = $property->getValue($cache);
-        } else if ($cache instanceof StorageInterface) {
+            // Store the Zend_Cache_Core wrapper directly
             self::$_metadataCache = $cache;
+        } else if ($cache instanceof StorageInterface) {
+            // Wrap Laminas storage in Zend_Cache_Core for compatibility
+            self::$_metadataCache = new Zend_Cache_Core($cache);
         } else {
             throw new \InvalidArgumentException('Cache must be instance of Zend_Cache_Core or StorageInterface');
         }
@@ -136,12 +134,13 @@ abstract class Zend_Db_Table_Abstract extends AbstractTableGateway
 
     /**
      * Get default metadata cache
+     * Always returns Zend_Cache_Core for ZF1 compatibility
      */
     public static function getDefaultMetadataCache()
     {
         if (!self::$_metadataCache) {
-            // Create a dummy cache that does nothing
-            self::$_metadataCache = new class implements StorageInterface {
+            // Create a dummy no-op storage adapter
+            $dummyStorage = new class implements StorageInterface {
                 public function setOptions($options) {}
                 public function getOptions() { return new \stdClass(); }
                 public function setItem($key, $value) { return true; }
@@ -168,8 +167,11 @@ abstract class Zend_Db_Table_Abstract extends AbstractTableGateway
                 public function getCapabilities() { return new \Laminas\Cache\Storage\Capabilities($this, new \stdClass()); }
                 public function clearByNamespace($namespace) { return true; }
                 public function clearExpired() { return true; }
-                public function clean() { return true; }
+                public function flush() { return true; }
             };
+
+            // Wrap in Zend_Cache_Core
+            self::$_metadataCache = new Zend_Cache_Core($dummyStorage);
         }
         return self::$_metadataCache;
     }
