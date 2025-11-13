@@ -15,9 +15,11 @@
 
 /**
  * A DBUnit test case framework.
+ * Note: DBUnit is not available for PHPUnit 9+, so we extend PHPUnit\Framework\TestCase instead
+ * Database-specific tests may need to be adapted or use alternative approaches
  */
-abstract class DatabaseTest extends PHPUnit_Extensions_Database_TestCase {
-    public function setUp () {
+abstract class DatabaseTest extends PHPUnit\Framework\TestCase {
+    public function setUp(): void {
         parent::setUp();
         Phprojekt::getInstance();
         Zend_Db_Table_Abstract::getDefaultMetadataCache()->clean();
@@ -25,8 +27,14 @@ abstract class DatabaseTest extends PHPUnit_Extensions_Database_TestCase {
 
     protected function getConnection() {
         /* @todo read from settings later */
+        // Note: This method is kept for backwards compatibility but may not work
+        // as expected without DbUnit extension
+        return Phprojekt::getInstance()->getDb()->getConnection();
+    }
 
-        return $this->createDefaultDBConnection(Phprojekt::getInstance()->getDb()->getConnection());
+    protected function getDataSet() {
+        // Stub method for backwards compatibility
+        return null;
     }
 }
 
