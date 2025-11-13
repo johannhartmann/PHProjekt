@@ -15,7 +15,7 @@ class Module implements ConfigProviderInterface, BootstrapListenerInterface
         return include __DIR__ . '/config/module.config.php';
     }
 
-    public function onBootstrap(MvcEvent $e)
+    public function onBootstrap(\Laminas\EventManager\EventInterface $e)
     {
         $eventManager = $e->getApplication()->getEventManager();
         $sharedEventManager = $eventManager->getSharedManager();

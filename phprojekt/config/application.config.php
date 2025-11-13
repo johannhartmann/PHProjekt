@@ -10,9 +10,10 @@ return [
         'Laminas\Form',
         'Laminas\Db',
         'Laminas\Session',
+        'Laminas\ZendFrameworkBridge',
         'Application\Default',
-        'Application\Project',
-        'Application\Core',
+        // 'Application\Project', // TODO: Migrate this module
+        // 'Application\Core',    // TODO: Migrate this module
     ],
 
     // These are various options for the listeners attached to the ModuleManager

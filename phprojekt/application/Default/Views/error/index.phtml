@@ -1,0 +1,19 @@
+<h1>An error occurred</h1>
+<h2><?php echo $this->escapeHtml($this->message ?? 'An error occurred') ?></h2>
+
+<?php if (isset($this->exception)): ?>
+<h3>Exception information:</h3>
+<p>
+    <b>Message:</b> <?php echo $this->escapeHtml($this->exception->getMessage()) ?>
+</p>
+
+<h3>Stack trace:</h3>
+<pre><?php echo $this->escapeHtml($this->exception->getTraceAsString()) ?>
+</pre>
+
+<?php if (isset($this->request) && method_exists($this->request, 'getParams')): ?>
+<h3>Request Parameters:</h3>
+<pre><?php echo $this->escapeHtml(var_export($this->request->getParams(), true)) ?>
+</pre>
+<?php endif ?>
+<?php endif ?>
