@@ -23,7 +23,7 @@
  * @group      phprojekt-converter
  * @group      phprojekt-converter-time
  */
-class Phprojekt_Converter_TimeTest extends PHPUnit_Framework_TestCase
+class Phprojekt_Converter_TimeTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Test convertMinutesToHours

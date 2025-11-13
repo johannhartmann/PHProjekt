@@ -21,7 +21,7 @@
  * @group      tabs
  * @group      phprojekt-tabs
  */
-class Phprojekt_TabsTest extends PHPUnit_Framework_TestCase
+class Phprojekt_TabsTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Test getId

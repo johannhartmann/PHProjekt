@@ -21,7 +21,7 @@
  * @group      date
  * @group      phprojekt-date
  */
-class Phprojekt_Date_CollectionTest extends PHPUnit_Framework_TestCase
+class Phprojekt_Date_CollectionTest extends PHPUnit\Framework\TestCase
 {
     private $_collection = null;
     private $_startDate  = '2009-05-21';
@@ -29,7 +29,7 @@ class Phprojekt_Date_CollectionTest extends PHPUnit_Framework_TestCase
     /**
      * setUp method for PHPUnit
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->_collection = new Phprojekt_Date_Collection($this->_startDate);
     }

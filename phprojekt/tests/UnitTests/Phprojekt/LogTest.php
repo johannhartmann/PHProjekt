@@ -21,7 +21,7 @@
  * @group      log
  * @group      phprojekt-log
  */
-class Phprojekt_LogTest extends PHPUnit_Framework_TestCase
+class Phprojekt_LogTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Test wrong call

@@ -23,7 +23,7 @@
  * @group      phprojekt-role-rights
  */
 
-class Phprojekt_RoleRightsTest extends PHPUnit_Framework_TestCase
+class Phprojekt_RoleRightsTest extends PHPUnit\Framework\TestCase
 {
     /**
      * @var    Phprojekt_RoleRights
@@ -37,7 +37,7 @@ class Phprojekt_RoleRightsTest extends PHPUnit_Framework_TestCase
      *
      * @access protected
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->_object = new Phprojekt_RoleRights(1, 2, 0, 1);
     }
@@ -48,7 +48,7 @@ class Phprojekt_RoleRightsTest extends PHPUnit_Framework_TestCase
      *
      * @access protected
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 

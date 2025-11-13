@@ -23,7 +23,7 @@
  */
 class Phprojekt_HistoryTest extends DatabaseTest
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->sharedFixture = Phprojekt::getInstance()->getDb();

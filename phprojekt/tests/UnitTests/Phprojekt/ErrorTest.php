@@ -21,7 +21,7 @@
  * @group      error
  * @group      phprojekt-error
  */
-class Phprojekt_ErrorTest extends PHPUnit_Framework_TestCase
+class Phprojekt_ErrorTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Test for get errors

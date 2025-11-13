@@ -21,7 +21,7 @@
  * @group      timecard-model
  * @group      vobject
  */
-class Timecard_Models_VObjectReader_Test extends PHPUnit_Framework_TestCase
+class Timecard_Models_VObjectReader_Test extends PHPUnit\Framework\TestCase
 {
     public function testReadFailsOnWrongType()
     {

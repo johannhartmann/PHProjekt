@@ -13,7 +13,6 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
-require_once 'PHPUnit/Framework/TestCase.php';
 
 class Phprojekt_Project extends Phprojekt_Item_Abstract
 {
@@ -39,7 +38,7 @@ class Phprojekt_HmabtmTest extends Phprojekt_ActiveRecord_Abstract
  */
 class Phprojekt_ActiveRecord_AbstractTest extends DatabaseTest
 {
-    public function setUp() {
+    public function setUp(): void {
         parent::setUp();
         $this->sharedFixture = Phprojekt::getInstance()->getDb();
     }

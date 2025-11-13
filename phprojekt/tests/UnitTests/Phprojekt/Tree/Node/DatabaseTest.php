@@ -33,7 +33,7 @@ class Phprojekt_Tree_Node_DatabaseTest extends DatabaseTest
     /**
      * initialite
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->_model = new Project_Models_Project();

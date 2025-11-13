@@ -21,7 +21,7 @@
  * @group      model
  * @group      role-model
  */
-class Phprojekt_RoleModelsRoleModulePermissions_Test extends PHPUnit_Framework_TestCase
+class Phprojekt_RoleModelsRoleModulePermissions_Test extends PHPUnit\Framework\TestCase
 {
     /**
      * Array with the current modules

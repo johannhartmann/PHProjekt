@@ -21,7 +21,7 @@
  * @group      language
  * @group      phprojekt-language
  */
-class Phprojekt_LanguageTest extends PHPUnit_Framework_TestCase
+class Phprojekt_LanguageTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Test translations

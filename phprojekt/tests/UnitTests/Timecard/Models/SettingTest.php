@@ -33,7 +33,7 @@ class Timecard_Models_Setting_Test extends DatabaseTest
     /**
      * setUp method for PHPUnit
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->_model = new Timecard_Models_Setting();
     }

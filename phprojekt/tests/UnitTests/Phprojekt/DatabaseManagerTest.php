@@ -31,7 +31,7 @@ class Phprojekt_DatabaseManagerTest extends DatabaseTest
     /**
      * setUp method for PHPUnit. We use a shared db connection
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->_emptyResult = array();

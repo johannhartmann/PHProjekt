@@ -23,7 +23,7 @@
  */
 class Phprojekt_ConfigurationTest extends DatabaseTest
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->sharedFixture = Phprojekt::getInstance()->getDb();

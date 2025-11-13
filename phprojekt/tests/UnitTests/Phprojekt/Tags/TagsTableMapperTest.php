@@ -29,7 +29,7 @@
  * @group      tags
  * @group      phprojekt-tags
  */
-class Phprojekt_Tags_TagsTableMapperTest extends PHPUnit_Framework_TestCase
+class Phprojekt_Tags_TagsTableMapperTest extends PHPUnit\Framework\TestCase
 {
 
     protected function getDataSet()

@@ -24,7 +24,7 @@
  * @group      activerecord
  * @group      databasemanager
  */
-class Phprojekt_ModelInformation_DefaultTest extends PHPUnit_Framework_TestCase
+class Phprojekt_ModelInformation_DefaultTest extends PHPUnit\Framework\TestCase
 {
     private $_model    = null;
     private $_testData = array();
@@ -32,7 +32,7 @@ class Phprojekt_ModelInformation_DefaultTest extends PHPUnit_Framework_TestCase
     /**
      * setUp method for PHPUnit
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->_model      = new Phprojekt_ModelInformation_Default();
         $this->_testData[] = array(

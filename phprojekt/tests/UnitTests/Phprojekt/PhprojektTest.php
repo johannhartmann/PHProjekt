@@ -21,7 +21,7 @@
  * @group      main
  * @group      phprojekt-main
  */
-class Phprojekt_PhprojektTest extends PHPUnit_Framework_TestCase
+class Phprojekt_PhprojektTest extends PHPUnit\Framework\TestCase
 {
     public function testGetVersion()
     {

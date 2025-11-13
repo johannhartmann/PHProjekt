@@ -23,7 +23,7 @@
  * @group      phprojekt-language
  * @group      phprojekt-language-adapter
  */
-class Phprojekt_LanguageAdapterTest extends PHPUnit_Framework_TestCase
+class Phprojekt_LanguageAdapterTest extends PHPUnit\Framework\TestCase
 {
     /**
      * Test name of the class

@@ -24,12 +24,12 @@
  * @group      calendar2-helper
  * @group      calendar-helper
  */
-class Calendar2_Helper_Rrule_Test extends PHPUnit_Framework_TestCase
+class Calendar2_Helper_Rrule_Test extends PHPUnit\Framework\TestCase
 {
     /** The helper object to tests */
     private $_helper;
 
-    public function setUp()
+    public function setUp(): void
     {
         $first    = new Datetime('2010-10-09 08:00:00 UTC');
         $duration = new DateInterval('PT1H');
