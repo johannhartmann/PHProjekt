@@ -13,7 +13,7 @@ class Zend_Db
      *
      * @param string|array|Zend_Config $adapter Adapter name or config
      * @param array|Zend_Config $config Configuration array or Zend_Config
-     * @return AdapterInterface
+     * @return Zend_Db_Adapter_Abstract
      */
     public static function factory($adapter, $config = [])
     {
@@ -75,8 +75,11 @@ class Zend_Db
             }
         }
 
-        // Create and return Laminas adapter
-        return new Adapter($laminasConfig);
+        // Create Laminas adapter
+        $laminasAdapter = new Adapter($laminasConfig);
+
+        // Wrap in Zend_Db_Adapter_Abstract for compatibility
+        return new Zend_Db_Adapter_Abstract($laminasAdapter);
     }
 }
 

@@ -44,6 +44,9 @@
         "files": [
             "library/Phprojekt.php",
             "library/Zend/Db.php",
+            "library/Zend/Db/Adapter/Abstract.php",
+            "library/Zend/Db/Select.php",
+            "library/Zend/Db/Statement.php",
             "library/Zend/Db/Table/Abstract.php",
             "library/Zend/Db/Table/Row.php",
             "library/Zend/Config.php",

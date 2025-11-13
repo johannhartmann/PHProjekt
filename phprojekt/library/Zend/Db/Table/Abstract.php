@@ -239,9 +239,18 @@ abstract class Zend_Db_Table_Abstract extends AbstractTableGateway
 
     /**
      * Find by primary key
+     * Uses func_get_args() for compatibility with child classes
      */
-    public function find($id)
+    public function find()
     {
+        $args = func_get_args();
+
+        if (empty($args)) {
+            throw new Exception('Missing argument');
+        }
+
+        $id = $args[0];
+
         if (!$this->_primary) {
             throw new Exception('No primary key defined');
         }
