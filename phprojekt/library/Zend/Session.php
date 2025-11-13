@@ -15,6 +15,17 @@ class Zend_Session
     protected static $_sessionManager;
 
     /**
+     * Get session manager
+     */
+    public static function getSessionManager()
+    {
+        if (!self::$_sessionManager) {
+            self::start();
+        }
+        return self::$_sessionManager;
+    }
+
+    /**
      * Start session
      */
     public static function start()
@@ -103,11 +114,11 @@ class Zend_Session_Namespace extends Container
     public function __construct($namespace = 'Default', $manager = null)
     {
         if (!$manager) {
-            if (!Zend_Session::$_sessionManager) {
-                Zend_Session::start();
-            }
-            $manager = Zend_Session::$_sessionManager;
+            $manager = Zend_Session::getSessionManager();
         }
+
+        // Sanitize namespace for Laminas - only allow alphanumerics, backslashes, and underscores
+        $namespace = preg_replace('/[^a-zA-Z0-9_\\\\]/', '_', $namespace);
 
         parent::__construct($namespace, $manager);
     }

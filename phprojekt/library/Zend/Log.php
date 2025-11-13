@@ -43,6 +43,21 @@ class Zend_Log extends Logger
 
         parent::log($level, $message, $extras ?? []);
     }
+
+    /**
+     * Add filter (for compatibility)
+     */
+    public function addFilter($filter)
+    {
+        // In Laminas, filters are added to writers, not the logger itself
+        // For basic compatibility, we'll just ignore this or add it to all writers
+        foreach ($this->getWriters() as $writer) {
+            if (method_exists($writer, 'addFilter')) {
+                $writer->addFilter($filter);
+            }
+        }
+        return $this;
+    }
 }
 
 /**
@@ -60,6 +75,56 @@ class Zend_Log_Writer_Stream extends StreamWriter
     public function __construct($streamOrUrl, $mode = 'a')
     {
         parent::__construct($streamOrUrl);
+    }
+}
+
+/**
+ * Priority filter
+ */
+class Zend_Log_Filter_Priority
+{
+    /**
+     * @var int
+     */
+    protected $_priority;
+
+    /**
+     * @var string
+     */
+    protected $_operator;
+
+    /**
+     * Constructor
+     */
+    public function __construct($priority, $operator = '<=')
+    {
+        $this->_priority = $priority;
+        $this->_operator = $operator;
+    }
+
+    /**
+     * Accept log message
+     */
+    public function accept($event)
+    {
+        $priority = isset($event['priority']) ? $event['priority'] : 7;
+
+        switch ($this->_operator) {
+            case '<=':
+                return $priority <= $this->_priority;
+            case '<':
+                return $priority < $this->_priority;
+            case '>=':
+                return $priority >= $this->_priority;
+            case '>':
+                return $priority > $this->_priority;
+            case '==':
+                return $priority == $this->_priority;
+            case '!=':
+                return $priority != $this->_priority;
+            default:
+                return true;
+        }
     }
 }
 

@@ -3,7 +3,8 @@
  * Compatibility shim for Zend_Cache
  */
 
-use Laminas\Cache\StorageFactory;
+use Laminas\Cache\Storage\Adapter\Filesystem;
+use Laminas\Cache\Storage\Adapter\Memory;
 use Laminas\Cache\Storage\StorageInterface;
 
 class Zend_Cache
@@ -13,29 +14,31 @@ class Zend_Cache
      */
     public static function factory($frontend, $backend, $frontendOptions = [], $backendOptions = [])
     {
-        // Map Zend cache types to Laminas
-        $backendMap = [
-            'File' => 'filesystem',
-            'Memcached' => 'memcached',
-            'Redis' => 'redis',
-            'Apc' => 'apcu',
-        ];
-
-        $adapter = $backendMap[$backend] ?? 'filesystem';
-
-        // Prepare Laminas config
-        $config = [
-            'adapter' => $adapter,
-            'options' => []
-        ];
-
-        // Map backend options
-        if (isset($backendOptions['cache_dir'])) {
-            $config['options']['cache_dir'] = $backendOptions['cache_dir'];
-        }
-
         try {
-            $storage = StorageFactory::factory($config);
+            $storage = null;
+
+            switch ($backend) {
+                case 'File':
+                    $options = [];
+                    if (isset($backendOptions['cache_dir'])) {
+                        $options['cache_dir'] = $backendOptions['cache_dir'];
+                    }
+                    $storage = new Filesystem($options);
+                    break;
+
+                case 'Memcached':
+                case 'Redis':
+                case 'Apc':
+                    // For now, fall back to memory adapter
+                    $storage = new Memory();
+                    break;
+
+                default:
+                    // Default to filesystem
+                    $storage = new Filesystem();
+                    break;
+            }
+
             return new Zend_Cache_Core($storage);
         } catch (\Exception $e) {
             throw new Zend_Cache_Exception($e->getMessage(), 0, $e);

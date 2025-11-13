@@ -132,6 +132,56 @@ class Zend_Controller_Request_Http extends LaminasRequest
     }
 
     /**
+     * Get request scheme (http or https)
+     */
+    public function getScheme()
+    {
+        return $this->getUri()->getScheme() ?: 'http';
+    }
+
+    /**
+     * Get HTTP host
+     */
+    public function getHttpHost()
+    {
+        $host = $this->getUri()->getHost();
+        $port = $this->getUri()->getPort();
+
+        if (($this->getScheme() === 'http' && $port == 80) ||
+            ($this->getScheme() === 'https' && $port == 443)) {
+            return $host;
+        }
+
+        return $host . ':' . $port;
+    }
+
+    /**
+     * Get base URL
+     */
+    public function getBaseUrl()
+    {
+        $uri = $this->getUri();
+        $path = $uri->getPath();
+
+        // Remove script filename from path
+        $path = dirname($path);
+        if ($path === '.' || $path === '/') {
+            $path = '';
+        }
+
+        return $path;
+    }
+
+    /**
+     * Set base URL
+     */
+    public function setBaseUrl($baseUrl)
+    {
+        // Compatibility - not implemented
+        return $this;
+    }
+
+    /**
      * Check if request is AJAX
      */
     public function isXmlHttpRequest()

@@ -118,9 +118,20 @@ abstract class Zend_Db_Table_Abstract extends AbstractTableGateway
     /**
      * Set default metadata cache
      */
-    public static function setDefaultMetadataCache(StorageInterface $cache)
+    public static function setDefaultMetadataCache($cache)
     {
-        self::$_metadataCache = $cache;
+        // Accept both Zend_Cache_Core and StorageInterface for compatibility
+        if ($cache instanceof Zend_Cache_Core) {
+            // Extract the Laminas storage from Zend_Cache_Core
+            $reflection = new \ReflectionClass($cache);
+            $property = $reflection->getProperty('_storage');
+            $property->setAccessible(true);
+            self::$_metadataCache = $property->getValue($cache);
+        } else if ($cache instanceof StorageInterface) {
+            self::$_metadataCache = $cache;
+        } else {
+            throw new \InvalidArgumentException('Cache must be instance of Zend_Cache_Core or StorageInterface');
+        }
     }
 
     /**

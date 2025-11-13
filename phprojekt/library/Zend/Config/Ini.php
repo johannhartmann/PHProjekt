@@ -4,33 +4,17 @@
  */
 
 use Laminas\Config\Reader\Ini as IniReader;
-use Laminas\Config\Config as LaminasConfig;
 
-class Zend_Config_Ini implements ArrayAccess, Iterator, Countable
+/**
+ * INI config class
+ */
+class Zend_Config_Ini extends Zend_Config
 {
-    /**
-     * Configuration data
-     * @var array
-     */
-    protected $_data = [];
-
     /**
      * Current section
      * @var string
      */
     protected $_section;
-
-    /**
-     * Allow modifications
-     * @var bool
-     */
-    protected $_allowModifications = false;
-
-    /**
-     * Current iterator index
-     * @var int
-     */
-    protected $_index = 0;
 
     /**
      * Constructor
@@ -64,6 +48,9 @@ class Zend_Config_Ini implements ArrayAccess, Iterator, Countable
             // Convert nested arrays to Zend_Config objects
             $this->_data = $this->_convertToConfig($this->_data);
         } catch (\Exception $e) {
+            if ($e instanceof Zend_Config_Exception) {
+                throw $e;
+            }
             throw new Zend_Config_Exception($e->getMessage(), 0, $e);
         }
     }
@@ -79,7 +66,8 @@ class Zend_Config_Ini implements ArrayAccess, Iterator, Countable
 
         foreach ($data as $key => $value) {
             if (is_array($value)) {
-                $config = new static('', null, $this->_allowModifications);
+                // Create a new config instance without going through constructor
+                $config = new Zend_Config($value, $this->_allowModifications);
                 $config->_data = $this->_convertToConfig($value);
                 $data[$key] = $config;
             }
@@ -87,127 +75,4 @@ class Zend_Config_Ini implements ArrayAccess, Iterator, Countable
 
         return $data;
     }
-
-    /**
-     * Magic getter
-     */
-    public function __get($name)
-    {
-        return $this->_data[$name] ?? null;
-    }
-
-    /**
-     * Magic setter
-     */
-    public function __set($name, $value)
-    {
-        if (!$this->_allowModifications) {
-            throw new Zend_Config_Exception('Config is read-only');
-        }
-        $this->_data[$name] = $value;
-    }
-
-    /**
-     * Magic isset
-     */
-    public function __isset($name)
-    {
-        return isset($this->_data[$name]);
-    }
-
-    /**
-     * Magic unset
-     */
-    public function __unset($name)
-    {
-        if (!$this->_allowModifications) {
-            throw new Zend_Config_Exception('Config is read-only');
-        }
-        unset($this->_data[$name]);
-    }
-
-    /**
-     * Get as array
-     */
-    public function toArray()
-    {
-        $array = [];
-        foreach ($this->_data as $key => $value) {
-            if ($value instanceof self) {
-                $array[$key] = $value->toArray();
-            } else {
-                $array[$key] = $value;
-            }
-        }
-        return $array;
-    }
-
-    // ArrayAccess implementation
-    public function offsetExists($offset): bool
-    {
-        return isset($this->_data[$offset]);
-    }
-
-    public function offsetGet($offset): mixed
-    {
-        return $this->_data[$offset] ?? null;
-    }
-
-    public function offsetSet($offset, $value): void
-    {
-        if (!$this->_allowModifications) {
-            throw new Zend_Config_Exception('Config is read-only');
-        }
-        $this->_data[$offset] = $value;
-    }
-
-    public function offsetUnset($offset): void
-    {
-        if (!$this->_allowModifications) {
-            throw new Zend_Config_Exception('Config is read-only');
-        }
-        unset($this->_data[$offset]);
-    }
-
-    // Iterator implementation
-    public function current(): mixed
-    {
-        $keys = array_keys($this->_data);
-        return $this->_data[$keys[$this->_index]] ?? null;
-    }
-
-    public function key(): mixed
-    {
-        $keys = array_keys($this->_data);
-        return $keys[$this->_index] ?? null;
-    }
-
-    public function next(): void
-    {
-        $this->_index++;
-    }
-
-    public function rewind(): void
-    {
-        $this->_index = 0;
-    }
-
-    public function valid(): bool
-    {
-        $keys = array_keys($this->_data);
-        return isset($keys[$this->_index]);
-    }
-
-    // Countable implementation
-    public function count(): int
-    {
-        return count($this->_data);
-    }
-}
-
-/**
- * Exception class
- */
-class Zend_Config_Exception extends Exception
-{
 }

@@ -8,14 +8,6 @@ use Laminas\Http\PhpEnvironment\Response as LaminasResponse;
 class Zend_Controller_Response_Http extends LaminasResponse
 {
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Set body
      */
     public function setBody($content, $name = null)
@@ -48,6 +40,33 @@ class Zend_Controller_Response_Http extends LaminasResponse
     public function clearBody($name = null)
     {
         $this->setContent('');
+        return $this;
+    }
+
+    /**
+     * Set HTTP response code
+     */
+    public function setHttpResponseCode($code)
+    {
+        $this->setStatusCode($code);
+        return $this;
+    }
+
+    /**
+     * Get HTTP response code
+     */
+    public function getHttpResponseCode()
+    {
+        return $this->getStatusCode();
+    }
+
+    /**
+     * Set redirect
+     */
+    public function setRedirect($url, $code = 302)
+    {
+        $this->setStatusCode($code);
+        $this->getHeaders()->addHeaderLine('Location', $url);
         return $this;
     }
 
