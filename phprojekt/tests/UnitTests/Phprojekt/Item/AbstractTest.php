@@ -257,7 +257,7 @@ class Phprojekt_Item_AbstractTest extends DatabaseTest
     public function testWrongSet()
     {
         $item = new Project_Models_Project(array('db' => $this->sharedFixture));
-        $this->setExpectedException('Phprojekt_ActiveRecord_Exception');
+        $this->expectException('Phprojekt_ActiveRecord_Exception');
         $item->wrongAttribute = 'Hello World';
     }
 

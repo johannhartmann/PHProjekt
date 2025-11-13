@@ -25,12 +25,12 @@ class Timecard_Models_VObjectReader_Test extends PHPUnit\Framework\TestCase
 {
     public function testReadFailsOnWrongType()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         Timecard_Models_VObjectReader::read(new Sabre_VObject_Component('vcalendar'));
     }
     public function testReadWithExistingFailsOnWrongType()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         Timecard_Models_VObjectReader::readBasedOnExistingTimecard(
             new Timecard_Models_Timecard(),
             new Sabre_VObject_Component('vcalendar')
@@ -112,7 +112,7 @@ HERE;
 
     public function testExceptionOnEndBeforeStart()
     {
-        $this->setExpectedException('Sabre_DAV_Exception_BadRequest');
+        $this->expectException('Sabre_DAV_Exception_BadRequest');
         $this->_callRead(array('end' => '20000101T080000Z', 'start' => '20000101T120000Z'));
     }
 

@@ -239,7 +239,7 @@ class Phprojekt_ActiveRecord_AbstractTest extends DatabaseTest
      */
     public function testWrongSet()
     {
-        $this->setExpectedException('Phprojekt_ActiveRecord_Exception');
+        $this->expectException('Phprojekt_ActiveRecord_Exception');
 
         $instance = new PHprojekt_Project(array('db' => $this->sharedFixture));
         $instance->wrongAttribute = 'Hello World';
@@ -253,7 +253,7 @@ class Phprojekt_ActiveRecord_AbstractTest extends DatabaseTest
      */
     public function testWrongGet()
     {
-        $this->setExpectedException('Phprojekt_ActiveRecord_Exception');
+        $this->expectException('Phprojekt_ActiveRecord_Exception');
 
         $instance = new PHprojekt_Project(array('db' => $this->sharedFixture));
         $instance->wrongAttribute;
@@ -327,7 +327,7 @@ class Phprojekt_ActiveRecord_AbstractTest extends DatabaseTest
     public function testFindWithNoArgument()
     {
         $project = new Phprojekt_Project(array('db' => $this->sharedFixture));
-        $this->setExpectedException('Phprojekt_ActiveRecord_Exception');
+        $this->expectException('Phprojekt_ActiveRecord_Exception');
         // This triggers an undefined index error, should throw an exception instead
         $project->find();
     }
@@ -338,7 +338,7 @@ class Phprojekt_ActiveRecord_AbstractTest extends DatabaseTest
     public function testFindWithNull()
     {
         $project = new Phprojekt_Project(array('db' => $this->sharedFixture));
-        $this->setExpectedException('Phprojekt_ActiveRecord_Exception');
+        $this->expectException('Phprojekt_ActiveRecord_Exception');
         // This acts like find(0), should throw an exception instead.
         $project->find(NULL);
     }
@@ -349,7 +349,7 @@ class Phprojekt_ActiveRecord_AbstractTest extends DatabaseTest
     public function testFindWithTwoArgument()
     {
         $project = new Phprojekt_Project(array('db' => $this->sharedFixture));
-        $this->setExpectedException('Phprojekt_ActiveRecord_Exception');
+        $this->expectException('Phprojekt_ActiveRecord_Exception');
         // Should throw an exception instead.
         $project->find(1, 2);
     }

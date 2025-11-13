@@ -81,7 +81,7 @@ class User_User_Test extends DatabaseTest
     {
         $user = new Phprojekt_User_User();
         $user->find(1);
-        $this->setExpectedException('Phprojekt_User_Exception');
+        $this->expectException('Phprojekt_User_Exception');
         $user->delete();
     }
 

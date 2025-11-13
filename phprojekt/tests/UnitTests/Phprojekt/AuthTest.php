@@ -49,7 +49,7 @@ class Phprojekt_AuthTest extends DatabaseTest
      */
     public function testInvalidUser()
     {
-        $this->setExpectedException('Phprojekt_Auth_Exception');
+        $this->expectException('Phprojekt_Auth_Exception');
         Phprojekt_Auth::login('invalidUser', 'password');
     }
 
@@ -58,7 +58,7 @@ class Phprojekt_AuthTest extends DatabaseTest
      */
     public function testInvalidPass()
     {
-        $this->setExpectedException('Phprojekt_Auth_Exception');
+        $this->expectException('Phprojekt_Auth_Exception');
         Phprojekt_Auth::login('david', 'iinvalidPassword');
     }
 
@@ -67,7 +67,7 @@ class Phprojekt_AuthTest extends DatabaseTest
      */
     public function testInvalidUserValidPass()
     {
-        $this->setExpectedException('Phprojekt_Auth_Exception');
+        $this->expectException('Phprojekt_Auth_Exception');
         Phprojekt_Auth::login('invalidUser', 'test');
     }
 
@@ -75,7 +75,7 @@ class Phprojekt_AuthTest extends DatabaseTest
      * Trying a login with a empty user and a valid password
      */
     public function testEmptyuser() {
-        $this->setExpectedException('Phprojekt_Auth_Exception');
+        $this->expectException('Phprojekt_Auth_Exception');
         Phprojekt_Auth::login('', 'test');
     }
 
@@ -83,7 +83,7 @@ class Phprojekt_AuthTest extends DatabaseTest
      * Trying a login with a valid user and a empty password
      */
     public function testEmptyPass() {
-        $this->setExpectedException('Phprojekt_Auth_Exception');
+        $this->expectException('Phprojekt_Auth_Exception');
         Phprojekt_Auth::login('david', '');
     }
 
@@ -91,7 +91,7 @@ class Phprojekt_AuthTest extends DatabaseTest
      * Trying a login with a valid user and the md5 value on the database
      */
     public function testMd5Login() {
-        $this->setExpectedException('Phprojekt_Auth_Exception');
+        $this->expectException('Phprojekt_Auth_Exception');
         Phprojekt_Auth::login('david', '156c3239dbfa5c5222b51514e9d12948');
     }
 
@@ -99,7 +99,7 @@ class Phprojekt_AuthTest extends DatabaseTest
      * Trying a login with a valid user but inactive
      */
     public function testInactiveUser() {
-        $this->setExpectedException('Phprojekt_Auth_Exception');
+        $this->expectException('Phprojekt_Auth_Exception');
         Phprojekt_Auth::login('inactive', 'test');
     }
 

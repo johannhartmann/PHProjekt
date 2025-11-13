@@ -47,7 +47,7 @@ class Phprojekt_Filter_UserFilterTest extends DatabaseTest
         $tree   = $tree->setup($filter);
         $this->assertEquals(1, $tree->getRootNode()->id);
 
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $filter = new Phprojekt_Filter_UserFilter($record, 'NONE', 'Invisible Root');
     }
 

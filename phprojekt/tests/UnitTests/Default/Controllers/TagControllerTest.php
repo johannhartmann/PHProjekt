@@ -89,7 +89,7 @@ class Phprojekt_TagController_Test extends FrontInit
      */
     public function testJsonSaveTagsActionInvalid()
     {
-        $this->setExpectedException('Zend_Controller_Action_Exception');
+        $this->expectException('Zend_Controller_Action_Exception');
         $this->setRequestUrl('Default/Tag/jsonSaveTags/');
         $this->request->setParam('moduleName', 'Project');
         $this->request->setParam('string', 'test');
@@ -132,7 +132,7 @@ class Phprojekt_TagController_Test extends FrontInit
      */
     public function testJsonDeleteTagsActionInvalid()
     {
-        $this->setExpectedException('Zend_Controller_Action_Exception');
+        $this->expectException('Zend_Controller_Action_Exception');
         $this->setRequestUrl('Default/Tag/jsonDeleteTags/');
         $this->request->setParam('moduleName', 'Project');
         $response = $this->getResponse();

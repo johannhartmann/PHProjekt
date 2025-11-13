@@ -170,7 +170,7 @@ class Phprojekt_Tree_Node_DatabaseTest extends DatabaseTest
         $this->assertNull($tree->id);
         $this->assertEquals(0, count($tree->getChildren()));
 
-        $this->setExpectedException('Phprojekt_Tree_Node_Exception');
+        $this->expectException('Phprojekt_Tree_Node_Exception');
         $tree->delete();
     }
 
@@ -179,7 +179,7 @@ class Phprojekt_Tree_Node_DatabaseTest extends DatabaseTest
      */
     public function testDeleteRoot()
     {
-        $this->setExpectedException('Phprojekt_Tree_Node_Exception');
+        $this->expectException('Phprojekt_Tree_Node_Exception');
         $this->_tree->delete();
     }
 }
