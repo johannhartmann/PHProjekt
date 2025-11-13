@@ -38,7 +38,8 @@
             "Cleaner\\": "library/Cleaner/"
         },
         "psr-0": {
-            "Zend_": "library/"
+            "Zend_": "library/",
+            "Phprojekt_": "library/"
         },
         "files": [
             "library/Zend/Db.php",
@@ -49,6 +50,7 @@
             "library/Zend/Registry.php",
             "library/Zend/Controller/Front.php",
             "library/Zend/Controller/Request/Http.php",
+            "library/Zend/Controller/Response/Http.php",
             "library/Zend/Cache.php",
             "library/Zend/Log.php"
         ]
