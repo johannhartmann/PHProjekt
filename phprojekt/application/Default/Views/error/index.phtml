@@ -1,19 +1,28 @@
-<h1>An error occurred</h1>
-<h2><?php echo $this->escapeHtml($this->message ?? 'An error occurred') ?></h2>
-
-<?php if (isset($this->exception)): ?>
-<h3>Exception information:</h3>
-<p>
-    <b>Message:</b> <?php echo $this->escapeHtml($this->exception->getMessage()) ?>
-</p>
-
-<h3>Stack trace:</h3>
-<pre><?php echo $this->escapeHtml($this->exception->getTraceAsString()) ?>
-</pre>
-
-<?php if (isset($this->request) && method_exists($this->request, 'getParams')): ?>
-<h3>Request Parameters:</h3>
-<pre><?php echo $this->escapeHtml(var_export($this->request->getParams(), true)) ?>
-</pre>
-<?php endif ?>
-<?php endif ?>
+<?php
+/**
+ * Error page template - Laminas MVC
+ */
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error <?php echo isset($statusCode) ? $statusCode : 500; ?> - PHProjekt</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f4; }
+        .error-container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { color: #d32f2f; }
+        .error-code { font-size: 72px; font-weight: bold; color: #d32f2f; margin: 20px 0; }
+        .error-message { padding: 15px; background: #ffebee; border-left: 4px solid #d32f2f; }
+        .back-link { display: inline-block; margin-top: 20px; padding: 10px 20px; background: #1976d2; color: white; text-decoration: none; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>An Error Occurred</h1>
+        <div class="error-code"><?php echo isset($statusCode) ? $statusCode : 500; ?></div>
+        <div class="error-message"><?php echo isset($message) ? htmlspecialchars($message) : 'Internal Server Error'; ?></div>
+        <a href="/" class="back-link">← Back to Home</a>
+    </div>
+</body>
+</html>
