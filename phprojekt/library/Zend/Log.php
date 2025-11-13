@@ -5,9 +5,16 @@
 
 use Laminas\Log\Logger;
 use Laminas\Log\Writer\Stream as StreamWriter;
+use Laminas\Log\Filter\FilterInterface;
 
 class Zend_Log extends Logger
 {
+    /**
+     * Whether default writer was added
+     * @var bool
+     */
+    protected $_hasDefaultWriter = false;
+
     /**
      * Constructor
      */
@@ -16,8 +23,33 @@ class Zend_Log extends Logger
         parent::__construct();
 
         if ($writer) {
-            if ($writer instanceof Zend_Log_Writer_Abstract) {
+            if ($writer instanceof Zend_Log_Writer_Abstract || $writer instanceof StreamWriter) {
                 $this->addWriter($writer);
+                $this->_hasDefaultWriter = false;
+            }
+        }
+    }
+
+    /**
+     * Add writer
+     */
+    public function addWriter($writer, $priority = 1, $options = [])
+    {
+        $this->_hasDefaultWriter = false;
+        return parent::addWriter($writer, $priority, $options);
+    }
+
+    /**
+     * Ensure we have at least one writer
+     */
+    protected function _ensureWriter()
+    {
+        if (!$this->_hasDefaultWriter && !$this->getWriters()->count()) {
+            try {
+                parent::addWriter(new StreamWriter('php://memory'));
+                $this->_hasDefaultWriter = true;
+            } catch (\Exception $e) {
+                // Silently fail
             }
         }
     }
@@ -27,6 +59,8 @@ class Zend_Log extends Logger
      */
     public function log($message, $priority, $extras = null)
     {
+        $this->_ensureWriter();
+
         // Map Zend priority to PSR-3 level
         $levelMap = [
             0 => Logger::EMERG,
@@ -81,7 +115,7 @@ class Zend_Log_Writer_Stream extends StreamWriter
 /**
  * Priority filter
  */
-class Zend_Log_Filter_Priority
+class Zend_Log_Filter_Priority implements FilterInterface
 {
     /**
      * @var int
@@ -103,7 +137,15 @@ class Zend_Log_Filter_Priority
     }
 
     /**
-     * Accept log message
+     * Filter method (Laminas interface)
+     */
+    public function filter(array $event): bool
+    {
+        return $this->accept($event);
+    }
+
+    /**
+     * Accept log message (Zend Framework compatibility)
      */
     public function accept($event)
     {

@@ -24,6 +24,12 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
     protected $_viewScriptPathNoControllerSpec = ':action.:suffix';
 
     /**
+     * View base path spec
+     * @var string
+     */
+    protected $_viewBasePathSpec = ':moduleDir/views';
+
+    /**
      * View suffix
      * @var string
      */
@@ -44,9 +50,13 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct($view = null)
     {
-        $this->_view = new Zend_View();
+        if ($view === null) {
+            $this->_view = new Zend_View();
+        } else {
+            $this->_view = $view;
+        }
     }
 
     /**
@@ -115,6 +125,23 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
     public function getViewScriptPathSpec()
     {
         return $this->_viewScriptPathSpec;
+    }
+
+    /**
+     * Set view base path spec
+     */
+    public function setViewBasePathSpec($spec)
+    {
+        $this->_viewBasePathSpec = $spec;
+        return $this;
+    }
+
+    /**
+     * Get view base path spec
+     */
+    public function getViewBasePathSpec()
+    {
+        return $this->_viewBasePathSpec;
     }
 
     /**

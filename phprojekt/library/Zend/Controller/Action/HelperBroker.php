@@ -18,6 +18,12 @@ class Zend_Controller_Action_HelperBroker
     protected static $_staticHelpers = [];
 
     /**
+     * Helper paths
+     * @var array
+     */
+    protected static $_helperPaths = [];
+
+    /**
      * Action controller
      * @var Zend_Controller_Action
      */
@@ -81,9 +87,9 @@ class Zend_Controller_Action_HelperBroker
     }
 
     /**
-     * Add helper
+     * Add helper to instance
      */
-    public function addHelper(Zend_Controller_Action_Helper_Abstract $helper)
+    public function addInstanceHelper(Zend_Controller_Action_Helper_Abstract $helper)
     {
         $name = $helper->getName();
         $this->_helpers[strtolower($name)] = $helper;
@@ -122,12 +128,23 @@ class Zend_Controller_Action_HelperBroker
     }
 
     /**
-     * Add static helper
+     * Add helper (static method for global registration)
      */
-    public static function addStaticHelper(Zend_Controller_Action_Helper_Abstract $helper)
+    public static function addHelper(Zend_Controller_Action_Helper_Abstract $helper)
     {
         $name = strtolower($helper->getName());
         self::$_staticHelpers[$name] = $helper;
+    }
+
+    /**
+     * Add path for helper loading
+     */
+    public static function addPath($path, $prefix = null)
+    {
+        self::$_helperPaths[] = [
+            'path' => $path,
+            'prefix' => $prefix
+        ];
     }
 
     /**

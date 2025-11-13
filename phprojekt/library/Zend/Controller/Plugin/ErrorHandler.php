@@ -91,7 +91,7 @@ class Zend_Controller_Plugin_ErrorHandler extends Zend_Controller_Plugin_Abstrac
     /**
      * Post-dispatch hook
      */
-    public function postDispatch(Zend_Controller_Request_Http $request)
+    public function postDispatch(Zend_Controller_Request_Abstract $request)
     {
         // Check for exceptions
         $response = $this->getResponse();

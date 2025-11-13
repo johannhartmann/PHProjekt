@@ -7,7 +7,7 @@ abstract class Zend_Controller_Plugin_Abstract
 {
     /**
      * Request object
-     * @var Zend_Controller_Request_Http
+     * @var Zend_Controller_Request_Abstract
      */
     protected $_request;
 
@@ -20,7 +20,7 @@ abstract class Zend_Controller_Plugin_Abstract
     /**
      * Set request
      */
-    public function setRequest(Zend_Controller_Request_Http $request)
+    public function setRequest($request)
     {
         $this->_request = $request;
         return $this;
@@ -37,7 +37,7 @@ abstract class Zend_Controller_Plugin_Abstract
     /**
      * Set response
      */
-    public function setResponse(Zend_Controller_Response_Http $response)
+    public function setResponse($response)
     {
         $this->_response = $response;
         return $this;
@@ -54,35 +54,35 @@ abstract class Zend_Controller_Plugin_Abstract
     /**
      * Called before routing
      */
-    public function routeStartup(Zend_Controller_Request_Http $request)
+    public function routeStartup(Zend_Controller_Request_Abstract $request)
     {
     }
 
     /**
      * Called after routing
      */
-    public function routeShutdown(Zend_Controller_Request_Http $request)
+    public function routeShutdown(Zend_Controller_Request_Abstract $request)
     {
     }
 
     /**
      * Called before dispatch loop
      */
-    public function dispatchLoopStartup(Zend_Controller_Request_Http $request)
+    public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
     }
 
     /**
      * Called before an action is dispatched
      */
-    public function preDispatch(Zend_Controller_Request_Http $request)
+    public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
     }
 
     /**
      * Called after an action is dispatched
      */
-    public function postDispatch(Zend_Controller_Request_Http $request)
+    public function postDispatch(Zend_Controller_Request_Abstract $request)
     {
     }
 
