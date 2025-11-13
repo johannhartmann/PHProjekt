@@ -52,7 +52,11 @@
             "library/Zend/Controller/Request/Http.php",
             "library/Zend/Controller/Response/Http.php",
             "library/Zend/Cache.php",
-            "library/Zend/Log.php"
+            "library/Zend/Log.php",
+            "library/Zend/View.php",
+            "library/Zend/Auth.php",
+            "library/Zend/Validate.php",
+            "library/Zend/Filter.php"
         ]
     },
     "config": {
