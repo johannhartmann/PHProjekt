@@ -2,6 +2,7 @@
 .project
 .settings/*
 phprojekt/configuration.php
+phprojekt/tests/UnitTests/configuration.php
 phprojekt/htdocs/dojo/release/dojo/dojo/build.txt
 coverage
 phprojekt/vendor/*
