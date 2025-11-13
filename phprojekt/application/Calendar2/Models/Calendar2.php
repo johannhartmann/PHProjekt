@@ -306,7 +306,7 @@ class Calendar2_Models_Calendar2 extends Phprojekt_Item_Abstract
      *
      * @return void.
      */
-    public function delete()
+    public function delete($where = null)
     {
         $db = $this->getAdapter();
 
@@ -326,7 +326,7 @@ class Calendar2_Models_Calendar2 extends Phprojekt_Item_Abstract
                 $this->id
             );
 
-            parent::delete();
+            parent::delete($where);
         } else {
             $first = clone $this;
             $first->find($this->id);

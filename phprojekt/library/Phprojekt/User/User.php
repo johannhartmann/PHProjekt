@@ -200,7 +200,7 @@ class Phprojekt_User_User extends Phprojekt_ActiveRecord_Abstract implements Php
      *
      * @return void
      */
-    public function delete()
+    public function delete($where = null)
     {
         throw new Phprojekt_User_Exception("Users can't be deleted", 1);
     }

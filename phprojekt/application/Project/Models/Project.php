@@ -141,9 +141,9 @@ class Project_Models_Project extends Phprojekt_Item_Abstract
      *
      * @return void
      */
-    public function delete()
+    public function delete($where = null)
     {
-        parent::delete();
+        parent::delete($where);
     }
 
     /**

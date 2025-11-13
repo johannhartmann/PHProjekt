@@ -6,3 +6,4 @@ phprojekt/tests/UnitTests/configuration.php
 phprojekt/htdocs/dojo/release/dojo/dojo/build.txt
 coverage
 phprojekt/vendor/*
+.phpunit.result.cache

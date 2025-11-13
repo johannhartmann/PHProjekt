@@ -112,10 +112,10 @@ class Phprojekt_Tab_Tab extends Phprojekt_ActiveRecord_Abstract implements Phpro
      *
      * @return void
      */
-    public function delete()
+    public function delete($where = null)
     {
         if ($this->id > 1) {
-            parent::delete();
+            parent::delete($where);
         }
     }
     /**

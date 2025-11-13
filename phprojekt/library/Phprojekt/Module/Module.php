@@ -163,7 +163,7 @@ class Phprojekt_Module_Module extends Phprojekt_ActiveRecord_Abstract implements
      *
      * @return void
      */
-    public function delete()
+    public function delete($where = null)
     {
         // Delete all the project-module relations
         $project = new Project_Models_ProjectModulePermissions();
@@ -191,7 +191,7 @@ class Phprojekt_Module_Module extends Phprojekt_ActiveRecord_Abstract implements
         $this->_deleteFolder(PHPR_USER_CORE_PATH . $this->name);
 
         // Delete module entry
-        parent::delete();
+        parent::delete($where);
     }
 
     /**

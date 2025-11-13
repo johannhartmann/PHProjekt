@@ -890,11 +890,15 @@ abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
     /**
      * Delete a record and all his relations.
      *
+     * @param string|array|null $where OPTIONAL An SQL WHERE clause for compatibility with parent class.
+     *                                  If not provided, deletes based on the current record's id.
+     *
      * @return Phprojekt_ActiveRecord_Abstract An instance of Phprojekt_ActiveRecord_Abstract.
      */
-    public function delete()
+    public function delete($where = null)
     {
-        if (array_key_exists('id', $this->_data)) {
+        // If $where is null, use ActiveRecord pattern (delete current record by id)
+        if ($where === null && array_key_exists('id', $this->_data)) {
             if (array_key_exists('hasMany', $this->_relations) || count($this->hasMany) > 0) {
                 foreach (array_keys($this->hasMany) as $key) {
                     $className = $this->_getClassNameForRelationship($key,
@@ -923,8 +927,12 @@ abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
                 }
             }
 
-            parent::delete(sprintf('id = %d', (int) $this->_data['id']));
+            $where = sprintf('id = %d', (int) $this->_data['id']);
+        }
 
+        // Call parent delete with the where clause
+        if ($where !== null) {
+            parent::delete($where);
             $this->_initDataArray();
             $this->_relations = array();
         }

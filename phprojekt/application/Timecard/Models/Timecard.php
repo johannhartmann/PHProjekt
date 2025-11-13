@@ -459,10 +459,10 @@ class Timecard_Models_Timecard extends Phprojekt_ActiveRecord_Abstract implement
      *
      * @return boolean
      */
-    public function delete()
+    public function delete($where = null)
     {
         if ($this->_originalData['ownerId'] == Phprojekt_Auth_Proxy::getEffectiveUserId()) {
-            return parent::delete();
+            return parent::delete($where);
         } else {
             return false;
         }

@@ -237,9 +237,11 @@ abstract class Phprojekt_Item_Abstract extends Phprojekt_ActiveRecord_Abstract i
     /**
      * Extension of the Abstract Record to delete an item.
      *
+     * @param string|array|null $where OPTIONAL An SQL WHERE clause for compatibility with parent class.
+     *
      * @return void
      */
-    public function delete()
+    public function delete($where = null)
     {
         $moduleId = Phprojekt_Module::getId($this->getModelName());
 
@@ -248,7 +250,7 @@ abstract class Phprojekt_Item_Abstract extends Phprojekt_ActiveRecord_Abstract i
         $this->_search->deleteObjectItem($this);
         $this->_rights->saveRights($moduleId, $this->id, array());
 
-        parent::delete();
+        parent::delete($where);
     }
 
     /**
