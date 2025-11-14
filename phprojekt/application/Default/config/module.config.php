@@ -40,6 +40,7 @@ return [
             Controller\LoginController::class => InvokableFactory::class,
             Controller\SearchController::class => InvokableFactory::class,
             Controller\TagController::class => InvokableFactory::class,
+            Controller\JsController::class => InvokableFactory::class,
             Controller\ErrorController::class => InvokableFactory::class,
         ],
         'aliases' => [
@@ -47,6 +48,7 @@ return [
             'Login' => Controller\LoginController::class,
             'Search' => Controller\SearchController::class,
             'Tag' => Controller\TagController::class,
+            'Js' => Controller\JsController::class,
             'Error' => Controller\ErrorController::class,
         ],
     ],
