@@ -7,3 +7,17 @@ phprojekt/htdocs/dojo/release/dojo/dojo/build.txt
 coverage
 phprojekt/vendor/*
 .phpunit.result.cache
+
+# Docker
+.env
+docker-compose.override.yml
+backup.sql
+*.backup.sql
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/

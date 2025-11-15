@@ -38,7 +38,13 @@
             "Cleaner\\": "library/Cleaner/"
         },
         "psr-0": {
-            "Phprojekt_": "library/"
+            "Phprojekt_": "library/",
+            "Zend_": "library/",
+            "Project_": "application/Project/",
+            "Calendar2_": "application/Calendar2/",
+            "Timecard_": "application/Timecard/",
+            "Default_": "application/Default/",
+            "Core_": "application/Core/"
         },
         "files": [
             "library/Phprojekt.php"

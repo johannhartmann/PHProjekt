@@ -1,0 +1,146 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: phprojekt_app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./phprojekt:/var/www/html/phprojekt
+      - ./public:/var/www/html/public
+      - phprojekt_tmp:/tmp/phprojekt-test
+    ports:
+      - "8080:80"
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=${DB_DATABASE:-phprojekt}
+      - DB_USERNAME=${DB_USERNAME:-phprojekt}
+      - DB_PASSWORD=${DB_PASSWORD:-phprojekt}
+      - PHP_DISPLAY_ERRORS=${PHP_DISPLAY_ERRORS:-Off}
+      - PHP_ERROR_REPORTING=${PHP_ERROR_REPORTING:-E_ALL}
+    networks:
+      - phprojekt_network
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:8.0
+    container_name: phprojekt_mysql
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password --sql-mode="STRICT_ALL_TABLES"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${DB_DATABASE:-phprojekt}
+      MYSQL_USER: ${DB_USERNAME:-phprojekt}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-phprojekt}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    networks:
+      - phprojekt_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-root}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mysql_test:
+    image: mysql:8.0
+    container_name: phprojekt_mysql_test
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password --sql-mode="STRICT_ALL_TABLES"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: phprojekt-mvc-test
+      MYSQL_USER: phprojekt
+      MYSQL_PASSWORD: phprojekt
+    volumes:
+      - mysql_test_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    networks:
+      - phprojekt_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: phprojekt_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-phprojekt}
+      POSTGRES_USER: ${POSTGRES_USER:-phprojekt}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-phprojekt}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - phprojekt_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-phprojekt}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres_test:
+    image: postgres:15-alpine
+    container_name: phprojekt_postgres_test
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: phprojekt-mvc-testing
+      POSTGRES_USER: phprojekt
+      POSTGRES_PASSWORD: phprojekt
+    volumes:
+      - postgres_test_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    networks:
+      - phprojekt_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U phprojekt"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phprojekt_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+    ports:
+      - "8081:80"
+    networks:
+      - phprojekt_network
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
+    driver: local
+  mysql_test_data:
+    driver: local
+  postgres_data:
+    driver: local
+  postgres_test_data:
+    driver: local
+  phprojekt_tmp:
+    driver: local
+
+networks:
+  phprojekt_network:
+    driver: bridge

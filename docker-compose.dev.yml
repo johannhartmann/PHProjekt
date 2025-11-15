@@ -1,0 +1,36 @@
+version: '3.8'
+
+# Development override file
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - INSTALL_XDEBUG=true
+    environment:
+      - PHP_DISPLAY_ERRORS=On
+      - PHP_ERROR_REPORTING=E_ALL
+      - APP_ENV=development
+      - APP_DEBUG=true
+      # Xdebug configuration
+      - XDEBUG_MODE=develop,debug,coverage
+      - XDEBUG_CONFIG=client_host=host.docker.internal
+    volumes:
+      # Mount source code for live editing
+      - ./phprojekt:/var/www/html/phprojekt:cached
+      # Mount vendor separately for better performance
+      - /var/www/html/phprojekt/vendor
+
+  mysql:
+    ports:
+      # Expose MySQL port for external tools
+      - "3306:3306"
+    command: --general-log=1 --general-log-file=/var/log/mysql/general.log
+
+  postgres:
+    ports:
+      # Expose PostgreSQL port for external tools
+      - "5432:5432"
