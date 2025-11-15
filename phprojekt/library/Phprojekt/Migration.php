@@ -218,8 +218,7 @@ class Phprojekt_Migration
             $db->quoteInto('name = ?', $module)
         );
 
-        Phprojekt::getInstance()->getCache()->clean(
-            Zend_Cache::CLEANING_MODE_ALL
-        );
+        // Laminas Cache uses flush() to clear all cache
+        Phprojekt::getInstance()->getCache()->flush();
     }
 }

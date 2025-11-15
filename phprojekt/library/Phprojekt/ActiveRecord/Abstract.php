@@ -477,7 +477,7 @@ abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
             'stored'   => true
         );
 
-        Zend_Loader::loadClass($this->_rowsetClass);
+        class_exists($this->_rowsetClass);
         return new $this->_rowsetClass($data);
     }
 
@@ -1187,7 +1187,7 @@ abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
             'stored'   => true
         );
 
-        Zend_Loader::loadClass($this->_rowsetClass);
+        class_exists($this->_rowsetClass);
         return new $this->_rowsetClass($data);
     }
 

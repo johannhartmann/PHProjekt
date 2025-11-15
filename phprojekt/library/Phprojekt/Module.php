@@ -205,7 +205,8 @@ class Phprojekt_Module
     public static function clearCache()
     {
         Phprojekt::getInstance()->getCache()->load(self::CACHE_ID);
-        Phprojekt::getInstance()->getCache()->clean(Zend_Cache::CLEANING_MODE_ALL);
+        // Laminas Cache uses flush() to clear all cache
+        Phprojekt::getInstance()->getCache()->flush();
         self::$_cache = null;
     }
 }
