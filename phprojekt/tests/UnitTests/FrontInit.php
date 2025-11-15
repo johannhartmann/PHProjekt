@@ -80,7 +80,7 @@ abstract class FrontInit extends DatabaseTest
         $uri = new HttpUri();
         $uri->setPath('/' . $url);
         $this->request->setUri($uri);
-        $this->request->setRequestUri('/' . $url);
+        // Note: setRequestUri() was removed in Laminas - URI is set via setUri() above
 
         // Set the CSRF token
         if (class_exists('Phprojekt')) {

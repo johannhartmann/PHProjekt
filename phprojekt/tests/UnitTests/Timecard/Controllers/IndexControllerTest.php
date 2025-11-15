@@ -38,7 +38,6 @@ class Timecard_IndexController_Test extends FrontInit
      */
     public function testJsonMonthListActionPart2()
     {
-        $this->markTestSkipped('Can\'t test because of errors in FrontInit');
         $this->setRequestUrl('Timecard/index/workedMinutesPerDay/');
         $this->request->setParam('start', "2009-05-01");
         $this->request->setParam('end', "2009-06-01");
@@ -58,7 +57,6 @@ class Timecard_IndexController_Test extends FrontInit
      */
     public function testCsv()
     {
-        $this->markTestSkipped('Can\'t test because of errors in FrontInit');
         $this->setRequestUrl('Timecard/Timecard/');
         $this->request->setParam('filter', '{"startDatetime":{"!ge":"2009-05-01 00:00","!lt":"2009-06-01 00:00"}}');
         $this->request->setParam('format', 'csv');
@@ -75,7 +73,6 @@ class Timecard_IndexController_Test extends FrontInit
      */
     public function testCsvListEmptyResult()
     {
-        $this->markTestSkipped('Can\'t test because of errors in FrontInit');
         $this->setRequestUrl('Timecard/Timecard/');
         $this->request->setParam('filter', '{"startDatetime":{"!ge":"2009-09-01 00:00","!lt":"2009-10-01 00:00"}}');
         $this->request->setParam('format', 'csv');
