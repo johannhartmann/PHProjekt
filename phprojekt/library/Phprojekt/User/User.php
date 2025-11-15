@@ -121,7 +121,7 @@ class Phprojekt_User_User extends Phprojekt_ActiveRecord_Abstract implements Php
         $db = Phprojekt::getInstance()->getDb();
 
         try {
-            $users = $this->fetchAll($db->quoteInto("username = ?", $username), null, 1);
+            $users = $this->fetchAll(sprintf("username = %s", $db->platform->quoteValue($username)), null, 1);
 
             if (!isset($users[0]) || !isset($users[0]->id)) {
                 return false;
@@ -146,7 +146,7 @@ class Phprojekt_User_User extends Phprojekt_ActiveRecord_Abstract implements Php
     {
         $db = Phprojekt::getInstance()->getDb();
 
-        $users = $this->fetchAll($db->quoteInto('username = ?', $username), null, 1);
+        $users = $this->fetchAll(sprintf("username = %s", $db->platform->quoteValue($username)), null, 1);
 
         if (isset($users[0])) {
             return $users[0];
