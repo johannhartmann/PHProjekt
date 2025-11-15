@@ -90,7 +90,7 @@ class Phprojekt_Pdf_Page extends Page
      * @param mixed $param2
      * @param mixed $param3
      *
-     * @throws Zend_Pdf_Exception
+     * @throws \Laminas\Pdf\Exception\ExceptionInterface
      *
      * @return void
      */

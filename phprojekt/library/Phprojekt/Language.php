@@ -89,8 +89,8 @@ class Phprojekt_Language extends Translator
      *
      * If the lang file that you want is not loaded, the function will load it.
      *
-     * @param string|Zend_Locale $locale Locale/Language to set, identical with Locale identifiers
-     *                                   see Zend_Locale for more information.
+     * @param string|locale $locale Locale/Language to set, identical with Locale identifiers
+     *                                   see locale for more information.
      *
      * @return void
      */
@@ -107,8 +107,8 @@ class Phprojekt_Language extends Translator
     /**
      * Return all the trasnlated strings for the $locale.
      *
-     * @param string|Zend_Locale $locale Locale/Language to set, identical with Locale identifiers
-     *                                   see Zend_Locale for more information.
+     * @param string|locale $locale Locale/Language to set, identical with Locale identifiers
+     *                                   see locale for more information.
      *
      * @return array Array with all the trasnlated strings.
      */
@@ -118,7 +118,7 @@ class Phprojekt_Language extends Translator
      * This method loads the language file for the given locale and returns an array containing all the translated strings.
      * If no locale is provided, the method will use the currently set locale.
      *
-     * @param string|Zend_Locale $locale The locale or language to retrieve the translated strings for. This should be a valid Locale identifier.
+     * @param string|locale $locale The locale or language to retrieve the translated strings for. This should be a valid Locale identifier.
      * @return array An array containing all the translated strings for the specified locale.
      * @throws null No exceptions are explicitly raised by this method.
      * @note This method modifies filesystem.
@@ -130,7 +130,7 @@ class Phprojekt_Language extends Translator
      * This method loads the language file for the given locale and returns an array containing all the translated strings.
      * If no locale is provided, the method will use the currently set locale.
      *
-     * @param string|Zend_Locale $locale The locale or language to retrieve the translated strings for. This should be a valid Locale identifier.
+     * @param string|locale $locale The locale or language to retrieve the translated strings for. This should be a valid Locale identifier.
      * @return array An array containing all the translated strings for the specified locale.
      * @note This method modifies filesystem.
      * @see Phprojekt_Language::_loadLangFile

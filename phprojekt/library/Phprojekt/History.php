@@ -39,7 +39,7 @@ class Phprojekt_History extends Phprojekt_ActiveRecord_Abstract
      * @param Phprojekt_Item_Abstract $object The item object.
      * @param string                  $action Action (edit/add/delete).
      *
-     * @throws Zend_Exception If the object do not exist.
+     * @throws \Exception If the object do not exist.
      *
      * @return void
      */

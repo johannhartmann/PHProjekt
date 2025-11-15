@@ -56,7 +56,7 @@ class Phprojekt_User_User extends Phprojekt_ActiveRecord_Abstract implements Php
      * If is seted the user id in the session,
      * the class will get all the values of these user.
      *
-     * @param array $db Configuration for Zend_Db_Table.
+     * @param array $db Configuration for Laminas database table.
      *
      * @return void
      */

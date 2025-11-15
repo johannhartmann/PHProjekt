@@ -51,7 +51,7 @@ class Phprojekt_Table
     /**
      * Initialize a new table admin.
      *
-     * @param null|\Laminas\Db\Adapter\Adapter $db Configuration for Zend_Db_Table.
+     * @param null|\Laminas\Db\Adapter\Adapter $db Configuration for Laminas database table.
      */
     public function __construct($db = null)
     {

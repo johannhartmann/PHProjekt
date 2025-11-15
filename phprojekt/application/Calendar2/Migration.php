@@ -24,7 +24,7 @@ class Calendar2_Migration extends Phprojekt_Migration_Abstract
     /**
      * The database on which to migrate
      *
-     * @var Zend_Db_Adapter_Abstract
+     * @var \Laminas\Db\Adapter\Adapter_Adapter_Abstract
      */
     protected $_db;
 
@@ -45,7 +45,7 @@ class Calendar2_Migration extends Phprojekt_Migration_Abstract
      *
      * @param String $currentVersion Phprojekt version string indicating our
      *                               current version
-     * @param Zend_Db_Adapter_Abstract $db The database to use
+     * @param \Laminas\Db\Adapter\Adapter $db The database to use
      *
      * @return void
      * @throws Exception On Errors

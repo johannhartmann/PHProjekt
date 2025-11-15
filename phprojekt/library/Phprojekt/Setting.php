@@ -272,7 +272,7 @@ class Phprojekt_Setting extends Phprojekt_ActiveRecord_Abstract
      * @param array $params An associative array of settings parameters, where the keys are the setting keys and the values are the setting values.
      * @param integer $userId The ID of the user whose settings should be saved. If not provided, the current user's ID is used.
      * @return void This method does not return a value.
-     * @throws Zend_Db_Exception An error occurs while saving the settings to the database.
+     * @throws \Laminas\Db\Exception\ExceptionInterface An error occurs while saving the settings to the database.
      * @note This method accesses database and modifies global state.
      * @see Phprojekt_Setting.getSettings
      */
@@ -287,7 +287,7 @@ class Phprojekt_Setting extends Phprojekt_ActiveRecord_Abstract
      * @param array $params An associative array of settings parameters, where the keys are the setting keys and the values are the setting values.
      * @param integer $userId The ID of the user whose settings should be saved. If not provided, the current user's ID is used.
      * @return void This method does not return a value.
-     * @throws Zend_Db_Exception An error occurs while saving the settings to the database.
+     * @throws \Laminas\Db\Exception\ExceptionInterface An error occurs while saving the settings to the database.
      * @note This method accesses database and modifies global state.
      * @see Phprojekt_Setting.getSettings
      */
@@ -302,7 +302,7 @@ class Phprojekt_Setting extends Phprojekt_ActiveRecord_Abstract
      * @param array $params An associative array of settings parameters, where the keys are the setting keys and the values are the setting values.
      * @param integer $userId The ID of the user whose settings should be saved. If not provided, the current user's ID is used.
      * @return void This method does not return a value.
-     * @throws Zend_Db_Exception An error occurs while saving the settings to the database.
+     * @throws \Laminas\Db\Exception\ExceptionInterface An error occurs while saving the settings to the database.
      * @note This method accesses database and modifies global state.
      * @see Phprojekt_Setting.getSettings
      */

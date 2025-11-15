@@ -20,7 +20,7 @@ use Laminas\Db\Sql\Expression;
  *
  * The class provide the functions for save/delete/search the words in the SearchWords table.
  */
-class Phprojekt_Search_Words extends Zend_Db_Table_Abstract
+class Phprojekt_Search_Words
 {
     /**
      * Name of the table.
@@ -109,7 +109,7 @@ class Phprojekt_Search_Words extends Zend_Db_Table_Abstract
     /**
      * Save or update the new word.
      *
-     * This function use the Zend_DB insert/update.
+     * This function use Laminas database insert/update.
      *
      * @param array $words Array with the words string.
      *
@@ -153,7 +153,7 @@ class Phprojekt_Search_Words extends Zend_Db_Table_Abstract
    /**
      * Decrease the ocurrences of the word.
      *
-     * This function use the Zend_DB update.
+     * This function use Laminas database update.
      *
      * @param array $words Array with word IDs.
      *

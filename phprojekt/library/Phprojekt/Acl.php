@@ -71,7 +71,7 @@ class Phprojekt_Acl extends Acl
     }
 
     /**
-     * Add all Roles to Zend_Acl.
+     * Add all Roles to Laminas ACL.
      *
      * @return void
      */
@@ -87,7 +87,7 @@ class Phprojekt_Acl extends Acl
     }
 
     /**
-     * Assign all rights to Zend_Acls.
+     * Assign all rights to Laminas ACLs.
      *
      * @return void
      */

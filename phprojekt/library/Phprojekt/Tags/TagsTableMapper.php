@@ -120,7 +120,7 @@ class Phprojekt_Tags_TagsTableMapper
             }
         }
 
-        // Use direct database insert instead of Zend_Db_Table
+        // Use direct database insert instead of Laminas database table
         foreach ($toAdd as $newTag) {
             $this->_db->insert(
                 self::tagsTableName,

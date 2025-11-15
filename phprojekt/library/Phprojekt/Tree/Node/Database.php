@@ -377,7 +377,7 @@ class Phprojekt_Tree_Node_Database implements IteratorAggregate
      * Delete a node an all subnodes.
      * ! NOTE this method uses transaction locking.
      *
-     * @throws Zend_Db_Exception If node is not stored to database or was not received yet.
+     * @throws \Laminas\Db\Exception\ExceptionInterface If node is not stored to database or was not received yet.
      *
      * @return void
      */

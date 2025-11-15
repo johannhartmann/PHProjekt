@@ -18,7 +18,7 @@
  *
  * The class provide the functions for display the item data of the results
  */
-class Phprojekt_Search_Display extends Zend_Db_Table_Abstract
+class Phprojekt_Search_Display
 {
     /**
      * Name of the table.
@@ -183,7 +183,7 @@ class Phprojekt_Search_Display extends Zend_Db_Table_Abstract
     /**
      * Save the new moduleId-item pair.
      *
-     * This function use the Zend_DB insert.
+     * This function use Laminas database insert.
      *
      * @param integer $moduleId      The module ID to store.
      * @param integer $itemId        The item ID.
@@ -206,7 +206,7 @@ class Phprojekt_Search_Display extends Zend_Db_Table_Abstract
     /**
      * Update a moduleId-item pair.
      *
-     * This function use the Zend_DB update.
+     * This function use Laminas database update.
      *
      * @param integer $moduleId      The module ID to store.
      * @param integer $itemId        The item ID.
@@ -220,7 +220,7 @@ class Phprojekt_Search_Display extends Zend_Db_Table_Abstract
      * Updates the display settings for a module-item pair..
      *
      * This method updates the 'first_display' and 'second_display' fields for a specific module-item pair identified by the provided moduleId, itemId, and projectId.
-     * It uses the Zend_DB update() method to perform the database update.
+     * It uses the database update() method to perform the database update.
      *
      * @param integer $moduleId The ID of the module to update.
      * @param integer $itemId The ID of the item to update.

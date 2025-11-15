@@ -98,7 +98,7 @@ final class Default_Helpers_Upload
             $_FILES['uploadedFile']['name'] = $md5name;
         }
 
-        // Native PHP file upload handling (replaces Zend_File_Transfer_Adapter_Http)
+        // Native PHP file upload handling (replaces ZF1 file transfer adapter)
         if (!isset($_FILES['uploadedFile']) || $_FILES['uploadedFile']['error'] !== UPLOAD_ERR_OK) {
             $errorCode = $_FILES['uploadedFile']['error'] ?? UPLOAD_ERR_NO_FILE;
             $errorMessages = [

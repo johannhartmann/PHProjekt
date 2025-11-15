@@ -83,7 +83,7 @@ class Phprojekt_Loader
      * @param string $module Name of the module.
      * @param string $model  Name of the class to be loaded.
      *
-     * @throws Zend_Exception If class not found.
+     * @throws \Exception If class not found.
      *
      * @return string Identifier class name.
      */
@@ -101,7 +101,7 @@ class Phprojekt_Loader
      * @param string $module Name of the module.
      * @param string $view   Name of the class to be loaded.
      *
-     * @throws Zend_Exception If class not found.
+     * @throws \Exception If class not found.
      *
      * @return string Identifier class name.
      */
@@ -233,7 +233,7 @@ class Phprojekt_Loader
     /**
      * Add the module path for load customs templates.
      *
-     * @param Zend_View|null $view View class.
+     * @param mixed|null $view View class.
      *
      * @return void;
      */
@@ -244,7 +244,7 @@ class Phprojekt_Loader
      * It first tries to load the view script from the system module's 'Views/dojo' directory, and if that fails, it tries to load it from the user module's 'Views/dojo' directory.
      * The loaded view script is then added to the view object's script path.
      *
-     * @param Zend_View|null $view The view object to which the script path should be added. If not provided, the method will use the view object from the Phprojekt instance.
+     * @param mixed|null $view The view object to which the script path should be added. If not provided, the method will use the view object from the Phprojekt instance.
      * @return void This method does not return anything, it only modifies the view object's script path.
      * @note This method modifies filesystem.
      */
@@ -255,7 +255,7 @@ class Phprojekt_Loader
      * It first tries to load the view script from the system module's 'Views/dojo' directory, and if that fails, it tries to load it from the user module's 'Views/dojo' directory.
      * The loaded view script is then added to the view object's script path.
      *
-     * @param Zend_View|null $view The view object to which the script path should be added. If not provided, the method will use the view object from the Phprojekt instance.
+     * @param mixed|null $view The view object to which the script path should be added. If not provided, the method will use the view object from the Phprojekt instance.
      * @return void This method does not return anything, it only modifies the view object's script path.
      * @note This method modifies filesystem.
      */

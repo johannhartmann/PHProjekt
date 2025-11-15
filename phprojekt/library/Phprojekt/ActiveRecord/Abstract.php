@@ -14,7 +14,7 @@
  */
 
 /**
- * Simple ActiveRecord implementation based on Zend_Db_Table.
+ * Simple ActiveRecord implementation using Laminas\Db.
  *
  * Every ActiveRecord object represents a row in a database table.
  * The name of the table is get by naming conventions based on the class name.
@@ -50,7 +50,7 @@
  *   A class is mapped to the database using the last part (after the last _)
  *   of the class name
  */
-abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
+abstract class Phprojekt_ActiveRecord_Abstract
 {
     /**
      * The format for the foreign key.
@@ -137,7 +137,7 @@ abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
      * Logging object from the global scope.
      * Fetched in the constructor.
      *
-     * @var Zend_Log
+     * @var \Laminas\Log\Logger
      */
     protected $_log;
 
@@ -165,7 +165,7 @@ abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
     /**
      * Initialize new object.
      *
-     * @param array $config Configuration for Zend_Db_Table.
+     * @param array $config Configuration for Laminas database table.
      *
      * @return void
      */
@@ -417,7 +417,7 @@ abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
      *
      * This is needed as relations are handles using table objects on the ZF
      * but as we want to keep things simple we don't want to have a e.g.: RoleUserRel object.
-     * We also cannot create this object on runtime as the Zend_Db_Table Relationships needs class names,
+     * We also cannot create this object on runtime as the Laminas database table Relationships needs class names,
      * and cannot handle just objects.
      *
      * @param string $where A query clause.
@@ -641,7 +641,7 @@ abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
                 $this->_log->debug($query);
             }
 
-            // @var Zend_Db_Statement $stmt
+            // @var \Laminas\Db\Adapter\Adapter_Statement $stmt
             $stmt   = $this->getAdapter()->prepare($query);
             $result = $stmt->execute(array($newId, $oldId)) && $result;
 
@@ -683,7 +683,7 @@ abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
                 $this->_log->debug($query);
             }
 
-            // @var Zend_Db_Statement $stmt
+            // @var \Laminas\Db\Adapter\Adapter_Statement $stmt
             $stmt   = $this->getAdapter()->prepare($query);
             $result = $stmt->execute(array($newId, $oldId)) && $result;
 

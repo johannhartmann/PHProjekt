@@ -55,7 +55,7 @@ class Phprojekt_Log extends Logger
      * Constructor function.
      *
      * For all the defined filenames for log constant,
-     * will create a Zend_Log object
+     * will create a Laminas Logger object
      * with the path to the filename and a filter for these log.
      *
      * @param \Laminas\Config\Config $config Object contain the user configuration.
@@ -86,7 +86,7 @@ class Phprojekt_Log extends Logger
      *
      * For DEBUG log, is defined a special format.
      *
-     * The message is passed to all Zend_Log instances saved in _loggers,
+     * The message is passed to all Laminas Logger instances saved in _loggers,
      * but they have priority filtering and therefore decide themself
      * if they pass the message to the file.
      *

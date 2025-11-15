@@ -37,7 +37,7 @@ class Phprojekt_Module_Module extends Phprojekt_ActiveRecord_Abstract implements
     /**
      * Constructor.
      *
-     * @param array $db Configuration for Zend_Db_Table.
+     * @param array $db Configuration for Laminas database table.
      *
      * @return void
      */

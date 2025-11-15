@@ -35,7 +35,7 @@ class Phprojekt_Tab_Tab extends Phprojekt_ActiveRecord_Abstract implements Phpro
     /**
      * Initialize new tab.
      *
-     * @param array $db Configuration for Zend_Db_Table.
+     * @param array $db Configuration for Laminas database table.
      *
      * @return void
      */

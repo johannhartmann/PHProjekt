@@ -273,7 +273,7 @@ class Phprojekt_Notification
     /**
      * Returns the fields part of the Notification body.
      *
-     * @param Zend_Locale $lang Locale for use in translations.
+     * @param locale $lang Locale for use in translations.
      *
      * @return array Array with 'field', 'label' and 'value'.
      */
@@ -299,7 +299,7 @@ class Phprojekt_Notification
      * (from internal variable _lastHistory) and checks for contents that have to be translated
      * if the $translate option is true, then returns the final array.
      *
-     * @param Zend_Locale $lang Locale for use in translations.
+     * @param locale $lang Locale for use in translations.
      * @param boolean     $translate Translate the fields or not.
      *
      * @return array Array with changes.
@@ -369,7 +369,7 @@ class Phprojekt_Notification
      *
      * @param array       $field The field definition for this value
      * @param mixed       $value The value to convert.
-     * @param Zend_Locale $lang The language to use for localization.
+     * @param locale $lang The language to use for localization.
      *
      * @return string A string representing $value.
      */

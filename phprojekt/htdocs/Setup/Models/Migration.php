@@ -89,14 +89,14 @@ class Setup_Models_Migration
     /**
      * P5 Database.
      *
-     * @var Zend_Db_Adapter_Abstract
+     * @var \Laminas\Db\Adapter\Adapter_Adapter_Abstract
      */
     private $_dbOrig = null;
 
     /**
      * P6 Database.
      *
-     * @var Zend_Db_Adapter_Abstract
+     * @var \Laminas\Db\Adapter\Adapter_Adapter_Abstract
      */
     private $_db = null;
 
@@ -175,7 +175,7 @@ class Setup_Models_Migration
      *
      * @param $file string p5 configuration
      * @param $diffToUtc int difference to utc
-     * @param $db null|Zend_Db_Adapter_Abstract p6 database
+     * @param $db null|\Laminas\Db\Adapter\Adapter p6 database
      */
     public function __construct($file, $diffToUtc, $db = null)
     {

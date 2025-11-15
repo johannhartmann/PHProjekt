@@ -14,7 +14,7 @@ namespace Application\Default\Exception;
 /**
  * HTTP Exception
  *
- * Replacement for Zend_Controller_Action_Exception with proper HTTP status code support.
+ * Replacement for ZF1 controller exceptions with proper HTTP status code support.
  * Compatible with Laminas MVC error handling.
  *
  * Usage:

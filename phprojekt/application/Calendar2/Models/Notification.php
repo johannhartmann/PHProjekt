@@ -70,7 +70,7 @@ class Calendar2_Models_Notification extends Phprojekt_Notification
     /**
      * Returns the fields part of the Notification body.
      *
-     * @param Zend_Locale $lang Locale for use in translations.
+     * @param locale $lang Locale for use in translations.
      *
      * @return array Array with 'field', 'label' and 'value'.
      */

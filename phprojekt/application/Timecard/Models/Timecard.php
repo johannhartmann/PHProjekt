@@ -74,7 +74,7 @@ class Timecard_Models_Timecard extends Phprojekt_ActiveRecord_Abstract implement
     /**
      * Constructor initializes additional Infomanager.
      *
-     * @param array $db Configuration for Zend_Db_Table.
+     * @param array $db Configuration for Laminas database table.
      *
      * @return void
      */

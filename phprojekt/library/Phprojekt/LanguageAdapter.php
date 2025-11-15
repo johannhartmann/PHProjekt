@@ -118,8 +118,8 @@ class Phprojekt_LanguageAdapter implements FileLoaderInterface
      * And also have an array with the already loaded languages for not load a same file two times.
      *
      * @param string             $data    Path to the default translation file.
-     * @param string|Zend_Locale $locale  Locale/Language to set, identical with Locale identifiers
-     *                                    see Zend_Locale for more information.
+     * @param string|locale $locale  Locale/Language to set, identical with Locale identifiers
+     *                                    see locale for more information.
      * @param string|array       $options Options for the adaptor.
      *
      * @return void
@@ -173,8 +173,8 @@ class Phprojekt_LanguageAdapter implements FileLoaderInterface
     /**
      * Collect the data and create the array translation set for modules folders.
      *
-     * @param string|Zend_Locale $locale Locale/Language to set, identical with Locale identifiers
-     *                                   see Zend_Locale for more information.
+     * @param string|locale $locale Locale/Language to set, identical with Locale identifiers
+     *                                   see locale for more information.
      *
      * @param string             $path   Path to the modules directory.
      *
@@ -208,8 +208,8 @@ class Phprojekt_LanguageAdapter implements FileLoaderInterface
     /**
      * Collect the data and create the array translation set for SubModules folders.
      *
-     * @param string|Zend_Locale $locale   Locale/Language to set, identical with Locale identifiers
-     *                                     see Zend_Locale for more information.
+     * @param string|locale $locale   Locale/Language to set, identical with Locale identifiers
+     *                                     see locale for more information.
      * @param string             $path     Path to the modules directory.
      * @param string             $langFile Current lang file for get.
      * @param string             $module   Folder name of the module.
@@ -264,8 +264,8 @@ class Phprojekt_LanguageAdapter implements FileLoaderInterface
     /**
      * Return the correct file for the current locale.
      *
-     * @param string|Zend_Locale $locale Locale/Language to set, identical with Locale identifiers
-     *                                   see Zend_Locale for more information.
+     * @param string|locale $locale Locale/Language to set, identical with Locale identifiers
+     *                                   see locale for more information.
      *
      * @return string File to use.
      */
@@ -390,8 +390,8 @@ class Phprojekt_LanguageAdapter implements FileLoaderInterface
     /**
      * Return all the trasnlated strings for the $locale.
      *
-     * @param string|Zend_Locale $locale Locale/Language to set, identical with Locale identifiers
-     *                                   see Zend_Locale for more information.
+     * @param string|locale $locale Locale/Language to set, identical with Locale identifiers
+     *                                   see locale for more information.
      *
      * @return array Array with all the translated strings.
      */
@@ -416,8 +416,8 @@ class Phprojekt_LanguageAdapter implements FileLoaderInterface
      *
      * @param string             $message    Message to translate.
      * @param string             $moduleName Module where search the translation.
-     * @param string|Zend_Locale $locale     Locale/Language to set, identical with Locale identifiers
-     *                                       see Zend_Locale for more information.
+     * @param string|locale $locale     Locale/Language to set, identical with Locale identifiers
+     *                                       see locale for more information.
      * @return string Translated string.
      */
     public function get($message, $moduleName, $locale = null)
@@ -452,8 +452,8 @@ class Phprojekt_LanguageAdapter implements FileLoaderInterface
      * Return if is loaded the lang file or not.
      * This is for do not read the same file two times.
      *
-     * @param string|Zend_Locale $locale Locale/Language to set, identical with Locale identifiers
-     *                                   see Zend_Locale for more information.
+     * @param string|locale $locale Locale/Language to set, identical with Locale identifiers
+     *                                   see locale for more information.
      *
      * @return boolean
      */
@@ -472,7 +472,7 @@ class Phprojekt_LanguageAdapter implements FileLoaderInterface
      *
      * @param string $locale PHProjekt locale.
      *
-     * @return string Zend_Locale string.
+     * @return string locale string.
      */
     protected static function _convertToZendLocale($locale)
     {

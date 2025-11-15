@@ -184,21 +184,21 @@ class Phprojekt_Module
     /**
      * Clears the cached data for the current Phprojekt instance..
      *
-     * This method retrieves the cache instance from the Phprojekt singleton, cleans all cached data using the Zend_Cache CLEANING_MODE_ALL mode, and sets the internal $_cache property to null to ensure a fresh cache is loaded on the next request.
+     * This method retrieves the cache instance from the Phprojekt singleton, cleans all cached data using the cache flush mode, and sets the internal $_cache property to null to ensure a fresh cache is loaded on the next request.
      * @return void This method does not return a value, it simply clears the cache.
      * @note This method modifies global state.
      */
     /**
      * Clears the cached data for the current Phprojekt instance..
      *
-     * This method retrieves the cache instance from the Phprojekt singleton, cleans all cached data using the Zend_Cache CLEANING_MODE_ALL mode, and sets the internal $_cache property to null to ensure a fresh cache is loaded on the next request.
+     * This method retrieves the cache instance from the Phprojekt singleton, cleans all cached data using the cache flush mode, and sets the internal $_cache property to null to ensure a fresh cache is loaded on the next request.
      * @return void This method does not return a value, it simply clears the cache.
      * @note This method modifies global state.
      */
     /**
      * Clears the cached data for the current Phprojekt instance..
      *
-     * This method retrieves the cache instance from the Phprojekt singleton, cleans all cached data using the Zend_Cache CLEANING_MODE_ALL mode, and sets the internal $_cache property to null to ensure a fresh cache is loaded on the next request.
+     * This method retrieves the cache instance from the Phprojekt singleton, cleans all cached data using the cache flush mode, and sets the internal $_cache property to null to ensure a fresh cache is loaded on the next request.
      * @return void This method does not return a value, it simply clears the cache.
      * @note This method modifies global state.
      */

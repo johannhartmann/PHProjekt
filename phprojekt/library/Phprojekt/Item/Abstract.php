@@ -70,7 +70,7 @@ abstract class Phprojekt_Item_Abstract extends Phprojekt_ActiveRecord_Abstract i
     /**
      * Initialize new object.
      *
-     * @param array $db Configuration for Zend_Db_Table.
+     * @param array $db Configuration for Laminas database table.
      *
      * @return void
      */

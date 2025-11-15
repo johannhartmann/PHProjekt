@@ -19,7 +19,7 @@
  * The class provide the functions for save/delete/search
  * the words - module relation in the SearchWordsModule table.
  */
-class Phprojekt_Search_WordModule extends Zend_Db_Table_Abstract
+class Phprojekt_Search_WordModule
 {
     /**
      * Name of the table.
@@ -179,7 +179,7 @@ class Phprojekt_Search_WordModule extends Zend_Db_Table_Abstract
     /**
      * Save the new word.
      *
-     * This function use the Zend_DB insert.
+     * This function use Laminas database insert.
      *
      * @param integer $moduleId The module ID to store.
      * @param integer $itemId   The item ID to store.

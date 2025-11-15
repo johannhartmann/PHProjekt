@@ -56,7 +56,7 @@ class Phprojekt_Role_Role extends Phprojekt_ActiveRecord_Abstract implements Php
     /**
      * Constructor.
      *
-     * @param Zend_Db Configuration for Zend_Db_Table.
+     * @param \Laminas\Db\Adapter\Adapter Configuration for Laminas database table.
      *
      * @return void
      */

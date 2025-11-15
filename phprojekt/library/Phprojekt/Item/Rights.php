@@ -17,7 +17,7 @@
  * This class manage the rights for each item per user.
  * Return and save the rights using the moduleId-itemId relation.
  */
-class Phprojekt_Item_Rights extends Zend_Db_Table_Abstract
+class Phprojekt_Item_Rights
 {
     /**
      * Name of the table.
@@ -62,7 +62,7 @@ class Phprojekt_Item_Rights extends Zend_Db_Table_Abstract
     /**
      * Save an access right.
      *
-     * This function use the Zend_Db insert.
+     * This function use Laminas database insert.
      *
      * @param string  $moduleId The module ID to store.
      * @param integer $itemId   The item ID.

@@ -44,7 +44,7 @@ class Phprojekt_DbParser
     /**
      * Current db connection.
      *
-     * @var Zend_Db
+     * @var \Laminas\Db\Adapter\Adapter
      */
     private $_db = null;
 
@@ -66,7 +66,7 @@ class Phprojekt_DbParser
      * Constructor.
      *
      * @param array $options Array with options.
-     * @param array $db      Configuration for Zend_Db_Table.
+     * @param array $db      Configuration for Laminas database table.
      *
      * @return void
      */

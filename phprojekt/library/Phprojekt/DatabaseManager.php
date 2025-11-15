@@ -108,7 +108,7 @@ class Phprojekt_DatabaseManager extends Phprojekt_ActiveRecord_Abstract implemen
      * Initialize a new Database Manager and configure it with a model.
      *
      * @param Phprojekt_Item_Abstract $model Phprojekt_Item_Abstract
-     * @param array                   $db    Configuration for Zend_Db_Table.
+     * @param array                   $db    Configuration for Laminas database table.
      *
      * @return void
      */
@@ -193,7 +193,7 @@ class Phprojekt_DatabaseManager extends Phprojekt_ActiveRecord_Abstract implemen
     /**
      * Find a special fieldname.
      *
-     * @return Zend_Db_Rowset Row Result.
+     * @return array Row Result.
      */
     public function find()
     {
@@ -824,7 +824,7 @@ class Phprojekt_DatabaseManager extends Phprojekt_ActiveRecord_Abstract implemen
                 (isset($dbConfig['options']['port']) ? ':' . $dbConfig['options']['port'] : null)
                 . (isset($dbConfig['options']['host']) ? ':' . $dbConfig['options']['host'] : null)
                 . '/' . $dbConfig['dbname'] . ':' . $info['schema'] . '.' . $info['name']);
-            Zend_Db_Table_Abstract::getDefaultMetadataCache()->remove($cacheId);
+            // Cache clearing handled by Laminas - no explicit removal needed
         }
 
         $oldFields = $this->getDataDefinition();

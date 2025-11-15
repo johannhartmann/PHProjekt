@@ -131,7 +131,7 @@ class Phprojekt_Notification_Mail extends Phprojekt_Mail
      * @param array       $params  Array with options.
      * @param array       $fields  Array with the fields of the model.
      * @param array       $changes Array with changes done in the model.
-     * @param Zend_Locale $lang Locale for use in translations.
+     * @param locale $lang Locale for use in translations.
      *
      * @return void
      */
@@ -212,7 +212,7 @@ class Phprojekt_Notification_Mail extends Phprojekt_Mail
      */
     public function sendNotification()
     {
-        // Creates the Zend_Mail_Transport_<Smtp/SendMail> object
+        // Creates the Laminas mail transport (SMTP or Sendmail) object
         $smtpTransport = $this->setTransport();
 
         try {

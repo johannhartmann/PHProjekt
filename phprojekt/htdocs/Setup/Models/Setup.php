@@ -603,7 +603,7 @@ class Setup_Models_Setup
     /**
      * Return the database connection.
      *
-     * @return Zend_Db The database conection.
+     * @return \Laminas\Db\Adapter\Adapter The database conection.
      */
     private function _getDb()
     {

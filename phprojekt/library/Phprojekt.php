@@ -65,7 +65,7 @@ class Phprojekt
     /**
      * Db class.
      *
-     * @var Zend_Db
+     * @var \Laminas\Db\Adapter\Adapter
      */
     protected $_db;
 
@@ -79,14 +79,14 @@ class Phprojekt
     /**
      * Cache class.
      *
-     * @var Zend_Cache
+     * @var \Laminas\Cache\Storage\StorageInterface
      */
     protected $_cache;
 
     /**
      * View class.
      *
-     * @var Zend_View
+     * @var \Laminas\View\Renderer\PhpRenderer
      */
     protected $_view;
 
@@ -265,7 +265,7 @@ class Phprojekt
      *
      * If don't exists, try to create it.
      *
-     * @param string|Zend_Locale $locale Locale/Language to set.
+     * @param string $locale Locale/Language to set.
      *
      * @return Phprojekt_Language An instance of Phprojekt_Language.
      */
@@ -324,7 +324,7 @@ class Phprojekt
      * Translate a string using the current module.
      *
      * @param string             $message    Message to translate.
-     * @param string|Zend_Locale $locale     Locale/Language to set.
+     * @param string $locale     Locale/Language to set.
      * @param string             $moduleName Module where search the string.
      *
      * @return string Translated string.
@@ -390,7 +390,7 @@ class Phprojekt
     /**
      * Return the View class.
      *
-     * @return Zend_View An instance of Zend_View.
+     * @return \Laminas\View\Renderer\PhpRenderer Laminas view renderer.
      */
     public function getView()
     {
@@ -400,7 +400,7 @@ class Phprojekt
     /**
      * Return the Cache class.
      *
-     * @return Zend_Cache An instance of Zend_Cache.
+     * @return \Laminas\Cache\Storage\StorageInterface Laminas cache storage.
      */
     public function getCache()
     {
@@ -629,7 +629,7 @@ class Phprojekt
 
     /**
      * Set up a cache for database table metadata.
-     * Note: Using Laminas Db TableGateway pattern instead of Zend_Db_Table
+     * Note: Using Laminas Db TableGateway pattern instead of ZF1 Table Gateway
      */
     private function _setupZendDbTableCache()
     {
@@ -653,7 +653,7 @@ class Phprojekt
      *
      * @param array $helperPaths Array with all the folders with helpers.
      *
-     * @return Zend_View An instance of Zend_View.
+     * @return \Laminas\View\Renderer\PhpRenderer Laminas view renderer.
      */
     private function _setView($helperPaths)
     {
@@ -837,7 +837,7 @@ class Phprojekt
                 // Skip the only error that we can´t resolve now
                 // @TODO: fix it
                 if (!strpos($errStr, 'Phprojekt_ActiveRecord_Abstract::delete()') &&
-                    !strpos($errStr, 'Zend_Db_Table_Abstract::delete()')) {
+                    !strpos($errStr, 'database table delete()')) {
                     $errDesc = "PHP code suggestion of change (non-fatal error).";
                 } else {
                     $useLog = false;
