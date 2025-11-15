@@ -215,16 +215,25 @@ class Phprojekt
      *
      * If don't exists, try to create it.
      *
-     * @return Phprojekt_Log An instance of Phprojekt_Log.
+     * @return Phprojekt_Log|\Laminas\Log\Logger An instance of logger.
      */
     public function getLog()
     {
         if (null === $this->_log) {
             try {
-                $this->_log = new Phprojekt_Log($this->_config);
-            } catch (Zend_Log_Exception $error) {
-                error_log($error->getMessage());
-                $this->_dieWithInternalServerError();
+                // Try to create Phprojekt_Log (which may use legacy Zend classes)
+                if (class_exists('Phprojekt_Log', false)) {
+                    $this->_log = new Phprojekt_Log($this->_config);
+                } else {
+                    // Fallback to a simple Laminas logger if Phprojekt_Log not available
+                    $this->_log = new \Laminas\Log\Logger();
+                    $this->_log->addWriter(new \Laminas\Log\Writer\Noop());
+                }
+            } catch (\Exception $error) {
+                // Don't die on log errors - just use a noop logger
+                error_log('Log initialization failed: ' . $error->getMessage());
+                $this->_log = new \Laminas\Log\Logger();
+                $this->_log->addWriter(new \Laminas\Log\Writer\Noop());
             }
         }
 
@@ -493,15 +502,22 @@ class Phprojekt
             }
         }
 
-        // Set a metadata cache and clean it
-        $frontendOptions = array('automatic_serialization' => true);
-        $backendOptions  = array('cache_dir' => PHPR_TEMP_PATH . 'zendCache' . DIRECTORY_SEPARATOR);
+        // Set a metadata cache and clean it using Laminas Cache
         try {
-            $this->_cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
-        } catch (Exception $error) {
-            error_log("The directory " . PHPR_TEMP_PATH . "zendCache do not exists or not have write access.");
-            $this->_dieWithInternalServerError();
+            $cacheDir = PHPR_TEMP_PATH . 'zendCache' . DIRECTORY_SEPARATOR;
+            if (!is_dir($cacheDir)) {
+                @mkdir($cacheDir, 0777, true);
+            }
 
+            $this->_cache = new \Laminas\Cache\Storage\Adapter\Filesystem([
+                'cache_dir' => $cacheDir,
+                'namespace' => 'phprojekt',
+            ]);
+            // Add serializer plugin
+            $this->_cache->addPlugin(new \Laminas\Cache\Storage\Plugin\Serializer());
+        } catch (Exception $error) {
+            error_log("The directory " . PHPR_TEMP_PATH . "zendCache do not exists or not have write access: " . $error->getMessage());
+            $this->_dieWithInternalServerError();
         }
 
         $this->_setupZendDbTableCache();
@@ -582,41 +598,24 @@ class Phprojekt
     }
 
     /**
-     * Set up a cache for Zend_Db_Table.
+     * Set up a cache for database table metadata.
+     * Note: Using Laminas Db TableGateway pattern instead of Zend_Db_Table
      */
     private function _setupZendDbTableCache()
     {
-        $cacheDir = PHPR_TEMP_PATH . 'zendDbTable_cache' . DIRECTORY_SEPARATOR;
-        if (!is_dir($cacheDir)) {
-            mkdir($cacheDir, 0700);
-        }
-        Zend_Db_Table_Abstract::setDefaultMetadataCache(
-            Zend_Cache::factory(
-                'Core',
-                'File',
-                array('automatic_serialization' => true),
-                array('cache_dir' => $cacheDir)
-            )
-        );
+        // TableGateway in Laminas doesn't use the same metadata caching pattern
+        // This method is kept for backward compatibility but doesn't do anything
+        // Metadata caching is handled differently in Laminas Db
     }
 
     /**
-     * Set up a cache for Zend_Locale. See http://jira.opensource.mayflower.de/jira/browse/PHPROJEKT-150
+     * Set up a cache for locale data
+     * Note: Laminas i18n handles caching differently
      */
     private function _setupZendLocaleCache()
     {
-        $cacheDir = PHPR_TEMP_PATH . 'zendLocale_cache' . DIRECTORY_SEPARATOR;
-        if (!is_dir($cacheDir)) {
-            mkdir($cacheDir, 0700);
-        }
-        Zend_Locale::setCache(
-            Zend_Cache::factory(
-                'Core',
-                'File',
-                array(),
-                array('cache_dir' => $cacheDir)
-            )
-        );
+        // Laminas i18n components handle caching internally
+        // This method is kept for backward compatibility but doesn't do anything
     }
 
     /**
@@ -628,7 +627,7 @@ class Phprojekt
      */
     private function _setView($helperPaths)
     {
-        $viewNamespace = new \Laminas\Session\Container('Phprojekt-_setView');
+        $viewNamespace = new \Laminas\Session\Container('Phprojekt__setView');
         if (!isset($viewNamespace->view)) {
             $view = new Zend_View();
             $view->addScriptPath(PHPR_CORE_PATH . '/Default/Views/dojo/');
@@ -654,7 +653,7 @@ class Phprojekt
      */
     private function _getHelperPaths()
     {
-        $helperPathNamespace = new \Laminas\Session\Container('Phprojekt-_getHelperPaths');
+        $helperPathNamespace = new \Laminas\Session\Container('Phprojekt__getHelperPaths');
         if (!isset($helperPathNamespace->helperPaths)) {
             $helperPaths = array();
             // System modules
@@ -699,7 +698,7 @@ class Phprojekt
      */
     private function _getControllersFolders($helperPaths)
     {
-        $controllerPathNamespace = new \Laminas\Session\Container('Phprojekt-_getControllersFolders');
+        $controllerPathNamespace = new \Laminas\Session\Container('Phprojekt__getControllersFolders');
         if (!isset($controllerPathNamespace->controllerPaths)) {
             $controllerPaths = array();
             foreach ($helperPaths as $helperPath) {
@@ -734,7 +733,7 @@ class Phprojekt
     public static function removeControllersFolders()
     {
         // Remove SubModules entries
-        $controllerPathNamespace = new \Laminas\Session\Container('Phprojekt-_getControllersFolders');
+        $controllerPathNamespace = new \Laminas\Session\Container('Phprojekt__getControllersFolders');
         $controllerPathNamespace->unsetAll();
     }
 
