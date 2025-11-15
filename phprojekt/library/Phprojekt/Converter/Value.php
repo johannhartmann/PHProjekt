@@ -35,7 +35,8 @@ class Phprojekt_Converter_Value
             case 'float':
                 $value = Cleaner::sanitize('float', $value, 0);
                 if ($value !== false) {
-                    $value = Zend_Locale_Format::getFloat($value, array('precision' => 2));
+                    // Round to 2 decimal places
+                    $value = round((float)$value, 2);
                 } else {
                     $value = 0;
                 }
@@ -86,7 +87,8 @@ class Phprojekt_Converter_Value
     {
         switch ($type) {
             case 'float':
-                $value = Zend_Locale_Format::toFloat($value, array('precision' => 2));
+                // Convert to float and round to 2 decimal places
+                $value = round((float)$value, 2);
                 break;
             case 'time':
                 if (!empty($value)) {

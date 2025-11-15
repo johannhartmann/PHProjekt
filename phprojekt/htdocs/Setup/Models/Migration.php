@@ -309,7 +309,8 @@ class Setup_Models_Migration
                 'password' => PHPR_DB_PASS,
                 'dbname'   => PHPR_DB_NAME
              );
-             $this->_dbOrig = Zend_Db::factory('pdo_' . PHPR_DB_TYPE, $dbParams);
+             $dbParams['driver'] = 'Pdo_' . ucfirst(PHPR_DB_TYPE);
+             $this->_dbOrig = new \Laminas\Db\Adapter\Adapter($dbParams);
         } catch (Exception $error) {
             throw new Exception('Can not connect to server at ' . PHPR_DB_HOST
                 . ' using ' . PHPR_DB_USER . ' user ' . '(' . $error->getMessage() . ')');

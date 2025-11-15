@@ -94,7 +94,7 @@ class IndexController extends AbstractActionController
      */
     public function indexAction()
     {
-        Zend_Session::destroy();
+        (new \Laminas\Session\SessionManager())->destroy();
         try {
             $this->_setup->checkServer();
             $message = $this->_setup->getMessage();
@@ -608,6 +608,6 @@ class IndexController extends AbstractActionController
             $return['module'] = $module;
         }
 
-        echo '{}&&(' . Zend_Json_Encoder::encode($return) . ')';
+        echo '{}&&(' . \Laminas\Json\Json::encode($return) . ')';
     }
 }

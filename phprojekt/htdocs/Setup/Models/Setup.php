@@ -168,7 +168,7 @@ class Setup_Models_Setup
                     'dbname'   => $params['dbName'],
                     'port'     => (int) $params['dbPort']
                 );
-                $db = Zend_Db::factory($params['serverType'], $dbParams);
+                $db = new \Laminas\Db\Adapter\Adapter($dbParams);
                 $db->getConnection();
                 $valid = true;
             } catch (Exception $error) {
@@ -617,7 +617,7 @@ class Setup_Models_Setup
                     'port'     => $databaseNamespace->data['dbPort'],
                     'charset'  => 'utf8');
 
-        return Zend_Db::factory($databaseNamespace->data['serverType'], $dbParams);
+        return new \Laminas\Db\Adapter\Adapter($dbParams);
     }
 
     /**
@@ -742,6 +742,6 @@ class Setup_Models_Setup
         foreach ($_COOKIE as $key => $value) {
             setcookie($key, "", 1);
         }
-        Zend_Session::writeClose();
+        \Laminas\Session\SessionManager::getDefaultManager()->writeClose();
     }
 }
