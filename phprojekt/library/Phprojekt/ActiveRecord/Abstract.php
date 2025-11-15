@@ -1217,11 +1217,14 @@ abstract class Phprojekt_ActiveRecord_Abstract
      */
     public function count($where = null)
     {
-        $select = $this->select()->from($this, array('COUNT(*)'));
+        $select = $this->select()->from($this->_name, array('COUNT(*)'));
         if (!is_null($where)) {
             $select->where($where);
         }
-        return $select->query()->fetchColumn();
+        $sql = new \Laminas\Db\Sql\Sql($this->_db);
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+        return $result->current()['COUNT(*)'];
     }
 
     /**

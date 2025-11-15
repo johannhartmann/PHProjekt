@@ -37,8 +37,8 @@ spl_autoload_register(function($className) {
     return false;
 });
 
-include_once 'DatabaseTest.php';
-include_once 'FrontInit.php';
+include_once __DIR__ . '/DatabaseTest.php';
+include_once __DIR__ . '/FrontInit.php';
 
 // Load Laminas application configuration
 $appConfig = require PHPR_ROOT_PATH . '/config/application.config.php';

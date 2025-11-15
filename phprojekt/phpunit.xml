@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="tests/UnitTests/Bootstrap.php"
+         colors="true"
+         verbose="true">
+    <testsuites>
+        <testsuite name="Phprojekt Core Tests">
+            <directory>tests/UnitTests/Phprojekt</directory>
+        </testsuite>
+        <testsuite name="Application Tests">
+            <directory>tests/UnitTests/Calendar2</directory>
+            <directory>tests/UnitTests/Default</directory>
+            <directory>tests/UnitTests/Project</directory>
+            <directory>tests/UnitTests/Role</directory>
+            <directory>tests/UnitTests/Timecard</directory>
+            <directory>tests/UnitTests/User</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
