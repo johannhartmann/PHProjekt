@@ -468,7 +468,7 @@ abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
         }
 
         $stmt      = $this->getAdapter()->query($select);
-        $dataArray = $stmt->fetchAll(Zend_Db::FETCH_ASSOC);
+        $dataArray = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
         $data  = array(
             'table'    => $this,
@@ -1178,7 +1178,7 @@ abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
 
         // return the results
         $stmt      = $this->_db->query($sqlStr);
-        $dataArray = $stmt->fetchAll(Zend_Db::FETCH_ASSOC);
+        $dataArray = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
         $data  = array(
             'table'    => $this,

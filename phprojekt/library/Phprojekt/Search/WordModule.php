@@ -146,7 +146,7 @@ class Phprojekt_Search_WordModule extends Zend_Db_Table_Abstract
                 }
 
                 $stmt      = $db->query($sqlString);
-                $tmpResult = $stmt->fetchAll(Zend_Db::FETCH_ASSOC);
+                $tmpResult = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             } else {
                 // Search By OR
                 $where = 'word_id IN (' . implode(', ', $ids) . ')';

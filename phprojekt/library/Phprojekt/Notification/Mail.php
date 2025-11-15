@@ -13,6 +13,8 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Application\Default\Exception\HttpException;
+
 /**
  * Notification Mail class.
  */
@@ -187,7 +189,7 @@ class Phprojekt_Notification_Mail extends Phprojekt_Mail
      * This method creates an SMTP transport object using the `setTransport()` method, and then sends the email notification using the `send()` method.
      * It handles any exceptions that may occur during the email sending process.
      * @return void This method does not return a value.
-     * @throws Zend_Controller_Action_Exception An exception occurs while sending the email notification.
+     * @throws HttpException An exception occurs while sending the email notification.
      * @note This method makes network calls.
      */
     /**
@@ -196,7 +198,7 @@ class Phprojekt_Notification_Mail extends Phprojekt_Mail
      * This method creates an SMTP transport object using the `setTransport()` method, and then sends the email notification using the `send()` method.
      * It handles any exceptions that may occur during the email sending process.
      * @return void This method does not return a value.
-     * @throws Zend_Controller_Action_Exception An exception occurs while sending the email notification.
+     * @throws HttpException An exception occurs while sending the email notification.
      * @note This method makes network calls.
      */
     /**
@@ -205,7 +207,7 @@ class Phprojekt_Notification_Mail extends Phprojekt_Mail
      * This method creates an SMTP transport object using the `setTransport()` method, and then sends the email notification using the `send()` method.
      * It handles any exceptions that may occur during the email sending process.
      * @return void This method does not return a value.
-     * @throws Zend_Controller_Action_Exception An exception occurs while sending the email notification.
+     * @throws HttpException An exception occurs while sending the email notification.
      * @note This method makes network calls.
      */
     public function sendNotification()
@@ -216,7 +218,7 @@ class Phprojekt_Notification_Mail extends Phprojekt_Mail
         try {
             $this->send($smtpTransport);
         } catch(Exception $e) {
-            throw new Zend_Controller_Action_Exception('SMTP error: ' . $e->getMessage(), 422);
+            throw new HttpException('SMTP error: ' . $e->getMessage(), 422);
         }
     }
 }

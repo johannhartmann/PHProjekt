@@ -13,6 +13,8 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Application\Default\Exception\HttpException;
+
 /**
  * User model class.
  */
@@ -399,7 +401,7 @@ class Phprojekt_User_User extends Phprojekt_ActiveRecord_Abstract implements Php
      * It then creates the appropriate holiday calculator object (either Bavaria or Germany) based on the identifier, and returns it.
      * @return \Holiday\Bavaria|\Holiday\Germany The holiday calculator object for the user's configured region
      * @throws Phprojekt_Exception_HolidayRegionNotSet The 'holidayIdentifier' setting is not configured
-     * @throws Zend_Controller_Action_Exception The 'holidayIdentifier' setting is not a valid identifier
+     * @throws HttpException The 'holidayIdentifier' setting is not a valid identifier
      * @note This method depends on current time.
      */
     /**
@@ -410,7 +412,7 @@ class Phprojekt_User_User extends Phprojekt_ActiveRecord_Abstract implements Php
      * It then creates the appropriate holiday calculator object (either Bavaria or Germany) based on the identifier, and returns it.
      * @return \Holiday\Bavaria|\Holiday\Germany The holiday calculator object for the user's configured region.
      * @throws Phprojekt_Exception_HolidayRegionNotSet The 'holidayIdentifier' setting is not configured.
-     * @throws Zend_Controller_Action_Exception The 'holidayIdentifier' setting is not a valid identifier.
+     * @throws HttpException The 'holidayIdentifier' setting is not a valid identifier.
      * @note This method depends on current time.
      */
     /**
@@ -421,7 +423,7 @@ class Phprojekt_User_User extends Phprojekt_ActiveRecord_Abstract implements Php
      * It then creates the appropriate holiday calculator object (either Bavaria or Germany) based on the identifier, and returns it.
      * @return \Holiday\Bavaria|\Holiday\Germany The holiday calculator object for the user's configured region.
      * @throws Phprojekt_Exception_HolidayRegionNotSet The 'holidayIdentifier' setting is not configured.
-     * @throws Zend_Controller_Action_Exception The 'holidayIdentifier' setting is not a valid identifier.
+     * @throws HttpException The 'holidayIdentifier' setting is not a valid identifier.
      * @note This method depends on current time.
      */
     public function getHolidayCalculator()
@@ -441,7 +443,7 @@ class Phprojekt_User_User extends Phprojekt_ActiveRecord_Abstract implements Php
             return new \Holiday\Germany($timezone);
             break;
         default:
-            throw new Zend_Controller_Action_Exception("Not a valid identifier", 500);
+            throw new HttpException("Not a valid identifier", 500);
         }
     }
 }

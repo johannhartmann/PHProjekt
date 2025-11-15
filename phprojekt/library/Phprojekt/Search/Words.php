@@ -13,6 +13,8 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Laminas\Db\Sql\Expression;
+
 /**
  * Class for manage the words on the Search.
  *
@@ -131,7 +133,7 @@ class Phprojekt_Search_Words extends Zend_Db_Table_Abstract
                 $ids[]        = $row->id;
             }
             if (!empty($ids)) {
-                $data = array('count' => new Zend_Db_Expr($this->_db->quoteIdentifier('count') . ' + 1'));
+                $data = array('count' => new Expression($this->_db->quoteIdentifier('count') . ' + 1'));
                 $this->update($data, array($this->_db->quoteIdentifier('id') . ' IN (' . implode(',', $ids) . ')'));
             }
         }
@@ -180,7 +182,7 @@ class Phprojekt_Search_Words extends Zend_Db_Table_Abstract
                 $this->delete(array($this->_db->quoteIdentifier('id') . ' IN (' . implode(',', $deleteIds) . ')'));
             }
             if (!empty($updateIds)) {
-                $data = array('count' => new Zend_Db_Expr($this->_db->quoteIdentifier('count') . ' - 1'));
+                $data = array('count' => new Expression($this->_db->quoteIdentifier('count') . ' - 1'));
                 $this->update($data, array($this->_db->quoteIdentifier('id') . ' IN (' . implode(',', $updateIds) . ')'));
             }
         }

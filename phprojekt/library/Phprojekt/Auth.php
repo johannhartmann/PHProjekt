@@ -13,10 +13,17 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Laminas\Authentication\AuthenticationService;
+use Laminas\Authentication\Adapter\Ldap as LdapAdapter;
+use Laminas\Authentication\Result;
+use Laminas\Session\Container;
+use Laminas\Session\SessionManager;
+use Laminas\Ldap\Ldap;
+
 /**
  * Auth class.
  */
-class Phprojekt_Auth extends Zend_Auth
+class Phprojekt_Auth extends AuthenticationService
 {
     /**
      * Prefix for use in cookies.
@@ -41,7 +48,7 @@ class Phprojekt_Auth extends Zend_Auth
      */
     static public function isLoggedIn()
     {
-        $authNamespace = new Zend_Session_Namespace('Phprojekt_Auth-login');
+        $authNamespace = new Container('Phprojekt_Auth_login');
 
         // Is there session data?
         if (!isset($authNamespace->userId) || empty($authNamespace->userId)) {
@@ -139,7 +146,10 @@ class Phprojekt_Auth extends Zend_Auth
        if ($success) {
            // Regenerate the id if we are not in the unitTest
            if (!headers_sent()) {
-               Zend_Session::regenerateId();
+               $sessionManager = Container::getDefaultManager();
+               if ($sessionManager) {
+                   $sessionManager->regenerateId();
+               }
            }
            return true;
        } else {
@@ -176,7 +186,7 @@ class Phprojekt_Auth extends Zend_Auth
         }
 
         // If the user was found we will save the user information on the session
-        $authNamespace = new Zend_Session_Namespace('Phprojekt_Auth-login');
+        $authNamespace = new Container('Phprojekt_Auth_login');
         $authNamespace->userId = $user->id;
         $authNamespace->admin  = $user->admin;
 
@@ -203,17 +213,17 @@ class Phprojekt_Auth extends Zend_Auth
 
         // We don't want LDAP authentication for PHProjekt system admin
         if ($userId !== 1) {
-            $auth        = Zend_Auth::getInstance();
+            $auth        = new AuthenticationService();
             $conf        = Phprojekt::getInstance()->getConfig();
             $ldapOptions = $conf->authentication->ldap->toArray();
-            $adapter     = new Zend_Auth_Adapter_Ldap($ldapOptions, $username, $password);
+            $adapter     = new LdapAdapter($ldapOptions, $username, $password);
             $result      = $auth->authenticate($adapter);
 
             if ($result->isValid()) {
                 // Authentication ok with LDAP
                 self::_ldapIntegration($userId, $username, $password, $loginServer);
-            } else if ($result->getCode() !== Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND
-                    && $result->getCode() !== Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID) {
+            } else if ($result->getCode() !== Result::FAILURE_IDENTITY_NOT_FOUND
+                    && $result->getCode() !== Result::FAILURE_CREDENTIAL_INVALID) {
                 Phprojekt::getInstance()->getLog()->debug(
                     "An error occured while trying to authenticate {$result->getIdentity()}\n\n"
                     . implode("\n", $result->getMessages())
@@ -242,7 +252,7 @@ class Phprojekt_Auth extends Zend_Auth
         if ($loginServer !== null && array_key_exists($loginServer, $ldapOptions)) {
             $searchOpts = $ldapOptions[$loginServer];
             try {
-                $ldap = new Zend_Ldap($searchOpts);
+                $ldap = new Ldap($searchOpts);
                 $ldap->connect();
                 $ldap->bind($username, $password);
 
@@ -401,7 +411,7 @@ class Phprojekt_Auth extends Zend_Auth
             // Temporarily login as admin user
             // This is only to get rights to add user
             // Ugly hack but PHProjekt backend has not thought of this situation
-            $authNamespace = new Zend_Session_Namespace('Phprojekt_Auth-login');
+            $authNamespace = new Container('Phprojekt_Auth_login');
             $authNamespace->userId = 1;
             $authNamespace->admin  = true;
 
@@ -450,7 +460,7 @@ class Phprojekt_Auth extends Zend_Auth
     static public function getUserId()
     {
         $returnValue   = 0;
-        $authNamespace = new Zend_Session_Namespace('Phprojekt_Auth-login');
+        $authNamespace = new Container('Phprojekt_Auth_login');
 
         if (isset($authNamespace->userId)) {
             $returnValue = $authNamespace->userId;
@@ -477,7 +487,7 @@ class Phprojekt_Auth extends Zend_Auth
     public static function isAdminUser()
     {
         $returnValue   = 0;
-        $authNamespace = new Zend_Session_Namespace('Phprojekt_Auth-login');
+        $authNamespace = new Container('Phprojekt_Auth_login');
 
         if (isset($authNamespace->admin)) {
             $returnValue = $authNamespace->admin;
@@ -493,7 +503,7 @@ class Phprojekt_Auth extends Zend_Auth
     public static function logout()
     {
         $userId        = 0;
-        $authNamespace = new Zend_Session_Namespace('Phprojekt_Auth-login');
+        $authNamespace = new Container('Phprojekt_Auth_login');
         // Try to read user id from PHP session
         if (isset($authNamespace->userId) && !empty($authNamespace->userId)) {
             $userId = $authNamespace->userId;
@@ -507,7 +517,10 @@ class Phprojekt_Auth extends Zend_Auth
         }
 
         self::_deleteDbAndCookies($userId);
-        Zend_Session::destroy();
+        $sessionManager = Container::getDefaultManager();
+        if ($sessionManager) {
+            $sessionManager->destroy();
+        }
         return true;
     }
 

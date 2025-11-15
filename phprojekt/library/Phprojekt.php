@@ -13,6 +13,8 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Application\Default\Exception\HttpException;
+
 /**
  * Phprojekt Class for initialize the Zend Framework.
  */
@@ -902,7 +904,7 @@ class Phprojekt
         // Show a message to the user throw an exception
         if ($throwErrors && $useException) {
             $messageUser = Phprojekt::getInstance()->translate($errDesc);
-            throw new Zend_Controller_Action_Exception($messageUser, 500);
+            throw new HttpException($messageUser, 500);
         }
 
         // Don't execute PHP internal error handler

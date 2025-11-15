@@ -13,6 +13,8 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Application\Default\Exception\HttpException;
+
 /**
  * Module model class.
  */
@@ -81,7 +83,7 @@ class Phprojekt_Module_Module extends Phprojekt_ActiveRecord_Abstract implements
      * @param Phprojekt_Model_Interface $model  The model.
      * @param array                     $params The parameters used to feed the model.
      *
-     * @throws Zend_Controller_Action_Exception On no valid parameters.
+     * @throws HttpException On no valid parameters.
      *
      * @return boolean True for a sucessful save.
      */
@@ -132,7 +134,7 @@ class Phprojekt_Module_Module extends Phprojekt_ActiveRecord_Abstract implements
         } else {
             $errors = $this->getError();
             $error  = array_pop($errors);
-            throw new Zend_Controller_Action_Exception($error['field'] . ' ' . $error['message'], 400);
+            throw new HttpException($error['field'] . ' ' . $error['message'], 400);
         }
     }
 

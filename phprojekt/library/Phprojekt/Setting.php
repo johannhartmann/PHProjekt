@@ -13,6 +13,8 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Laminas\Session\Container;
+
 /**
  * Class for manage user setting from different modules.
  */
@@ -21,7 +23,7 @@ class Phprojekt_Setting extends Phprojekt_ActiveRecord_Abstract
     /**
      * Name for use with the session.
      */
-    const IDENTIFIER = 'Phprojekt_Setting-getSetting-';
+    const IDENTIFIER = 'Phprojekt_Setting_getSetting_';
 
     /**
      * The name of a module.
@@ -154,7 +156,7 @@ class Phprojekt_Setting extends Phprojekt_ActiveRecord_Abstract
             $userId = Phprojekt_Auth_Proxy::getEffectiveUserId();
         }
 
-        $namespace = new Zend_Session_Namespace(self::IDENTIFIER . $userId);
+        $namespace = new Container(self::IDENTIFIER . $userId);
         if (!isset($namespace->$settingName)) {
             $where = sprintf('user_id = %d AND key_value = %s AND module_id = %d', (int) $userId,
                 $this->_db->quote($settingName), (int) $this->_moduleId);
@@ -313,7 +315,7 @@ class Phprojekt_Setting extends Phprojekt_ActiveRecord_Abstract
         if (method_exists($this->getModel(), 'setSettings')) {
             call_user_func(array($this->getModel(), 'setSettings'), $params, $userId);
         } else {
-            $namespace = new Zend_Session_Namespace(self::IDENTIFIER . $userId);
+            $namespace = new Container(self::IDENTIFIER . $userId);
             $fields    = $this->getModel()->getFieldDefinition(Phprojekt_ModelInformation_Default::ORDERING_FORM);
             foreach ($fields as $data) {
                 foreach ($params as $key => $value) {
