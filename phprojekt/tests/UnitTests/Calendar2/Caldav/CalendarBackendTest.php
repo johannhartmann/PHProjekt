@@ -37,18 +37,18 @@ class Calendar2_Caldav_CalendarBackend_Test extends FrontInit
     public function testSplittingRecurrenceGivesNewUidAndUri()
     {
         $this->setRequestUrl('Calendar2/index/jsonSave/nodeId/1/id/0');
-        $this->request->setParam('comments', '');
-        $this->request->setParam('confirmationStatus', '2');
-        $this->request->setParam('description', '');
-        $this->request->setParam('end', '2011-12-01 09:00');
-        $this->request->setParam('location', '');
-        $this->request->setParam('ownerId', '2');
-        $this->request->setParam('participants', '2');
-        $this->request->setParam('rrule', 'FREQ=DAILY;INTERVAL=1;BYDAY=');
-        $this->request->setParam('sendNotification', '0');
-        $this->request->setParam('start', '2011-12-01 08:00');
-        $this->request->setParam('summary', 'test');
-        $this->request->setParam('visibility', '1');
+        $this->request->getPost()->set('comments', '');
+        $this->request->getPost()->set('confirmationStatus', '2');
+        $this->request->getPost()->set('description', '');
+        $this->request->getPost()->set('end', '2011-12-01 09:00');
+        $this->request->getPost()->set('location', '');
+        $this->request->getPost()->set('ownerId', '2');
+        $this->request->getPost()->set('participants', '2');
+        $this->request->getPost()->set('rrule', 'FREQ=DAILY;INTERVAL=1;BYDAY=');
+        $this->request->getPost()->set('sendNotification', '0');
+        $this->request->getPost()->set('start', '2011-12-01 08:00');
+        $this->request->getPost()->set('summary', 'test');
+        $this->request->getPost()->set('visibility', '1');
         $response = $this->getResponse();
         $this->assertContains(IndexController::ADD_TRUE_TEXT, $response);
 
@@ -62,20 +62,20 @@ class Calendar2_Caldav_CalendarBackend_Test extends FrontInit
         $hour = 8 - $tzOffset;
         $hour = sprintf('%02d', $hour);
         $this->setRequestUrl("Calendar2/index/jsonSave/nodeId/1/id/{$firstId}/occurrence/2011-12-03%20{$hour}:00:00");
-        $this->request->setParam('comments', '');
-        $this->request->setParam('confirmationStatus', '2');
-        $this->request->setParam('description', '');
-        $this->request->setParam('end', '2011-12-03 09:00:00');
-        $this->request->setParam('location', '');
-        $this->request->setParam('multipleEvents', 'true');
-        $this->request->setParam('occurrence', '2011-12-03 08:00:00');
-        $this->request->setParam('ownerId', '2');
-        $this->request->setParam('participants', '2');
-        $this->request->setParam('rrule', 'FREQ=DAILY;INTERVAL=1;BYDAY=');
-        $this->request->setParam('sendNotification', '0');
-        $this->request->setParam('start', '2011-12-03 08:00:00');
-        $this->request->setParam('summary', 'something else');
-        $this->request->setParam('visibility', '1');
+        $this->request->getPost()->set('comments', '');
+        $this->request->getPost()->set('confirmationStatus', '2');
+        $this->request->getPost()->set('description', '');
+        $this->request->getPost()->set('end', '2011-12-03 09:00:00');
+        $this->request->getPost()->set('location', '');
+        $this->request->getPost()->set('multipleEvents', 'true');
+        $this->request->getPost()->set('occurrence', '2011-12-03 08:00:00');
+        $this->request->getPost()->set('ownerId', '2');
+        $this->request->getPost()->set('participants', '2');
+        $this->request->getPost()->set('rrule', 'FREQ=DAILY;INTERVAL=1;BYDAY=');
+        $this->request->getPost()->set('sendNotification', '0');
+        $this->request->getPost()->set('start', '2011-12-03 08:00:00');
+        $this->request->getPost()->set('summary', 'something else');
+        $this->request->getPost()->set('visibility', '1');
         $response = $this->getResponse();
         $this->assertContains(IndexController::EDIT_TRUE_TEXT, $response);
 

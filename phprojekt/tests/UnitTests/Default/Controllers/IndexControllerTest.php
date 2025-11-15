@@ -47,7 +47,7 @@ class Phprojekt_IndexController_Test extends FrontInit
     public function testJsonListAction()
     {
         $this->setRequestUrl('Project/index/jsonList/');
-        $this->request->setParam('nodeId', null);
+        $this->request->getPost()->set('nodeId', null);
 
         try {
             $this->front->dispatch($this->request, $this->response);
@@ -65,7 +65,7 @@ class Phprojekt_IndexController_Test extends FrontInit
     public function testJsonListActionWithNodeId()
     {
         $this->setRequestUrl('Project/index/jsonList/');
-        $this->request->setParam('nodeId', 1);
+        $this->request->getPost()->set('nodeId', 1);
         $response = $this->getResponse();
         $this->assertContains('"numRows":2}', $response);
     }
@@ -76,8 +76,8 @@ class Phprojekt_IndexController_Test extends FrontInit
     public function testJsonListActionWithNodeIdAndRecursive()
     {
         $this->setRequestUrl('Project/index/jsonList/');
-        $this->request->setParam('nodeId', 1);
-        $this->request->setParam('recursive', 'true');
+        $this->request->getPost()->set('nodeId', 1);
+        $this->request->getPost()->set('recursive', 'true');
         $response = $this->getResponse();
         $this->assertContains('"numRows":3}', $response);
     }
@@ -88,8 +88,8 @@ class Phprojekt_IndexController_Test extends FrontInit
     public function testJsonDetailAction()
     {
         $this->setRequestUrl('Project/index/jsonDetail/');
-        $this->request->setParam('id', 1);
-        $this->request->setParam('nodeId', 1);
+        $this->request->getPost()->set('id', 1);
+        $this->request->getPost()->set('nodeId', 1);
         $response = $this->getResponse();
         $expected = '{"key":"title","label":"Title","originalLabel":"Title","type":"text","hint":"","listPosition":1,'
             . '"formPosition":1';
@@ -103,7 +103,7 @@ class Phprojekt_IndexController_Test extends FrontInit
     public function testJsonDetailActionWithoutId()
     {
         $this->setRequestUrl('Project/index/jsonDetail');
-        $this->request->setParam('nodeId', 1);
+        $this->request->getPost()->set('nodeId', 1);
         $response = $this->getResponse();
         $this->assertContains('"metadata":[{"key":"title"', $response);
     }
@@ -125,7 +125,7 @@ class Phprojekt_IndexController_Test extends FrontInit
     public function testJsonGetModulesPermission()
     {
         $this->setRequestUrl('Project/index/jsonGetModulesPermission/');
-        $this->request->setParam('nodeId', 1);
+        $this->request->getPost()->set('nodeId', 1);
         $response = $this->getResponse();
         $this->assertContains('"name":"Project","label":"Project","inProject":true,"rights":{"none":false,', $response);
     }
@@ -136,7 +136,7 @@ class Phprojekt_IndexController_Test extends FrontInit
     public function testJsonGetModulesPermissionNoId()
     {
         $this->setRequestUrl('Project/index/jsonGetModulesPermission/');
-        $this->request->setParam('nodeId', null);
+        $this->request->getPost()->set('nodeId', null);
         $response = $this->getResponse();
         $this->assertContains('{"metadata":[]}', $response);
     }
@@ -168,7 +168,7 @@ class Phprojekt_IndexController_Test extends FrontInit
     public function testCsvListNodeId()
     {
         $this->setRequestUrl('Project/index/csvList/');
-        $this->request->setParam('nodeId', '1');
+        $this->request->getPost()->set('nodeId', '1');
         $response = $this->getResponse();
         $this->assertContains('"Title"'."\n"
             . '"Project 1"'."\n"
@@ -181,8 +181,8 @@ class Phprojekt_IndexController_Test extends FrontInit
     public function testCsvListId()
     {
         $this->setRequestUrl('Project/index/csvList/');
-        $this->request->setParam('id', '1');
-        $this->request->setParam('nodeId', 1);
+        $this->request->getPost()->set('id', '1');
+        $this->request->getPost()->set('nodeId', 1);
         $response = $this->getResponse();
         $this->assertContains('"Title"'."\n"
             . '"Invisible Root"'."\n", $response);
@@ -194,8 +194,8 @@ class Phprojekt_IndexController_Test extends FrontInit
     public function testCsvExportMultipleAction()
     {
         $this->setRequestUrl('Project/index/csvExportMultiple/');
-        $this->request->setParam('ids', '1,2');
-        $this->request->setParam('nodeId', 1);
+        $this->request->getPost()->set('ids', '1,2');
+        $this->request->getPost()->set('nodeId', 1);
         $response = $this->getResponse();
         $this->assertContains('"Title"'."\n"
             . '"Invisible Root"'."\n"
@@ -208,7 +208,7 @@ class Phprojekt_IndexController_Test extends FrontInit
     public function testJsonDeleteMultipleActionPart1()
     {
         $this->setRequestUrl('Project/index/jsonList/');
-        $this->request->setParam('nodeId', 1);
+        $this->request->getPost()->set('nodeId', 1);
         $response = $this->getResponse();
         $this->assertContains('"numRows":2}', $response);
     }
@@ -219,8 +219,8 @@ class Phprojekt_IndexController_Test extends FrontInit
     public function testJsonDeleteMultipleActionPart2()
     {
         $this->setRequestUrl('Project/index/jsonDeleteMultiple/');
-        $this->request->setParam('ids', '2,3');
-        $this->request->setParam('nodeId', 1);
+        $this->request->getPost()->set('ids', '2,3');
+        $this->request->getPost()->set('nodeId', 1);
         $response = $this->getResponse();
         $this->assertContains('The Items were deleted correctly', $response);
     }
@@ -231,7 +231,7 @@ class Phprojekt_IndexController_Test extends FrontInit
     public function testGetFilterWherePart1()
     {
         $this->setRequestUrl('Project/index/jsonList/');
-        $this->request->setParam('nodeId', 1);
+        $this->request->getPost()->set('nodeId', 1);
         $response = $this->getResponse();
         $this->assertContains('"numRows":2}', $response);
     }
@@ -242,8 +242,8 @@ class Phprojekt_IndexController_Test extends FrontInit
     public function testGetFilterWherePart2()
     {
         $this->setRequestUrl('Project/index/jsonList/');
-        $this->request->setParam('nodeId', 1);
-        $this->request->setParam('filters', '[["AND","title","like","test"]]');
+        $this->request->getPost()->set('nodeId', 1);
+        $this->request->getPost()->set('filters', '[["AND","title","like","test"]]');
         $response = $this->getResponse();
         $this->assertContains('"numRows":1}', $response);
     }
@@ -300,7 +300,7 @@ class Phprojekt_IndexController_Test extends FrontInit
     public function testJsonGetUsersRightsAction()
     {
         $this->setRequestUrl('Project/index/jsonGetUsersRights/');
-        $this->request->setParam('id', 2);
+        $this->request->getPost()->set('id', 2);
         $response = json_decode($this->getResponse(), true);
         $expected = array (
             1 => array (

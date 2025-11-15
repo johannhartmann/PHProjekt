@@ -33,13 +33,13 @@ class Project_IndexController_Test extends FrontInit
     public function testJsonSave()
     {
         $this->setRequestUrl('Project/index/jsonSave/');
-        $this->request->setParam('id', null);
-        $this->request->setParam('title', 'test');
-        $this->request->setParam('startDate', '2008-08-07');
-        $this->request->setParam('endDate', '2020-08-31');
-        $this->request->setParam('priority', 2);
-        $this->request->setParam('projectId', 1);
-        $this->request->setParam('nodeId', 1);
+        $this->request->getPost()->set('id', null);
+        $this->request->getPost()->set('title', 'test');
+        $this->request->getPost()->set('startDate', '2008-08-07');
+        $this->request->getPost()->set('endDate', '2020-08-31');
+        $this->request->getPost()->set('priority', 2);
+        $this->request->getPost()->set('projectId', 1);
+        $this->request->getPost()->set('nodeId', 1);
         $response = $this->getResponse();
         $this->assertContains(Project_IndexController::ADD_TRUE_TEXT, $response);
     }
@@ -50,8 +50,8 @@ class Project_IndexController_Test extends FrontInit
     public function testJsonSaveMultiple()
     {
         $this->setRequestUrl('Project/index/jsonSaveMultiple/');
-        $this->request->setParam('data[1][notes]', 'test');
-        $this->request->setParam('nodeId', 1);
+        $this->request->getPost()->set('data[1][notes]', 'test');
+        $this->request->getPost()->set('nodeId', 1);
         $response = $this->getResponse();
         $this->assertContains(Project_IndexController::EDIT_MULTIPLE_TRUE_TEXT, $response);
     }
@@ -62,7 +62,7 @@ class Project_IndexController_Test extends FrontInit
     public function testJsonGetModulesProjectRelation()
     {
         $this->setRequestUrl('Project/index/jsonGetModulesProjectRelation/');
-        $this->request->setParam('id', 2);
+        $this->request->getPost()->set('id', 2);
         $response = $this->getResponse();
         $this->assertEquals(
             json_encode(
@@ -87,7 +87,7 @@ class Project_IndexController_Test extends FrontInit
     public function testJsonGetProjectRoleUserRelation()
     {
         $this->setRequestUrl('Project/index/jsonGetProjectRoleUserRelation/');
-        $this->request->setParam('id', 1);
+        $this->request->getPost()->set('id', 1);
         $response = $this->getResponse();
         $this->assertContains('{"1":{"id":1,"name":"Admin",', $response);
     }
@@ -99,8 +99,8 @@ class Project_IndexController_Test extends FrontInit
     {
         $this->setRequestUrl('Project/index/jsonSaveMultiple');
         $items = array(2 => array('projectId' => '2'));
-        $this->request->setParam('data', $items);
-        $this->request->setParam('nodeId', 1);
+        $this->request->getPost()->set('data', $items);
+        $this->request->getPost()->set('nodeId', 1);
         $response = json_decode($this->getResponse());
         $expected = array(
             'type' => 'error',

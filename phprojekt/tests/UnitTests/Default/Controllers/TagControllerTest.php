@@ -34,10 +34,10 @@ class Phprojekt_TagController_Test extends FrontInit
     public function testJsonSaveTagsAction()
     {
         $this->setRequestUrl('Default/Tag/jsonSaveTags/');
-        $this->request->setParam('moduleName', 'Project');
-        $this->request->setParam('string', 'test');
-        $this->request->setParam('id', 1);
-        $this->request->setParam('projectId', 1);
+        $this->request->getPost()->set('moduleName', 'Project');
+        $this->request->getPost()->set('string', 'test');
+        $this->request->getPost()->set('id', 1);
+        $this->request->getPost()->set('projectId', 1);
         $response = $this->getResponse();
         $this->assertEquals('{"type":"success","message":"The Tags were added correctly","id":0}', $response);
 
@@ -62,10 +62,10 @@ class Phprojekt_TagController_Test extends FrontInit
     public function testJsonSaveTagsActionMultiple()
     {
         $this->setRequestUrl('Default/Tag/jsonSaveTags/');
-        $this->request->setParam('moduleName', 'Project');
-        $this->request->setParam('string', 'test awesome');
-        $this->request->setParam('id', 1);
-        $this->request->setParam('projectId', 1);
+        $this->request->getPost()->set('moduleName', 'Project');
+        $this->request->getPost()->set('string', 'test awesome');
+        $this->request->getPost()->set('id', 1);
+        $this->request->getPost()->set('projectId', 1);
         $response = $this->getResponse();
         $this->assertEquals('{"type":"success","message":"The Tags were added correctly","id":0}', $response);
 
@@ -91,9 +91,9 @@ class Phprojekt_TagController_Test extends FrontInit
     {
         $this->expectException('Application\\Default\\Exception\\HttpException');
         $this->setRequestUrl('Default/Tag/jsonSaveTags/');
-        $this->request->setParam('moduleName', 'Project');
-        $this->request->setParam('string', 'test');
-        $this->request->setParam('projectId', 1);
+        $this->request->getPost()->set('moduleName', 'Project');
+        $this->request->getPost()->set('string', 'test');
+        $this->request->getPost()->set('projectId', 1);
         $response = $this->getResponse();
     }
 
@@ -117,8 +117,8 @@ class Phprojekt_TagController_Test extends FrontInit
         ), $tags);
 
         $this->setRequestUrl('Default/Tag/jsonDeleteTags/');
-        $this->request->setParam('moduleName', 'Project');
-        $this->request->setParam('id', 2);
+        $this->request->getPost()->set('moduleName', 'Project');
+        $this->request->getPost()->set('id', 2);
         $response = $this->getResponse();
 
         $this->assertEquals('{"type":"success","message":"The Tags were deleted correctly","id":0}', $response);
@@ -134,7 +134,7 @@ class Phprojekt_TagController_Test extends FrontInit
     {
         $this->expectException('Application\\Default\\Exception\\HttpException');
         $this->setRequestUrl('Default/Tag/jsonDeleteTags/');
-        $this->request->setParam('moduleName', 'Project');
+        $this->request->getPost()->set('moduleName', 'Project');
         $response = $this->getResponse();
     }
 
@@ -144,8 +144,8 @@ class Phprojekt_TagController_Test extends FrontInit
     public function testGetTagsByModuleAction()
     {
         $this->setRequestUrl('Default/Tag/jsonGetTagsByModule/');
-        $this->request->setParam('moduleName', 'Project');
-        $this->request->setParam('id', 2);
+        $this->request->getPost()->set('moduleName', 'Project');
+        $this->request->getPost()->set('id', 2);
         $response = json_decode($this->getResponse());
 
         $this->assertEquals(array(
@@ -170,7 +170,7 @@ class Phprojekt_TagController_Test extends FrontInit
     public function testGetTagsByModuleActionNoId()
     {
         $this->setRequestUrl('Default/Tag/jsonGetTagsByModule/');
-        $this->request->setParam('moduleName', 'Project');
+        $this->request->getPost()->set('moduleName', 'Project');
         $response = json_decode($this->getResponse());
 
         $this->assertEquals(array(

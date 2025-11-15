@@ -35,7 +35,7 @@ class Phprojekt_SearchController_Test extends FrontInit
     public function testJsonSeacrchAction()
     {
         $this->setRequestUrl('Default/Search/jsonSearch/');
-        $this->request->setParam('words', 'note');
+        $this->request->getPost()->set('words', 'note');
         $response = $this->getResponse();
         $expected = '"id":1,"moduleId":1,"moduleName":"Project","moduleLabel":"Project","firstDisplay":"test"';
         $this->assertContains($expected, $response);

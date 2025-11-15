@@ -39,8 +39,8 @@ class Timecard_IndexController_Test extends FrontInit
     public function testJsonMonthListActionPart2()
     {
         $this->setRequestUrl('Timecard/index/workedMinutesPerDay/');
-        $this->request->setParam('start', "2009-05-01");
-        $this->request->setParam('end', "2009-06-01");
+        $this->request->getPost()->set('start', "2009-05-01");
+        $this->request->getPost()->set('end', "2009-06-01");
         $response = $this->getResponse();
         $expected = '{"date":"2009-05-01","sumInMinutes":0}';
         $this->assertContains($expected, $response);
@@ -58,8 +58,8 @@ class Timecard_IndexController_Test extends FrontInit
     public function testCsv()
     {
         $this->setRequestUrl('Timecard/Timecard/');
-        $this->request->setParam('filter', '{"startDatetime":{"!ge":"2009-05-01 00:00","!lt":"2009-06-01 00:00"}}');
-        $this->request->setParam('format', 'csv');
+        $this->request->getPost()->set('filter', '{"startDatetime":{"!ge":"2009-05-01 00:00","!lt":"2009-06-01 00:00"}}');
+        $this->request->getPost()->set('format', 'csv');
         $response = $this->getResponse();
         $this->assertContains(
             '"Start","End","Minutes","Project","Notes"'."\n"
@@ -74,8 +74,8 @@ class Timecard_IndexController_Test extends FrontInit
     public function testCsvListEmptyResult()
     {
         $this->setRequestUrl('Timecard/Timecard/');
-        $this->request->setParam('filter', '{"startDatetime":{"!ge":"2009-09-01 00:00","!lt":"2009-10-01 00:00"}}');
-        $this->request->setParam('format', 'csv');
+        $this->request->getPost()->set('filter', '{"startDatetime":{"!ge":"2009-09-01 00:00","!lt":"2009-10-01 00:00"}}');
+        $this->request->getPost()->set('format', 'csv');
         $response = $this->getResponse();
         $this->assertEquals(2, strlen($response));
     }

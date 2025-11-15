@@ -40,17 +40,17 @@ class Calendar2_IndexController_Test extends FrontInit
         $this->_setTimezone(1);
 
         $this->setRequestUrl('Calendar2/index/jsonSave/nodeId/1/id/0');
-        $this->request->setParam('comments', '');
-        $this->request->setParam('confirmationStatus', '2');
-        $this->request->setParam('description', '');
-        $this->request->setParam('end', '2011-12-16 09:00');
-        $this->request->setParam('location', '');
-        $this->request->setParam('ownerId', '3');
-        $this->request->setParam('participants', '3');
-        $this->request->setParam('sendNotification', '0');
-        $this->request->setParam('start', '2011-12-16 08:00');
-        $this->request->setParam('summary', 'asd');
-        $this->request->setParam('visibility', '1');
+        $this->request->getPost()->set('comments', '');
+        $this->request->getPost()->set('confirmationStatus', '2');
+        $this->request->getPost()->set('description', '');
+        $this->request->getPost()->set('end', '2011-12-16 09:00');
+        $this->request->getPost()->set('location', '');
+        $this->request->getPost()->set('ownerId', '3');
+        $this->request->getPost()->set('participants', '3');
+        $this->request->getPost()->set('sendNotification', '0');
+        $this->request->getPost()->set('start', '2011-12-16 08:00');
+        $this->request->getPost()->set('summary', 'asd');
+        $this->request->getPost()->set('visibility', '1');
         $response = $this->getResponse();
         $this->assertContains(IndexController::ADD_TRUE_TEXT, $response);
 
@@ -69,13 +69,13 @@ class Calendar2_IndexController_Test extends FrontInit
     {
         $this->_reset();
         $this->setRequestUrl('Core/setting/jsonSave/nodeId/1/moduleName/User');
-        $this->request->setParam('confirmValue', '');
-        $this->request->setParam('email', '');
-        $this->request->setParam('language', 'en');
-        $this->request->setParam('oldValue', '');
-        $this->request->setParam('password', '');
-        $this->request->setParam('proxies[]', '');
-        $this->request->setParam('timeZone', "{$offset}");
+        $this->request->getPost()->set('confirmValue', '');
+        $this->request->getPost()->set('email', '');
+        $this->request->getPost()->set('language', 'en');
+        $this->request->getPost()->set('oldValue', '');
+        $this->request->getPost()->set('password', '');
+        $this->request->getPost()->set('proxies[]', '');
+        $this->request->getPost()->set('timeZone', "{$offset}");
         $response = $this->getResponse();
         $this->assertContains(IndexController::EDIT_TRUE_TEXT, $response);
         $this->_reset();

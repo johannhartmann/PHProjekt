@@ -33,7 +33,7 @@ class User_IndexController_Test extends FrontInit
     public function testGetUsersAction()
     {
         $this->setRequestUrl('Core/user/jsonGetUsers');
-        $this->request->setParam('nodeId', 1);
+        $this->request->getPost()->set('nodeId', 1);
         $response = json_decode($this->getResponse());
         $expected = array(
             'data' => array(
@@ -52,8 +52,8 @@ class User_IndexController_Test extends FrontInit
         $this->setRequestUrl('Core/user/jsonSaveMultiple');
         $items = array(2 => array('admin'     => '1'),
                        3 => array('firstname' => 'Yo'));
-        $this->request->setParam('data', $items);
-        $this->request->setParam('nodeId', 1);
+        $this->request->getPost()->set('data', $items);
+        $this->request->getPost()->set('nodeId', 1);
         $response = $this->getResponse();
         $expected = '{"type":"error","message":"ID 2. Last name: Is a required field","id":"2"}';
         $this->assertContains($expected, $response);
