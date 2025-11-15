@@ -986,6 +986,46 @@ abstract class Phprojekt_ActiveRecord_Abstract
     }
 
     /**
+     * Insert a new row into the table.
+     *
+     * @param array $data Column-value pairs.
+     *
+     * @return int|null The number of affected rows or null on error.
+     */
+    public function insert(array $data)
+    {
+        $insert = new \Laminas\Db\Sql\Insert($this->_name);
+        $insert->values($data);
+
+        $sql = new \Laminas\Db\Sql\Sql($this->_db);
+        $statement = $sql->prepareStatementForSqlObject($insert);
+        $result = $statement->execute();
+
+        return $result->getAffectedRows();
+    }
+
+    /**
+     * Update existing rows in the table.
+     *
+     * @param array        $data  Column-value pairs.
+     * @param string|array $where WHERE clause.
+     *
+     * @return int The number of affected rows.
+     */
+    public function update(array $data, $where)
+    {
+        $update = new \Laminas\Db\Sql\Update($this->_name);
+        $update->set($data);
+        $update->where($where);
+
+        $sql = new \Laminas\Db\Sql\Sql($this->_db);
+        $statement = $sql->prepareStatementForSqlObject($update);
+        $result = $statement->execute();
+
+        return $result->getAffectedRows();
+    }
+
+    /**
      * Delete a record and all his relations.
      *
      * @param string|array|null $where OPTIONAL An SQL WHERE clause for compatibility with parent class.
