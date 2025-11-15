@@ -215,7 +215,7 @@ class Phprojekt_Migration
         $db->update(
             'module',
             array('version' => $data['to']),
-            $db->quoteInto('name = ?', $module)
+            sprintf('name = %s', $db->platform->quoteValue($module))
         );
 
         // Laminas Cache uses flush() to clear all cache

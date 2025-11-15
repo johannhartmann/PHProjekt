@@ -172,11 +172,11 @@ class Phprojekt_DatabaseManager extends Phprojekt_ActiveRecord_Abstract implemen
                 $table = $this->_getModuleName();
 
                 if (in_array($order, $this->_mapping)) {
-                    $sqlString = 'table_name = ? AND ' . $order . ' > 0';
+                    $sqlString = sprintf('table_name = %s AND ' . $order . ' > 0', $this->getAdapter()->platform->quoteValue($table));
                     if (!$all) {
                         $sqlString .= ' AND status = 1';
                     }
-                    $result = $this->fetchAll($this->getAdapter()->quoteInto($sqlString, $table), $order);
+                    $result = $this->fetchAll($sqlString, $order);
 
                     if (!$all) {
                         $this->_dbFields[$order] = $result;
@@ -200,8 +200,8 @@ class Phprojekt_DatabaseManager extends Phprojekt_ActiveRecord_Abstract implemen
         $fieldname = func_get_arg(0);
         $table     = $this->_getModuleName();
 
-        return parent::fetchRow($this->_db->quoteInto('table_name = ?', $table)
-            . ' AND ' . $this->_db->quoteInto('table_field = ?', $fieldname));
+        return parent::fetchRow(sprintf('table_name = ?', $this->_db->platform->quoteValue($table))
+            . ' AND ' . sprintf('table_field = ?', $this->_db->platform->quoteValue($fieldname)));
     }
 
     /**
@@ -708,7 +708,7 @@ class Phprojekt_DatabaseManager extends Phprojekt_ActiveRecord_Abstract implemen
      */
     public function saveData($table, $data, $tableData)
     {
-        $where  = $this->getAdapter()->quoteInto('table_name = ?', $table);
+        $where  = sprintf('table_name = ?', $this->getAdapter()->platform->quoteValue($table));
         $result = $this->fetchAll($where);
         foreach ($result as $row) {
             $row->delete();
@@ -901,7 +901,7 @@ class Phprojekt_DatabaseManager extends Phprojekt_ActiveRecord_Abstract implemen
     public function deleteModule()
     {
         $table  = $this->_getModuleName();
-        $where  = $this->getAdapter()->quoteInto('table_name = ?', $table);
+        $where  = sprintf('table_name = ?', $this->getAdapter()->platform->quoteValue($table));
         $result = $this->fetchAll($where);
 
         foreach ($result as $record) {

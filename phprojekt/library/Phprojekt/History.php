@@ -168,10 +168,10 @@ class Phprojekt_History extends Phprojekt_ActiveRecord_Abstract
         $where = sprintf('module_id = %d AND item_id = %d', (int) $moduleId, (int) $itemId);
 
         if (!empty($startDate)) {
-            $where .= $this->getAdapter()->quoteInto(' AND datetime >= ?', $startDate);
+            $where .= sprintf(' AND datetime >= ?', $this->getAdapter()->platform->quoteValue($startDate));
         }
         if (!empty($endDate)) {
-            $where .= $this->getAdapter()->quoteInto(' AND datetime <= ?', $endDate);
+            $where .= sprintf(' AND datetime <= ?', $this->getAdapter()->platform->quoteValue($endDate));
         }
         if (!empty($userId)) {
             $where .= sprintf(' AND user_id = %d', (int) $userId);

@@ -28,7 +28,7 @@ class Phprojekt_Notification_FrontendMessage extends Phprojekt_ActiveRecord_Abst
      */
     public function getMessageData($userId)
     {
-        $where   = $this->getAdapter()->quoteInto('recipient_id = ?', $userId);
+        $where   = sprintf('recipient_id = ?', $this->getAdapter()->platform->quoteValue($userId));
         $now     = gmdate('Y-m-d H:i:s');
         $where  .= " AND (valid_from <= '" . $now . "' AND '" . $now . "' <= valid_until)";
         $where  .= " AND delivered = 0";

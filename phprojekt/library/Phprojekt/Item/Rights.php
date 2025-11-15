@@ -240,15 +240,15 @@ class Phprojekt_Item_Rights
     public function getUsersWithRight($moduleId, $itemId, $rights = null, $exact = false)
     {
         $db     = Phprojekt::getInstance()->getDb();
-        $where  = $db->quoteInto('module_id = ? AND ', (int) $moduleId);
-        $where .= $db->quoteInto('item_id = ?', (int) $itemId);
+        $where  = sprintf('module_id = %d AND ', (int) $moduleId);
+        $where .= sprintf('item_id = %d', (int) $itemId);
 
         if (is_null($rights)) {
             $where .= ' AND access > 0';
         } else if ($exact) {
-            $where .= $db->quoteInto(' AND access = ?', (int) $rights);
+            $where .= sprintf(' AND access = %d', (int) $rights);
         } else {
-            $where .= $db->quoteInto(' AND (access & ?) = ?', (int) $rights, (int) $rights);
+            $where .= sprintf(' AND (access & %d) = %d', (int) $rights, (int) $rights);
         }
 
         $user  = new Phprojekt_User_User();

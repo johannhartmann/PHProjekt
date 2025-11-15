@@ -207,6 +207,7 @@ class Phprojekt_Filter
                 $k = '%' . $keyword . '%';
         }
 
-        return Phprojekt::getInstance()->getDb()->quoteInto($w, $k);
+        $db = Phprojekt::getInstance()->getDb();
+        return str_replace('?', $db->platform->quoteValue($k), $w);
     }
 }

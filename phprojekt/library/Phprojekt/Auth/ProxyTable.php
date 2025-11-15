@@ -200,7 +200,7 @@ class Phprojekt_Auth_ProxyTable
 
     protected function _clearProxiesForUserId($userId)
     {
-        $where = $this->_db->quoteInto('proxyed_id = ?', $userId);
+        $where = sprintf('proxyed_id = ?', $this->_db->platform->quoteValue($userId));
         $this->_db->delete($this->_tableName, $where);
     }
 

@@ -208,7 +208,7 @@ class Phprojekt_Tree_Node_Database implements IteratorAggregate
                 $where .= " AND ";
             }
 
-            $where .= $database->quoteInto('project_id IN (?)', $projectIds);
+            $where .= sprintf('project_id IN (?)', $database->platform->quoteValue($projectIds));
             return $model->fetchAll($where, $sort, $count, $offset);
         }
     }
@@ -229,7 +229,7 @@ class Phprojekt_Tree_Node_Database implements IteratorAggregate
         if (!is_null($where)) {
             $where .= ' AND ';
         }
-        $where .= $model->getAdapter()->quoteInto('project_id IN (?)', $projectIds);
+        $where .= sprintf('project_id IN (?)', $model->getAdapter()->platform->quoteValue($projectIds));
         return $model->count($where);
     }
 
@@ -395,7 +395,7 @@ class Phprojekt_Tree_Node_Database implements IteratorAggregate
 
         $table    = $this->getActiveRecord()->getTableName();
         $database = Phprojekt::getInstance()->getDb();
-        $database->delete($table, $database->quoteInto('path LIKE ?', $this->path . '%'));
+        $database->delete($table, sprintf('path LIKE ?', $database->platform->quoteValue($this->path . '%')));
         $children = $this->getChildren();
         $this->_deleteChildren($children);
         $this->_initialize();
