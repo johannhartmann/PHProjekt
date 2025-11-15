@@ -58,11 +58,15 @@ class Phprojekt_Module
     {
         if (is_null(self::$_cache)) {
             // cache miss
-            $db     = Phprojekt::getInstance()->getDb();
-            $select = $db->select()
-                         ->from('module');
-            $stmt = $db->query($select);
-            $rows = $stmt->fetchAll();
+            $db  = Phprojekt::getInstance()->getDb();
+            $sql = new \Laminas\Db\Sql\Sql($db);
+            $select = $sql->select()->from('module');
+            $stmt = $sql->prepareStatementForSqlObject($select);
+            $result = $stmt->execute();
+            $rows = array();
+            foreach ($result as $row) {
+                $rows[] = $row;
+            }
 
             self::$_cache = array();
             foreach ($rows as $row) {

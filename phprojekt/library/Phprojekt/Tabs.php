@@ -44,15 +44,20 @@ class Phprojekt_Tabs
             return self::$_cache[$moduleId];
         }
 
-        $db     = Phprojekt::getInstance()->getDb();
-        $select = $db->select()
+        $db  = Phprojekt::getInstance()->getDb();
+        $sql = new \Laminas\Db\Sql\Sql($db);
+        $select = $sql->select()
                      ->from(array('t' => 'tab'))
-                     ->joinInner(array('rel' => 'module_tab_relation'),
-                                 sprintf("%s = %s", $db->quoteIdentifier("t.id"),
-                                 $db->quoteIdentifier("rel.tab_id")))
+                     ->join(array('rel' => 'module_tab_relation'),
+                            sprintf("%s = %s", $db->quoteIdentifier("t.id"),
+                            $db->quoteIdentifier("rel.tab_id")))
                      ->where(sprintf('rel.module_id = %d', (int) $moduleId));
-        $stmt = $db->query($select);
-        $rows = $stmt->fetchAll();
+        $stmt = $sql->prepareStatementForSqlObject($select);
+        $result = $stmt->execute();
+        $rows = array();
+        foreach ($result as $row) {
+            $rows[] = $row;
+        }
 
         // Set the index 0, is not used but is needed for create other index
         self::$_cache[0] = array();
@@ -85,12 +90,17 @@ class Phprojekt_Tabs
      */
     public static function getTabs()
     {
-        $db     = Phprojekt::getInstance()->getDb();
-        $select = $db->select()
-                     ->from('tab');
-        $stmt = $db->query($select);
+        $db  = Phprojekt::getInstance()->getDb();
+        $sql = new \Laminas\Db\Sql\Sql($db);
+        $select = $sql->select()->from('tab');
+        $stmt = $sql->prepareStatementForSqlObject($select);
+        $result = $stmt->execute();
+        $rows = array();
+        foreach ($result as $row) {
+            $rows[] = $row;
+        }
 
-        return $stmt->fetchAll();
+        return $rows;
     }
 
     /**

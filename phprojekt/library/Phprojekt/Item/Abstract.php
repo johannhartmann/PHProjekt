@@ -383,25 +383,23 @@ abstract class Phprojekt_Item_Abstract extends Phprojekt_ActiveRecord_Abstract i
         $db       = Phprojekt::getInstance()->getDb();
         $rawTable = $this->getTableName();
         $table    = $db->quoteIdentifier($rawTable);
-        $select   = $db->select()->from($rawTable, array('COUNT(*)'));
+        $sql      = new \Laminas\Db\Sql\Sql($db);
+        $select   = $sql->select()->from($rawTable, array('COUNT(*)'));
 
         if (!is_null($where)) {
             $select->where($where);
         }
 
         $select->join(array('ir' => 'item_rights'), "ir.item_id = {$table}.id", array())
-            ->where('ir.module_id = :thisModule')
-            ->where('ir.user_id = :effectiveUser')
-            ->where("{$table}.owner_id = :effectiveUser OR (ir.access & :right) = :right")
-            ->bind(
-                array(
-                    ':thisModule' => Phprojekt_Module::getId($this->getModelName()),
-                    ':effectiveUser' => Phprojekt_Auth_Proxy::getEffectiveUserId(),
-                    ':right' => Phprojekt_Acl::READ
-                )
-            );
+            ->where('ir.module_id = ' . (int) Phprojekt_Module::getId($this->getModelName()))
+            ->where('ir.user_id = ' . (int) Phprojekt_Auth_Proxy::getEffectiveUserId())
+            ->where("{$table}.owner_id = " . (int) Phprojekt_Auth_Proxy::getEffectiveUserId() .
+                    " OR (ir.access & " . (int) Phprojekt_Acl::READ . ") = " . (int) Phprojekt_Acl::READ);
 
-        return $select->query()->fetchColumn();
+        $stmt = $sql->prepareStatementForSqlObject($select);
+        $result = $stmt->execute();
+        $row = $result->current();
+        return $row ? (int) $row['COUNT(*)'] : 0;
     }
 
     /**
