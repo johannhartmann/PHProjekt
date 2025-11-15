@@ -12,8 +12,10 @@ return [
         'Laminas\Session',
         'Laminas\ZendFrameworkBridge',
         'Application\Default',
-        // 'Application\Project', // TODO: Migrate this module
-        // 'Application\Core',    // TODO: Migrate this module
+        'Application\Core',
+        'Application\Project',
+        'Application\Timecard',
+        'Application\Calendar2',
     ],
 
     // These are various options for the listeners attached to the ModuleManager
