@@ -13,13 +13,15 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Laminas\I18n\Translator\Translator;
+
 /**
  * Sinse the Zend use some type of Adapter that can not be used with the
  * PHProjekt lang files, we create an own Adapter for read these files.
  *
- * The class is an extension of the Zend_Translate and call the Phprojekt_LanguageAdapter.
+ * The class is an extension of the Translator and call the Phprojekt_LanguageAdapter.
  */
-class Phprojekt_Language extends Zend_Translate
+class Phprojekt_Language extends Translator
 {
     private $_locale = null;
 

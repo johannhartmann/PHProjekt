@@ -13,14 +13,16 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Laminas\I18n\Translator\Loader\FileLoaderInterface;
+use Laminas\I18n\Translator\TextDomain;
+
 /**
  * Sinse the Zend use some type of Adapter that can not be used with the
  * PHProjekt lang files, we create an own Adapter for read these files.
  *
- * The class is an extension of the Zend_Translate_Adapter that is an abstract class.
- * So we only must redefine the functions defined on the Original Adapter.
+ * The class implements FileLoaderInterface for Laminas I18n.
  */
-class Phprojekt_LanguageAdapter extends Zend_Translate_Adapter
+class Phprojekt_LanguageAdapter implements FileLoaderInterface
 {
     /**
      * Define all the lang files.
@@ -79,11 +81,28 @@ class Phprojekt_LanguageAdapter extends Zend_Translate_Adapter
      *
      * @return void
      */
+    protected $_options = array();
+    protected $_translate = array();
+
     public function __construct($options)
     {
         $options['locale']         = self::_convertToZendLocale($options['locale']);
         $options['disableNotices'] = true;
-        parent::__construct($options);
+        $this->_options = $options;
+
+        // Load translation data
+        $locale = $options['locale'] ?? 'en';
+        $this->_loadTranslationData('-', $locale, $options);
+    }
+
+    /**
+     * Required by FileLoaderInterface - loads translation file
+     */
+    public function load($locale, $filename)
+    {
+        $locale = self::_convertToZendLocale($locale);
+        $this->_loadTranslationData($filename, $locale);
+        return new TextDomain($this->_translate[$locale] ?? []);
     }
 
     /**
@@ -537,7 +556,6 @@ class Phprojekt_LanguageAdapter extends Zend_Translate_Adapter
             $reflect   = new ReflectionClass('Phprojekt_LanguageAdapter');
             $constants = $reflect->getConstants();
             $languages = array();
-            $locale    = new Zend_Locale();
             $available = array();
 
             // Get all the languages files in Defualt module
@@ -555,7 +573,11 @@ class Phprojekt_LanguageAdapter extends Zend_Translate_Adapter
                     // Show only the availables languages
                     if (isset($available[$value])) {
                         $zendValue = substr(self::_convertToZendLocale($value), 0, 2);
-                        $langName  = $locale->getTranslation($zendValue, 'language', 'en');
+                        // Use native PHP Locale to get language name
+                        $langName  = \Locale::getDisplayLanguage($zendValue, 'en');
+                        if (empty($langName)) {
+                            $langName = $value;
+                        }
 
                         $languages[$value] = $langName . " (" . $value . ")";
                     }

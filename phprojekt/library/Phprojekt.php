@@ -14,9 +14,11 @@
  */
 
 use Application\Default\Exception\HttpException;
+use Laminas\View\View;
+use Laminas\View\Renderer\PhpRenderer;
 
 /**
- * Phprojekt Class for initialize the Zend Framework.
+ * Phprojekt Class for initialize the Laminas Framework.
  */
 class Phprojekt
 {
@@ -657,8 +659,8 @@ class Phprojekt
     {
         $viewNamespace = new \Laminas\Session\Container('Phprojekt__setView');
         if (!isset($viewNamespace->view)) {
-            $view = new Zend_View();
-            $view->addScriptPath(PHPR_CORE_PATH . '/Default/Views/dojo/');
+            $view = new PhpRenderer();
+            $view->resolver()->addPath(PHPR_CORE_PATH . '/Default/Views/dojo/');
             foreach ($helperPaths as $helperPath) {
                 if (is_dir($helperPath['directory'])) {
                     $view->addHelperPath($helperPath['directory'], $helperPath['module'] . '_' . 'Helpers');
