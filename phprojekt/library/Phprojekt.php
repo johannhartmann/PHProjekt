@@ -48,7 +48,7 @@ class Phprojekt
     /**
      * Config class.
      *
-     * @var Zend_Config_Ini
+     * @var \Laminas\Config\Config
      */
     protected $_config;
 
@@ -182,7 +182,7 @@ class Phprojekt
     /**
      * Return the Config class.
      *
-     * @return Zend_Config_Ini An instance of Zend_Config_Ini.
+     * @return \Laminas\Config\Config An instance of Laminas Config.
      */
     public function getConfig()
     {
@@ -412,16 +412,57 @@ class Phprojekt
 
         // Read the config file, but only the production setting
         try {
-            $this->_config = new Zend_Config_Ini(PHPR_CONFIG_FILE, PHPR_CONFIG_SECTION, true);
-        } catch (Zend_Config_Exception $error) {
+            $reader = new \Laminas\Config\Reader\Ini();
+            $reader->setProcessSections(true);
+            $configData = $reader->fromFile(PHPR_CONFIG_FILE);
+
+            // Handle section inheritance manually
+            $sectionData = null;
+            $sectionFound = false;
+
+            // First check for exact match
+            if (isset($configData[PHPR_CONFIG_SECTION])) {
+                $sectionData = $configData[PHPR_CONFIG_SECTION];
+                $sectionFound = true;
+            } else {
+                // Check for section with inheritance syntax (e.g., "testing-mysql : general")
+                foreach ($configData as $key => $data) {
+                    if (strpos($key, PHPR_CONFIG_SECTION . ' :') === 0 ||
+                        strpos($key, PHPR_CONFIG_SECTION . ':') === 0) {
+                        // Parse parent section name
+                        $parts = preg_split('/\s*:\s*/', $key);
+                        if (count($parts) === 2) {
+                            $parentSection = trim($parts[1]);
+                            // Merge parent data with section data
+                            if (isset($configData[$parentSection])) {
+                                $sectionData = array_merge($configData[$parentSection], $data);
+                            } else {
+                                $sectionData = $data;
+                            }
+                        } else {
+                            $sectionData = $data;
+                        }
+                        $sectionFound = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!$sectionFound) {
+                throw new \RuntimeException('Configuration section "' . PHPR_CONFIG_SECTION . '" not found in ' . PHPR_CONFIG_FILE);
+            }
+
+            $this->_config = new \Laminas\Config\Config($sectionData, true);
+        } catch (\Exception $error) {
             error_log('There is an error in your configuration.php: ' . $error->getMessage());
             $this->_dieWithInternalServerError();
         }
 
         if (empty($this->_config->webpath)) {
-            $response               = new Zend_Controller_Request_Http();
-            $this->_config->webpath = $response->getScheme() . '://' . $response->getHttpHost()
-                . $response->getBasePath() . '/';
+            $scheme = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
+            $httpHost = $_SERVER['HTTP_HOST'] ?? 'localhost';
+            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME'] ?? ''), '/');
+            $this->_config->webpath = $scheme . '://' . $httpHost . $basePath . '/';
         }
         if (!defined('PHPR_TEMP_PATH')) {
             define('PHPR_TEMP_PATH', $this->_config->tmpPath);
@@ -440,13 +481,16 @@ class Phprojekt
         date_default_timezone_set('UTC');
 
         // Start zend session to handle all session stuff
-        try {
-            Zend_Session::start();
-        } catch (Zend_Session_Exception $error) {
-            Zend_Session::writeClose();
-            Zend_Session::start();
-            Zend_Session::regenerateId();
-            error_log($error);
+        // Start session using native PHP (Laminas SessionManager auto-starts when Container is created)
+        if (session_status() === PHP_SESSION_NONE) {
+            try {
+                session_start();
+            } catch (\Exception $error) {
+                session_write_close();
+                session_start();
+                session_regenerate_id(true);
+                error_log($error->getMessage());
+            }
         }
 
         // Set a metadata cache and clean it
@@ -584,7 +628,7 @@ class Phprojekt
      */
     private function _setView($helperPaths)
     {
-        $viewNamespace = new Zend_Session_Namespace('Phprojekt-_setView');
+        $viewNamespace = new \Laminas\Session\Container('Phprojekt-_setView');
         if (!isset($viewNamespace->view)) {
             $view = new Zend_View();
             $view->addScriptPath(PHPR_CORE_PATH . '/Default/Views/dojo/');
@@ -610,7 +654,7 @@ class Phprojekt
      */
     private function _getHelperPaths()
     {
-        $helperPathNamespace = new Zend_Session_Namespace('Phprojekt-_getHelperPaths');
+        $helperPathNamespace = new \Laminas\Session\Container('Phprojekt-_getHelperPaths');
         if (!isset($helperPathNamespace->helperPaths)) {
             $helperPaths = array();
             // System modules
@@ -655,7 +699,7 @@ class Phprojekt
      */
     private function _getControllersFolders($helperPaths)
     {
-        $controllerPathNamespace = new Zend_Session_Namespace('Phprojekt-_getControllersFolders');
+        $controllerPathNamespace = new \Laminas\Session\Container('Phprojekt-_getControllersFolders');
         if (!isset($controllerPathNamespace->controllerPaths)) {
             $controllerPaths = array();
             foreach ($helperPaths as $helperPath) {
@@ -690,7 +734,7 @@ class Phprojekt
     public static function removeControllersFolders()
     {
         // Remove SubModules entries
-        $controllerPathNamespace = new Zend_Session_Namespace('Phprojekt-_getControllersFolders');
+        $controllerPathNamespace = new \Laminas\Session\Container('Phprojekt-_getControllersFolders');
         $controllerPathNamespace->unsetAll();
     }
 
@@ -849,7 +893,7 @@ class Phprojekt
     public static function createCsrfToken()
     {
         $sessionName   = 'Phprojekt_CsrfToken';
-        $csrfNamespace = new Zend_Session_Namespace($sessionName);
+        $csrfNamespace = new \Laminas\Session\Container($sessionName);
         $token         = uniqid(mt_rand(), true);
 
         $csrfNamespace->token = $token;
@@ -1011,10 +1055,10 @@ class Phprojekt
 
     private function _dieWithInternalServerError()
     {
-        $response = new Zend_Controller_Response_Http();
-        $response->setHttpResponseCode(500);
-        $response->setBody('Internal Server Error. Please contact an administrator.');
-        $response->sendResponse();
+        if (!headers_sent()) {
+            header('HTTP/1.1 500 Internal Server Error');
+        }
+        echo 'Internal Server Error. Please contact an administrator.';
         die();
     }
 
@@ -1034,10 +1078,10 @@ class Phprojekt
      */
     private function _redirectToSetupAndDie()
     {
-        $response = new Zend_Controller_Response_Http();
-        $response->setRedirect('setup.php');
-        $response->setBody('No configuration file found, redirecting to setup.');
-        $response->sendResponse();
+        if (!headers_sent()) {
+            header('Location: setup.php');
+        }
+        echo 'No configuration file found, redirecting to setup.';
         die();
     }
 }

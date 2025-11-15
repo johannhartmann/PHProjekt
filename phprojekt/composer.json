@@ -38,41 +38,10 @@
             "Cleaner\\": "library/Cleaner/"
         },
         "psr-0": {
-            "Zend_": "library/",
             "Phprojekt_": "library/"
         },
         "files": [
-            "library/Phprojekt.php",
-            "library/Zend/Db.php",
-            "library/Zend/Db/Adapter/Abstract.php",
-            "library/Zend/Db/Select.php",
-            "library/Zend/Db/Statement.php",
-            "library/Zend/Db/Table/Abstract.php",
-            "library/Zend/Db/Table/Row.php",
-            "library/Zend/Config.php",
-            "library/Zend/Config/Ini.php",
-            "library/Zend/Session.php",
-            "library/Zend/Registry.php",
-            "library/Zend/Controller/Front.php",
-            "library/Zend/Controller/Request/Http.php",
-            "library/Zend/Controller/Response/Http.php",
-            "library/Zend/Controller/Action.php",
-            "library/Zend/Controller/Action/HelperBroker.php",
-            "library/Zend/Controller/Action/Helper/Abstract.php",
-            "library/Zend/Controller/Action/Helper/ViewRenderer.php",
-            "library/Zend/Controller/Action/Helper/Redirector.php",
-            "library/Zend/Controller/Action/Helper/Url.php",
-            "library/Zend/Controller/Action/Helper/Json.php",
-            "library/Zend/Controller/Plugin/Abstract.php",
-            "library/Zend/Controller/Plugin/ErrorHandler.php",
-            "library/Zend/Cache.php",
-            "library/Zend/Log.php",
-            "library/Zend/View.php",
-            "library/Zend/Auth.php",
-            "library/Zend/Validate.php",
-            "library/Zend/Filter.php",
-            "library/Zend/Locale.php",
-            "library/Zend/Translate.php"
+            "library/Phprojekt.php"
         ]
     },
     "config": {
