@@ -10,6 +10,8 @@ ini_set("magic_quotes_gpc", 0);
 ini_set("magic_quotes_runtime", 0);
 ini_set("magic_quotes_sybase", 0);
 
+define('PHPR_ROOT_PATH', realpath(dirname(__FILE__) . '/../../'));
+
 $config = "configuration.php";
 if (getenv('P6_TEST_CONFIG')) {
     $config = getenv('P6_TEST_CONFIG');
@@ -21,7 +23,19 @@ define("PHPR_CONFIG_FILE", $config);
 define("DEFAULT_CONFIG_SECTION", "testing-mysql");
 define("PHPR_CONFIG_SECTION", "testing-mysql");
 
-define('PHPR_ROOT_PATH', realpath(dirname(__FILE__) . '/../../'));
+// Register autoloader for application modules (Project_Models_*, etc.)
+spl_autoload_register(function($className) {
+    // Convert Project_Models_Project to Project/Models/Project.php
+    if (strpos($className, '_') !== false) {
+        $parts = explode('_', $className);
+        $file = PHPR_ROOT_PATH . '/application/' . implode('/', $parts) . '.php';
+        if (file_exists($file)) {
+            require_once $file;
+            return true;
+        }
+    }
+    return false;
+});
 
 include_once 'DatabaseTest.php';
 include_once 'FrontInit.php';
