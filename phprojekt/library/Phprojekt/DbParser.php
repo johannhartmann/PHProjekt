@@ -13,6 +13,8 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Laminas\Json\Json;
+
 /**
  * DbParser Class for process the json db data.
  */
@@ -109,7 +111,7 @@ class Phprojekt_DbParser
 
         // Load the Code file and process it
         $json         = file_get_contents($coreDirectory . '/Core/Sql/Db.json');
-        $dataToParser = Zend_Json::decode($json);
+        $dataToParser = Json::decode($json);
         if (is_dir($coreDirectory . '/Core/SubModules/')) {
             $files = scandir($coreDirectory . '/Core/SubModules/');
             foreach ($files as $file) {
@@ -120,7 +122,7 @@ class Phprojekt_DbParser
                             $subPath = $coreDirectory . '/Core/SubModules/' . $file . '/' . $subFile . '/Sql/Db.json';
                             if (file_exists($subPath)) {
                                 $json         = file_get_contents($subPath);
-                                $data         = Zend_Json::decode($json);
+                                $data         = Json::decode($json);
                                 $dataToParser = array_merge_recursive($dataToParser, $data);
                             }
                         }
@@ -193,7 +195,7 @@ class Phprojekt_DbParser
         $file = $coreDirectory . '/' . $module . '/Sql/Db.json';
         if (file_exists($file)) {
             $json         = file_get_contents($file);
-            $data         = Zend_Json::decode($json);
+            $data         = Json::decode($json);
         }
         $submoduleDir = $coreDirectory . '/' . $module . '/SubModules/';
         if (is_dir($submoduleDir)) {
@@ -204,7 +206,7 @@ class Phprojekt_DbParser
                         $json = file_get_contents($file);
                         $data = array_merge_recursive(
                             $data,
-                            Zend_Json::decode($json)
+                            Json::decode($json)
                         );
                     }
                 }

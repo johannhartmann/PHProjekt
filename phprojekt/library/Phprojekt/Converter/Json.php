@@ -13,6 +13,8 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Laminas\Json\Json;
+
 /**
  * Convert a model into a json structure.
  * This is usually done by a controller to send data to the client.
@@ -265,7 +267,7 @@ class Phprojekt_Converter_Json
      * Encodes data as a JSON string.
      *
      * This method takes an array of data and encodes it into a JSON string using
-     * the Zend_Json::encode() function. The resulting JSON string is returned.
+     * the Json::encode() function. The resulting JSON string is returned.
      *
      * @param array $data The data to be encoded as a JSON string.
      *
@@ -273,6 +275,6 @@ class Phprojekt_Converter_Json
      */
     private static function _makeJsonString($data)
     {
-        return Zend_Json::encode($data);
+        return Json::encode($data);
     }
 }

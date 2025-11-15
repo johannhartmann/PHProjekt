@@ -13,11 +13,15 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Laminas\Log\Logger;
+use Laminas\Log\Writer\Stream;
+use Laminas\Log\Filter\Priority;
+
 /**
- * Manage an array with Zend_Log objects for loging each type of log in one distinct file.
+ * Manage an array with Logger objects for loging each type of log in one distinct file.
  *
- * Since the Zend_Log use only one file for log everything in one big file,
- * we create an array with various Zend_Log objects,
+ * Since the Logger use only one file for log everything in one big file,
+ * we create an array with various Logger objects,
  * each one, defined with a own log file and a own filter.
  *
  * The path to the log file is defined in the configuration.php file in the way:
@@ -38,10 +42,10 @@
  * You can add in the configuration.php all of these types.
  * If the path to a log file is not defined, the class just drop the log.
  */
-class Phprojekt_Log extends Zend_Log
+class Phprojekt_Log extends Logger
 {
     /**
-     * An array of Zend_Log with priority filtering.
+     * An array of Logger with priority filtering.
      *
      * @var array
      */
@@ -69,8 +73,8 @@ class Phprojekt_Log extends Zend_Log
                 $constant = "self::" . strtoupper($key);
                 if (defined($constant)) {
                     $priority = constant($constant);
-                    $logger = new Zend_Log(new Zend_Log_Writer_Stream($val->filename));
-                    $logger->addFilter(new Zend_Log_Filter_Priority($priority));
+                    $logger = new Logger(new Stream($val->filename));
+                    $logger->addFilter(new Priority($priority));
                     $this->_loggers[] = $logger;
                 }
             }

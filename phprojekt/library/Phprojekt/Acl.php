@@ -13,10 +13,14 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Laminas\Permissions\Acl\Acl;
+use Laminas\Permissions\Acl\Role\GenericRole;
+use Laminas\Permissions\Acl\Resource\GenericResource;
+
 /**
  * ACL class.
  */
-class Phprojekt_Acl extends Zend_Acl
+class Phprojekt_Acl extends Acl
 {
     /**
      * Fixed permission values for items and modules.
@@ -78,7 +82,7 @@ class Phprojekt_Acl extends Zend_Acl
             if ($role->parent < 1) {
                 $role->parent = null;
             }
-            $this->addRole(new Zend_Acl_Role($role->id), $role->parent);
+            $this->addRole(new GenericRole($role->id), $role->parent);
         }
     }
 
@@ -104,7 +108,7 @@ class Phprojekt_Acl extends Zend_Acl
                 foreach ($modules as $moduleId) {
                     $resources = array();
                     if (!$this->has($moduleId)) {
-                        $this->add(new Zend_Acl_Resource($moduleId));
+                        $this->add(new GenericResource($moduleId));
                     }
                     $resources[] = $moduleId;
                 }

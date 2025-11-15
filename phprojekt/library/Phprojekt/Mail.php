@@ -13,10 +13,14 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Laminas\Mail\Message;
+use Laminas\Mail\Transport\Smtp;
+use Laminas\Mail\Transport\Sendmail;
+
 /**
  * Mail class.
  */
-class Phprojekt_Mail extends Zend_Mail
+class Phprojekt_Mail extends Message
 {
     /**
      * External use (configuration.php):
@@ -31,7 +35,7 @@ class Phprojekt_Mail extends Zend_Mail
      *
      * The data is obtained from the configuration.php file.
      *
-     * @return Zend_Mail_Transport_Smtp|Zend_Mail_Transport_Sendmail Object
+     * @return Smtp|Sendmail Object
      */
     public function setTransport()
     {
@@ -67,15 +71,15 @@ class Phprojekt_Mail extends Zend_Mail
                 }
 
                 if (empty($parameters)) {
-                    $smtpTransport = new Zend_Mail_Transport_Smtp($smtpServer);
+                    $smtpTransport = new Smtp($smtpServer);
                 } else {
-                    $smtpTransport = new Zend_Mail_Transport_Smtp($smtpServer, $parameters);
+                    $smtpTransport = new Smtp($smtpServer, $parameters);
                 }
 
                 break;
 
             case self::TRANSPORT_SENDMAIL:
-                $smtpTransport = new Zend_Mail_Transport_Sendmail();
+                $smtpTransport = new Sendmail();
                 break;
         }
 
