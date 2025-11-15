@@ -13,6 +13,9 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Laminas\Pdf\Color\GrayScale;
+use Laminas\Pdf\Page;
+
 /**
  * Phprojekt Class for creation of column in PDF table row.
  */
@@ -178,12 +181,12 @@ class Phprojekt_Pdf_Table_Column
     public function renderBorder($page, $x, $y, $height, $isHeader = false)
     {
         if ($isHeader) {
-            $grayColor  = new Zend_Pdf_Color_GrayScale(Phprojekt_Pdf_Page::HEADER_GRAY_LEVEL);
-            $blackColor = new Zend_Pdf_Color_GrayScale(0);
+            $grayColor  = new GrayScale(Phprojekt_Pdf_Page::HEADER_GRAY_LEVEL);
+            $blackColor = new GrayScale(0);
             $page->setFillColor($grayColor);
-            $page->drawRectangle($x, $y, $x + $this->_width, $y - $height, Zend_Pdf_Page::SHAPE_DRAW_FILL);
+            $page->drawRectangle($x, $y, $x + $this->_width, $y - $height, Page::SHAPE_DRAW_FILL);
             $page->setFillColor($blackColor);
         }
-        $page->drawRectangle($x, $y, $x + $this->_width, $y - $height, Zend_Pdf_Page::SHAPE_DRAW_STROKE);
+        $page->drawRectangle($x, $y, $x + $this->_width, $y - $height, Page::SHAPE_DRAW_STROKE);
     }
 }

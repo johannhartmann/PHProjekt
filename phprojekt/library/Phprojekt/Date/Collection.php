@@ -44,9 +44,9 @@ class Phprojekt_Date_Collection
     private $_minDate = null;
 
     /**
-     * Zend_Date class.
+     * DateTime class for date manipulation.
      *
-     * @var Zend_Date
+     * @var \DateTime
      */
     private $_date = null;
 
@@ -59,7 +59,7 @@ class Phprojekt_Date_Collection
      */
     public function __construct($minDate)
     {
-        $this->_date    = new Zend_Date();
+        $this->_date    = new \DateTime();
         $this->_minDate = $this->_getDate(strtotime($minDate));
     }
 
@@ -162,7 +162,7 @@ class Phprojekt_Date_Collection
         $rrule = explode(';', $rrule);
         $rules = array();
 
-        // Needed to translate the Weekdays to a format compatible with Zend_Date
+        // Needed to translate the Weekdays to ISO-8601 numeric representation
         $translateByDay = array(
             'MO' => 1,
             'TU' => 2,
@@ -278,7 +278,7 @@ class Phprojekt_Date_Collection
     }
 
     /**
-     * Set the date in the Zend_Date and return it in date format.
+     * Set the date in the DateTime and return it as timestamp.
      *
      * @param integer $date Timestamp of the date.
      *
@@ -286,51 +286,18 @@ class Phprojekt_Date_Collection
      */
     private function _getDate($date)
     {
-        $this->_date->set($date);
+        $this->_date->setTimestamp($date);
 
-        return $this->_date->get();
+        return $this->_date->getTimestamp();
     }
 
-    /**
-     * Apply the rule method to one date.
-     *
-     * @param string  $method The method name.
-     * @param mix     $value  Parameter for the method.
-     * @param integer $date   Timestamp of the date.
-     *
-     * @return integer The new timestamp.
-     */
     /**
      * Applies a date manipulation method to a given date.
      *
      * This private method is used to apply a specified date manipulation method (such as `add()` or `sub()`) to a given date value.
      * It sets the internal date object to the provided date, calls the specified method on the date object, and returns the new timestamp value.
      *
-     * @param string $method The name of the date manipulation method to apply (e.g. 'add', 'sub')
-     * @param mixed $value The parameter(s) to pass to the date manipulation method
-     * @param integer $date The timestamp of the date to manipulate
-     * @return integer The new timestamp value after applying the date manipulation method
-     * @note This method depends on current time.
-     */
-    /**
-     * Applies a date manipulation method to a given date..
-     *
-     * This private method is used to apply a specified date manipulation method (such as `add()` or `sub()`) to a given date value.
-     * It sets the internal date object to the provided date, calls the specified method on the date object, and returns the new timestamp value.
-     *
-     * @param string $method The name of the date manipulation method to apply (e.g. 'add', 'sub')
-     * @param mixed $value The parameter(s) to pass to the date manipulation method
-     * @param integer $date The timestamp of the date to manipulate
-     * @return integer The new timestamp value after applying the date manipulation method
-     * @note This method depends on current time.
-     */
-    /**
-     * Applies a date manipulation method to a given date..
-     *
-     * This private method is used to apply a specified date manipulation method (such as `add()` or `sub()`) to a given date value.
-     * It sets the internal date object to the provided date, calls the specified method on the date object, and returns the new timestamp value.
-     *
-     * @param string $method The name of the date manipulation method to apply (e.g. 'add', 'sub')
+     * @param string $method The name of the date manipulation method to apply (e.g. 'addYear', 'addMonth', 'setDay')
      * @param mixed $value The parameter(s) to pass to the date manipulation method
      * @param integer $date The timestamp of the date to manipulate
      * @return integer The new timestamp value after applying the date manipulation method
@@ -338,9 +305,52 @@ class Phprojekt_Date_Collection
      */
     private function _applyMethod($method, $value, $date)
     {
-        $this->_date->set($date);
-        $this->_date->$method($value);
+        $this->_date->setTimestamp($date);
 
-        return $this->_date->get();
+        // Map method names to DateTime operations
+        switch ($method) {
+            case 'addYear':
+                $this->_date->modify("+{$value} year");
+                break;
+            case 'addMonth':
+                $this->_date->modify("+{$value} month");
+                break;
+            case 'addWeek':
+                $this->_date->modify("+{$value} week");
+                break;
+            case 'addDay':
+                $this->_date->modify("+{$value} day");
+                break;
+            case 'setMonth':
+                $this->_date->setDate($this->_date->format('Y'), $value, $this->_date->format('d'));
+                break;
+            case 'setWeek':
+                $this->_date->setISODate($this->_date->format('Y'), $value);
+                break;
+            case 'setDayOfYear':
+                $this->_date->setDate($this->_date->format('Y'), 1, 1);
+                $this->_date->modify("+".($value - 1)." day");
+                break;
+            case 'setDay':
+                $this->_date->setDate($this->_date->format('Y'), $this->_date->format('m'), $value);
+                break;
+            case 'setWeekday':
+                // ISO-8601 weekday (1=Monday, 7=Sunday)
+                $currentWeekday = $this->_date->format('N');
+                $diff = $value - $currentWeekday;
+                $this->_date->modify("{$diff} day");
+                break;
+            case 'setHour':
+                $this->_date->setTime($value, $this->_date->format('i'), $this->_date->format('s'));
+                break;
+            case 'setMinute':
+                $this->_date->setTime($this->_date->format('H'), $value, $this->_date->format('s'));
+                break;
+            case 'setSecond':
+                $this->_date->setTime($this->_date->format('H'), $this->_date->format('i'), $value);
+                break;
+        }
+
+        return $this->_date->getTimestamp();
     }
 }

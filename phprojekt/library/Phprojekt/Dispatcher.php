@@ -13,10 +13,12 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
+
 /**
  * Phprojekt own dispatcher.
  */
-class Phprojekt_Dispatcher extends Zend_Controller_Dispatcher_Standard
+class Phprojekt_Dispatcher extends AbstractPlugin
 {
     /**
      * Formats a string from a URI into a PHP-friendly name.

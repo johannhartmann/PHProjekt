@@ -54,7 +54,7 @@ class Phprojekt_Tags_TagsTableMapper
             $select->limit($limit);
         }
 
-        $rows = $this->_db->query($select)->fetchAll(Zend_Db::FETCH_COLUMN);
+        $rows = $this->_db->query($select)->fetchAll(\PDO::FETCH_COLUMN);
         $ret  = array();
 
         foreach ($rows as $row) {
@@ -120,17 +120,13 @@ class Phprojekt_Tags_TagsTableMapper
             }
         }
 
-        $tagTable = new Zend_Db_Table(array(
-            'db' => $this->_db,
-            'name' => self::tagsTableName
-        ));
-
+        // Use direct database insert instead of Zend_Db_Table
         foreach ($toAdd as $newTag) {
-            $ids[$newTag] = $tagTable->insert(
-                array(
-                    'word' => $newTag
-                )
+            $this->_db->insert(
+                self::tagsTableName,
+                array('word' => $newTag)
             );
+            $ids[$newTag] = $this->_db->lastInsertId();
         }
 
         return $ids;

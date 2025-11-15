@@ -13,13 +13,13 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
-/** Zend_Pdf */
-require_once 'Zend/Pdf.php';
+use Laminas\Pdf\Page;
+use Laminas\Pdf\Font;
 
 /**
  * Phprojekt Class for PFD creation.
  */
-class Phprojekt_Pdf_Page extends Zend_Pdf_Page
+class Phprojekt_Pdf_Page extends Page
 {
     /**
      * pt/cm equals 72 pt/in / 2.54 cm/in.
@@ -309,9 +309,9 @@ class Phprojekt_Pdf_Page extends Zend_Pdf_Page
     {
         $pages       = array($this);
         $currentPage = $this;
-        $fontName    = isset($prototype['font']) ? $prototype['font'] : Zend_Pdf_Font::FONT_HELVETICA;
+        $fontName    = isset($prototype['font']) ? $prototype['font'] : Font::FONT_HELVETICA;
         $fontSize    = isset($prototype['fontSize']) ? $prototype['fontSize'] : self::DEFAULT_FONT_SIZE;
-        $font        = Zend_Pdf_Font::fontWithName($fontName);
+        $font        = Font::fontWithName($fontName);
 
         foreach ($prototype as $element) {
             if (!isset($element['type'])) {
@@ -351,7 +351,7 @@ class Phprojekt_Pdf_Page extends Zend_Pdf_Page
         $fontSize = $this->getFontSize();
         // Draw the box
         $this->drawRectangle($x, $this->getHeight() - $y, $x + $width, $this->getHeight() - $y - $height,
-            Zend_Pdf_Page::SHAPE_DRAW_STROKE);
+            Page::SHAPE_DRAW_STROKE);
         // Draw the header bottom
         $this->drawLine($x, $this->getHeight() - $y - ($fontSize * 2), $x + $width,
             $this->getHeight() - $y - ($fontSize * 2));

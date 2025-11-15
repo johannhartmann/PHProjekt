@@ -13,16 +13,18 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Laminas\Router\Http\Segment as RestRoute;
+
 /**
- * Extend Zend_Rest_Route to fit PHProjekt's module system.
+ * Extend Laminas REST Route to fit PHProjekt's module system.
  */
-class Phprojekt_RestRoute extends Zend_Rest_Route
+class Phprojekt_RestRoute extends RestRoute
 {
     /**
      * Check if the given controller is restful.
      *
-     * This is overwritten because Zend_Rest_Route only allows a list of restful controllers on initialization.
-     * To find out if a controller ist restful, we need to check it's class. So, instead of checking all Controllers on
+     * This is overwritten because Laminas REST routing only allows a list of restful controllers on initialization.
+     * To find out if a controller is restful, we need to check it's class. So, instead of checking all Controllers on
      * Startup, we just overwrite this function to check it on demand.
      */
     /**

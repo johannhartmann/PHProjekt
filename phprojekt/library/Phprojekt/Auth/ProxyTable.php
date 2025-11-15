@@ -20,7 +20,8 @@
  */
 class Phprojekt_Auth_ProxyTable
 {
-    protected $_proxyTable = null;
+    protected $_db = null;
+    protected $_tableName = 'user_proxy';
 
     /**
      * Constructor
@@ -31,10 +32,7 @@ class Phprojekt_Auth_ProxyTable
             $db = Phprojekt::getInstance()->getDb();
         }
 
-        $this->_proxyTable = new Zend_Db_Table(array(
-            'db' => $db,
-            'name' => 'user_proxy'
-        ));
+        $this->_db = $db;
     }
 
     /**
@@ -80,10 +78,11 @@ class Phprojekt_Auth_ProxyTable
 
         $userIdList = array();
 
-        $select = $this->_proxyTable->select();
-        $select->where('proxying_id = ?', (int) $userId);
+        $select = $this->_db->select()
+            ->from($this->_tableName, array('proxyed_id'))
+            ->where('proxying_id = ?', (int) $userId);
 
-        $rows = $this->_proxyTable->fetchAll($select);
+        $rows = $this->_db->fetchAll($select);
 
         foreach ($rows as $row) {
             $userIdList[] = $row['proxyed_id'];
@@ -128,10 +127,11 @@ class Phprojekt_Auth_ProxyTable
 
         $this->_throwOnInvalidUserId($userId);
 
-        $select = $this->_proxyTable->select();
-        $select->where('proxyed_id = ?', (int) $userId);
+        $select = $this->_db->select()
+            ->from($this->_tableName, array('proxying_id'))
+            ->where('proxyed_id = ?', (int) $userId);
 
-        $rows = $this->_proxyTable->fetchAll($select);
+        $rows = $this->_db->fetchAll($select);
 
         $userlist = array();
 
@@ -155,11 +155,12 @@ class Phprojekt_Auth_ProxyTable
         $this->_throwOnInvalidUserId($sourceUserId);
         $this->_throwOnInvalidUserId($targetUserId);
 
-        $select = $this->_proxyTable->select();
-        $select->where('proxyed_id = ?', (int) $targetUserId)
-                ->where('proxying_id = ?', (int) $sourceUserId);
+        $select = $this->_db->select()
+            ->from($this->_tableName)
+            ->where('proxyed_id = ?', (int) $targetUserId)
+            ->where('proxying_id = ?', (int) $sourceUserId);
 
-        $row = $this->_proxyTable->fetchRow($select);
+        $row = $this->_db->fetchRow($select);
 
         return !is_null($row);
     }
@@ -199,19 +200,10 @@ class Phprojekt_Auth_ProxyTable
 
     protected function _clearProxiesForUserId($userId)
     {
-        $where = $this->_proxyTable->getAdapter()->quoteInto('proxyed_id = ?', $userId);
-        $this->_proxyTable->delete($where);
+        $where = $this->_db->quoteInto('proxyed_id = ?', $userId);
+        $this->_db->delete($this->_tableName, $where);
     }
 
-    /**
-     * Inserts an array of rows into the proxy table..
-     *
-     * This protected method takes an array of rows and inserts each one into the proxy table.
-     * It is used to populate the proxy table with data from the main user table.
-     *
-     * @param array $rows An array of row data to be inserted into the proxy table.
-     * @note This method accesses database.
-     */
     /**
      * Inserts an array of rows into the proxy table.
      *
@@ -221,18 +213,9 @@ class Phprojekt_Auth_ProxyTable
      * @param array $rows An array of row data to be inserted into the proxy table
      * @note This method accesses database.
      */
-    /**
-     * Inserts an array of rows into the proxy table..
-     *
-     * This protected method takes an array of row data and inserts each row into the proxy table.
-     * It is used to populate the proxy table with data from the main user table.
-     *
-     * @param array $rows An array of row data to be inserted into the proxy table.
-     * @note This method accesses database.
-     */
     protected function _insertRowsIntoProxyTable($rows = array()) {
         foreach ($rows as $row) {
-            $this->_proxyTable->insert($row);
+            $this->_db->insert($this->_tableName, $row);
         }
     }
 }

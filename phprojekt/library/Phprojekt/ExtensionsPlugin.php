@@ -13,15 +13,18 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
+use Laminas\Stdlib\RequestInterface;
+
 /**
- * This zend controller plugin is used to implement the phprojekt extensions.
+ * This Laminas controller plugin is used to implement the phprojekt extensions.
  *
  * It is also used to check whether we need to redirect the user to the
  * migration screen. This is because the check uses extensions, but must be done
  * before init is called, as the modules will assume that they have a current
  * database.
  */
-class Phprojekt_ExtensionsPlugin extends Zend_Controller_Plugin_Abstract
+class Phprojekt_ExtensionsPlugin extends AbstractPlugin
 {
     private $_extensions;
 
@@ -40,7 +43,7 @@ class Phprojekt_ExtensionsPlugin extends Zend_Controller_Plugin_Abstract
         $this->_extensions = new Phprojekt_Extensions(PHPR_CORE_PATH);
     }
 
-    public function routeShutdown(Zend_Controller_Request_Abstract $request)
+    public function routeShutdown(RequestInterface $request)
     {
         /* Redirect to the upgrade controller if an upgrade is neccessary */
         if (Phprojekt_Auth::isLoggedIn()
@@ -63,19 +66,10 @@ class Phprojekt_ExtensionsPlugin extends Zend_Controller_Plugin_Abstract
      * This method is called before the main controller dispatch.
      * It iterates through all registered extensions and calls their `init()` method, allowing the extensions to perform any necessary initialization tasks.
      *
-     * @param Zend_Controller_Request_Abstract $request The current controller request object.
+     * @param RequestInterface $request The current controller request object.
      * @note This method modifies global state.
      */
-    /**
-     * Initializes all registered extensions before the main controller dispatch..
-     *
-     * This method is called before the main controller dispatch.
-     * It iterates through all registered extensions and calls their `init()` method, allowing the extensions to perform any necessary initialization tasks.
-     *
-     * @param Zend_Controller_Request_Abstract $request The current controller request object.
-     * @note This method modifies global state.
-     */
-    public function preDispatch(Zend_Controller_Request_Abstract $request)
+    public function preDispatch(RequestInterface $request)
     {
         // Call the init method on every extension
         $this->_extensions->init();
