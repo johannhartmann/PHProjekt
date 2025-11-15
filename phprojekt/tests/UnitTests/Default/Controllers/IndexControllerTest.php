@@ -15,6 +15,8 @@
  */
 
 
+use Application\Default\Exception\HttpException;
+
 /**
  * Tests for Index Controller
  *
@@ -49,7 +51,7 @@ class Phprojekt_IndexController_Test extends FrontInit
 
         try {
             $this->front->dispatch($this->request, $this->response);
-        } catch (Zend_Controller_Action_Exception $error) {
+        } catch (HttpException $error) {
             $this->assertEquals(IndexController::NODEID_REQUIRED_TEXT, $error->getMessage());
             return;
         }
@@ -141,7 +143,7 @@ class Phprojekt_IndexController_Test extends FrontInit
 
     /**
      * Test of json delete project -without a project Id-
-     * @expectedException Zend_Controller_Action_Exception
+     * @expectedException HttpException
      */
     public function testJsonDeleteNoId()
     {

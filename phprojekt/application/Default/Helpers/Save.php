@@ -13,6 +13,8 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Application\Default\Exception\HttpException;
+
 /**
  * Helper to save tree nodes and models.
  */
@@ -85,11 +87,11 @@ final class Default_Helpers_Save
         if (!$node->getActiveRecord()->recordValidate()) {
             $errors = $node->getActiveRecord()->getError();
             $error  = array_pop($errors);
-            throw new Zend_Controller_Action_Exception($error['label'] . ': ' . $error['message'], 400);
+            throw new HttpException($error['label'] . ': ' . $error['message'], 400);
         }
 
         if (!self::_checkModule(1, $node->projectId)) {
-            throw new Zend_Controller_Action_Exception(
+            throw new HttpException(
                 'You do not have access to add projects on the parent project',
                 403
             );
@@ -101,7 +103,7 @@ final class Default_Helpers_Save
         $rights = Default_Helpers_Right::getRights($params);
         if ($newItem) {
             if (!$parentNode->getActiveRecord()->hasRight($userId, Phprojekt_Acl::CREATE)) {
-                throw new Zend_Controller_Action_Exception(
+                throw new HttpException(
                     'You do not have the necessary create right',
                     403
                 );
@@ -109,7 +111,7 @@ final class Default_Helpers_Save
             $rights[$userId] = Phprojekt_Acl::ALL;
             $parentNode->appendNode($node);
         } else if (!$model->hasRight($userId, Phprojekt_Acl::WRITE, $model->id)) {
-            throw new Zend_Controller_Action_Exception(
+            throw new HttpException(
                 'You do not have the necessary write right',
                 403
             );
@@ -119,7 +121,7 @@ final class Default_Helpers_Save
             /* ensure we have at least one right */
             if ($setRights) {
                 if (count($rights) <= 0) {
-                    throw new Zend_Controller_Action_Exception(
+                    throw new HttpException(
                         'At least one person must have access to this item',
                         400
                     );
@@ -179,10 +181,10 @@ final class Default_Helpers_Save
         if (!$model->recordValidate()) {
             $errors = $model->getError();
             $error  = array_pop($errors);
-            throw new Zend_Controller_Action_Exception($error['label'] . ': ' . $error['message'], 400);
+            throw new HttpException($error['label'] . ': ' . $error['message'], 400);
         }
         if (!self::_checkModule($moduleId, $projectId)) {
-            throw new Zend_Controller_Action_Exception(
+            throw new HttpException(
                 'The parent project do not have enabled this module',
                 400
             );
@@ -195,14 +197,14 @@ final class Default_Helpers_Save
                 $project = new Project_Models_Project();
                 $project->find($projectId);
                 if (!$project->hasRight($userId, Phprojekt_Acl::CREATE)) {
-                    throw new Zend_Controller_Action_Exception(
+                    throw new HttpException(
                         'You do not have the necessary create right',
                         403
                     );
                 }
                 $rights[$userId] = Phprojekt_Acl::ALL;
             } else if (!$model->hasRight($userId, Phprojekt_Acl::WRITE)) {
-                throw new Zend_Controller_Action_Exception(
+                throw new HttpException(
                     'You do not have the necessary write right',
                     403
                 );
@@ -220,7 +222,7 @@ final class Default_Helpers_Save
             // Save access only if the user have "admin" right
             if ($newItem || $model->hasRight(Phprojekt_Auth_Proxy::getEffectiveUserId(), Phprojekt_Acl::ADMIN)) {
                 if (!Phprojekt_Auth_Proxy::isAdminUser() && count($rights) <= 0) {
-                    throw new Zend_Controller_Action_Exception(
+                    throw new HttpException(
                         'At least one person must have access to this item',
                         400
                     );
@@ -250,7 +252,7 @@ final class Default_Helpers_Save
                 if (array_key_exists('projectId', $params)) {
                     $parentId = $params['projectId'];
                 } else {
-                    throw new Zend_Controller_Action_Exception('No parent id found in parameters or passed', 400);
+                    throw new HttpException('No parent id found in parameters or passed', 400);
                 }
             }
 

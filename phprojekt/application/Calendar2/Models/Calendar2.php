@@ -13,6 +13,8 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Application\Default\Exception\HttpException;
+
 /**
  * Calendar2 model class.
  *
@@ -153,7 +155,7 @@ class Calendar2_Models_Calendar2 extends Phprojekt_Item_Abstract
         if (!$this->recordValidate()) {
             $errors = $this->getError();
             $error  = array_pop($errors);
-            throw new Zend_Controller_Action_Exception($error['label'] . ': ' . $error['message'], 400);
+            throw new HttpException($error['label'] . ': ' . $error['message'], 400);
         }
 
         if ($this->_isFirst) {
@@ -165,7 +167,7 @@ class Calendar2_Models_Calendar2 extends Phprojekt_Item_Abstract
                 $this->_data['lastEnd'] = null;
             }
             if (!self::isValidVisibility($this->visibility)) {
-                throw new Zend_Controller_Action_Exception("Invalid visibility {$this->visibility}", 400);
+                throw new HttpException("Invalid visibility {$this->visibility}", 400);
             }
 
             $this->_fetchParticipantData();
@@ -276,7 +278,7 @@ class Calendar2_Models_Calendar2 extends Phprojekt_Item_Abstract
         if (!$this->recordValidate()) {
             $errors = $this->getError();
             $error  = array_pop($errors);
-            throw new Zend_Controller_Action_Exception($error['label'] . ': ' . $error['message'], 400);
+            throw new HttpException($error['label'] . ': ' . $error['message'], 400);
         }
 
         if (is_null($this->_storedId)) {

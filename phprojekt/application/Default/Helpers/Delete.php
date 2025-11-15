@@ -13,6 +13,8 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Application\Default\Exception\HttpException;
+
 /**
  * Helper to delete tree nodes and models.
  */
@@ -32,9 +34,9 @@ final class Default_Helpers_Delete
         $id = $model->id;
         // Checks
         if ($id == 1) {
-            throw new Zend_Controller_Action_Exception('You can not delete the root project', 422);
+            throw new HttpException('You can not delete the root project', 422);
         } else if (!self::_checkItemRights($model, 'Project')) {
-            throw new Zend_Controller_Action_Exception('You do not have access to do this action', 403);
+            throw new HttpException('You do not have access to do this action', 403);
         } else {
             $relations = new Project_Models_ProjectModulePermissions();
             $where     = sprintf('project_id = %d', (int) $id);
@@ -93,7 +95,7 @@ final class Default_Helpers_Delete
         // Checks
         $moduleName = Phprojekt_Loader::getModuleFromObject($model);
         if (!self::_checkItemRights($model, $moduleName)) {
-            throw new Zend_Controller_Action_Exception('You do not have access to do this action', 400);
+            throw new HttpException('You do not have access to do this action', 400);
         } else {
             $return = $model->delete();
             if (is_bool($return)) {
@@ -122,7 +124,7 @@ final class Default_Helpers_Delete
         $model     = $arguments[0];
 
         if (func_num_args() < 1) {
-            throw new Zend_Controller_Action_Exception('The model argument is expected', 400);
+            throw new HttpException('The model argument is expected', 400);
         }
 
         if ($model instanceof Phprojekt_ActiveRecord_Abstract) {
