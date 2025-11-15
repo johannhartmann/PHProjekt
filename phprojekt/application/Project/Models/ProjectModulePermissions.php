@@ -49,7 +49,7 @@ class Project_Models_ProjectModulePermissions extends Phprojekt_ActiveRecord_Abs
             ->where('pmp.project_id = ?', (int) $projectId)
             ->where('m.active = 1');
 
-        foreach ($select->query()->fetchAll(Zend_Db::FETCH_COLUMN) as $moduleId) {
+        foreach ($select->query()->fetchAll(\PDO::FETCH_COLUMN) as $moduleId) {
             $modules['data'][$moduleId]['inProject'] = true;
         }
 

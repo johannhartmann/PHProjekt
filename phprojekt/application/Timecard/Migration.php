@@ -85,15 +85,16 @@ class Timecard_Migration extends Phprojekt_Migration_Abstract
      * @see Zend_Controller_Request_Http::getHttpHost
      * @see Phprojekt::getInstance
      */
-    public function upgrade($currentVersion, Zend_Db_Adapter_Abstract $db)
+    public function upgrade($currentVersion, $db)
     {
         date_default_timezone_set('UTC');
         $this->_db = $db;
         $this->parseDbFile('Timecard');
 
         if (Phprojekt::compareVersion($currentVersion, '6.1.4') < 0) {
-            $request  = new Zend_Controller_Request_Http();
-            $uidSuffix = "@phprojekt6-" . $request->getHttpHost();
+            // Use native PHP to get HTTP host (replaces Zend_Controller_Request_Http)
+            $httpHost = $_SERVER['HTTP_HOST'] ?? 'localhost';
+            $uidSuffix = "@phprojekt6-" . $httpHost;
             Phprojekt::getInstance()->getDB()->query(
                 "UPDATE timecard SET uri = id, uid = CONCAT(UUID(), \"{$uidSuffix}\");"
             );

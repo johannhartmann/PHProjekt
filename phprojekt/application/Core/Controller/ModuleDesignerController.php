@@ -148,7 +148,7 @@ class ModuleDesignerController extends IndexController
 
         if ($model instanceof \Phprojekt_Item_Abstract || $id == 0) {
             $databaseManager = new \Phprojekt_DatabaseManager($model);
-            $data = \Zend_Json::decode($data);
+            $data = json_decode($data, true);
 
             // Validate
             if ($databaseManager->recordValidate($data, $saveType)) {

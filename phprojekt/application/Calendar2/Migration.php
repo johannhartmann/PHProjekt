@@ -50,7 +50,7 @@ class Calendar2_Migration extends Phprojekt_Migration_Abstract
      * @return void
      * @throws Exception On Errors
      */
-    public function upgrade($currentVersion, Zend_Db_Adapter_Abstract $db)
+    public function upgrade($currentVersion, $db)
     {
         date_default_timezone_set('UTC');
         $this->_db = $db;
@@ -58,7 +58,7 @@ class Calendar2_Migration extends Phprojekt_Migration_Abstract
         if (is_null($currentVersion)
                 || Phprojekt::compareVersion($currentVersion, '6.1.0-beta1') < 0) {
             $this->parseDbFile('Calendar2');
-            Phprojekt::getInstance()->getCache()->clean(Zend_Cache::CLEANING_MODE_ALL);
+            Phprojekt::getInstance()->getCache()->clean(\Laminas\Cache\Storage\Adapter\AbstractAdapter::MATCH_ALL);
             $this->_migrateFromOldCalendar();
             $this->_removeOldCalendar();
         }

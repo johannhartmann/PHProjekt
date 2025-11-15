@@ -235,7 +235,7 @@ class IndexController extends AbstractActionController
 
         $fieldDefinition = $this->getModelObject()->getInformation()->getFieldDefinition();
         \Phprojekt_CompressedSender::send(
-            \Zend_Json_Encoder::encode($fieldDefinition)
+            json_encode($fieldDefinition)
         );
 
         return $this->getResponse();

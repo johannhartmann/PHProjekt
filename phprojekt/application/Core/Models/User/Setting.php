@@ -13,6 +13,9 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Laminas\Session\Container as SessionContainer;
+use Laminas\Validator\EmailAddress as EmailValidator;
+
 /**
  * Settings on a per user base.
  */
@@ -168,7 +171,7 @@ class Core_Models_User_Setting extends Phprojekt_ModelInformation_Default
 
         // Email
         if (!empty($params['email'])) {
-            $validator = new Zend_Validate_EmailAddress();
+            $validator = new EmailValidator();
             if (!$validator->isValid($params['email'])) {
                 $message = Phprojekt::getInstance()->translate('Invalid email address');
             }
@@ -196,7 +199,7 @@ class Core_Models_User_Setting extends Phprojekt_ModelInformation_Default
             $password = Phprojekt_Auth::cryptString($params['password']);
         }
 
-        $namespace = new Zend_Session_Namespace(Phprojekt_Setting::IDENTIFIER . $userId);
+        $namespace = new SessionContainer(Phprojekt_Setting::IDENTIFIER . $userId);
         $fields    = $this->getFieldDefinition(Phprojekt_ModelInformation_Default::ORDERING_FORM);
         foreach ($fields as $data) {
             foreach ($params as $key => $value) {

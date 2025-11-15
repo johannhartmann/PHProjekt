@@ -13,6 +13,8 @@
  * @license    LGPL v3 (See LICENSE file)
  */
 
+use Laminas\Session\Container as SessionContainer;
+
 /**
  * Settings for the Timecard module
  */
@@ -52,7 +54,7 @@ class Timecard_Models_Setting extends Phprojekt_ModelInformation_Default
      */
     public function setSettings($params)
     {
-        $namespace = new Zend_Session_Namespace(Phprojekt_Setting::IDENTIFIER . Phprojekt_Auth::getUserId());
+        $namespace = new SessionContainer(Phprojekt_Setting::IDENTIFIER . Phprojekt_Auth::getUserId());
         $fields    = $this->getFieldDefinition(Phprojekt_ModelInformation_Default::ORDERING_FORM);
         foreach ($fields as $data) {
             foreach ($params as $key => $value) {

@@ -14,6 +14,8 @@
  */
 
 use Application\Default\Exception\HttpException;
+use Laminas\Db\TableGateway\TableGateway;
+use Laminas\Db\Sql\Expression as DbExpression;
 
 /**
  * Helper to manage the upload files.
@@ -96,25 +98,36 @@ final class Default_Helpers_Upload
             $_FILES['uploadedFile']['name'] = $md5name;
         }
 
-        $adapter = new Zend_File_Transfer_Adapter_Http();
-        $adapter->setDestination($config->uploadPath);
+        // Native PHP file upload handling (replaces Zend_File_Transfer_Adapter_Http)
+        if (!isset($_FILES['uploadedFile']) || $_FILES['uploadedFile']['error'] !== UPLOAD_ERR_OK) {
+            $errorCode = $_FILES['uploadedFile']['error'] ?? UPLOAD_ERR_NO_FILE;
+            $errorMessages = [
+                UPLOAD_ERR_INI_SIZE => 'The uploaded file exceeds the upload_max_filesize directive',
+                UPLOAD_ERR_FORM_SIZE => 'The uploaded file exceeds the MAX_FILE_SIZE directive',
+                UPLOAD_ERR_PARTIAL => 'The uploaded file was only partially uploaded',
+                UPLOAD_ERR_NO_FILE => 'No file was uploaded',
+                UPLOAD_ERR_NO_TMP_DIR => 'Missing a temporary folder',
+                UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk',
+                UPLOAD_ERR_EXTENSION => 'A PHP extension stopped the file upload',
+            ];
 
-        if (!$adapter->receive()) {
-            $messages = $adapter->getMessages();
-            foreach ($messages as $index => $message) {
-                $messages[$index] = Phprojekt::getInstance()->translate($message);
-                if ($index == 'fileUploadErrorFormSize') {
-                    $maxSize = (isset($config->maxUploadSize)) ? (int) $config->maxUploadSize :
-                        Phprojekt::DEFAULT_MAX_UPLOAD_SIZE;
-                    $maxSize           = (int) ($maxSize / 1024);
-                    $messages[$index] .= ': ' . $maxSize . ' Kb.';
-                }
+            $message = Phprojekt::getInstance()->translate($errorMessages[$errorCode] ?? 'Unknown upload error');
+            if ($errorCode === UPLOAD_ERR_FORM_SIZE || $errorCode === UPLOAD_ERR_INI_SIZE) {
+                $maxSize = (isset($config->maxUploadSize)) ? (int) $config->maxUploadSize :
+                    Phprojekt::DEFAULT_MAX_UPLOAD_SIZE;
+                $maxSize = (int) ($maxSize / 1024);
+                $message .= ': ' . $maxSize . ' Kb.';
             }
-            throw new Exception(implode("\n", $messages));
-        } else {
-            $files[] = $addedFile;
-            self::addFilesToUnusedFileList(array($addedFile));
+            throw new Exception($message);
         }
+
+        $destination = $config->uploadPath . DIRECTORY_SEPARATOR . $_FILES['uploadedFile']['name'];
+        if (!move_uploaded_file($_FILES['uploadedFile']['tmp_name'], $destination)) {
+            throw new Exception('Failed to move uploaded file');
+        }
+
+        $files[] = $addedFile;
+        self::addFilesToUnusedFileList(array($addedFile));
 
         self::_setSessionFiles($files, $field);
         return $files;
@@ -251,7 +264,7 @@ final class Default_Helpers_Upload
         }
 
         $db = Phprojekt::getInstance()->getDb();
-        $table = new Zend_Db_Table(array(
+        $table = new TableGateway(array(
             'db' => $db,
             'name' => 'uploaded_unused_files'
         ));
@@ -260,7 +273,7 @@ final class Default_Helpers_Upload
 
         foreach ($files as $file) {
             $rows[] = array(
-                "created" => new Zend_Db_Expr('NOW()'),
+                "created" => new DbExpression('NOW()'),
                 "hash" => $file['md5']
             );
         }
@@ -492,7 +505,7 @@ final class Default_Helpers_Upload
         $db = Phprojekt::getInstance()->getDb();
 
         $select = $db->select()->from('uploaded_unused_files', array('hash', 'created'))
-            ->where('created < ?', new Zend_Db_Expr('DATE_SUB(NOW(), INTERVAL 2 HOUR)'));
+            ->where('created < ?', new DbExpression('DATE_SUB(NOW(), INTERVAL 2 HOUR)'));
         $stmt = $select->query();
 
         $rows = $stmt->fetchAll();

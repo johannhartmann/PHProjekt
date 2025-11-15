@@ -65,7 +65,7 @@ HERE
      * @return void
      * @throws Exception On Errors
      */
-    public function upgrade($currentVersion, Zend_Db_Adapter_Abstract $db)
+    public function upgrade($currentVersion, $db)
     {
         $this->_db = $db;
 
@@ -84,7 +84,7 @@ HERE
         $dbParser->parseSingleModuleData('Project', null, array('before' => $before, 'after' => $after));
 
         Phprojekt::getInstance()->getCache()->clean(
-            Zend_Cache::CLEANING_MODE_ALL
+            \Laminas\Cache\Storage\Adapter\AbstractAdapter::MATCH_ALL
         );
 
         if (is_null($currentVersion) || Phprojekt::compareVersion($currentVersion, '6.2.1') < 0) {
