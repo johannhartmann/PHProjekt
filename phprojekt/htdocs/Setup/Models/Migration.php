@@ -753,7 +753,7 @@ class Setup_Models_Migration
         $userIds = $this->_dbOrig->select()
             ->distinct()
             ->from(PHPR_DB_PREFIX . 'timecard', array('users'))
-            ->query()->fetchAll(Zend_Db::FETCH_COLUMN);
+            ->query()->fetchAll(\PDO::FETCH_COLUMN);
 
         foreach($userIds as $userId) {
             if(!array_key_exists($userId, $this->_users)) {

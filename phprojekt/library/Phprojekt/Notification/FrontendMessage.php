@@ -24,7 +24,7 @@ class Phprojekt_Notification_FrontendMessage extends Phprojekt_ActiveRecord_Abst
      *
      * @param integer $userId The ID of the recipient.
      *
-     * @return Zend_Db_Table_Rowset The rowset with the results.
+     * @return array The rowset with the results.
      */
     public function getMessageData($userId)
     {

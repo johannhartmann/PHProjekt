@@ -344,7 +344,7 @@ abstract class Phprojekt_Item_Abstract extends Phprojekt_ActiveRecord_Abstract i
      * @param string       $select The comma-separated columns of the joined columns.
      * @param string       $join   The join statements.
      *
-     * @return Zend_Db_Table_Rowset The rowset with the results.
+     * @return array The rowset with the results.
      */
     public function fetchAll($where = null, $order = null, $count = null, $offset = null, $select = null, $join = null)
     {

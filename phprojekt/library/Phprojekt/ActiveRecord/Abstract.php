@@ -179,9 +179,9 @@ abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
             $config = array('db' => $config);
         }
 
-        if (!array_key_exists('db', $config) || !($config['db'] instanceof Zend_Db_Adapter_Abstract)) {
+        if (!array_key_exists('db', $config) || !($config['db'] instanceof \Laminas\Db\Adapter\Adapter)) {
             throw new Phprojekt_ActiveRecord_Exception("ActiveRecord class must be initialized using a valid "
-                . "Zend_Db_Adapter_Abstract");
+                . "\Laminas\Db\Adapter\Adapter");
         }
 
         parent::__construct($config);
@@ -424,7 +424,7 @@ abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
      *
      * @see _fetch
      *
-     * @return Zend_Db_Table_Rowset The rowset with the results.
+     * @return array The rowset with the results.
      */
     protected function _fetchHasManyAndBelongsToMany($where = null)
     {
@@ -489,7 +489,7 @@ abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
      * @param string|array $count  Limit.
      * @param string|array $offset Offset.
      *
-     * @return Zend_Db_Table_Rowset The rowset with the results.
+     * @return array The rowset with the results.
      */
     protected function _fetchWithOutJoin($where = null, $order = null, $count = null, $offset = null)
     {
@@ -950,7 +950,7 @@ abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
      * @param string       $select The comma-separated columns of the joined tables.
      * @param string       $join   Join Statements.
      *
-     * @return Zend_Db_Table_Rowset The rowset with the results.
+     * @return array The rowset with the results.
      */
     public function fetchAll($where = null, $order = null, $count = null, $offset = null, $select = null, $join = null)
     {
@@ -985,7 +985,7 @@ abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
         foreach ($rows as $row) {
             $instance        = clone $this;
             $instance->_data = array();
-            if ($row instanceof Zend_Db_Table_Row) {
+            if ($row instanceof \Laminas\Db\RowGateway\RowGateway) {
                 $data = $row->toArray();
             } else {
                 $data = $row;
@@ -1100,7 +1100,7 @@ abstract class Phprojekt_ActiveRecord_Abstract extends Zend_Db_Table_Abstract
      * @param string       $select The columns of the joined tables.
      * @param string       $join   Join statement.
      *
-     * @return Zend_Db_Table_Rowset The rowset with the results.
+     * @return array The rowset with the results.
      */
     protected function _fetchWithJoin($where = null, $order = null, $count = null, $offset = null, $select = null,
         $join = null)

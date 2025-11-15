@@ -58,7 +58,7 @@ abstract class Phprojekt_Migration_Abstract
      * @param                   string $currentVersion The current version of
      *                                                 the module or null if
      *                                                 not yet installed.
-     * @param Zend_Db_Adapter_Abstract             $db The database.
+     * @param \Laminas\Db\Adapter\Adapter             $db The database.
      *
      * @return void
      *
@@ -74,7 +74,7 @@ abstract class Phprojekt_Migration_Abstract
      * It should use database transactions to ensure the upgrade can be rolled back if any errors occur.
      *
      * @param string $currentVersion The current version of the module, or null if the module is not yet installed.
-     * @param Zend_Db_Adapter_Abstract $db The database adapter to use for the upgrade process.
+     * @param \Laminas\Db\Adapter\Adapter $db The database adapter to use for the upgrade process.
      * @return void This method does not return a value, but may throw an exception on error.
      * @throws exception Any error occurs during the upgrade process.
      * @throws Phprojekt_Migration_IKilledTheDatabaseException The upgrade process fails in a way that makes it impossible to recover the old state of the database.
@@ -87,7 +87,7 @@ abstract class Phprojekt_Migration_Abstract
      * It should use database transactions to ensure the upgrade can be rolled back if any errors occur.
      *
      * @param string $currentVersion The current version of the module, or null if the module is not yet installed.
-     * @param Zend_Db_Adapter_Abstract $db The database adapter to use for the upgrade process.
+     * @param \Laminas\Db\Adapter\Adapter $db The database adapter to use for the upgrade process.
      * @return void This method does not return a value, but may throw an exception on error.
      * @throws Exception Any error occurs during the upgrade process.
      * @throws Phprojekt_Migration_IKilledTheDatabaseException The upgrade process fails in a way that makes it impossible to recover the old state of the database.
@@ -100,13 +100,13 @@ abstract class Phprojekt_Migration_Abstract
      * It should use database transactions to ensure the upgrade can be rolled back if any errors occur.
      *
      * @param string $currentVersion The current version of the module, or null if the module is not yet installed.
-     * @param Zend_Db_Adapter_Abstract $db The database adapter to use for the upgrade process.
+     * @param \Laminas\Db\Adapter\Adapter $db The database adapter to use for the upgrade process.
      * @return void This method does not return a value, but may throw an exception on error.
      * @throws Exception Any error occurs during the upgrade process.
      * @throws Phprojekt_Migration_IKilledTheDatabaseException The upgrade process fails in a way that makes it impossible to recover the old state of the database.
      * @note This method accesses database.
      */
-    public abstract function upgrade($currentVersion, Zend_Db_Adapter_Abstract $db);
+    public abstract function upgrade($currentVersion, \Laminas\Db\Adapter\Adapter $db);
 
     /**
      * Helper function that parses the SQL/Db.json file and updates the database

@@ -120,7 +120,7 @@ class Setup_Models_Setup
             while ($buff = fread($sock, 1024)) {
                 $str .= $buff;
             }
-            $response = Zend_Http_Response::fromString($str);
+            $response = \Laminas\Http\Response::fromString($str);
             if ($response->getStatus() != '403') {
                 $this->_message[] = "Please note that your webserver needs to support .htaccess files "
                     . "to deny access to the configuration files.<br />"

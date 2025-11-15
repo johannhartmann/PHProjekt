@@ -27,18 +27,18 @@ abstract class Phprojekt_Filter_Abstract
     /**
      * Database adapter. This is needed to quote columns.
      *
-     * @var Zend_Db_Adapter_Abstract
+     * @var \Laminas\Db\Adapter\Adapter
      */
     protected $_adapter = null;
 
     /**
      * Initialize a new filter using the db adapter to quote values and identifiers.
      *
-     * @param Zend_Db_Adapter_Abstract $adapter Db adapter for quoting.
+     * @param \Laminas\Db\Adapter\Adapter $adapter Db adapter for quoting.
      *
      * @return void
      */
-    public function __construct(Zend_Db_Adapter_Abstract $adapter)
+    public function __construct(\Laminas\Db\Adapter\Adapter $adapter)
     {
          $this->_adapter = $adapter;
     }
@@ -78,11 +78,11 @@ abstract class Phprojekt_Filter_Abstract
     /**
      * Filters a select.
      *
-     * @param Zend_Db_Select $select Db select statement to be filter.
+     * @param \Laminas\Db\Sql\Select $select Db select statement to be filter.
      *
      * @return void
      */
-    abstract public function filter(Zend_Db_Select $select);
+    abstract public function filter(\Laminas\Db\Sql\Select $select);
 
     /**
      * Retrieves the backing store pair for the current filter.

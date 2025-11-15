@@ -107,7 +107,7 @@ class Phprojekt_RoleRights
             } else {
                 return false;
             }
-        } catch(Zend_Acl_Exception $error) {
+        } catch(\Laminas\Permissions\Acl\Exception\ExceptionInterface $error) {
             $logger = Phprojekt::getInstance()->getLog();
             $logger->debug((string) $error);
             return false;

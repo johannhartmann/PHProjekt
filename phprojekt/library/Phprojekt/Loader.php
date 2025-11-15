@@ -37,11 +37,11 @@ class Phprojekt_Loader
     {
         if (preg_match("@Controller$@", $class)) {
             $names  = explode('_', $class);
-            $front  = Zend_Controller_Front::getInstance();
-            $module = (count($names) > 1) ? $names[0] : $front->getDefaultModule();
+            // Use 'Default' as default module if not specified
+            $module = (count($names) > 1) ? $names[0] : 'Default';
 
             $path = $module . DIRECTORY_SEPARATOR
-                  . $front->getModuleControllerDirectoryName()
+                  . 'Controllers'  // Standard controller directory
                   . DIRECTORY_SEPARATOR
                   . array_pop($names) . '.php';
 
@@ -58,19 +58,18 @@ class Phprojekt_Loader
 
     /**
      * The autoload method used to load classes on demand.
-     * Returns either the name of the class or throws the Zend_Excepton, if loading failed.
-     * The Zend_Exception can be catched for something like: new MissingClass().
+     * Returns either the name of the class or false if loading failed.
      *
      * @param string $class The name of the class.
      *
-     * @return string|Zend_Exception Class name on success; false on failure.
+     * @return string|false Class name on success; false on failure.
      */
     public static function autoload($class)
     {
         try {
             @self::loadClass($class, null);
             return $class;
-        } catch (Zend_Exception $error) {
+        } catch (\Exception $error) {
             return false;
         }
     }
@@ -267,13 +266,17 @@ class Phprojekt_Loader
      * It first tries to load the view script from the system module's 'Views/dojo' directory, and if that fails, it tries to load it from the user module's 'Views/dojo' directory.
      * The loaded view script is then added to the view object's script path.
      *
-     * @param Zend_View|null $view The view object to which the script path should be added. If not provided, the method will use the view object from the Phprojekt instance.
+     * @param mixed $view The view object to which the script path should be added. If not provided, the method will use the view object from the Phprojekt instance.
      * @return void This method does not return anything, it only modifies the view object's script path.
      * @note This method modifies filesystem.
      */
     public static function loadViewScript($view = null)
     {
-        $module = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
+        // Get module from request if available, otherwise use Default
+        $module = 'Default';
+        if (isset($_REQUEST['module'])) {
+            $module = $_REQUEST['module'];
+        }
         if (null === $view) {
             $view = Phprojekt::getInstance()->getView();
         }

@@ -77,11 +77,11 @@ class Phprojekt_Filter_UserFilter extends Phprojekt_Filter_Abstract
      * This might get more complex in upcoming versions.
      * After running the filter() method you can easily run the database query with the modified query.
      *
-     * @param Zend_Db_Select $select The select to update.
+     * @param \Laminas\Db\Sql\Select $select The select to update.
      *
      * @return void
      */
-    public function filter(Zend_Db_Select $select, $tableName = null)
+    public function filter(\Laminas\Db\Sql\Select $select, $tableName = null)
     {
         $db = $this->_adapter;
         if (null !== $tableName) {

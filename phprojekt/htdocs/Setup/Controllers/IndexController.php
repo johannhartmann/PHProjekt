@@ -67,9 +67,6 @@ class IndexController extends AbstractActionController
         $this->_helper->viewRenderer->setNoRender();
         $this->view->clearVars();
 
-        $front    = Zend_Controller_Front::getInstance();
-        $response = $front->getRequest();
-
         $this->view->message = array();
         $this->view->success = "";
         $this->view->error   = array();

@@ -155,7 +155,7 @@ class Phprojekt_Tree_Node_Database implements IteratorAggregate
                 $filter->filter($select, 'tt');
             }
 
-            $treeData = $select->query()->fetchAll(Zend_Db::FETCH_CLASS);
+            $treeData = $select->query()->fetchAll(\PDO::FETCH_CLASS);
             foreach ($treeData as $index => $record) {
                 foreach ($record as $key => $value) {
                     $newKey = Phprojekt_ActiveRecord_Abstract::convertVarFromSql($key);

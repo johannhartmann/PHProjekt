@@ -58,11 +58,11 @@ class Phprojekt_Log extends Logger
      * will create a Zend_Log object
      * with the path to the filename and a filter for these log.
      *
-     * @param Zend_Config $config Object contain the user configuration.
+     * @param \Laminas\Config\Config $config Object contain the user configuration.
      *
      * @return void
      */
-    public function __construct(Zend_Config $config)
+    public function __construct(\Laminas\Config\Config $config)
     {
         parent::__construct();
 
@@ -136,7 +136,7 @@ class Phprojekt_Log extends Logger
      */
     public function log($message, $priority, $extras = null)
     {
-        if ($priority >= Zend_Log::DEBUG) {
+        if ($priority >= \Laminas\Log\Logger::DEBUG) {
             $btrace = debug_backtrace();
             if (isset($btrace[3])) {
                 if (!isset($btrace[3]['line'])) {

@@ -292,7 +292,7 @@ class Phprojekt_DbParser
 
         try {
             $version = $this->_moduleRow($module, 'version');
-        } catch (Zend_Db_Statement_Exception $error) {
+        } catch (\Laminas\Db\Adapter\Exception\RuntimeException $error) {
             // The module table don't exists yet
             $version = "0.0.0";
         }
