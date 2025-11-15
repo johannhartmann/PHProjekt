@@ -33,9 +33,8 @@ class Phprojekt_Item_Rights
      */
     public function __construct()
     {
+        // Initialize with database adapter
         $config = array('db' => Phprojekt::getInstance()->getDb());
-
-        parent::__construct($config);
     }
 
     /**

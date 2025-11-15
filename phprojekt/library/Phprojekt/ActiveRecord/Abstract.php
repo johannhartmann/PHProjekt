@@ -163,6 +163,34 @@ abstract class Phprojekt_ActiveRecord_Abstract
     protected $_colInfo;
 
     /**
+     * Database adapter instance.
+     *
+     * @var \Laminas\Db\Adapter\Adapter
+     */
+    protected $_db;
+
+    /**
+     * Table name.
+     *
+     * @var string
+     */
+    protected $_name;
+
+    /**
+     * Table schema name.
+     *
+     * @var string
+     */
+    protected $_schema;
+
+    /**
+     * Column names.
+     *
+     * @var array
+     */
+    protected $_cols = array();
+
+    /**
      * Initialize new object.
      *
      * @param array $config Configuration for Laminas database table.
@@ -184,10 +212,16 @@ abstract class Phprojekt_ActiveRecord_Abstract
                 . "\Laminas\Db\Adapter\Adapter");
         }
 
-        parent::__construct($config);
+        // Store database adapter
+        $this->_db = $config['db'];
 
+        // Setup table name
+        $this->_setupTableName();
+
+        // Get table metadata
         $info           = $this->info();
         $this->_colInfo = $info['cols'];
+        $this->_cols    = $info['cols'];
 
         $this->_initDataArray();
     }
@@ -281,7 +315,52 @@ abstract class Phprojekt_ActiveRecord_Abstract
     protected function _setupTableName()
     {
         $this->_name = $this->getTableName();
-        parent::_setupTableName();
+    }
+
+    /**
+     * Get database adapter.
+     *
+     * @return \Laminas\Db\Adapter\Adapter
+     */
+    public function getAdapter()
+    {
+        return $this->_db;
+    }
+
+    /**
+     * Get table metadata info.
+     *
+     * @return array
+     */
+    public function info()
+    {
+        if (empty($this->_cols)) {
+            // Get table metadata from database
+            $metadata = new \Laminas\Db\Metadata\Metadata($this->_db);
+            $table = $metadata->getTable($this->_name);
+            $columns = $table->getColumns();
+
+            foreach ($columns as $column) {
+                $this->_cols[] = $column->getName();
+            }
+        }
+
+        return array(
+            'name' => $this->_name,
+            'cols' => $this->_cols,
+            'schema' => $this->_schema
+        );
+    }
+
+    /**
+     * Create a new select object for the database.
+     *
+     * @return \Laminas\Db\Sql\Select
+     */
+    public function select()
+    {
+        $sql = new \Laminas\Db\Sql\Sql($this->_db);
+        return $sql->select();
     }
 
     /**
@@ -506,9 +585,28 @@ abstract class Phprojekt_ActiveRecord_Abstract
                 $select->order($order);
             }
             if ($count !== null || $offset !== null) {
-                $select->limit($count, $offset);
+                $select->limit($count);
+                if ($offset !== null) {
+                    $select->offset($offset);
+                }
             }
-            return parent::fetchAll($select);
+
+            // Execute the select statement
+            $sql = new \Laminas\Db\Sql\Sql($this->_db);
+            $statement = $sql->prepareStatementForSqlObject($select);
+            $results = $statement->execute();
+
+            // Convert results to array of ActiveRecord objects
+            $rows = array();
+            $className = get_class($this);
+            foreach ($results as $row) {
+                $object = new $className(array('db' => $this->_db));
+                foreach ($row as $col => $value) {
+                    $object->_data[self::convertVarFromSql($col)] = $value;
+                }
+                $rows[] = $object;
+            }
+            return $rows;
         }
     }
 
@@ -930,9 +1028,15 @@ abstract class Phprojekt_ActiveRecord_Abstract
             $where = sprintf('id = %d', (int) $this->_data['id']);
         }
 
-        // Call parent delete with the where clause
+        // Execute delete with the where clause
         if ($where !== null) {
-            parent::delete($where);
+            $delete = new \Laminas\Db\Sql\Delete($this->_name);
+            $delete->where($where);
+
+            $sql = new \Laminas\Db\Sql\Sql($this->_db);
+            $statement = $sql->prepareStatementForSqlObject($delete);
+            $statement->execute();
+
             $this->_initDataArray();
             $this->_relations = array();
         }
@@ -1022,7 +1126,21 @@ abstract class Phprojekt_ActiveRecord_Abstract
             throw new Phprojekt_ActiveRecord_Exception('Argument cannot be NULL');
         }
 
-        $find = parent::find($args[0]);
+        // Find row by ID
+        $select = $this->select()->from($this->_name)->where(array('id' => $args[0]));
+
+        $sql = new \Laminas\Db\Sql\Sql($this->_db);
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $results = $statement->execute();
+
+        $find = array();
+        foreach ($results as $row) {
+            $object = new static(array('db' => $this->_db));
+            foreach ($row as $col => $value) {
+                $object->_data[self::convertVarFromSql($col)] = $value;
+            }
+            $find[] = $object;
+        }
 
         if (false === is_array($find) || count($find) === 0) {
             return $find;

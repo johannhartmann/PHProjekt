@@ -51,8 +51,6 @@ class Phprojekt_Search_Words
             $tmp              = file_get_contents($file);
             $this->_stopWords = $this->_stringToArray($tmp);
         }
-
-        parent::__construct($config);
     }
 
     /**

@@ -34,9 +34,8 @@ class Phprojekt_Search_Display
      */
     public function __construct()
     {
+        // Initialize with database adapter
         $config = array('db' => Phprojekt::getInstance()->getDb());
-
-        parent::__construct($config);
     }
 
     /**
