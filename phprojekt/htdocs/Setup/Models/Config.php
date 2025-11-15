@@ -155,7 +155,7 @@ class Setup_Models_Config
      */
     private function _setPrivateDir()
     {
-        $folderNamespace = new Zend_Session_Namespace('privateFolder');
+        $folderNamespace = new \Laminas\Session\Container('privateFolder');
         if (isset($folderNamespace->path)) {
             $this->_privateDir = $folderNamespace->path;
         } else {

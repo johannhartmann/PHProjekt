@@ -35,7 +35,10 @@
  * @version    Release: 6.1.0
  * @author     Gustavo Solt <solt@mayflower.de>
  */
-class IndexController extends Zend_Controller_Action
+
+use Laminas\Mvc\Controller\AbstractActionController;
+
+class IndexController extends AbstractActionController
 {
     /**
      * Internal var for keep the Setup model.

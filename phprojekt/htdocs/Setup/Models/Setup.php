@@ -110,7 +110,7 @@ class Setup_Models_Setup
                 . "You should try to generate an extra virtual host (or a sub-domain) to phprojekt/htdocs.";
 
             // Works the .htaccess?
-            $response = new Zend_Controller_Request_Http();
+            $response = new \Laminas\Http\PhpEnvironment\Request();
             $webpath  = $response->getHttpHost();
             $str      = '';
             $sock     = fsockopen($webpath, $response->getServer('SERVER_PORT'));
@@ -278,7 +278,7 @@ class Setup_Models_Setup
         }
 
         if ($valid == 1) {
-            $folderNamespace       = new Zend_Session_Namespace('privateFolder');
+            $folderNamespace       = new \Laminas\Session\Container('privateFolder');
             $folderNamespace->path = $privateDir;
         }
 
@@ -503,7 +503,7 @@ class Setup_Models_Setup
         $dbParser->parseData(PHPR_ROOT_PATH . DIRECTORY_SEPARATOR . 'application');
 
         // Update users passwords
-        $usersNamespace = new Zend_Session_Namespace('usersData');
+        $usersNamespace = new \Laminas\Session\Container('usersData');
 
         // Update admin Pass
         $db->update('setting', array('value' => md5('phprojektmd5' . $usersNamespace->data['adminPass'])),
@@ -607,7 +607,7 @@ class Setup_Models_Setup
      */
     private function _getDb()
     {
-        $databaseNamespace = new Zend_Session_Namespace('databaseData');
+        $databaseNamespace = new \Laminas\Session\Container('databaseData');
 
         $dbParams = array(
                     'host'     => $databaseNamespace->data['dbHost'],
@@ -630,7 +630,7 @@ class Setup_Models_Setup
      */
     private function _saveSession($name, $value)
     {
-        $namespace       = new Zend_Session_Namespace($name);
+        $namespace       = new \Laminas\Session\Container($name);
         $namespace->data = $value;
     }
 
@@ -708,7 +708,7 @@ class Setup_Models_Setup
 
     public function writeConfigFile()
     {
-        $databaseNamespace = new Zend_Session_Namespace('databaseData');
+        $databaseNamespace = new \Laminas\Session\Container('databaseData');
         $config            = new Setup_Models_Config();
         $content           = $config->getDefaultProduction(
             $databaseNamespace->data['dbUser'],

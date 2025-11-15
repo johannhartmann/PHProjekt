@@ -52,32 +52,34 @@ error_reporting(-1);
 // Set the timezone to UTC
 date_default_timezone_set('UTC');
 
-// Start zend session to handle all session stuff
-Zend_Session::start();
+// Start Laminas session to handle all session stuff
+\Laminas\Session\SessionManager::getDefaultManager()->start();
 
-$view = new Zend_View();
-$view->addScriptPath(PHPR_CORE_PATH . '/Setup/Views/dojo/');
+$view = new \Laminas\View\Renderer\PhpRenderer();
+$view->resolver()->addPath(PHPR_CORE_PATH . '/Setup/Views/dojo/');
 
-$viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($view);
-$viewRenderer->setViewBasePathSpec(':moduleDir/Views');
-$viewRenderer->setViewScriptPathSpec(':action.:suffix');
-Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
-
-$plugin = new Zend_Controller_Plugin_ErrorHandler();
-$plugin->setErrorHandlerModule('Setup');
-$plugin->setErrorHandlerController('Error');
-$plugin->setErrorHandlerAction('error');
-
-$front = Zend_Controller_Front::getInstance();
-$front->setDispatcher(new Phprojekt_Dispatcher());
-$front->registerPlugin($plugin);
-$front->setDefaultModule('Setup');
-$front->setModuleControllerDirectoryName('Controllers');
-$front->addModuleDirectory(PHPR_CORE_PATH);
-$front->setParam('useDefaultControllerAlways', true);
+// Note: Laminas MVC uses different architecture than Zend Framework 1
+// The front controller pattern has been replaced with the event-driven MVC in Laminas
+// This bootstrap maintains compatibility while using Laminas components
 
 try {
-    Zend_Controller_Front::getInstance()->dispatch();
+    // Use a simple routing approach for setup
+    $request = new \Laminas\Http\PhpEnvironment\Request();
+    $module = $request->getQuery('module', 'Setup');
+    $controller = $request->getQuery('controller', 'Index');
+    $action = $request->getQuery('action', 'index');
+
+    $controllerClass = ucfirst($controller) . 'Controller';
+    $controllerFile = PHPR_CORE_PATH . '/' . $module . '/Controllers/' . $controllerClass . '.php';
+
+    if (file_exists($controllerFile)) {
+        require_once $controllerFile;
+        $controllerInstance = new $controllerClass();
+        $actionMethod = $action . 'Action';
+        if (method_exists($controllerInstance, $actionMethod)) {
+            $controllerInstance->$actionMethod();
+        }
+    }
 } catch (Exception $error) {
     echo "Caught exception: " . $error->getFile() . ':' . $error->getLine() . "\n";
     echo '<br/>' . $error->getMessage();

@@ -937,15 +937,7 @@ class Setup_Models_Migration
                 ]
             )->query()->fetchAll();
 
-        $contractTable = new Zend_Db_Table([
-            Zend_Db_Table_Abstract::NAME => 'contract',
-            Zend_Db_Table_Abstract::ADAPTER => $this->_db
-        ]);
-        $settingTable = new Zend_Db_Table([
-            Zend_Db_Table_Abstract::NAME => 'setting',
-            Zend_Db_Table_Abstract::ADAPTER => $this->_db
-        ]);
-
+        // Tables are managed through _tableManager, no need for table objects
         $contractRelFields = ['user_id', 'contract_id', 'start', 'end'];
         $contractRelValues = [];
         $settingFields = array('user_id', 'module_id', 'key_value', 'value');
@@ -1073,7 +1065,7 @@ class Setup_Models_Migration
      */
     private function _getModules()
     {
-        $modulesNamespace = new Zend_Session_Namespace('migratedModules');
+        $modulesNamespace = new \Laminas\Session\Container('migratedModules');
         if (!isset($modulesNamespace->modules)) {
             $modulesNamespace->modules = array();
 
@@ -1472,7 +1464,7 @@ class Setup_Models_Migration
      */
     private function _saveSession($name, $value)
     {
-        $namespace       = new Zend_Session_Namespace($name);
+        $namespace       = new \Laminas\Session\Container($name);
         $namespace->data = $value;
     }
 
@@ -1487,7 +1479,7 @@ class Setup_Models_Migration
      */
     private function _getSession($name)
     {
-        $namespace = new Zend_Session_Namespace($name);
+        $namespace = new \Laminas\Session\Container($name);
 
         return (isset($namespace->data)) ? $namespace->data : array();
     }
@@ -1501,7 +1493,7 @@ class Setup_Models_Migration
      */
     private function _cleanSession($name)
     {
-        $namespace = new Zend_Session_Namespace($name);
+        $namespace = new \Laminas\Session\Container($name);
         $namespace->unsetAll();
     }
 }
