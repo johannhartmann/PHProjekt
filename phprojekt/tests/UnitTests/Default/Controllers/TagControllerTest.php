@@ -89,7 +89,7 @@ class Phprojekt_TagController_Test extends FrontInit
      */
     public function testJsonSaveTagsActionInvalid()
     {
-        $this->expectException('Zend_Controller_Action_Exception');
+        $this->expectException('Application\\Default\\Exception\\HttpException');
         $this->setRequestUrl('Default/Tag/jsonSaveTags/');
         $this->request->setParam('moduleName', 'Project');
         $this->request->setParam('string', 'test');
@@ -132,7 +132,7 @@ class Phprojekt_TagController_Test extends FrontInit
      */
     public function testJsonDeleteTagsActionInvalid()
     {
-        $this->expectException('Zend_Controller_Action_Exception');
+        $this->expectException('Application\\Default\\Exception\\HttpException');
         $this->setRequestUrl('Default/Tag/jsonDeleteTags/');
         $this->request->setParam('moduleName', 'Project');
         $response = $this->getResponse();
@@ -146,7 +146,7 @@ class Phprojekt_TagController_Test extends FrontInit
         $this->setRequestUrl('Default/Tag/jsonGetTagsByModule/');
         $this->request->setParam('moduleName', 'Project');
         $this->request->setParam('id', 2);
-        $response = Zend_Json::decode($this->getResponse());
+        $response = json_decode($this->getResponse());
 
         $this->assertEquals(array(
             'metadata' => array(
@@ -171,7 +171,7 @@ class Phprojekt_TagController_Test extends FrontInit
     {
         $this->setRequestUrl('Default/Tag/jsonGetTagsByModule/');
         $this->request->setParam('moduleName', 'Project');
-        $response = Zend_Json::decode($this->getResponse());
+        $response = json_decode($this->getResponse());
 
         $this->assertEquals(array(
             'metadata' => array(

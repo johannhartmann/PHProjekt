@@ -54,7 +54,7 @@ class Calendar2_IndexController_Test extends FrontInit
         $response = $this->getResponse();
         $this->assertContains(IndexController::ADD_TRUE_TEXT, $response);
 
-        $response = Zend_Json::decode($response, 5, -1);
+        $response = json_decode($response, 5, -1);
         $this->assertArrayHasKey('id', $response);
         $id = $response['id'];
 
@@ -67,7 +67,7 @@ class Calendar2_IndexController_Test extends FrontInit
 
     private function _setTimezone($offset)
     {
-        $this->request = new Zend_Controller_Request_Http();
+        $this->_reset();
         $this->setRequestUrl('Core/setting/jsonSave/nodeId/1/moduleName/User');
         $this->request->setParam('confirmValue', '');
         $this->request->setParam('email', '');

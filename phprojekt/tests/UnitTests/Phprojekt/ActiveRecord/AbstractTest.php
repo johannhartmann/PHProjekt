@@ -74,7 +74,7 @@ class Phprojekt_ActiveRecord_AbstractTest extends DatabaseTest
 
     public function testDeleteHasManyAndBelongsToMany()
     {
-        $authNamespace = new Zend_Session_Namespace('Phprojekt_Auth-login');
+        $authNamespace = new Laminas\Session\Container('Phprojekt_Auth-login');
         $keepUser = $authNamespace->userId;
 
         $role = new Phprojekt_Role_Role(array('db' => $this->sharedFixture));

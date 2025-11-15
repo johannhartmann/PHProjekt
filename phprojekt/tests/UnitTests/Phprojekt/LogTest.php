@@ -31,7 +31,7 @@ class Phprojekt_LogTest extends PHPUnit\Framework\TestCase
         $config = Phprojekt::getInstance()->getConfig();
         $log = new Phprojekt_Log($config);
 
-        $this->expectException('Zend_Log_Exception');
+        $this->expectException('Laminas\\Log\\Exception\\InvalidArgumentException');
         $log->nothing('TEST');
     }
 
@@ -43,7 +43,7 @@ class Phprojekt_LogTest extends PHPUnit\Framework\TestCase
         $config = Phprojekt::getInstance()->getConfig();
         $log = new Phprojekt_Log($config);
 
-        $this->expectException('Zend_Log_Exception');
+        $this->expectException('Laminas\\Log\\Exception\\InvalidArgumentException');
         $log->log('TEST', 'NOTHING');
     }
 
@@ -55,7 +55,7 @@ class Phprojekt_LogTest extends PHPUnit\Framework\TestCase
         $config = Phprojekt::getInstance()->getConfig();
         $log = new Phprojekt_Log($config);
 
-        $this->expectException('Zend_Log_Exception');
+        $this->expectException('Laminas\\Log\\Exception\\InvalidArgumentException');
         $log->log('TEST', 8);
     }
 
@@ -67,9 +67,9 @@ class Phprojekt_LogTest extends PHPUnit\Framework\TestCase
         $config = Phprojekt::getInstance()->getConfig();
         $log = new Phprojekt_Log($config);
 
-        $log->log('TEST', Zend_Log::DEBUG);
-        $log->log('TEST', Zend_Log::CRIT);
-        $log->log('TEST', Zend_Log::INFO);
+        $log->log('TEST', \Laminas\Log\Logger::DEBUG);
+        $log->log('TEST', \Laminas\Log\Logger::CRIT);
+        $log->log('TEST', \Laminas\Log\Logger::INFO);
         $this->assertSame($this, $this);
     }
 }

@@ -22,7 +22,7 @@ abstract class DatabaseTest extends PHPUnit\Framework\TestCase {
     public function setUp(): void {
         parent::setUp();
         Phprojekt::getInstance();
-        Zend_Db_Table_Abstract::getDefaultMetadataCache()->clean();
+        // Note: Metadata cache cleaning removed - using Laminas Db TableGateway instead
     }
 
     protected function getConnection() {

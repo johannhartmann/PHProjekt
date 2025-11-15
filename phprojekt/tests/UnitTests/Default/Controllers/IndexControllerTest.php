@@ -266,7 +266,7 @@ class Phprojekt_IndexController_Test extends FrontInit
     public function testJsonGetConfigurationsAction()
     {
         $this->setRequestUrl('Project/index/jsonGetConfigurations');
-        $response = Zend_Json::decode($this->getResponse());
+        $response = json_decode($this->getResponse(), true);
         $expected = array(
             array(
                 'name' => 'supportAddress',
@@ -301,7 +301,7 @@ class Phprojekt_IndexController_Test extends FrontInit
     {
         $this->setRequestUrl('Project/index/jsonGetUsersRights/');
         $this->request->setParam('id', 2);
-        $response = Zend_Json::decode($this->getResponse());
+        $response = json_decode($this->getResponse(), true);
         $expected = array (
             1 => array (
                 'none' => false,

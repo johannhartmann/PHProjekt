@@ -375,8 +375,8 @@ class Phprojekt_Item_AbstractTest extends DatabaseTest
      */
     public function testFloat()
     {
-        $locale = new Zend_Locale();
-        $locale->setLocale('es_AR');
+        $locale = new \Locale();
+        \Locale::setDefault('es_AR');
         $item         = new Project_Models_Project(array('db' => $this->sharedFixture));
         $item->budget = '1000,30';
         $this->assertEquals(array(), $item->getError());

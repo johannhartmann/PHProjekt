@@ -34,7 +34,7 @@ class Calendar2_Models_Calendar2_Test extends FrontInit
 
     public function testCaldavCreateObject()
     {
-        Zend_Controller_Front::getInstance()->setRequest(new Zend_Controller_Request_Http());
+        // Request is already set up by FrontInit parent class
 
         $calendarId = '1';
         $objectUri = '693F6D66-92C6-47B8-8E97-C799B758FAE4';
