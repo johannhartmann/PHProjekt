@@ -49,6 +49,22 @@ All 24 application controllers have been refactored to native Laminas MVC:
 2. **Phprojekt_RestController** (1 file removed)
    - No longer used - all REST controllers now extend Laminas AbstractRestfulController
 
+### Exceptions - Native Laminas ✓
+
+**Created Application\Default\Exception\HttpException**
+- Modern replacement for Zend_Controller_Action_Exception
+- Extends RuntimeException for PSR compliance
+- Maintains HTTP status code support (400, 401, 403, 404, 422, etc.)
+- Compatible with Laminas MVC error handling
+- Zero ZF1 dependencies
+
+**Migrated Exception Usage (26 occurrences)**
+- application/Default/Helpers/Save.php - Now throws HttpException
+- application/Default/Helpers/Delete.php - Now throws HttpException
+- application/Default/Helpers/Upload.php - Now throws HttpException
+- application/Calendar2/Models/Calendar2.php - Now throws HttpException
+- tests/UnitTests/Default/Controllers/IndexControllerTest.php - Now catches HttpException
+
 ## Remaining Wrapper Dependencies
 
 ### Zend/Controller/* - REQUIRED by Bootstrap Infrastructure
@@ -64,18 +80,10 @@ The following Zend/Controller wrapper classes **CANNOT be deleted** without majo
 - `Zend_Controller_Plugin_ErrorHandler` - Error handling plugin
 - `Zend_Controller_Action_Exception` - Exception handling
 
-**Used by Helper Classes**
-- `application/Default/Helpers/Save.php` - Throws Zend_Controller_Action_Exception (18 occurrences)
-- `application/Default/Helpers/Delete.php` - Throws Zend_Controller_Action_Exception (4 occurrences)
-- `application/Default/Helpers/Upload.php` - Throws Zend_Controller_Action_Exception (3 occurrences)
-
 **Used by Tests**
 - `tests/UnitTests/FrontInit.php` - Creates Zend_Controller_Front instance
 - `tests/UnitTests/Bootstrap.php` - Front Controller setup
 - Various model and controller tests
-
-**Used by Models (Legacy Pattern)**
-- `application/Calendar2/Models/Calendar2.php` - Creates Zend_Controller_Request_Http
 
 **Used by Setup System**
 - `htdocs/Setup/Controllers/IndexController.php` - Uses ZF1 patterns
@@ -99,11 +107,11 @@ The following Zend/Controller wrapper classes **CANNOT be deleted** without majo
 - **Risk**: Cannot remove Zend/Controller wrappers without breaking application
 - **Future Work**: Full bootstrap refactoring required (major undertaking)
 
-### Helpers: Using Wrapper Exceptions ⚠️
-- **Status**: Helper classes throw Zend_Controller_Action_Exception
-- **Dependencies**: 25+ occurrences across Save/Delete/Upload helpers
-- **Impact**: Cannot remove exception wrappers without refactoring helpers
-- **Future Work**: Migrate to Laminas exceptions or HTTP exceptions
+### Helpers: Migration Complete ✓
+- **Status**: Helper classes now throw native HttpException
+- **Dependencies**: Zero wrapper exception dependencies
+- **Benefits**: Clean, PSR-compliant exception handling with proper HTTP status codes
+- **Impact**: 26 wrapper exception calls eliminated from application layer
 
 ## Next Steps for Complete Wrapper Removal
 
@@ -116,19 +124,15 @@ To fully remove Zend/Controller wrappers, the following work is required:
    - Refactor error handling plugin
    - Update view renderer setup
 
-2. **Refactor Helper Classes**
-   - Replace Zend_Controller_Action_Exception with Laminas\Http\Response exceptions
-   - Update exception handling in controllers
-
-3. **Refactor Test Infrastructure**
+2. **Refactor Test Infrastructure**
    - Update test bootstrap to use Laminas patterns
    - Migrate controller tests to Laminas testing framework
 
-4. **Refactor Setup System**
+3. **Refactor Setup System**
    - Update htdocs/Setup to use Laminas patterns
    - Remove ZF1 dependencies from setup flow
 
-5. **Update Models**
+4. **Update Models**
    - Remove controller dependencies from models
    - Use proper dependency injection
 
@@ -139,11 +143,14 @@ To fully remove Zend/Controller wrappers, the following work is required:
 - ✓ 5,277 lines of legacy controller code removed
 - ✓ Unused wrapper classes deleted (Phprojekt_RestController)
 - ✓ Native Laminas patterns throughout controller layer
+- ✓ Exception handling migrated to native HttpException (26 occurrences)
+- ✓ Helper classes (Save, Delete, Upload) now ZF1-independent
+- ✓ Model exception handling migrated (Calendar2)
 
 **Remaining Work:**
 - Bootstrap infrastructure still requires Zend/Controller wrappers
-- Helper classes use wrapper exceptions
 - Test infrastructure uses wrapper patterns
+- Setup system uses ZF1 patterns
 - Estimated effort: 2-3 weeks for complete wrapper removal
 
 **Recommendation:**
