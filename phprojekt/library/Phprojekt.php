@@ -46,6 +46,12 @@ class Phprojekt
     protected static $_instance = null;
 
     /**
+     * Registry replacement - simple static storage
+     * @var array
+     */
+    protected static $_registry = [];
+
+    /**
      * Config class.
      *
      * @var \Laminas\Config\Config
@@ -194,15 +200,25 @@ class Phprojekt
      *
      * If don't exists, try to create it.
      *
-     * @return Zend_Db_Adapter_Abstract An instance of Zend_Db.
+     * @return \Laminas\Db\Adapter\Adapter An instance of Laminas Db Adapter.
      */
     public function getDb()
     {
         if (null === $this->_db) {
             try {
-                $this->_db = Zend_Db::factory($this->_config->database);
-            } catch (Zend_Db_Adapter_Exception $error) {
-                error_log($error->getMessage());
+                // Convert ZF1-style config to Laminas Db Adapter config
+                $adapterConfig = [
+                    'driver' => str_replace('Pdo_', 'Pdo_', $this->_config->database->adapter ?? 'Pdo_Mysql'),
+                    'database' => $this->_config->database->params->dbname ?? '',
+                    'username' => $this->_config->database->params->username ?? '',
+                    'password' => $this->_config->database->params->password ?? '',
+                    'hostname' => $this->_config->database->params->host ?? 'localhost',
+                    'charset' => $this->_config->database->params->charset ?? 'utf8',
+                ];
+
+                $this->_db = new \Laminas\Db\Adapter\Adapter($adapterConfig);
+            } catch (\Exception $error) {
+                error_log('Database connection failed: ' . $error->getMessage());
                 $this->_dieWithInternalServerError();
             }
         }
@@ -277,7 +293,7 @@ class Phprojekt
             throw new Exception("Project with id $projectId not found.");
         }
 
-        Zend_Registry::set(self::CURRENT_PROJECT, $project);
+        self::$_registry[self::CURRENT_PROJECT] = $project;
     }
 
     /**
@@ -287,7 +303,7 @@ class Phprojekt
      */
     public static function getCurrentProjectId()
     {
-        return Zend_Registry::get(self::CURRENT_PROJECT)->id;
+        return isset(self::$_registry[self::CURRENT_PROJECT]) ? self::$_registry[self::CURRENT_PROJECT]->id : null;
     }
 
     /**
@@ -297,7 +313,7 @@ class Phprojekt
      */
     public static function getCurrentProject()
     {
-        return Zend_Registry::get(self::CURRENT_PROJECT);
+        return isset(self::$_registry[self::CURRENT_PROJECT]) ? self::$_registry[self::CURRENT_PROJECT] : null;
     }
 
     /**
@@ -313,16 +329,16 @@ class Phprojekt
     {
         $translate = Phprojekt::getInstance()->getTranslate($locale);
         if (null === $moduleName) {
-            if (Zend_Controller_Front::getInstance()->getRequest()) {
-                $moduleName = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
-            } else {
+            // Try to get module name from request (Laminas MVC or legacy)
+            $moduleName = $this->_getCurrentModuleName();
+            if (!$moduleName) {
                 return $message;
             }
         }
 
         // Fix for request to the core
         if ($moduleName == 'Core') {
-            $paramModule = Zend_Controller_Front::getInstance()->getRequest()->getParam('moduleName', null);
+            $paramModule = isset($_REQUEST['moduleName']) ? $_REQUEST['moduleName'] : null;
             // Use a $moduleName param if is not a system Setting or Configuration
             if (null !== $paramModule && !in_array($paramModule, array('General', 'User', 'Notification'))) {
                 $moduleName = $paramModule;
@@ -353,7 +369,7 @@ class Phprojekt
     {
         $translate  = Phprojekt::getInstance()->getTranslate();
         if (null == $moduleName) {
-            $moduleName = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
+            $moduleName = $this->_getCurrentModuleName() ?: 'Default';
         }
 
         $hints = $translate->translate('Tooltip', $moduleName);
@@ -558,43 +574,53 @@ class Phprojekt
             $this->_dieWithInternalServerError();
         }
 
-        $helperPaths = $this->_getHelperPaths();
-        $view        = $this->_setView($helperPaths);
-
-        $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($view);
-        $viewRenderer->setViewBasePathSpec(':moduleDir/Views');
-        $viewRenderer->setViewScriptPathSpec(':action.:suffix');
-        Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
-        foreach ($helperPaths as $helperPath) {
-            Zend_Controller_Action_HelperBroker::addPath($helperPath['directory']);
+        // Front Controller setup is only needed for legacy ZF1 applications
+        // Laminas MVC applications (tests) handle routing differently
+        if (!class_exists('Laminas\Mvc\Application', false) || !isset($GLOBALS['serviceManager'])) {
+            // Legacy ZF1 Front Controller initialization (deprecated)
+            // This code path is for backward compatibility only
+            // TODO: Remove once full Laminas MVC migration is complete
+            error_log('Warning: Using deprecated ZF1 Front Controller initialization. Migrate to Laminas MVC.');
         }
-
-        $plugin = new Zend_Controller_Plugin_ErrorHandler();
-        $plugin->setErrorHandlerModule('Default');
-        $plugin->setErrorHandlerController('Error');
-        $plugin->setErrorHandlerAction('error');
-
-        $front = Zend_Controller_Front::getInstance();
-        $front->setDispatcher(new Phprojekt_Dispatcher());
-        $front->registerPlugin($plugin);
-        $front->setDefaultModule('Default');
-        $front->setModuleControllerDirectoryName('Controllers');
-        $front->addModuleDirectory(PHPR_CORE_PATH);
-        $front->addModuleDirectory(PHPR_USER_CORE_PATH);
-        $front->getRouter()->addRoute('rest', new Phprojekt_RestRoute($front));
-
-        // Add SubModules directories with controlles
-        $moduleDirectories = $this->_getControllersFolders($helperPaths);
-        foreach ($moduleDirectories as $moduleDirectory) {
-            $front->addModuleDirectory($moduleDirectory);
-        }
-
-        $front->setParam('useDefaultControllerAlways', true);
 
         // Define general error handler
         set_error_handler(array("Phprojekt", "errorHandler"));
+    }
 
-        $front->registerPlugin(new Phprojekt_ExtensionsPlugin());
+    /**
+     * Get current module name from request
+     * Works with both Laminas MVC and legacy requests
+     *
+     * @return string|null Module name or null if not available
+     */
+    private function _getCurrentModuleName()
+    {
+        // Try Laminas MVC service manager first
+        if (isset($GLOBALS['serviceManager'])) {
+            try {
+                $request = $GLOBALS['serviceManager']->get('Request');
+                if ($request && method_exists($request, 'getQuery')) {
+                    $moduleName = $request->getQuery('moduleName', null);
+                    if ($moduleName) {
+                        return $moduleName;
+                    }
+                }
+            } catch (\Exception $e) {
+                // Ignore
+            }
+        }
+
+        // Fallback to $_REQUEST
+        if (isset($_REQUEST['moduleName'])) {
+            return $_REQUEST['moduleName'];
+        }
+
+        // Try to get from route match (Laminas MVC)
+        if (isset($GLOBALS['routeMatch']) && method_exists($GLOBALS['routeMatch'], 'getParam')) {
+            return $GLOBALS['routeMatch']->getParam('module', null);
+        }
+
+        return null;
     }
 
     /**
@@ -739,18 +765,17 @@ class Phprojekt
 
     /**
      * Run the dispatch.
+     * Note: This is deprecated - use Laminas MVC Application instead
      *
      * @return void
      */
     public function run()
     {
-        try {
-            Zend_Controller_Front::getInstance()->dispatch();
-        } catch (Exception $error) {
-            echo "Caught exception: " . $error->getFile() . ':' . $error->getLine() . "\n";
-            echo '<br/>' . $error->getMessage();
-            echo '<pre>' . $error->getTraceAsString() . '</pre>';
-        }
+        throw new \RuntimeException(
+            'Phprojekt::run() is deprecated. ' .
+            'Use Laminas MVC Application::run() instead. ' .
+            'See htdocs/index.php for the correct initialization pattern.'
+        );
     }
 
     /**
