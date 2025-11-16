@@ -1242,7 +1242,10 @@ abstract class Phprojekt_ActiveRecord_Abstract
         }
 
         if (false === is_array($find) || count($find) === 0) {
-            return $find;
+            // Reset data when record not found
+            $this->_initDataArray();
+            $this->_storedId = null;
+            return $this;
         }
 
         $find = $find[0];
@@ -1276,12 +1279,25 @@ abstract class Phprojekt_ActiveRecord_Abstract
      */
     public function count($where = null)
     {
+        $wheres = array();
+        // Add hasMany relationship filter if present
+        if (array_key_exists('hasMany', $this->_relations)) {
+            $keyName  = $this->_translateKeyFormat($this->_relations['hasMany']['classname']);
+            $wheres[] = sprintf('%s = %d', $this->getAdapter()->platform->quoteIdentifier($keyName),
+                (int) $this->_relations['hasMany']['id']);
+        }
+        if (null !== $where) {
+            $wheres[] = $where;
+        }
+
+        $whereClause = (is_array($wheres) && count($wheres) > 0) ? implode(' AND ', $wheres) : null;
+
         $sql = new \Laminas\Db\Sql\Sql($this->_db);
         $select = $sql->select();
         $select->from($this->_name);
         $select->columns(array('cnt' => new \Laminas\Db\Sql\Expression('COUNT(*)')));
-        if (!is_null($where)) {
-            $select->where($where);
+        if (!is_null($whereClause)) {
+            $select->where($whereClause);
         }
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();

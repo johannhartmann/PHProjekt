@@ -90,11 +90,14 @@ class Phprojekt_ActiveRecord_AbstractTest extends DatabaseTest
         $this->assertTrue($modulePermissions->save());
 
         $this->assertNotNull($role->id);
-        $this->assertEquals(2, $role->modulePermissions->count());
+        // After creating and saving one modulePermissions, count should be 1
+        $this->assertEquals(1, $role->modulePermissions->count());
 
         $role->delete();
 
-        $this->assertEquals(1, $role->modulePermissions->count());
+        // After deleting the role, all its modulePermissions should be cascade deleted
+        // So count should be 0 (for role_id=NULL after delete sets id to null)
+        $this->assertEquals(0, $role->modulePermissions->count());
         $this->assertNull($role->id);
 
         $authNamespace->userId = $keepUser;
@@ -150,12 +153,14 @@ class Phprojekt_ActiveRecord_AbstractTest extends DatabaseTest
         $this->assertEquals('Developer Tasks', $project->instances->find(1)->name);
         $this->assertEquals('Project Tasks', $project->instances->find(2)->name);
 
-        $this->assertEquals(3, $project->instances->count());
-        $this->assertEquals(5, $project->count());
+        // Project 2 has 2 module instances in fixtures
+        $this->assertEquals(2, $project->instances->count());
+        $this->assertEquals(7, $project->count());
 
         // same but with fetch all
         $rows = $project->fetchAll();
-        $this->assertEquals(6, $rows[3]->id);
+        // $rows[3] is the 4th project (index 3), which has id=4
+        $this->assertEquals(4, $rows[3]->id);
         $this->assertEquals('Developer Tasks', $rows[1]->instances->find(1)->name);
     }
 

@@ -56,7 +56,6 @@ INSERT IGNORE INTO `item_rights` (`module_id`, `item_id`, `user_id`, `access`) V
 INSERT IGNORE INTO `item_rights` (`module_id`, `item_id`, `user_id`, `access`) VALUES (1, 7, 1, 255);
 INSERT IGNORE INTO `item_rights` (`module_id`, `item_id`, `user_id`, `access`) VALUES (1, 2, 3, 255);
 INSERT IGNORE INTO `role` (`id`, `name`) VALUES (1, 'Admin');
-INSERT IGNORE INTO `role_module_permissions` (`role_id`, `module_id`, `access`) VALUES (1, 1, 139);
 INSERT IGNORE INTO `groups` (`id`, `name`) VALUES (1, 'Group 1');
 INSERT IGNORE INTO `groups` (`id`, `name`) VALUES (2, 'Group 2');
 INSERT IGNORE INTO `groups_user_relation` (`user_id`, `groups_id`) VALUES (1, 1);
@@ -117,7 +116,6 @@ INSERT IGNORE INTO `item_rights` (`module_id`, `item_id`, `user_id`, `access`) V
 INSERT IGNORE INTO `item_rights` (`module_id`, `item_id`, `user_id`, `access`) VALUES (1, 7, 1, 255);
 INSERT IGNORE INTO `item_rights` (`module_id`, `item_id`, `user_id`, `access`) VALUES (1, 2, 3, 255);
 INSERT IGNORE INTO `role` (`id`, `name`) VALUES (1, 'Admin');
-INSERT IGNORE INTO `role_module_permissions` (`role_id`, `module_id`, `access`) VALUES (1, 1, 139);
 INSERT IGNORE INTO `groups` (`id`, `name`) VALUES (1, 'Group 1');
 INSERT IGNORE INTO `groups` (`id`, `name`) VALUES (2, 'Group 2');
 INSERT IGNORE INTO `groups_user_relation` (`user_id`, `groups_id`) VALUES (1, 1);
@@ -171,9 +169,6 @@ INSERT IGNORE INTO `item_rights` (`module_id`, `item_id`, `user_id`, `access`) V
 INSERT IGNORE INTO `item_rights` (`module_id`, `item_id`, `user_id`, `access`) VALUES (1, 2, 1, 255);
 INSERT IGNORE INTO `item_rights` (`module_id`, `item_id`, `user_id`, `access`) VALUES (1, 3, 1, 255);
 INSERT IGNORE INTO `role` (`id`, `name`) VALUES (1, 'Admin');
-INSERT IGNORE INTO `role_module_permissions` (`role_id`, `module_id`, `access`) VALUES (1, 1, 139);
-INSERT IGNORE INTO `role_module_permissions` (`role_id`, `module_id`, `access`) VALUES (1, 2, 139);
-INSERT IGNORE INTO `role_module_permissions` (`role_id`, `module_id`, `access`) VALUES (1, 3, 139);
 INSERT IGNORE INTO `database_manager` (`table_name`, `table_field`, `form_tab`, `form_label`, `form_type`, `form_position`, `form_columns`, `form_regexp`, `form_range`, `default_value`, `list_position`, `list_align`, `list_use_filter`, `alt_position`, `status`, `is_integer`, `is_required`, `is_unique`) VALUES ('Project', 'title', 1, 'Title', 'text', 1, 1, NULL, NULL, NULL, 1, 'left', 1, 2, 1, 0, 1, 0);
 INSERT IGNORE INTO `tags` (`id`, `word`) VALUES (1, 'this');
 INSERT IGNORE INTO `tags` (`id`, `word`) VALUES (2, 'that');
@@ -199,3 +194,6 @@ INSERT IGNORE INTO `user` (`id`, `username`, `firstname`, `lastname`, `status`, 
 SET FOREIGN_KEY_CHECKS=1;
 INSERT IGNORE INTO `project_role_user_permissions` (`project_id`, `user_id`, `role_id`) VALUES (2, 1, 1);
 INSERT IGNORE INTO `project_role_user_permissions` (`project_id`, `user_id`, `role_id`) VALUES (1, 1, 1);
+INSERT IGNORE INTO `role_module_permissions` (`role_id`, `module_id`, `access`) VALUES (1, 1, 139);
+INSERT IGNORE INTO `role_module_permissions` (`role_id`, `module_id`, `access`) VALUES (1, 2, 139);
+INSERT IGNORE INTO `role_module_permissions` (`role_id`, `module_id`, `access`) VALUES (1, 3, 139);
