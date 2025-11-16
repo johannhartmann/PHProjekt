@@ -971,8 +971,9 @@ abstract class Phprojekt_ActiveRecord_Abstract
                 $this->_data[$foreignKeyName] = $data[$foreignKeyName];
             }
 
-            $result            = ($this->insert($data) !== null);
-            $this->_data['id'] = $this->_db->lastInsertId();
+            $insertedId = $this->insert($data);
+            $result            = ($insertedId !== null);
+            $this->_data['id'] = $insertedId;
             $this->_storedId   = $this->_data['id'];
 
             if (array_key_exists('hasManyAndBelongsToMany', $this->_relations)) {
@@ -1001,7 +1002,8 @@ abstract class Phprojekt_ActiveRecord_Abstract
         $statement = $sql->prepareStatementForSqlObject($insert);
         $result = $statement->execute();
 
-        return $result->getAffectedRows();
+        // Return the last inserted ID for use by save()
+        return $result->getGeneratedValue();
     }
 
     /**

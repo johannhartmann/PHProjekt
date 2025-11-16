@@ -120,13 +120,14 @@ class Phprojekt_Tags_TagsTableMapper
             }
         }
 
-        // Use direct database insert instead of Laminas database table
+        // Use Laminas Sql for insert
         foreach ($toAdd as $newTag) {
-            $this->_db->insert(
-                self::tagsTableName,
-                array('word' => $newTag)
-            );
-            $ids[$newTag] = $this->_db->lastInsertId();
+            $sql = new \Laminas\Db\Sql\Sql($this->_db);
+            $insert = $sql->insert(self::tagsTableName);
+            $insert->values(array('word' => $newTag));
+            $statement = $sql->prepareStatementForSqlObject($insert);
+            $result = $statement->execute();
+            $ids[$newTag] = $result->getGeneratedValue();
         }
 
         return $ids;
@@ -134,13 +135,14 @@ class Phprojekt_Tags_TagsTableMapper
 
     public function deleteTagsForModuleItem($moduleId, $itemId)
     {
-        $this->_db->delete(
-            self::tagsRelationTableName,
-            array(
-                'module_id = ?' => (int) $moduleId,
-                'item_id = ?' => (int) $itemId
-            )
-        );
+        $sql = new \Laminas\Db\Sql\Sql($this->_db);
+        $delete = $sql->delete(self::tagsRelationTableName);
+        $delete->where([
+            'module_id' => (int) $moduleId,
+            'item_id' => (int) $itemId
+        ]);
+        $statement = $sql->prepareStatementForSqlObject($delete);
+        $statement->execute();
     }
 
     /*
