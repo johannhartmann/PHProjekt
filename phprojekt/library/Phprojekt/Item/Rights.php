@@ -17,7 +17,7 @@
  * This class manage the rights for each item per user.
  * Return and save the rights using the moduleId-itemId relation.
  */
-class Phprojekt_Item_Rights
+class Phprojekt_Item_Rights extends Phprojekt_ActiveRecord_Abstract
 {
     /**
      * Name of the table.
@@ -29,12 +29,17 @@ class Phprojekt_Item_Rights
     /**
      * Constructor.
      *
+     * @param array $config Configuration for database adapter.
+     *
      * @return void
      */
-    public function __construct()
+    public function __construct($config = null)
     {
-        // Initialize with database adapter
-        $config = array('db' => Phprojekt::getInstance()->getDb());
+        if (null === $config) {
+            // Initialize with database adapter
+            $config = array('db' => Phprojekt::getInstance()->getDb());
+        }
+        parent::__construct($config);
     }
 
     /**

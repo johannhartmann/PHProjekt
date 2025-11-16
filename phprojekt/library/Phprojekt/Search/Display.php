@@ -18,7 +18,7 @@
  *
  * The class provide the functions for display the item data of the results
  */
-class Phprojekt_Search_Display
+class Phprojekt_Search_Display extends Phprojekt_ActiveRecord_Abstract
 {
     /**
      * Name of the table.
@@ -30,12 +30,17 @@ class Phprojekt_Search_Display
     /**
      * Constructor.
      *
+     * @param array $config Configuration for database adapter.
+     *
      * @return void
      */
-    public function __construct()
+    public function __construct($config = null)
     {
-        // Initialize with database adapter
-        $config = array('db' => Phprojekt::getInstance()->getDb());
+        if (null === $config) {
+            // Initialize with database adapter
+            $config = array('db' => Phprojekt::getInstance()->getDb());
+        }
+        parent::__construct($config);
     }
 
     /**
@@ -167,7 +172,7 @@ class Phprojekt_Search_Display
      * Checks if a module-item pair has already been inserted..
      *
      * This private method checks if the provided module ID and item ID combination has already been inserted into the system.
-     * It does this by calling the `find()` method and checking if the result set has any rows.
+     * It does this by calling the `count()` method with a WHERE clause.
      *
      * @param integer $moduleId The ID of the module to check.
      * @param integer $itemId The ID of the item to check.
@@ -176,7 +181,8 @@ class Phprojekt_Search_Display
      */
     private function _exists($moduleId, $itemId)
     {
-        return ($this->find($moduleId, $itemId)->count() > 0);
+        $where = sprintf('module_id = %d AND item_id = %d', (int) $moduleId, (int) $itemId);
+        return ($this->count($where) > 0);
     }
 
     /**

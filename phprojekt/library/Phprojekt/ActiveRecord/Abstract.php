@@ -356,6 +356,31 @@ abstract class Phprojekt_ActiveRecord_Abstract
     }
 
     /**
+     * Get full table metadata including column types.
+     * Replacement for old _metadata property from Zend_Db_Table.
+     *
+     * @return array Column metadata array.
+     */
+    public function getMetadata()
+    {
+        $metadata = new \Laminas\Db\Metadata\Metadata($this->_db);
+        $table = $metadata->getTable($this->_name);
+        $columns = $table->getColumns();
+
+        $result = array();
+        foreach ($columns as $column) {
+            $result[$column->getName()] = array(
+                'DATA_TYPE' => $column->getDataType(),
+                'NULLABLE' => $column->isNullable(),
+                'LENGTH' => $column->getCharacterMaximumLength(),
+                'DEFAULT' => $column->getColumnDefault(),
+            );
+        }
+
+        return $result;
+    }
+
+    /**
      * Create a new select object for the database.
      *
      * @return \Laminas\Db\Sql\Select
@@ -414,6 +439,12 @@ abstract class Phprojekt_ActiveRecord_Abstract
     public function __get($varname)
     {
         $varname = trim($varname);
+
+        // Handle _metadata property for backward compatibility with Zend_Db_Table
+        if ($varname === '_metadata') {
+            return $this->getMetadata();
+        }
+
         $getter  = 'get' . ucfirst($varname);
         if (method_exists(get_class($this), $getter)) {
             return call_user_func(array($this, $getter));

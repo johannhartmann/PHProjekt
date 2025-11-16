@@ -20,7 +20,7 @@ use Laminas\Db\Sql\Expression;
  *
  * The class provide the functions for save/delete/search the words in the SearchWords table.
  */
-class Phprojekt_Search_Words
+class Phprojekt_Search_Words extends Phprojekt_ActiveRecord_Abstract
 {
     /**
      * Name of the table.
@@ -39,11 +39,16 @@ class Phprojekt_Search_Words
     /**
      * Constructor.
      *
+     * @param array $config Configuration for database adapter.
+     *
      * @return void
      */
-    public function __construct()
+    public function __construct($config = null)
     {
-        $config = array('db' => Phprojekt::getInstance()->getDb());
+        if (null === $config) {
+            $config = array('db' => Phprojekt::getInstance()->getDb());
+        }
+        parent::__construct($config);
 
         $file = Phprojekt::getInstance()->getConfig()->searchStopwordList;
 
