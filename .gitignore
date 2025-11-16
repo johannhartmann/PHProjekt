@@ -30,7 +30,7 @@ package-lock.json
 /frontend-react/node_modules/
 /frontend-react/dist/
 /frontend-react/.vite/
-/public/react/
+/phprojekt/htdocs/app/
 
 # E2E Tests
 /tests/e2e/node_modules/

@@ -5,9 +5,9 @@ import path from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/react/',
+  base: '/app/',
   build: {
-    outDir: '../public/react',
+    outDir: '../phprojekt/htdocs/app',
     emptyOutDir: true,
   },
   resolve: {

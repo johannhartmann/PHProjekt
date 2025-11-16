@@ -21,6 +21,19 @@ return [
                     ],
                 ],
             ],
+            'app' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/app[/:path]',
+                    'constraints' => [
+                        'path' => '.*',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\ReactController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'react' => [
                 'type'    => Segment::class,
                 'options' => [

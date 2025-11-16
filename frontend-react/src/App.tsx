@@ -15,7 +15,7 @@ import './App.css';
  */
 function App() {
   return (
-    <BrowserRouter basename="/react">
+    <BrowserRouter basename="/app">
       <Routes>
         <Route element={<ShellLayout />}>
           <Route index element={<Home />} />
