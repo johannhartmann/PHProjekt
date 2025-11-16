@@ -1150,6 +1150,20 @@ abstract class Phprojekt_ActiveRecord_Abstract
     }
 
     /**
+     * Fetch a single row from the table.
+     *
+     * @param string $where  Optional WHERE clause.
+     * @param string $order  Optional ORDER BY clause.
+     *
+     * @return Phprojekt_ActiveRecord_Abstract|null The first matching row or null if none found.
+     */
+    public function fetchRow($where = null, $order = null)
+    {
+        $rows = $this->fetchAll($where, $order, 1, null);
+        return !empty($rows) ? $rows[0] : null;
+    }
+
+    /**
      * Overwrite the find method to get relations too.
      *
      * @return Phprojekt_ActiveRecord_Abstract An instance of Phprojekt_ActiveRecord_Abstract.
