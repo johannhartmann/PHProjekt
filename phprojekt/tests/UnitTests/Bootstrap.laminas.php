@@ -62,7 +62,7 @@ try {
 
 // Set up session for authentication (if using Laminas Session)
 if (class_exists('Laminas\Session\Container')) {
-    $authContainer = new Laminas\Session\Container('Phprojekt_Auth-login');
+    $authContainer = new Laminas\Session\Container('Phprojekt_Auth_login');
     $authContainer->userId = 1;
     $authContainer->admin = 1;
 }

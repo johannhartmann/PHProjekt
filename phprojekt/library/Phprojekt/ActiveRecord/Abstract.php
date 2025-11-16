@@ -1331,7 +1331,7 @@ abstract class Phprojekt_ActiveRecord_Abstract
             $selectObj->offset($offset);
         }
 
-        $sqlStr    = $selectObj->__toString();
+        $sqlStr    = $sql->buildSqlString($selectObj);
         $statement = explode("FROM", $sqlStr);
 
         if (null === $select) {
@@ -1373,7 +1373,11 @@ abstract class Phprojekt_ActiveRecord_Abstract
 
         // return the results
         $stmt      = $this->_db->query($sqlStr);
-        $dataArray = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $result    = $stmt->execute();
+        $dataArray = array();
+        foreach ($result as $row) {
+            $dataArray[] = $row;
+        }
 
         $data  = array(
             'table'    => $this,

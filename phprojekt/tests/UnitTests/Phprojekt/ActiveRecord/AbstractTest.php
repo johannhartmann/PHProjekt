@@ -51,9 +51,9 @@ class Phprojekt_ActiveRecord_AbstractTest extends DatabaseTest
     {
         $project  = new Phprojekt_Project(array('db' => $this->sharedFixture));
         $project->fetchAll();
-        $this->assertEquals(5, $project->count());
+        $this->assertEquals(7, $project->count());
 
-        $project->find(3);
+        $project->find(8);
         $this->assertNull($project->title);
 
         $projects = $project->fetchAll(null, null, null, null, null,
@@ -74,7 +74,7 @@ class Phprojekt_ActiveRecord_AbstractTest extends DatabaseTest
 
     public function testDeleteHasManyAndBelongsToMany()
     {
-        $authNamespace = new Laminas\Session\Container('Phprojekt_Auth-login');
+        $authNamespace = new Laminas\Session\Container('Phprojekt_Auth_login');
         $keepUser = $authNamespace->userId;
 
         $role = new Phprojekt_Role_Role(array('db' => $this->sharedFixture));

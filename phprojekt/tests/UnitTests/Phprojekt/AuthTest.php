@@ -39,7 +39,7 @@ class Phprojekt_AuthTest extends DatabaseTest
      */
     public function testLoginWithoutSession()
     {
-        $authNamespace = new Laminas\Session\Container('Phprojekt_Auth-login');
+        $authNamespace = new Laminas\Session\Container('Phprojekt_Auth_login');
         $authNamespace->unsetAll();
         $this->assertFalse(Phprojekt_Auth::isLoggedIn());
     }
