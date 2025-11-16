@@ -159,7 +159,7 @@ class Phprojekt_Setting extends Phprojekt_ActiveRecord_Abstract
         $namespace = new Container(self::IDENTIFIER . $userId);
         if (!isset($namespace->$settingName)) {
             $where = sprintf('user_id = %d AND key_value = %s AND module_id = %d', (int) $userId,
-                $this->_db->quote($settingName), (int) $this->_moduleId);
+                $this->_db->platform->quoteValue($settingName), (int) $this->_moduleId);
             $record = $this->fetchAll($where);
             if (!empty($record)) {
                 $toReturn = $record[0]->value;
@@ -321,7 +321,7 @@ class Phprojekt_Setting extends Phprojekt_ActiveRecord_Abstract
                 foreach ($params as $key => $value) {
                     if ($key == $data['key']) {
                         $where  = sprintf('user_id = %d AND key_value = %s AND module_id = %d', (int) $userId,
-                            $this->_db->quote($key), (int) $this->_moduleId);
+                            $this->_db->platform->quoteValue($key), (int) $this->_moduleId);
                         $record = $this->fetchAll($where);
                         if (isset($record[0])) {
                             $record[0]->keyValue = $key;

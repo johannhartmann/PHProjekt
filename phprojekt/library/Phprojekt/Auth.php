@@ -607,7 +607,7 @@ class Phprojekt_Auth extends AuthenticationService
             $db      = Phprojekt::getInstance()->getDb();
             $setting = new Phprojekt_Setting();
             $setting->setModule('User');
-            $where = sprintf("user_id = %d AND key_value LIKE %s", (int) $userId, $db->quote(self::LOGGED_TOKEN . '%'));
+            $where = sprintf("user_id = %d AND key_value LIKE %s", (int) $userId, $db->platform->quoteValue(self::LOGGED_TOKEN . '%'));
             $rows  = $setting->fetchAll($where);
             foreach ($rows as $row) {
                 $row->delete();

@@ -115,11 +115,15 @@ class Phprojekt_Module_Module extends Phprojekt_ActiveRecord_Abstract implements
                 // Get the first and second fields
                 $field  = Phprojekt_DatabaseManager::COLUMN_NAME;
                 $db     = Phprojekt::getInstance()->getDb();
-                $select = $db->select()
-                             ->from('database_manager')
-                             ->where(sprintf('table_name = %s AND status = 1 AND %s != %s', $db->quote($this->name),
-                                $field, $db->quote('project_id')));
-                $results     = $db->query($select)->fetchAll();
+                $sql    = new \Laminas\Db\Sql\Sql($db);
+                $select = $sql->select()
+                              ->from('database_manager')
+                              ->where(sprintf('table_name = %s AND status = 1 AND %s != %s',
+                                  $db->platform->quoteValue($this->name),
+                                  $field,
+                                  $db->platform->quoteValue('project_id')));
+                $statement = $sql->prepareStatementForSqlObject($select);
+                $results   = $statement->execute();
                 $firstField  = (isset($results[0][$field])) ? $results[0][$field] : 'id';
                 $secondField = (isset($results[1][$field])) ? $results[1][$field] : 'id';
 

@@ -139,7 +139,7 @@ class Phprojekt_Configuration extends Phprojekt_ActiveRecord_Abstract
     {
         $toReturn = null;
 
-        $where  = sprintf("key_value = %s AND module_id = %d", $this->_db->quote($configName), (int) $this->_moduleId);
+        $where  = sprintf("key_value = %s AND module_id = %d", $this->_db->platform->quoteValue($configName), (int) $this->_moduleId);
         $record = $this->fetchAll($where);
         if (!empty($record)) {
             $toReturn = $record[0]->value;
@@ -258,7 +258,7 @@ class Phprojekt_Configuration extends Phprojekt_ActiveRecord_Abstract
             foreach ($fields as $data) {
                 foreach ($params as $key => $value) {
                     if ($key == $data['key']) {
-                        $where = sprintf('key_value = %s AND module_id = %d', $this->_db->quote($key),
+                        $where = sprintf('key_value = %s AND module_id = %d', $this->_db->platform->quoteValue($key),
                             (int) $this->_moduleId);
                         $record = $this->fetchAll($where);
                         if (isset($record[0])) {

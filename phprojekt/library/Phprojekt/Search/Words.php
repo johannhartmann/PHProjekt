@@ -93,9 +93,9 @@ class Phprojekt_Search_Words
 
             foreach ($words as $word) {
                 if ($operator == 'like') {
-                    $where[] = '(word LIKE ' . $this->getAdapter()->quote('%' . $word . '%') . ')';
+                    $where[] = '(word LIKE ' . $this->getAdapter()->platform->quoteValue('%' . $word . '%') . ')';
                 } else {
-                    $where[] = '(word = ' . $this->getAdapter()->quote($word) . ')';
+                    $where[] = '(word = ' . $this->getAdapter()->platform->quoteValue($word) . ')';
                 }
             }
             $where = implode('OR', $where);
@@ -120,7 +120,7 @@ class Phprojekt_Search_Words
         $quotedWords = array();
 
         foreach ($words as $word) {
-            $quotedWords[] = $this->getAdapter()->quote($word);
+            $quotedWords[] = $this->getAdapter()->platform->quoteValue($word);
         }
 
         if (!empty($quotedWords)) {

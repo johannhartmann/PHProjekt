@@ -92,8 +92,8 @@ class Phprojekt_Item_Rights
         $where = array();
         $clone = clone($this);
 
-        $where[] = 'module_id = ' . $clone->getAdapter()->quote($moduleId);
-        $where[] = 'item_id = ' . $clone->getAdapter()->quote($itemId);
+        $where[] = 'module_id = ' . $clone->getAdapter()->platform->quoteValue($moduleId);
+        $where[] = 'item_id = ' . $clone->getAdapter()->platform->quoteValue($itemId);
         $clone->delete($where);
     }
 

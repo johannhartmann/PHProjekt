@@ -242,7 +242,7 @@ class Phprojekt_User_User extends Phprojekt_ActiveRecord_Abstract implements Php
         if ($result) {
             // Username repeated?
             $db      = Phprojekt::getInstance()->getDb();
-            $where   = sprintf("username = %s AND id != %d", $db->quote($this->username), (int) $this->id);
+            $where   = sprintf("username = %s AND id != %d", $db->platform->quoteValue($this->username), (int) $this->id);
             $records = $this->fetchAll($where);
             if (count($records) > 0) {
                 $this->_validate->error->addError(array(
@@ -383,7 +383,7 @@ class Phprojekt_User_User extends Phprojekt_ActiveRecord_Abstract implements Php
      */
     public function getAllowedUsers()
     {
-        $where  = sprintf('status = %s', $this->getAdapter()->quote('A'));
+        $where  = sprintf('status = %s', $this->getAdapter()->platform->quoteValue('A'));
         $result = $this->fetchAll($where);
         $values = array();
 

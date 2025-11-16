@@ -82,9 +82,9 @@ class Phprojekt_Tags_TagsTableMapper
                     implode(
                         ',',
                         array(
-                            $this->_db->quote($moduleId),
-                            $this->_db->quote($itemId),
-                            $this->_db->quote($id)
+                            $this->_db->platform->quoteValue($moduleId),
+                            $this->_db->platform->quoteValue($itemId),
+                            $this->_db->platform->quoteValue($id)
                         )
                     ) .
                     ')';
