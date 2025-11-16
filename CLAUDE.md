@@ -100,7 +100,7 @@ frontend-react/             # New React SPA (strangler pattern)
 └── package.json           # NPM dependencies
 ```
 
-**Build Output**: `public/react/` (served by PHP backend at `/react/`)
+**Build Output**: `phprojekt/htdocs/app/` (served by PHP backend at `/app/`)
 
 **Status**: ✅ **Infrastructure ready** - Routes, layout, and build pipeline configured
 
@@ -189,7 +189,7 @@ npm install
 # Start development server (runs on port 3000)
 npm run dev
 
-# Access React app at: http://localhost:3000/react/
+# Access React app at: http://localhost:3000/app/
 ```
 
 **Features**:
@@ -207,8 +207,8 @@ cd frontend-react
 # Build for production
 npm run build
 
-# Output: ../public/react/
-# Served by PHP backend at: http://localhost:8080/react/
+# Output: ../phprojekt/htdocs/app/
+# Served by PHP backend at: http://localhost:8080/app/ (or /react/ as alias)
 ```
 
 **Other React Commands**:
