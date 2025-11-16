@@ -19,7 +19,7 @@
  * The class provide the functions for save/delete/search
  * the words - module relation in the SearchWordsModule table.
  */
-class Phprojekt_Search_WordModule
+class Phprojekt_Search_WordModule extends Phprojekt_ActiveRecord_Abstract
 {
     /**
      * Name of the table.
@@ -31,12 +31,17 @@ class Phprojekt_Search_WordModule
     /**
      * Constructor.
      *
+     * @param array $config Configuration for database adapter.
+     *
      * @return void
      */
-    public function __construct()
+    public function __construct($config = null)
     {
-        // Initialize with database adapter
-        $config = array('db' => Phprojekt::getInstance()->getDb());
+        if (null === $config) {
+            // Initialize with database adapter
+            $config = array('db' => Phprojekt::getInstance()->getDb());
+        }
+        parent::__construct($config);
     }
 
     /**

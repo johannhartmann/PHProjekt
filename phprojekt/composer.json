@@ -25,7 +25,8 @@
         "laminas/laminas-servicemanager": "^3.21",
         "laminas/laminas-component-installer": "^3.2",
         "sabre/dav": "^4.4",
-        "laminas/laminas-zendframework-bridge": "^1.8"
+        "laminas/laminas-zendframework-bridge": "^1.8",
+        "laminas/laminas-permissions-acl": "^2.18"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.6"
@@ -47,7 +48,8 @@
             "Core_": "application/Core/"
         },
         "files": [
-            "library/Phprojekt.php"
+            "library/Phprojekt.php",
+            "library/Cleaner.php"
         ]
     },
     "config": {

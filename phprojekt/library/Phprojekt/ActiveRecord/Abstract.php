@@ -314,7 +314,10 @@ abstract class Phprojekt_ActiveRecord_Abstract
      */
     protected function _setupTableName()
     {
-        $this->_name = $this->getTableName();
+        // Only set table name if not already set by child class
+        if (empty($this->_name)) {
+            $this->_name = $this->getTableName();
+        }
     }
 
     /**
@@ -1123,7 +1126,10 @@ abstract class Phprojekt_ActiveRecord_Abstract
         }
 
         if (null === $order) {
-            $order = 'id';
+            // Only default to 'id' if the column exists
+            if (in_array('id', $this->_cols)) {
+                $order = 'id';
+            }
         }
 
         // In case of join strings please note that the resultset is read only.
