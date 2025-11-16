@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ShellLayout } from './components/ShellLayout';
 import { Home } from './pages/Home';
 import { Health } from './pages/Health';
+import { ApiTest } from './pages/ApiTest';
 import './App.css';
 
 /**
@@ -10,6 +11,7 @@ import './App.css';
  * Sets up React Router with the following routes:
  * - / : Home page (landing/dashboard)
  * - /health : Health check page
+ * - /api-test : API client test page
  *
  * All routes use the ShellLayout wrapper for consistent navigation.
  */
@@ -20,6 +22,7 @@ function App() {
         <Route element={<ShellLayout />}>
           <Route index element={<Home />} />
           <Route path="health" element={<Health />} />
+          <Route path="api-test" element={<ApiTest />} />
 
           {/* Fallback route - redirect to home */}
           <Route path="*" element={<Navigate to="/" replace />} />

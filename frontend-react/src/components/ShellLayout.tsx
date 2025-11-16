@@ -31,6 +31,9 @@ export function ShellLayout() {
             <Link to="/health" className="shell-nav-link">
               Health
             </Link>
+            <Link to="/api-test" className="shell-nav-link">
+              API Test
+            </Link>
             {/* Future navigation links will be added here as modules are migrated */}
           </nav>
 
