@@ -85,10 +85,10 @@ class Phprojekt_Filter_UserFilter extends Phprojekt_Filter_Abstract
     {
         $db = $this->_adapter;
         if (null !== $tableName) {
-            $query = sprintf("%s.%s = ?", $db->quoteIdentifier($tableName),
-                $db->quoteIdentifier($this->_identifier));
+            $query = sprintf("%s.%s = ?", $db->platform->quoteIdentifier($tableName),
+                $db->platform->quoteIdentifier($this->_identifier));
         } else {
-            $query = sprintf("%s = ?", $db->quoteIdentifier($this->_identifier));
+            $query = sprintf("%s = ?", $db->platform->quoteIdentifier($this->_identifier));
         }
 
         $select->where($query, $this->_value);

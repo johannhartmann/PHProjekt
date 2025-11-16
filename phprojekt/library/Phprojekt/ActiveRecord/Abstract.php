@@ -713,8 +713,8 @@ abstract class Phprojekt_ActiveRecord_Abstract
         $im        = new $className($this->getAdapter());
         $tableName = $this->_translateIntoRelationTableName($this, $im);
 
-        $query = sprintf("INSERT INTO %s (%s, %s) VALUES (?, ?)", $this->getAdapter()->quoteIdentifier($tableName),
-            $this->getAdapter()->quoteIdentifier($myKeyName), $this->getAdapter()->quoteIdentifier($foreignKeyName));
+        $query = sprintf("INSERT INTO %s (%s, %s) VALUES (?, ?)", $this->getAdapter()->platform->quoteIdentifier($tableName),
+            $this->getAdapter()->platform->quoteIdentifier($myKeyName), $this->getAdapter()->platform->quoteIdentifier($foreignKeyName));
 
         if (null !== $this->_log) {
             $this->_log->debug($query);
@@ -743,8 +743,8 @@ abstract class Phprojekt_ActiveRecord_Abstract
             $tableName  = $im->getTableName();
             $columnName = $this->_translateKeyFormat(get_class($this));
 
-            $query = sprintf("UPDATE %s SET %s = ? WHERE %s = ?", $this->getAdapter()->quoteIdentifier($tableName),
-                $this->getAdapter()->quoteIdentifier($columnName), $this->getAdapter()->quoteIdentifier($columnName));
+            $query = sprintf("UPDATE %s SET %s = ? WHERE %s = ?", $this->getAdapter()->platform->quoteIdentifier($tableName),
+                $this->getAdapter()->platform->quoteIdentifier($columnName), $this->getAdapter()->platform->quoteIdentifier($columnName));
 
             if (null !== $this->_log) {
                 $this->_log->debug($query);
@@ -785,8 +785,8 @@ abstract class Phprojekt_ActiveRecord_Abstract
             $myKeyName = $this->_translateKeyFormat(get_class($this));
             $tableName = $this->_translateIntoRelationTableName($this, $im);
 
-            $query = sprintf("UPDATE %s SET %s = ? WHERE %s = ?", $this->getAdapter()->quoteIdentifier($tableName),
-                $this->getAdapter()->quoteIdentifier($myKeyName), $this->getAdapter()->quoteIdentifier($myKeyName));
+            $query = sprintf("UPDATE %s SET %s = ? WHERE %s = ?", $this->getAdapter()->platform->quoteIdentifier($tableName),
+                $this->getAdapter()->platform->quoteIdentifier($myKeyName), $this->getAdapter()->platform->quoteIdentifier($myKeyName));
 
             if (null !== $this->_log) {
                 $this->_log->debug($query);
@@ -1058,7 +1058,7 @@ abstract class Phprojekt_ActiveRecord_Abstract
                     $tableName  = $im->getTableName();
                     $columnName = $this->_translateKeyFormat(get_class($this));
                     $this->getAdapter()->delete($tableName, sprintf('%s = %d',
-                        $this->getAdapter()->quoteIdentifier($columnName), (int) $this->id));
+                        $this->getAdapter()->platform->quoteIdentifier($columnName), (int) $this->id));
                 }
             }
 
@@ -1074,7 +1074,7 @@ abstract class Phprojekt_ActiveRecord_Abstract
                     $im        = new $className($this->getAdapter());
                     $tableName = $this->_translateIntoRelationTableName($this, $im);
                     $this->getAdapter()->delete($tableName, sprintf('%s = %d',
-                        $this->getAdapter()->quoteIdentifier($keyName), (int) $this->id));
+                        $this->getAdapter()->platform->quoteIdentifier($keyName), (int) $this->id));
                 }
             }
 
@@ -1114,7 +1114,7 @@ abstract class Phprojekt_ActiveRecord_Abstract
         $wheres = array();
         if (array_key_exists('hasMany', $this->_relations)) {
             $keyName  = $this->_translateKeyFormat($this->_relations['hasMany']['classname']);
-            $wheres[] = sprintf('%s = %d', $this->getAdapter()->quoteIdentifier($keyName),
+            $wheres[] = sprintf('%s = %d', $this->getAdapter()->platform->quoteIdentifier($keyName),
                 (int) $this->_relations['hasMany']['id']);
         }
         if (null !== $where) {
@@ -1332,7 +1332,7 @@ abstract class Phprojekt_ActiveRecord_Abstract
             $columns   = array();
             $tableName = $this->getTableName();
             foreach ($this->_cols as $column) {
-                $columns[] = $this->getAdapter()->quoteIdentifier($tableName . '.' . $column);
+                $columns[] = $this->getAdapter()->platform->quoteIdentifier($tableName . '.' . $column);
             }
             $sqlStr .= implode(",", $columns);
             $sqlStr .= " FROM " . $statement[1];
@@ -1388,7 +1388,7 @@ abstract class Phprojekt_ActiveRecord_Abstract
      */
     private function _callbackQuoteIdentifier1($data)
     {
-        return Phprojekt::getInstance()->getDb()->quoteIdentifier($data[0]);
+        return Phprojekt::getInstance()->getDb()->platform->quoteIdentifier($data[0]);
     }
 
     /**
@@ -1400,7 +1400,7 @@ abstract class Phprojekt_ActiveRecord_Abstract
      */
     private function _callbackQuoteIdentifier2($data)
     {
-        return " " . Phprojekt::getInstance()->getDb()->quoteIdentifier(trim($data[0])) . " ";
+        return " " . Phprojekt::getInstance()->getDb()->platform->quoteIdentifier(trim($data[0])) . " ";
     }
 
     /**

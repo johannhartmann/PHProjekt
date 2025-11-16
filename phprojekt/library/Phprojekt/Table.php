@@ -116,7 +116,7 @@ class Phprojekt_Table
         }
 
         $sqlString = sprintf("CREATE TABLE %s (%s) DEFAULT CHARSET=utf8",
-            $this->_db->quoteIdentifier((string) $tableName),
+            $this->_db->platform->quoteIdentifier((string) $tableName),
             implode(',', $definitions));
 
         try {
@@ -145,7 +145,7 @@ class Phprojekt_Table
     public function addField($tableName, $fieldDefinition, $position = null)
     {
         $tableName = strtolower($tableName);
-        $sqlString = "ALTER TABLE " . $this->_db->quoteIdentifier((string) $tableName) . " ADD ";
+        $sqlString = "ALTER TABLE " . $this->_db->platform->quoteIdentifier((string) $tableName) . " ADD ";
 
         if (is_array($fieldDefinition) && !empty($fieldDefinition)) {
             if (!isset($fieldDefinition['length'])) {
@@ -160,7 +160,7 @@ class Phprojekt_Table
             if (!isset($fieldDefinition['default_no_quote'])) {
                 $fieldDefinition['default_no_quote'] = false;
             }
-            $sqlString .= $this->_db->quoteIdentifier((string) $fieldDefinition['name']);
+            $sqlString .= $this->_db->platform->quoteIdentifier((string) $fieldDefinition['name']);
             $sqlString .= $this->_getTypeDefinition($fieldDefinition);
         } else {
             return false;
@@ -193,8 +193,8 @@ class Phprojekt_Table
     public function changeField($tableName, $fieldDefinition, $position = null)
     {
         $tableName = strtolower($tableName);
-        $sqlString = "ALTER TABLE " . $this->_db->quoteIdentifier((string) $tableName) . " CHANGE ";
-        $sqlString .= $this->_db->quoteIdentifier((string) $fieldDefinition['oldName']) . ' ';
+        $sqlString = "ALTER TABLE " . $this->_db->platform->quoteIdentifier((string) $tableName) . " CHANGE ";
+        $sqlString .= $this->_db->platform->quoteIdentifier((string) $fieldDefinition['oldName']) . ' ';
 
         if (is_array($fieldDefinition) && !empty($fieldDefinition)) {
             if (!isset($fieldDefinition['length'])) {
@@ -210,7 +210,7 @@ class Phprojekt_Table
                 $fieldDefinition['default_no_quote'] = false;
             }
 
-            $sqlString .= $this->_db->quoteIdentifier((string) $fieldDefinition['name']);
+            $sqlString .= $this->_db->platform->quoteIdentifier((string) $fieldDefinition['name']);
             $sqlString .= $this->_getTypeDefinition($fieldDefinition);
         } else {
             return false;
@@ -239,7 +239,7 @@ class Phprojekt_Table
     public function modifyField($tableName, $fieldDefinition, $position = null)
     {
         $tableName = strtolower($tableName);
-        $sqlString = "ALTER TABLE " . $this->_db->quoteIdentifier((string) $tableName) . " MODIFY ";
+        $sqlString = "ALTER TABLE " . $this->_db->platform->quoteIdentifier((string) $tableName) . " MODIFY ";
 
         if (is_array($fieldDefinition) && !empty($fieldDefinition)) {
             if (!isset($fieldDefinition['length'])) {
@@ -255,9 +255,9 @@ class Phprojekt_Table
                 $fieldDefinition['default_no_quote'] = false;
             }
             if (isset($fieldDefinition['oldName'])) {
-                $sqlString .= $this->_db->quoteIdentifier((string) $fieldDefinition['oldName']) . ' ';
+                $sqlString .= $this->_db->platform->quoteIdentifier((string) $fieldDefinition['oldName']) . ' ';
             }
-            $sqlString .= $this->_db->quoteIdentifier((string) $fieldDefinition['name']);
+            $sqlString .= $this->_db->platform->quoteIdentifier((string) $fieldDefinition['name']);
             $sqlString .= $this->_getTypeDefinition($fieldDefinition);
         } else {
             return false;
@@ -286,10 +286,10 @@ class Phprojekt_Table
     public function deleteField($tableName, $fieldDefinition)
     {
         $tableName = strtolower($tableName);
-        $sqlString = "ALTER TABLE " . $this->_db->quoteIdentifier((string) $tableName) . " DROP ";
+        $sqlString = "ALTER TABLE " . $this->_db->platform->quoteIdentifier((string) $tableName) . " DROP ";
 
         if (is_array($fieldDefinition) && !empty($fieldDefinition)) {
-            $sqlString .= $this->_db->quoteIdentifier((string) $fieldDefinition['name']);
+            $sqlString .= $this->_db->platform->quoteIdentifier((string) $fieldDefinition['name']);
         } else {
             return false;
         }
@@ -430,7 +430,7 @@ class Phprojekt_Table
     public function dropTable($tableName)
     {
         $tableName = strtolower($tableName);
-        $sqlString = "DROP TABLE " . $this->_db->quoteIdentifier((string) $tableName);
+        $sqlString = "DROP TABLE " . $this->_db->platform->quoteIdentifier((string) $tableName);
 
         try {
             $this->_db->getConnection()->exec($sqlString);
@@ -453,7 +453,7 @@ class Phprojekt_Table
     public function tableExists($tableName)
     {
         $tableName = strtolower($tableName);
-        $sqlString = "SELECT COUNT(*) FROM " . $this->_db->quoteIdentifier((string) $tableName);
+        $sqlString = "SELECT COUNT(*) FROM " . $this->_db->platform->quoteIdentifier((string) $tableName);
 
         try {
             $this->_db->getConnection()->exec($sqlString);
@@ -509,12 +509,12 @@ class Phprojekt_Table
 
         try {
             if ($returnId) {
-                $sqlString = "SELECT MAX(id) as count FROM " . $this->_db->quoteIdentifier((string) $tableName);
+                $sqlString = "SELECT MAX(id) as count FROM " . $this->_db->platform->quoteIdentifier((string) $tableName);
                 $result    = $this->_db->query($sqlString)->fetchAll();
                 $currentId = (int) $result[0]['count'];
             }
             $ids  = array();
-            $sql  = 'INSERT INTO ' . $this->_db->quoteIdentifier($tableName) . ' ';
+            $sql  = 'INSERT INTO ' . $this->_db->platform->quoteIdentifier($tableName) . ' ';
             $sql .= '(' . implode(",", $fields) . ') ';
             $sql .= 'VALUES ';
 
@@ -656,14 +656,14 @@ class Phprojekt_Table
         $options = array_merge($defaults, $options);
 
         foreach ($columns as $key => $column) {
-            $columns[$key] = $this->_db->quoteIdentifier($column);
+            $columns[$key] = $this->_db->platform->quoteIdentifier($column);
         }
 
         $sql = sprintf(
             'CREATE %s INDEX %s ON %s (%s)',
             $options['unique'] ? 'UNIQUE' : '',
-            $this->_db->quoteIdentifier($options['name']),
-            $this->_db->quoteIdentifier($tableName),
+            $this->_db->platform->quoteIdentifier($options['name']),
+            $this->_db->platform->quoteIdentifier($tableName),
             implode(', ', $columns)
         );
 

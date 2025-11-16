@@ -352,7 +352,7 @@ abstract class Phprojekt_Item_Abstract extends Phprojekt_ActiveRecord_Abstract i
         if (!Phprojekt_Auth::isAdminUser()) {
             $join .= sprintf(' INNER JOIN item_rights ON (item_rights.item_id = %s
                 AND item_rights.module_id = %d AND item_rights.user_id = %d) ',
-                $this->getAdapter()->quoteIdentifier($this->getTableName() . '.id'),
+                $this->getAdapter()->platform->quoteIdentifier($this->getTableName() . '.id'),
                 Phprojekt_Module::getId($this->getModelName()), Phprojekt_Auth_Proxy::getEffectiveUserId());
 
             // Set where
@@ -382,7 +382,7 @@ abstract class Phprojekt_Item_Abstract extends Phprojekt_ActiveRecord_Abstract i
 
         $db       = Phprojekt::getInstance()->getDb();
         $rawTable = $this->getTableName();
-        $table    = $db->quoteIdentifier($rawTable);
+        $table    = $db->platform->quoteIdentifier($rawTable);
         $sql      = new \Laminas\Db\Sql\Sql($db);
         $select   = $sql->select()->from($rawTable, array('COUNT(*)'));
 

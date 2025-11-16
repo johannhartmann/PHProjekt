@@ -131,8 +131,8 @@ class Phprojekt_Search_Words
                 $ids[]        = $row->id;
             }
             if (!empty($ids)) {
-                $data = array('count' => new Expression($this->_db->quoteIdentifier('count') . ' + 1'));
-                $this->update($data, array($this->_db->quoteIdentifier('id') . ' IN (' . implode(',', $ids) . ')'));
+                $data = array('count' => new Expression($this->_db->platform->quoteIdentifier('count') . ' + 1'));
+                $this->update($data, array($this->_db->platform->quoteIdentifier('id') . ' IN (' . implode(',', $ids) . ')'));
             }
         }
 
@@ -177,11 +177,11 @@ class Phprojekt_Search_Words
                 }
             }
             if (!empty($deleteIds)) {
-                $this->delete(array($this->_db->quoteIdentifier('id') . ' IN (' . implode(',', $deleteIds) . ')'));
+                $this->delete(array($this->_db->platform->quoteIdentifier('id') . ' IN (' . implode(',', $deleteIds) . ')'));
             }
             if (!empty($updateIds)) {
-                $data = array('count' => new Expression($this->_db->quoteIdentifier('count') . ' - 1'));
-                $this->update($data, array($this->_db->quoteIdentifier('id') . ' IN (' . implode(',', $updateIds) . ')'));
+                $data = array('count' => new Expression($this->_db->platform->quoteIdentifier('count') . ' - 1'));
+                $this->update($data, array($this->_db->platform->quoteIdentifier('id') . ' IN (' . implode(',', $updateIds) . ')'));
             }
         }
     }

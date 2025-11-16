@@ -142,13 +142,13 @@ class Phprojekt_Filter
         if ($this->_info['metadata'][$identifier]['DATA_TYPE'] == 'time') {
             // Moving the value to UTC
             $identifier = $this->_record->getTableName() . '.' . $identifier;
-            $identifier = Phprojekt::getInstance()->getDb()->quoteIdentifier($identifier);
+            $identifier = Phprojekt::getInstance()->getDb()->platform->quoteIdentifier($identifier);
             $value      = Cleaner::sanitize('time', $keyword);
             $k          = date("H:i:s", Phprojekt_Converter_Time::userToUtc($value));
             //$identifier = 'TIME(' . $identifier . ')';
         } else if ($this->_info['metadata'][$identifier]['DATA_TYPE'] == 'datetime') {
             $identifier = $this->_record->getTableName() . '.' . $identifier;
-            $identifier = Phprojekt::getInstance()->getDb()->quoteIdentifier($identifier);
+            $identifier = Phprojekt::getInstance()->getDb()->platform->quoteIdentifier($identifier);
             if (strstr($keyword, '-')) {
                 // Use it as date
                 $k          = Cleaner::sanitize('date', $keyword);
@@ -167,7 +167,7 @@ class Phprojekt_Filter
             $keyword    = mb_strtolower($keyword, 'UTF-8');
             $k          = $keyword;
             $identifier = $this->_record->getTableName() . '.' . $identifier;
-            $identifier = Phprojekt::getInstance()->getDb()->quoteIdentifier($identifier);
+            $identifier = Phprojekt::getInstance()->getDb()->platform->quoteIdentifier($identifier);
         }
 
         switch ($rule) {
