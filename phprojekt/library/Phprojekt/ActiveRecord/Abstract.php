@@ -1086,8 +1086,14 @@ abstract class Phprojekt_ActiveRecord_Abstract
                     $im         = new $className($this->getAdapter());
                     $tableName  = $im->getTableName();
                     $columnName = $this->_translateKeyFormat(get_class($this));
-                    $this->getAdapter()->delete($tableName, sprintf('%s = %d',
+
+                    // Use Laminas Delete
+                    $delete = new \Laminas\Db\Sql\Delete($tableName);
+                    $delete->where(sprintf('%s = %d',
                         $this->getAdapter()->platform->quoteIdentifier($columnName), (int) $this->id));
+                    $sql = new \Laminas\Db\Sql\Sql($this->_db);
+                    $statement = $sql->prepareStatementForSqlObject($delete);
+                    $statement->execute();
                 }
             }
 
@@ -1102,8 +1108,14 @@ abstract class Phprojekt_ActiveRecord_Abstract
                     $keyName   = $this->_translateKeyFormat(get_class($this));
                     $im        = new $className($this->getAdapter());
                     $tableName = $this->_translateIntoRelationTableName($this, $im);
-                    $this->getAdapter()->delete($tableName, sprintf('%s = %d',
+
+                    // Use Laminas Delete
+                    $delete = new \Laminas\Db\Sql\Delete($tableName);
+                    $delete->where(sprintf('%s = %d',
                         $this->getAdapter()->platform->quoteIdentifier($keyName), (int) $this->id));
+                    $sql = new \Laminas\Db\Sql\Sql($this->_db);
+                    $statement = $sql->prepareStatementForSqlObject($delete);
+                    $statement->execute();
                 }
             }
 
@@ -1183,7 +1195,10 @@ abstract class Phprojekt_ActiveRecord_Abstract
                 $instance->_data[self::convertVarFromSql($k)] = $v;
             }
 
-            $instance->_storedId     = $instance->_data['id'];
+            // Only set _storedId if 'id' column exists
+            if (array_key_exists('id', $instance->_data)) {
+                $instance->_storedId = $instance->_data['id'];
+            }
             $instance->_originalData = $instance->_data;
 
             $result[] = $instance;

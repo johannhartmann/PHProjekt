@@ -266,12 +266,12 @@ class Phprojekt_ActiveRecord_AbstractTest extends DatabaseTest
 
     /**
      * Test, db not given
-     * @expectedException Phprojekt_ActiveRecord_Exception
      *
      * @return void
      */
     public function testDbNotGiven()
     {
+        $this->expectException(Phprojekt_ActiveRecord_Exception::class);
         new Phprojekt_Project(array());
     }
 

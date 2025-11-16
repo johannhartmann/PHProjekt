@@ -77,7 +77,8 @@ class Phprojekt_Search_WordModule extends Phprojekt_ActiveRecord_Abstract
 
         $result = $this->fetchAll($where);
         foreach ($result as $data) {
-            $ids[] = $data->word_id;
+            // Use camelCase property name (converted from word_id)
+            $ids[] = $data->wordId;
         }
         $this->delete($where);
 
