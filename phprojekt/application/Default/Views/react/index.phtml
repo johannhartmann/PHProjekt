@@ -1,0 +1,68 @@
+<?php
+/**
+ * React SPA View Template
+ *
+ * This template serves the built React application from public/react/
+ * The React app is built with Vite and outputs to public/react/index.html
+ *
+ * All routing is handled client-side by React Router.
+ */
+
+// Path to the React build output
+$reactIndexPath = __DIR__ . '/../../../../../public/react/index.html';
+
+// Check if the React build exists
+if (!file_exists($reactIndexPath)) {
+    ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHProjekt - React App</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: #f5f7fa;
+        }
+        .error-container {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 600px;
+        }
+        h1 { color: #e53e3e; margin: 0 0 1rem 0; }
+        p { color: #4a5568; line-height: 1.6; }
+        code {
+            background: #2d3748;
+            color: #68d391;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>React Frontend Not Built</h1>
+        <p>The React application has not been built yet.</p>
+        <p>Please build the React frontend:</p>
+        <pre><code>cd frontend-react && npm run build</code></pre>
+        <p>Then refresh this page.</p>
+    </div>
+</body>
+</html>
+    <?php
+    exit;
+}
+
+// Serve the React index.html
+// This includes all the necessary <script> and <link> tags with hashed filenames
+echo file_get_contents($reactIndexPath);

@@ -21,6 +21,19 @@ return [
                     ],
                 ],
             ],
+            'react' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/react[/:path]',
+                    'constraints' => [
+                        'path' => '.*',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\ReactController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'default' => [
                 'type'    => Segment::class,
                 'options' => [
@@ -42,6 +55,7 @@ return [
             Controller\TagController::class => InvokableFactory::class,
             Controller\JsController::class => InvokableFactory::class,
             Controller\ErrorController::class => InvokableFactory::class,
+            Controller\ReactController::class => InvokableFactory::class,
         ],
         'aliases' => [
             'Index' => Controller\IndexController::class,
@@ -50,6 +64,7 @@ return [
             'Tag' => Controller\TagController::class,
             'Js' => Controller\JsController::class,
             'Error' => Controller\ErrorController::class,
+            'React' => Controller\ReactController::class,
         ],
     ],
     'view_manager' => [
@@ -62,6 +77,7 @@ return [
             'layout/layout'                                 => __DIR__ . '/../Views/layout/layout.phtml',
             'application/default/index/index'               => __DIR__ . '/../Views/index/index.phtml',
             'application-default-controller-index/index'    => __DIR__ . '/../Views/index/index.phtml',
+            'application/default/react/index'               => __DIR__ . '/../Views/react/index.phtml',
             'error/404'                                     => __DIR__ . '/../Views/error/404.phtml',
             'error/index'                                   => __DIR__ . '/../Views/error/index.phtml',
         ],
