@@ -120,9 +120,7 @@ class Phprojekt_Table
             implode(',', $definitions));
 
         try {
-            $this->_db->getConnection()->exec($sqlString);
-            // Fix for Zend Framework 1.7.2
-            $this->_db->closeConnection();
+            $this->_db->query($sqlString);
             return true;
         } catch (Exception $error) {
             if ($this->_log) {
@@ -171,7 +169,7 @@ class Phprojekt_Table
         }
 
         try {
-            $this->_db->getConnection()->exec($sqlString);
+            $this->_db->query($sqlString);
             return true;
         } catch (Exception $error) {
             if ($this->_log) {
@@ -217,7 +215,7 @@ class Phprojekt_Table
         }
 
         try {
-            $this->_db->getConnection()->exec($sqlString);
+            $this->_db->query($sqlString);
             return true;
         } catch (Exception $error) {
             if ($this->_log) {
@@ -264,7 +262,7 @@ class Phprojekt_Table
         }
 
         try {
-            $this->_db->getConnection()->exec($sqlString);
+            $this->_db->query($sqlString);
             return true;
         } catch (Exception $error) {
             if ($this->_log) {
@@ -295,7 +293,7 @@ class Phprojekt_Table
         }
 
         try {
-            $this->_db->getConnection()->exec($sqlString);
+            $this->_db->query($sqlString);
             return true;
         } catch (Exception $error) {
             if ($this->_log) {
@@ -433,7 +431,7 @@ class Phprojekt_Table
         $sqlString = "DROP TABLE " . $this->_db->platform->quoteIdentifier((string) $tableName);
 
         try {
-            $this->_db->getConnection()->exec($sqlString);
+            $this->_db->query($sqlString);
             return true;
         } catch (Exception $error) {
             if ($this->_log) {
@@ -456,9 +454,7 @@ class Phprojekt_Table
         $sqlString = "SELECT COUNT(*) FROM " . $this->_db->platform->quoteIdentifier((string) $tableName);
 
         try {
-            $this->_db->getConnection()->exec($sqlString);
-            // Fix for Zend Framework 1.7.2
-            $this->_db->closeConnection();
+            $this->_db->query($sqlString);
             return true;
         } catch (Exception $error) {
             return false;

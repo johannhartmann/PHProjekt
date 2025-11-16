@@ -29,7 +29,7 @@ abstract class DatabaseTest extends PHPUnit\Framework\TestCase {
         /* @todo read from settings later */
         // Note: This method is kept for backwards compatibility but may not work
         // as expected without DbUnit extension
-        return Phprojekt::getInstance()->getDb()->getConnection();
+        return Phprojekt::getInstance()->getDb()->getDriver()->getConnection();
     }
 
     protected function getDataSet() {
