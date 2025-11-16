@@ -521,16 +521,23 @@ abstract class Phprojekt_ActiveRecord_Abstract
 
         $tableName = $this->_translateIntoRelationTableName($im, $this);
 
-        $select = $adapter->select()->from(array('rel' => $tableName));
+        $sql = new \Laminas\Db\Sql\Sql($adapter);
+        $select = $sql->select();
+        $select->from(array('rel' => $tableName));
 
-        $select->joinInner(array('my' => $myTable), sprintf("%s = %s", $adapter->quoteIdentifier("my.id"),
-            $adapter->quoteIdentifier("rel." . self::convertVarToSql($myKeyName))));
+        $joinCondition1 = sprintf("%s = %s",
+            $adapter->platform->quoteIdentifier("my.id"),
+            $adapter->platform->quoteIdentifier("rel." . self::convertVarToSql($myKeyName)));
+        $select->join(array('my' => $myTable), $joinCondition1, array());
 
-        $select->joinInner(array('foreign' => $foreignTable),
-            sprintf("%s = %s", $adapter->quoteIdentifier("foreign.id"),
-            $adapter->quoteIdentifier("rel." . self::convertVarToSql($foreignKeyName))));
+        $joinCondition2 = sprintf("%s = %s",
+            $adapter->platform->quoteIdentifier("foreign.id"),
+            $adapter->platform->quoteIdentifier("rel." . self::convertVarToSql($foreignKeyName)));
+        $select->join(array('foreign' => $foreignTable), $joinCondition2, array());
+
         if (isset($classId)) {
-            $select->where(sprintf("%s = %d", $adapter->quoteIdentifier("rel." . self::convertVarToSql($myKeyName)),
+            $select->where(sprintf("%s = %d",
+                $adapter->platform->quoteIdentifier("rel." . self::convertVarToSql($myKeyName)),
                 (int) $classId));
         }
 
@@ -538,16 +545,20 @@ abstract class Phprojekt_ActiveRecord_Abstract
         // At the moment we asume that the where clause contains the id string,
         // as it is called from find()
         if (null !== $where) {
-            $select->where(str_replace($adapter->quoteIdentifier($foreignTable),
-                $adapter->quoteIdentifier("foreign"), $where));
+            $select->where(str_replace($adapter->platform->quoteIdentifier($foreignTable),
+                $adapter->platform->quoteIdentifier("foreign"), $where));
         }
 
         if (null !== $this->_log) {
             $this->_log->debug((string) $select);
         }
 
-        $stmt      = $this->getAdapter()->query($select);
-        $dataArray = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result    = $statement->execute();
+        $dataArray = array();
+        foreach ($result as $row) {
+            $dataArray[] = $row;
+        }
 
         $data  = array(
             'table'    => $this,
