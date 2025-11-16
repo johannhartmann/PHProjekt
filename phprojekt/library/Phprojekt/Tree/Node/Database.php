@@ -137,25 +137,39 @@ class Phprojekt_Tree_Node_Database implements IteratorAggregate
         } else {
             $database = $this->getActiveRecord()->getAdapter();
             $table    = $this->getActiveRecord()->getTableName();
-            $select   = $database->select();
+            $sql      = new \Laminas\Db\Sql\Sql($database);
+            $select   = $sql->select();
+
+            $joinCondition = new \Laminas\Db\Sql\Expression(
+                sprintf(
+                    't.id = %d AND (tt.path like CONCAT(t.path, t.id, "/%%") OR tt.id = t.id)',
+                    (int) $this->_requestedId
+                )
+            );
 
             $select->from(array('t' => $table), array())
                 ->join(
                     array('tt' => $table),
-                    sprintf(
-                        't.id = %d AND (tt.path like CONCAT(t.path, t.id, "/%%") OR tt.id = t.id)',
-                        (int) $this->_requestedId
-                    ),
+                    $joinCondition,
                     '*'
                 )
-               ->order('path')
-               ->order('id');
+               ->order('tt.path')
+               ->order('tt.id');
 
             if (null !== $filter) {
                 $filter->filter($select, 'tt');
             }
 
-            $treeData = $select->query()->fetchAll(\PDO::FETCH_CLASS);
+            $statement = $sql->prepareStatementForSqlObject($select);
+            $result = $statement->execute();
+            $treeData = array();
+            foreach ($result as $row) {
+                $obj = new \stdClass();
+                foreach ($row as $key => $value) {
+                    $obj->$key = $value;
+                }
+                $treeData[] = $obj;
+            }
             foreach ($treeData as $index => $record) {
                 foreach ($record as $key => $value) {
                     $newKey = Phprojekt_ActiveRecord_Abstract::convertVarFromSql($key);
@@ -395,7 +409,11 @@ class Phprojekt_Tree_Node_Database implements IteratorAggregate
 
         $table    = $this->getActiveRecord()->getTableName();
         $database = Phprojekt::getInstance()->getDb();
-        $database->delete($table, sprintf('path LIKE ?', $database->platform->quoteValue($this->path . '%')));
+        $sql = new \Laminas\Db\Sql\Sql($database);
+        $delete = $sql->delete($table);
+        $delete->where->like('path', $this->path . '%');
+        $statement = $sql->prepareStatementForSqlObject($delete);
+        $statement->execute();
         $children = $this->getChildren();
         $this->_deleteChildren($children);
         $this->_initialize();
