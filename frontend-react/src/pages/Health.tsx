@@ -9,6 +9,7 @@ import './Health.css';
  */
 export function Health() {
   const [timestamp, setTimestamp] = useState(new Date().toISOString());
+  const [uptime] = useState(() => performance.now());
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -23,7 +24,7 @@ export function Health() {
     version: '1.0.0',
     environment: import.meta.env.MODE,
     timestamp,
-    uptime: performance.now(),
+    uptime,
     features: {
       reactRouter: true,
       typescript: true,
