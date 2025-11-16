@@ -37,28 +37,32 @@ class Phprojekt_Tags_TagsTableMapper
 
     public function getTagsForModuleItem($moduleId, $itemId, $limit = 0)
     {
-        $select = $this->_db->select()->from(
+        $sql = new \Laminas\Db\Sql\Sql($this->_db);
+        $select = $sql->select();
+        $select->from(
             array('t' => self::tagsTableName),
             array('word')
         );
 
         $select->join(
             array('i' => self::tagsRelationTableName),
-            't.id = i.tag_id'
+            't.id = i.tag_id',
+            array()
         );
 
-        $select->where('module_id = ?', (int) $moduleId)
-            ->where('item_id = ?', (int) $itemId);
+        $select->where(['module_id' => (int) $moduleId])
+               ->where(['item_id' => (int) $itemId]);
 
         if ($limit !== 0) {
             $select->limit($limit);
         }
 
-        $rows = $this->_db->query($select)->fetchAll(\PDO::FETCH_COLUMN);
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
         $ret  = array();
 
-        foreach ($rows as $row) {
-            $ret[] = $row;
+        foreach ($result as $row) {
+            $ret[] = $row['word'];
         }
 
         return $ret;
@@ -73,7 +77,7 @@ class Phprojekt_Tags_TagsTableMapper
 
         if (count($tags) > 0) {
             $stmt = 'INSERT INTO ' .
-                $this->_db->quoteIdentifier(self::tagsRelationTableName) .
+                $this->_db->platform->quoteIdentifier(self::tagsRelationTableName) .
                 ' (module_id, item_id, tag_id) VALUES ';
 
             $rows = array();
@@ -102,14 +106,15 @@ class Phprojekt_Tags_TagsTableMapper
         $toAdd   = array();
 
         if (!empty($tags)) {
-            $select = $this->_db->select()->from(
-                self::tagsTableName,
-                array('id', 'word'))
-                ->where('word IN (?)', $tags);
+            $sql = new \Laminas\Db\Sql\Sql($this->_db);
+            $select = $sql->select();
+            $select->from(self::tagsTableName, array('id', 'word'));
+            $select->where->in('word', $tags);
 
-            $rows = $this->_db->fetchAll($select);
+            $statement = $sql->prepareStatementForSqlObject($select);
+            $result = $statement->execute();
 
-            foreach ($rows as $row) {
+            foreach ($result as $row) {
                 $ids[$row['word']] = $row['id'];
             }
         }
@@ -196,9 +201,17 @@ class Phprojekt_Tags_TagsTableMapper
      */
     private function getTagsForSearchWords(Array $words) {
         foreach ($words as $word) {
-            $select = $this->_db->select()->from(self::tagsTableName, array('id'));
-            $select->where('word LIKE ?', '%' . str_replace("%", "\%", $word) . '%');
-            $tagids = $this->_db->fetchCol($select);
+            $sql = new \Laminas\Db\Sql\Sql($this->_db);
+            $select = $sql->select();
+            $select->from(self::tagsTableName, array('id'));
+            $select->where->like('word', '%' . str_replace("%", "\%", $word) . '%');
+
+            $statement = $sql->prepareStatementForSqlObject($select);
+            $result = $statement->execute();
+            $tagids = array();
+            foreach ($result as $row) {
+                $tagids[] = $row['id'];
+            }
 
             if (empty($tagids)) {
                 //no matching tags, we can stop here
@@ -250,11 +263,15 @@ class Phprojekt_Tags_TagsTableMapper
         $moduleItemTagMap = array();
 
         foreach ($tagGroupList as $index => $ids) {
-            $select = $this->_db->select()->from(self::tagsRelationTableName, array('module_id', 'item_id'));
-            $select->where('tag_id IN (?)', $ids);
+            $sql = new \Laminas\Db\Sql\Sql($this->_db);
+            $select = $sql->select();
+            $select->from(self::tagsRelationTableName, array('module_id', 'item_id'));
+            $select->where->in('tag_id', $ids);
 
-            $rows = $this->_db->fetchAll($select);
-            foreach ($rows as $row) {
+            $statement = $sql->prepareStatementForSqlObject($select);
+            $result = $statement->execute();
+
+            foreach ($result as $row) {
                 $moduleId = $row['module_id'];
                 $itemId = $row['item_id'];
                 if (!array_key_exists($moduleId, $moduleItemTagMap)) {
