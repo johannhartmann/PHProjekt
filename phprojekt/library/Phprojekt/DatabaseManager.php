@@ -200,8 +200,9 @@ class Phprojekt_DatabaseManager extends Phprojekt_ActiveRecord_Abstract implemen
         $fieldname = func_get_arg(0);
         $table     = $this->_getModuleName();
 
-        return parent::fetchRow(sprintf('table_name = ?', $this->_db->platform->quoteValue($table))
-            . ' AND ' . sprintf('table_field = ?', $this->_db->platform->quoteValue($fieldname)));
+        return parent::fetchRow(sprintf('table_name = %s AND table_field = %s',
+            $this->_db->platform->quoteValue($table),
+            $this->_db->platform->quoteValue($fieldname)));
     }
 
     /**

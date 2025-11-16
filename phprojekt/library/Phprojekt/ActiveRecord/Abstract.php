@@ -607,15 +607,10 @@ abstract class Phprojekt_ActiveRecord_Abstract
             $statement = $sql->prepareStatementForSqlObject($select);
             $results = $statement->execute();
 
-            // Convert results to array of ActiveRecord objects
+            // Convert results to array of arrays
             $rows = array();
-            $className = get_class($this);
             foreach ($results as $row) {
-                $object = new $className(array('db' => $this->_db));
-                foreach ($row as $col => $value) {
-                    $object->_data[self::convertVarFromSql($col)] = $value;
-                }
-                $rows[] = $object;
+                $rows[] = $row;
             }
             return $rows;
         }
@@ -1244,14 +1239,17 @@ abstract class Phprojekt_ActiveRecord_Abstract
      */
     public function count($where = null)
     {
-        $select = $this->select()->from($this->_name, array('COUNT(*)'));
+        $sql = new \Laminas\Db\Sql\Sql($this->_db);
+        $select = $sql->select();
+        $select->from($this->_name);
+        $select->columns(array('cnt' => new \Laminas\Db\Sql\Expression('COUNT(*)')));
         if (!is_null($where)) {
             $select->where($where);
         }
-        $sql = new \Laminas\Db\Sql\Sql($this->_db);
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
-        return $result->current()['COUNT(*)'];
+        $row = $result->current();
+        return $row ? (int)$row['cnt'] : 0;
     }
 
     /**
@@ -1293,11 +1291,13 @@ abstract class Phprojekt_ActiveRecord_Abstract
     protected function _fetchWithJoin($where = null, $order = null, $count = null, $offset = null, $select = null,
         $join = null)
     {
-        // selection tool
-        $selectObj = $this->_db->select();
+        // selection tool using Laminas
+        $sql = new \Laminas\Db\Sql\Sql($this->_db);
+        $selectObj = $sql->select();
 
         // the FROM clause
-        $selectObj->from($this->_name, $this->_cols, $this->_schema);
+        $selectObj->from($this->_name);
+        $selectObj->columns($this->_cols);
 
         // the WHERE clause
         $where = (array) $where;
@@ -1309,7 +1309,7 @@ abstract class Phprojekt_ActiveRecord_Abstract
             } else {
                 // $key is the condition with placeholder,
                 // and $val is quoted into the condition
-                $selectObj->where($key, $val);
+                $selectObj->where([$key => $val]);
             }
         }
 
@@ -1318,11 +1318,18 @@ abstract class Phprojekt_ActiveRecord_Abstract
             $order = array($order);
         }
         foreach ($order as $val) {
-            $selectObj->order($val);
+            if ($val) {
+                $selectObj->order($val);
+            }
         }
 
         // the LIMIT clause
-        $selectObj->limit($count, $offset);
+        if ($count !== null) {
+            $selectObj->limit($count);
+        }
+        if ($offset !== null) {
+            $selectObj->offset($offset);
+        }
 
         $sqlStr    = $selectObj->__toString();
         $statement = explode("FROM", $sqlStr);
