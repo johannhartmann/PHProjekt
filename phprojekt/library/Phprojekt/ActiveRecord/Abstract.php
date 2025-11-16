@@ -1291,87 +1291,83 @@ abstract class Phprojekt_ActiveRecord_Abstract
     protected function _fetchWithJoin($where = null, $order = null, $count = null, $offset = null, $select = null,
         $join = null)
     {
-        // selection tool using Laminas
-        $sql = new \Laminas\Db\Sql\Sql($this->_db);
-        $selectObj = $sql->select();
-
-        // the FROM clause
-        $selectObj->from($this->_name);
-        $selectObj->columns($this->_cols);
-
-        // the WHERE clause
-        $where = (array) $where;
-        foreach ($where as $key => $val) {
-            // is $key an int?
-            if (is_int($key)) {
-                // $val is the full condition
-                $selectObj->where($this->_quoteTableAndFieldName($val));
-            } else {
-                // $key is the condition with placeholder,
-                // and $val is quoted into the condition
-                $selectObj->where([$key => $val]);
-            }
-        }
-
-        // the ORDER clause
-        if (!is_array($order)) {
-            $order = array($order);
-        }
-        foreach ($order as $val) {
-            if ($val) {
-                $selectObj->order($val);
-            }
-        }
-
-        // the LIMIT clause
-        if ($count !== null) {
-            $selectObj->limit($count);
-        }
-        if ($offset !== null) {
-            $selectObj->offset($offset);
-        }
-
-        $sqlStr    = $sql->buildSqlString($selectObj);
-        $statement = explode("FROM", $sqlStr);
-
+        // Build the SELECT clause
         if (null === $select) {
             $sqlStr    = "SELECT ";
             $columns   = array();
             $tableName = $this->getTableName();
             foreach ($this->_cols as $column) {
-                $columns[] = $this->getAdapter()->platform->quoteIdentifier($tableName . '.' . $column);
+                $columns[] = $this->getAdapter()->platform->quoteIdentifier($tableName) . '.' .
+                             $this->getAdapter()->platform->quoteIdentifier($column);
             }
             $sqlStr .= implode(",", $columns);
-            $sqlStr .= " FROM " . $statement[1];
         } else {
-            $selectStmt = $statement[0] . ", ";
-            $columns    = explode(",", trim($select));
-
-            $count = 0;
-            foreach ($columns as $column) {
-                $count++;
-                $selectStmt .= " " . $this->_quoteTableAndFieldName($column) . " ";
-                if ($count < count($columns)) {
-                    $selectStmt .= ", ";
-                }
+            $sqlStr = "SELECT ";
+            $columns = array();
+            $tableName = $this->getTableName();
+            foreach ($this->_cols as $column) {
+                $columns[] = $this->getAdapter()->platform->quoteIdentifier($tableName) . '.' .
+                             $this->getAdapter()->platform->quoteIdentifier($column);
             }
+            $sqlStr .= implode(",", $columns);
 
-            $selectStmt .= " FROM ";
-            $sqlStr      = $selectStmt . $statement[1];
+            // Add additional select columns
+            $selectColumns = explode(",", trim($select));
+            foreach ($selectColumns as $column) {
+                $sqlStr .= ", " . $this->_quoteTableAndFieldName(trim($column));
+            }
         }
 
+        // Add FROM clause
+        $sqlStr .= " FROM " . $this->getAdapter()->platform->quoteIdentifier($this->_name);
+
+        // Add JOIN clause
         $join = $this->_quoteTableAndFieldName($join);
-        if (preg_match('/WHERE/i', $sqlStr)) {
-            $joinPart = ' ' . $join . ' WHERE ';
-            $sqlStr   = str_replace('WHERE', $joinPart, $sqlStr);
-        } else if (preg_match('/ORDER/i', $sqlStr)) {
-            $joinPart = ' ' . $join . ' ORDER ';
-            $sqlStr   = str_replace('ORDER', $joinPart, $sqlStr);
-        } else {
-            $sqlStr .= ' ' . $join;
+        $sqlStr .= " " . $join;
+
+        // Add WHERE clause
+        $where = (array) $where;
+        $whereParts = array();
+        foreach ($where as $key => $val) {
+            if (is_int($key)) {
+                // $val is the full condition
+                $whereParts[] = $this->_quoteTableAndFieldName($val);
+            } else {
+                // $key is the condition with placeholder
+                $whereParts[] = $key . ' = ' . $this->getAdapter()->platform->quoteValue($val);
+            }
+        }
+        if (!empty($whereParts)) {
+            $sqlStr .= " WHERE " . implode(" AND ", $whereParts);
+        }
+
+        // Add ORDER BY clause
+        if (!is_array($order)) {
+            $order = array($order);
+        }
+        $orderParts = array();
+        foreach ($order as $val) {
+            if ($val) {
+                $orderParts[] = $val;
+            }
+        }
+        if (!empty($orderParts)) {
+            $sqlStr .= " ORDER BY " . implode(", ", $orderParts);
+        }
+
+        // Add LIMIT clause
+        if ($count !== null) {
+            $sqlStr .= " LIMIT " . (int)$count;
+            if ($offset !== null) {
+                $sqlStr .= " OFFSET " . (int)$offset;
+            }
         }
 
         // return the results
+        if (null !== $this->_log) {
+            $this->_log->debug($sqlStr);
+        }
+        error_log("DEBUG SQL: " . $sqlStr);
         $stmt      = $this->_db->query($sqlStr);
         $result    = $stmt->execute();
         $dataArray = array();
@@ -1379,15 +1375,8 @@ abstract class Phprojekt_ActiveRecord_Abstract
             $dataArray[] = $row;
         }
 
-        $data  = array(
-            'table'    => $this,
-            'data'     => $dataArray,
-            'rowClass' => $this->_rowClass,
-            'stored'   => true
-        );
-
-        class_exists($this->_rowsetClass);
-        return new $this->_rowsetClass($data);
+        // Return simple array - fetchAll() will convert to ActiveRecord instances
+        return $dataArray;
     }
 
     /**
@@ -1399,6 +1388,12 @@ abstract class Phprojekt_ActiveRecord_Abstract
      */
     private function _callbackQuoteIdentifier1($data)
     {
+        // Split table.column and quote separately
+        $parts = explode('.', $data[0]);
+        if (count($parts) === 2) {
+            $db = Phprojekt::getInstance()->getDb();
+            return $db->platform->quoteIdentifier($parts[0]) . '.' . $db->platform->quoteIdentifier($parts[1]);
+        }
         return Phprojekt::getInstance()->getDb()->platform->quoteIdentifier($data[0]);
     }
 

@@ -49,8 +49,6 @@ INSERT IGNORE INTO `user` (`id`, `username`, `firstname`, `lastname`, `status`, 
 INSERT IGNORE INTO `module` (`id`, `name`, `label`, `save_type`, `version`, `active`) VALUES (1, 'Project', 'Project', 0, '6.1.4', 1);
 INSERT IGNORE INTO `project_module_permissions` (`module_id`, `project_id`) VALUES (1, 1);
 INSERT IGNORE INTO `project_module_permissions` (`module_id`, `project_id`) VALUES (1, 2);
-INSERT IGNORE INTO `project_role_user_permissions` (`project_id`, `user_id`, `role_id`) VALUES (2, 1, 1);
-INSERT IGNORE INTO `project_role_user_permissions` (`project_id`, `user_id`, `role_id`) VALUES (1, 1, 1);
 INSERT IGNORE INTO `item_rights` (`module_id`, `item_id`, `user_id`, `access`) VALUES (1, 1, 1, 255);
 INSERT IGNORE INTO `item_rights` (`module_id`, `item_id`, `user_id`, `access`) VALUES (1, 2, 1, 255);
 INSERT IGNORE INTO `item_rights` (`module_id`, `item_id`, `user_id`, `access`) VALUES (1, 5, 1, 255);
@@ -112,8 +110,6 @@ INSERT IGNORE INTO `user` (`id`, `username`, `firstname`, `lastname`, `status`, 
 INSERT IGNORE INTO `module` (`id`, `name`, `label`, `save_type`, `version`, `active`) VALUES (1, 'Project', 'Project', 0, '6.1.0-dev', 1);
 INSERT IGNORE INTO `project_module_permissions` (`module_id`, `project_id`) VALUES (1, 1);
 INSERT IGNORE INTO `project_module_permissions` (`module_id`, `project_id`) VALUES (1, 2);
-INSERT IGNORE INTO `project_role_user_permissions` (`project_id`, `user_id`, `role_id`) VALUES (2, 1, 1);
-INSERT IGNORE INTO `project_role_user_permissions` (`project_id`, `user_id`, `role_id`) VALUES (1, 1, 1);
 INSERT IGNORE INTO `item_rights` (`module_id`, `item_id`, `user_id`, `access`) VALUES (1, 1, 1, 255);
 INSERT IGNORE INTO `item_rights` (`module_id`, `item_id`, `user_id`, `access`) VALUES (1, 2, 1, 255);
 INSERT IGNORE INTO `item_rights` (`module_id`, `item_id`, `user_id`, `access`) VALUES (1, 5, 1, 255);
@@ -171,8 +167,6 @@ INSERT IGNORE INTO `module` (`id`, `name`, `label`, `save_type`, `version`, `act
 INSERT IGNORE INTO `project_module_permissions` (`module_id`, `project_id`) VALUES (1, 1);
 INSERT IGNORE INTO `project_module_permissions` (`module_id`, `project_id`) VALUES (2, 1);
 INSERT IGNORE INTO `project_module_permissions` (`module_id`, `project_id`) VALUES (3, 1);
-INSERT IGNORE INTO `project_role_user_permissions` (`project_id`, `user_id`, `role_id`) VALUES (2, 1, 1);
-INSERT IGNORE INTO `project_role_user_permissions` (`project_id`, `user_id`, `role_id`) VALUES (1, 1, 1);
 INSERT IGNORE INTO `item_rights` (`module_id`, `item_id`, `user_id`, `access`) VALUES (1, 1, 1, 255);
 INSERT IGNORE INTO `item_rights` (`module_id`, `item_id`, `user_id`, `access`) VALUES (1, 2, 1, 255);
 INSERT IGNORE INTO `item_rights` (`module_id`, `item_id`, `user_id`, `access`) VALUES (1, 3, 1, 255);
@@ -203,3 +197,5 @@ INSERT IGNORE INTO `user` (`id`, `username`, `firstname`, `lastname`, `status`, 
 
 -- Re-enable foreign key checks
 SET FOREIGN_KEY_CHECKS=1;
+INSERT IGNORE INTO `project_role_user_permissions` (`project_id`, `user_id`, `role_id`) VALUES (2, 1, 1);
+INSERT IGNORE INTO `project_role_user_permissions` (`project_id`, `user_id`, `role_id`) VALUES (1, 1, 1);

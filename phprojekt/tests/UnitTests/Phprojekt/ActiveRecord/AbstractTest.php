@@ -63,7 +63,7 @@ class Phprojekt_ActiveRecord_AbstractTest extends DatabaseTest
         $projects = $project->fetchAll(null, null, null, null, "project_role_user_permissions.role_id",
             'LEFT JOIN project_role_user_permissions ON project_role_user_permissions.project_id = project.id');
 
-        $this->assertEquals(5, count($projects));
+        $this->assertEquals(7, count($projects));
     }
 
     public function testGetTableName()
