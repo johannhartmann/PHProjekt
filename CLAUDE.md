@@ -82,6 +82,28 @@ public/
 
 **Note**: In development, `phprojekt/htdocs/` serves as the document root. In Docker, `public/` may be used as an alias.
 
+### React Frontend (`frontend-react/`)
+
+```
+frontend-react/             # New React SPA (strangler pattern)
+├── src/
+│   ├── components/         # Reusable React components
+│   │   └── ShellLayout.tsx # Main layout with navigation
+│   ├── pages/              # Page components (routes)
+│   │   ├── Home.tsx       # Home page
+│   │   └── Health.tsx     # Health check page
+│   ├── App.tsx            # Main app with React Router
+│   └── main.tsx           # Entry point
+├── public/                 # Static assets
+├── vite.config.ts         # Vite configuration
+├── tsconfig.json          # TypeScript configuration
+└── package.json           # NPM dependencies
+```
+
+**Build Output**: `public/react/` (served by PHP backend at `/react/`)
+
+**Status**: ✅ **Infrastructure ready** - Routes, layout, and build pipeline configured
+
 ---
 
 ## Commands
@@ -154,6 +176,50 @@ php -S localhost:8080
 ```
 
 **⚠️ DO NOT run this unless working with legacy Dojo code. New development should use React.**
+
+### Run React Development Server
+
+```bash
+# Navigate to React frontend
+cd frontend-react
+
+# Install dependencies (first time only)
+npm install
+
+# Start development server (runs on port 3000)
+npm run dev
+
+# Access React app at: http://localhost:3000/react/
+```
+
+**Features**:
+- Hot Module Replacement (HMR) for instant updates
+- TypeScript type checking
+- API proxy to PHP backend (localhost:8080)
+- React Router with / and /health routes
+
+### Build React for Production
+
+```bash
+# Navigate to React frontend
+cd frontend-react
+
+# Build for production
+npm run build
+
+# Output: ../public/react/
+# Served by PHP backend at: http://localhost:8080/react/
+```
+
+**Other React Commands**:
+
+```bash
+npm run lint         # Run ESLint
+npm run lint:fix     # Fix ESLint issues
+npm run type-check   # Run TypeScript type checking
+npm run preview      # Preview production build
+npm test             # Run tests (not yet configured)
+```
 
 ---
 

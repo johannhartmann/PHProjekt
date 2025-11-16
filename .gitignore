@@ -26,6 +26,12 @@ temp/
 /node_modules/
 package-lock.json
 
+# React Frontend
+/frontend-react/node_modules/
+/frontend-react/dist/
+/frontend-react/.vite/
+/public/react/
+
 # E2E Tests
 /tests/e2e/node_modules/
 /tests/e2e/test-results/
