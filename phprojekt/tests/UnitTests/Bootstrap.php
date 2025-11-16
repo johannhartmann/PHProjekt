@@ -78,3 +78,21 @@ try {
 } catch (Exception $e) {
     error_log("Warning: Could not set SQL mode: " . $e->getMessage());
 }
+
+// Load test fixtures
+$fixturesFile = PHPR_ROOT_PATH . '/tests/test_fixtures.sql';
+if (file_exists($fixturesFile) && class_exists('Phprojekt') && Phprojekt::getInstance()->getDb()) {
+    try {
+        $fixtures = file_get_contents($fixturesFile);
+        $db = Phprojekt::getInstance()->getDb();
+        // Execute each statement
+        foreach (explode(";\n", $fixtures) as $statement) {
+            $statement = trim($statement);
+            if (!empty($statement) && substr($statement, 0, 2) !== '--') {
+                $db->query($statement);
+            }
+        }
+    } catch (Exception $e) {
+        error_log("Warning: Could not load test fixtures: " . $e->getMessage());
+    }
+}
