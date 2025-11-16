@@ -29,7 +29,7 @@ $tables = [
 ];
 
 foreach ($tables as $table) {
-    $sqlOutput .= "DELETE FROM `$table`;\n";
+    $sqlOutput .= "TRUNCATE TABLE `$table`;\n";
 }
 
 $sqlOutput .= "\n-- Insert fixture data\n";
@@ -66,7 +66,7 @@ function xmlToSql($xmlFile) {
         }
 
         $sql .= sprintf(
-            "REPLACE INTO `%s` (%s) VALUES (%s);\n",
+            "INSERT IGNORE INTO `%s` (%s) VALUES (%s);\n",
             $tableName,
             implode(', ', $columns),
             implode(', ', $values)

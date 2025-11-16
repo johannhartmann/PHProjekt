@@ -81,16 +81,17 @@ try {
 
 // Load test fixtures
 $fixturesFile = PHPR_ROOT_PATH . '/tests/test_fixtures.sql';
-if (file_exists($fixturesFile) && class_exists('Phprojekt') && Phprojekt::getInstance()->getDb()) {
+if (file_exists($fixturesFile)) {
     try {
-        $fixtures = file_get_contents($fixturesFile);
-        $db = Phprojekt::getInstance()->getDb();
-        // Execute each statement
-        foreach (explode(";\n", $fixtures) as $statement) {
-            $statement = trim($statement);
-            if (!empty($statement) && substr($statement, 0, 2) !== '--') {
-                $db->query($statement);
-            }
+        // Load fixtures using MySQL command line to properly handle TRUNCATE and auto-increment reset
+        // Using test database credentials
+        $mysqlCmd = sprintf(
+            'mysql -u test -ptest phprojekt_test < %s 2>&1',
+            escapeshellarg($fixturesFile)
+        );
+        exec($mysqlCmd, $output, $returnCode);
+        if ($returnCode !== 0) {
+            error_log("Warning: Could not load test fixtures: " . implode("\n", $output));
         }
     } catch (Exception $e) {
         error_log("Warning: Could not load test fixtures: " . $e->getMessage());

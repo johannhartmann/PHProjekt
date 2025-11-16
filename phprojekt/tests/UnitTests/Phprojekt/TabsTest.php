@@ -36,6 +36,7 @@ class Phprojekt_TabsTest extends PHPUnit\Framework\TestCase
 
     /**
      * Test getModuleName
+     * @depends testSaveTab
      */
     public function testGetTabs()
     {
@@ -49,6 +50,9 @@ class Phprojekt_TabsTest extends PHPUnit\Framework\TestCase
         $this->assertEquals($result, $tab->getTabs());
     }
 
+    /**
+     * @depends testSaveTab
+     */
     public function testSaveModuleTabRelation()
     {
         $tab = new Phprojekt_Tabs();

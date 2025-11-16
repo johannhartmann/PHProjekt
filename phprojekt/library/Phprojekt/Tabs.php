@@ -49,9 +49,9 @@ class Phprojekt_Tabs
         $select = $sql->select()
                      ->from(array('t' => 'tab'))
                      ->join(array('rel' => 'module_tab_relation'),
-                            sprintf("%s = %s", $db->quoteIdentifier("t.id"),
-                            $db->quoteIdentifier("rel.tab_id")))
-                     ->where(sprintf('rel.module_id = %d', (int) $moduleId));
+                            't.id = rel.tab_id',
+                            [])
+                     ->where(['rel.module_id' => (int) $moduleId]);
         $stmt = $sql->prepareStatementForSqlObject($select);
         $result = $stmt->execute();
         $rows = array();
@@ -114,14 +114,21 @@ class Phprojekt_Tabs
     public function saveTab($label, $id = 0)
     {
         $db = Phprojekt::getInstance()->getDb();
+        $sql = new \Laminas\Db\Sql\Sql($db);
+
         if ($id > 0) {
-            $data['label'] = $label;
-            $db->update('tab', $data, 'id = ' . (int) $id);
+            $update = $sql->update('tab');
+            $update->set(['label' => $label]);
+            $update->where(['id' => (int) $id]);
+            $statement = $sql->prepareStatementForSqlObject($update);
+            $statement->execute();
             return $id;
         } else {
-            $data['label'] = $label;
-            $db->insert('tab', $data);
-            return $db->lastInsertId();
+            $insert = $sql->insert('tab');
+            $insert->values(['label' => $label]);
+            $statement = $sql->prepareStatementForSqlObject($insert);
+            $result = $statement->execute();
+            return $result->getGeneratedValue();
         }
     }
 
@@ -169,14 +176,26 @@ class Phprojekt_Tabs
     public function saveModuleTabRelation($tabIds, $moduleId)
     {
         $db = Phprojekt::getInstance()->getDb();
-        $db->delete('module_tab_relation', sprintf('module_id = %d', (int) $moduleId));
+        $sql = new \Laminas\Db\Sql\Sql($db);
+
+        // Delete existing relations
+        $delete = $sql->delete('module_tab_relation');
+        $delete->where(['module_id' => (int) $moduleId]);
+        $statement = $sql->prepareStatementForSqlObject($delete);
+        $statement->execute();
+
+        // Insert new relations
         if (!is_array($tabIds)) {
             $tabIds = array($tabIds);
         }
         foreach ($tabIds as $tabId) {
-            $data['tab_id']    = (int) $tabId;
-            $data['module_id'] = (int) $moduleId;
-            $db->insert('module_tab_relation', $data);
+            $insert = $sql->insert('module_tab_relation');
+            $insert->values([
+                'tab_id'    => (int) $tabId,
+                'module_id' => (int) $moduleId
+            ]);
+            $statement = $sql->prepareStatementForSqlObject($insert);
+            $statement->execute();
         }
     }
 }
