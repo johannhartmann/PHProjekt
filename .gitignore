@@ -21,3 +21,14 @@ logs/
 # Temporary files
 tmp/
 temp/
+
+# Node.js
+/node_modules/
+package-lock.json
+
+# E2E Tests
+/tests/e2e/node_modules/
+/tests/e2e/test-results/
+/tests/e2e/playwright-report/
+/tests/e2e/playwright/.cache/
+/tests/e2e/.env.e2e
