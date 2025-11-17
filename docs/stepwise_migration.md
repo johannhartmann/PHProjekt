@@ -14,11 +14,17 @@ This document provides step-by-step instructions for migrating each PHProjekt mo
 
 **Key Principles:**
 1. **One module at a time** - Complete vertical slices
-2. **Test everything** - Unit tests, E2E tests, backend tests
+2. **Test everything** - Unit tests, E2E tests, backend tests (**MANDATORY**)
 3. **Feature flags** - Gradual rollout with toggles
 4. **Documentation first** - Understand before implementing
 5. **No breaking changes** - Dojo and React coexist
 6. **Git tags** - Mark completion of each module
+
+**⚠️ CRITICAL: Testing is MANDATORY**
+- All tests (unit, E2E, backend) must be implemented and passing
+- No module can be marked as complete without full test coverage
+- Cannot start next module until current module tests are green
+- This ensures quality and prevents regressions
 
 ---
 
@@ -37,6 +43,17 @@ Before starting any module migration, ensure:
 ---
 
 ### Step 1: Select Next Module
+
+**⚠️ PREREQUISITE: Previous module MUST be 100% complete**
+- All tests passing (unit, E2E, backend)
+- Documentation updated
+- Git tag created
+- Module marked as ✅ Complete in tracking table
+
+**If previous module has failing tests:**
+- STOP and fix them first
+- Do NOT start a new module
+- Quality gates are mandatory
 
 **Action:** Choose the next module from the tracking table below
 
@@ -630,6 +647,40 @@ npm run dev
 - [ ] Test responsive design (mobile, tablet, desktop)
 
 **Deliverable:** All tests passing, manual verification complete
+
+---
+
+### 🚨 MANDATORY GATE: Testing Verification
+
+**BEFORE PROCEEDING TO STEP 10, YOU MUST:**
+
+1. ✅ **All unit tests passing** - No failures, no skipped tests
+2. ✅ **All E2E tests passing** - Full browser automation tests green
+3. ✅ **All backend tests passing** - PHPUnit suite 100% passing
+4. ✅ **Manual testing complete** - All checklist items verified
+5. ✅ **No regressions** - Existing functionality still works
+
+**⚠️ STOP: If ANY test is failing:**
+- Fix the failing test immediately
+- Do NOT proceed to next steps
+- Do NOT start next module
+- Do NOT mark module as complete
+
+**Why This Matters:**
+- Quality gates prevent bugs from accumulating
+- Each module builds on previous ones
+- Broken tests indicate incomplete implementation
+- Moving forward with failing tests creates technical debt
+
+**How to Verify:**
+```bash
+# All three commands must show 100% pass rate:
+cd frontend-react && npm test              # Frontend tests
+cd /home/user/PHProjekt && npm run test:e2e  # E2E tests
+cd phprojekt && vendor/bin/phpunit --no-coverage  # Backend tests
+```
+
+**Only proceed to Step 10 when all tests are GREEN ✅**
 
 ---
 
