@@ -64,16 +64,17 @@ describe('API Client', () => {
         json: async () => mockResponse,
       });
 
+      const bookingId = 1;
       const bookingData = {
-        id: 1,
         projectId: 10,
         startDatetime: '2025-11-16 09:00:00',
+        notes: 'Test booking',
       };
 
-      await timecardApi.saveBooking(bookingData);
+      await timecardApi.saveBooking(bookingId, bookingData);
 
       expect(mockFetch).toHaveBeenCalledWith(
-        '/index.php/Timecard/index/jsonSave',
+        '/index.php/Timecard/index/jsonSave/nodeId/1/id/1',
         expect.objectContaining({
           method: 'POST',
           body: JSON.stringify(bookingData),
