@@ -14,6 +14,7 @@ import { Users } from './pages/admin/Users';
 import { Roles } from './pages/admin/Roles';
 import { Modules } from './pages/admin/Modules';
 import { Settings } from './pages/admin/Settings';
+import { UserSettingsPage } from './features/settings/UserSettingsPage';
 import './App.css';
 
 /**
@@ -63,6 +64,10 @@ function App() {
           <Route path="search" element={<Search />} />
           <Route path="files" element={<Files />} />
           <Route path="tags" element={<Tags />} />
+
+          {/* User Settings (Module A - First vertical slice) */}
+          <Route path="settings" element={<UserSettingsPage />} />
+          <Route path="settings/:moduleName" element={<UserSettingsPage />} />
 
           {/* Administration */}
           <Route path="admin/users" element={<Users />} />

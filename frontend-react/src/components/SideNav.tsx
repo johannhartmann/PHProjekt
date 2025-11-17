@@ -80,6 +80,17 @@ export function SideNav() {
         {/* Divider */}
         <div className="side-nav-divider"></div>
 
+        {/* User Settings */}
+        <div className="side-nav-section">
+          <NavLink to="/settings" className="side-nav-item">
+            <span className="side-nav-icon">👤</span>
+            <span className="side-nav-label">My Settings</span>
+          </NavLink>
+        </div>
+
+        {/* Divider */}
+        <div className="side-nav-divider"></div>
+
         {/* Administration (Collapsible) */}
         <div className="side-nav-section">
           <button
