@@ -1,0 +1,145 @@
+.timecard-day-page {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.timecard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.timecard-header h1 {
+  margin: 0;
+  color: #333;
+  font-size: 2rem;
+}
+
+.timecard-date-navigation {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.date-nav-button {
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.date-nav-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.date-nav-button:active {
+  transform: scale(0.98);
+}
+
+.date-picker {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #667eea;
+  border-radius: 4px;
+  min-width: 160px;
+}
+
+.today-button {
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.today-button:hover {
+  background: #45a049;
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+.timecard-error {
+  background: #ffebee;
+  border: 1px solid #ef5350;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: #c62828;
+}
+
+.timecard-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.timecard-day-view {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.timecard-day-view h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #667eea;
+  font-size: 1.3rem;
+}
+
+.timecard-form-view {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 2rem;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .timecard-content {
+    grid-template-columns: 1fr;
+  }
+
+  .timecard-form-view {
+    position: static;
+    max-height: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .timecard-day-page {
+    padding: 1rem;
+  }
+
+  .timecard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .timecard-date-navigation {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .date-picker {
+    flex: 1;
+    min-width: 140px;
+  }
+}

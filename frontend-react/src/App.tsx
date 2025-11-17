@@ -5,7 +5,6 @@ import { Health } from './pages/Health';
 import { ApiTest } from './pages/ApiTest';
 import { Projects } from './pages/Projects';
 import { Calendar } from './pages/Calendar';
-import { Timecard } from './pages/Timecard';
 import { Tickets } from './pages/Tickets';
 import { Search } from './pages/Search';
 import { Files } from './pages/Files';
@@ -15,6 +14,7 @@ import { Roles } from './pages/admin/Roles';
 import { Modules } from './pages/admin/Modules';
 import { Settings } from './pages/admin/Settings';
 import { UserSettingsPage } from './features/settings/UserSettingsPage';
+import { TimecardDayPage } from './features/timecard/TimecardDayPage';
 import './App.css';
 
 /**
@@ -57,7 +57,7 @@ function App() {
           {/* Main Modules */}
           <Route path="projects" element={<Projects />} />
           <Route path="calendar" element={<Calendar />} />
-          <Route path="timecard" element={<Timecard />} />
+          <Route path="timecard" element={<TimecardDayPage />} />
           <Route path="tickets" element={<Tickets />} />
 
           {/* Tools */}

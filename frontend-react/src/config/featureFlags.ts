@@ -67,7 +67,7 @@ export const featureFlags: FeatureFlags = {
   },
 
   timecard: {
-    enabled: false, // Not migrated yet
+    enabled: true, // Module B - React implementation is live!
   },
 };
 
