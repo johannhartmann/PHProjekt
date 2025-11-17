@@ -1,59 +1,37 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import { TopNav } from './TopNav';
+import { SideNav } from './SideNav';
 import './ShellLayout.css';
 
 /**
  * ShellLayout Component
  *
  * Main application layout component that provides:
- * - Top navigation bar
- * - Logo/branding
- * - Main navigation links
+ * - Top navigation bar with user menu and language selector
+ * - Side navigation menu with module links
  * - Content area for routes
  *
- * This layout will be used across all React routes and will eventually
- * include the full PHProjekt navigation when modules are migrated.
+ * This layout is used across all React routes and implements
+ * the full PHProjekt navigation structure.
  */
 export function ShellLayout() {
   return (
     <div className="shell-layout">
-      {/* Header / Navigation */}
-      <header className="shell-header">
-        <div className="shell-header-content">
-          <div className="shell-logo">
-            <h1>PHProjekt</h1>
-            <span className="shell-badge">React SPA</span>
+      {/* Top Navigation */}
+      <TopNav />
+
+      {/* Main Container: Side Nav + Content */}
+      <div className="shell-container">
+        {/* Side Navigation */}
+        <SideNav />
+
+        {/* Main Content Area */}
+        <main className="shell-main">
+          <div className="shell-content">
+            <Outlet />
           </div>
-
-          <nav className="shell-nav">
-            <Link to="/" className="shell-nav-link">
-              Home
-            </Link>
-            <Link to="/health" className="shell-nav-link">
-              Health
-            </Link>
-            <Link to="/api-test" className="shell-nav-link">
-              API Test
-            </Link>
-            {/* Future navigation links will be added here as modules are migrated */}
-          </nav>
-
-          <div className="shell-user">
-            <span>User Menu</span>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content Area */}
-      <main className="shell-main">
-        <div className="shell-content">
-          <Outlet />
-        </div>
-      </main>
-
-      {/* Footer */}
-      <footer className="shell-footer">
-        <p>PHProjekt 6 - React Frontend Migration</p>
-      </footer>
+        </main>
+      </div>
     </div>
   );
 }
