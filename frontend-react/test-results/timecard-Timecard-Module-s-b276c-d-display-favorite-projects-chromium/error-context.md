@@ -1,0 +1,114 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "PHProjekt 6.0" [ref=e7] [cursor=pointer]:
+        - /url: /app
+        - heading "PHProjekt" [level=1] [ref=e8]
+        - generic [ref=e9]: "6.0"
+      - generic [ref=e10]:
+        - button "Select Language" [ref=e12] [cursor=pointer]:
+          - generic [ref=e13]: 🌐
+          - generic [ref=e14]: EN
+        - button "Notifications" [ref=e15] [cursor=pointer]:
+          - generic [ref=e16]: 🔔
+          - generic [ref=e17]: "0"
+        - button "User Menu" [ref=e19] [cursor=pointer]:
+          - generic [ref=e20]: DU
+          - generic [ref=e21]: Demo User
+          - generic [ref=e22]: ▼
+  - generic [ref=e23]:
+    - navigation [ref=e24]:
+      - button "Collapse menu" [ref=e25] [cursor=pointer]: «
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - link "🏠 Dashboard" [ref=e28] [cursor=pointer]:
+            - /url: /app
+            - generic [ref=e29]: 🏠
+            - generic [ref=e30]: Dashboard
+          - link "📁 Projects" [ref=e31] [cursor=pointer]:
+            - /url: /app/projects
+            - generic [ref=e32]: 📁
+            - generic [ref=e33]: Projects
+          - link "📅 Calendar" [ref=e34] [cursor=pointer]:
+            - /url: /app/calendar
+            - generic [ref=e35]: 📅
+            - generic [ref=e36]: Calendar
+          - link "⏱️ Timecard" [ref=e37] [cursor=pointer]:
+            - /url: /app/timecard
+            - generic [ref=e38]: ⏱️
+            - generic [ref=e39]: Timecard
+          - link "🎫 Tickets" [ref=e40] [cursor=pointer]:
+            - /url: /app/tickets
+            - generic [ref=e41]: 🎫
+            - generic [ref=e42]: Tickets
+        - generic [ref=e44]:
+          - link "🔍 Search" [ref=e45] [cursor=pointer]:
+            - /url: /app/search
+            - generic [ref=e46]: 🔍
+            - generic [ref=e47]: Search
+          - link "📎 Files" [ref=e48] [cursor=pointer]:
+            - /url: /app/files
+            - generic [ref=e49]: 📎
+            - generic [ref=e50]: Files
+          - link "🏷️ Tags" [ref=e51] [cursor=pointer]:
+            - /url: /app/tags
+            - generic [ref=e52]: 🏷️
+            - generic [ref=e53]: Tags
+        - link "👤 My Settings" [ref=e56] [cursor=pointer]:
+          - /url: /app/settings
+          - generic [ref=e57]: 👤
+          - generic [ref=e58]: My Settings
+        - button "⚙️ Administration ▶" [ref=e61] [cursor=pointer]:
+          - generic [ref=e62]: ⚙️
+          - generic [ref=e63]: Administration
+          - generic [ref=e64]: ▶
+        - generic [ref=e66]:
+          - generic [ref=e67]: Development
+          - link "🏥 Health Check" [ref=e68] [cursor=pointer]:
+            - /url: /app/health
+            - generic [ref=e69]: 🏥
+            - generic [ref=e70]: Health Check
+          - link "🧪 API Test" [ref=e71] [cursor=pointer]:
+            - /url: /app/api-test
+            - generic [ref=e72]: 🧪
+            - generic [ref=e73]: API Test
+    - main [ref=e74]:
+      - generic [ref=e76]:
+        - generic [ref=e77]:
+          - heading "Timecard" [level=1] [ref=e78]
+          - generic [ref=e79]:
+            - button "‹" [ref=e80] [cursor=pointer]
+            - textbox [ref=e81] [cursor=pointer]: 2025-11-17
+            - button "›" [ref=e82] [cursor=pointer]
+            - button "Today" [ref=e83] [cursor=pointer]
+        - paragraph [ref=e85]: "Error: HTTP 404: Not Found"
+        - generic [ref=e86]:
+          - generic [ref=e87]:
+            - heading "Bookings for Monday, November 17, 2025" [level=2] [ref=e88]
+            - generic [ref=e90]:
+              - paragraph [ref=e91]: No bookings for this day.
+              - paragraph [ref=e92]: Click "New" to create a booking.
+          - generic [ref=e94]:
+            - heading "New Booking" [level=3] [ref=e95]
+            - generic [ref=e96]:
+              - generic [ref=e97]:
+                - generic [ref=e98]: Start Date & Time *
+                - textbox "Start Date & Time *" [ref=e99] [cursor=pointer]: 2025-11-17T13:04
+              - generic [ref=e100]:
+                - generic [ref=e101]: End Time(leave empty for running timer)
+                - textbox "End Time(leave empty for running timer)" [ref=e102] [cursor=pointer]
+              - generic [ref=e103]:
+                - generic [ref=e104]: Project *
+                - combobox "Project *" [ref=e105]:
+                  - option "Unassigned" [selected]
+              - generic [ref=e106]:
+                - generic [ref=e107]: Notes
+                - textbox "Notes" [ref=e108]:
+                  - /placeholder: Enter notes or description...
+              - generic [ref=e109]:
+                - button "Save" [ref=e110] [cursor=pointer]
+                - button "Clear" [ref=e111] [cursor=pointer]
+```
