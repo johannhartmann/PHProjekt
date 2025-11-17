@@ -38,6 +38,19 @@ That's it. The server runs on port 8080 and serves both:
 - Legacy Dojo app: `http://localhost:8080/index.php`
 - API endpoints: `http://localhost:8080/index.php/Module/Controller/Action`
 
+### Starting MySQL for Backend Tests
+
+If you need MySQL running, start MySQL:
+
+```bash
+/usr/bin/mysqld_safe --user=mysql &
+```
+
+That's it. MySQL will start in the background. The backend needs MySQL for:
+- API endpoints that query the database
+- PHPUnit tests with fixtures
+- E2E tests that interact with real data
+
 ### Running All Tests
 
 **Always run ALL tests - unit AND E2E:**

@@ -96,7 +96,7 @@
             - generic [ref=e96]:
               - generic [ref=e97]:
                 - generic [ref=e98]: Start Date & Time *
-                - textbox "Start Date & Time *" [ref=e99] [cursor=pointer]: 2025-11-17T13:04
+                - textbox "Start Date & Time *" [ref=e99] [cursor=pointer]: 2025-11-17T14:55
               - generic [ref=e100]:
                 - generic [ref=e101]: End Time(leave empty for running timer)
                 - textbox "End Time(leave empty for running timer)" [ref=e102] [cursor=pointer]
