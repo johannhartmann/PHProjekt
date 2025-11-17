@@ -47,20 +47,6 @@ return [
                     ],
                 ],
             ],
-            'legacy_index_php' => [
-                'type'    => Segment::class,
-                'options' => [
-                    'route'    => '/index.php[/:path]',
-                    'constraints' => [
-                        'path' => '.*',
-                    ],
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Application\Default\Controller',
-                        'controller' => Controller\IndexController::class,
-                        'action'     => 'legacyRouter',
-                    ],
-                ],
-            ],
             'default' => [
                 'type'    => Segment::class,
                 'options' => [

@@ -4,8 +4,6 @@
  */
 return [
     // This should be an array of module namespaces used in the application.
-    // NOTE: Specific modules (Timecard, Project, etc.) must come BEFORE Default
-    // because Default has a catch-all route that would match their URLs first
     'modules' => [
         'Laminas\Router',
         'Laminas\Validator',
@@ -13,11 +11,11 @@ return [
         'Laminas\Db',
         'Laminas\Session',
         'Laminas\ZendFrameworkBridge',
+        'Application\Default',
         'Application\Core',
-        'Application\Timecard',
         'Application\Project',
+        'Application\Timecard',
         'Application\Calendar2',
-        'Application\Default',  // Must be LAST - has catch-all route
     ],
 
     // These are various options for the listeners attached to the ModuleManager
