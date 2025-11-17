@@ -30,6 +30,7 @@ export {
   projectApi,
   tagApi,
   searchApi,
+  settingsApi,
   systemApi,
   configureApiClient,
   ApiError,

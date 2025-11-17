@@ -369,6 +369,59 @@ export interface SearchResult {
 }
 
 // ============================================================================
+// Settings Types
+// ============================================================================
+
+/**
+ * Setting module information
+ * Endpoint: GET /index.php/Core/Setting/jsonGetModules
+ */
+export interface SettingModule {
+  name: string;
+  label: string;
+}
+
+/**
+ * Setting field metadata (describes a form field)
+ */
+export interface SettingFieldMetadata {
+  key: string;
+  label: string;
+  type: 'text' | 'selectbox' | 'checkbox' | 'number' | 'textarea';
+  range?: Array<{ id: string; name: string }>;
+  required?: boolean;
+  readOnly?: boolean;
+  hint?: string;
+  defaultValue?: string | number | boolean;
+}
+
+/**
+ * Setting data (key-value pairs for actual settings values)
+ */
+export interface SettingData {
+  [key: string]: string | number | boolean;
+}
+
+/**
+ * Setting detail response
+ * Endpoint: GET /index.php/Core/Setting/jsonDetail?moduleName=User
+ */
+export interface SettingDetailResponse {
+  metadata: SettingFieldMetadata[];
+  data: SettingData[];
+  numRows: number;
+}
+
+/**
+ * Save settings request
+ * Endpoint: POST /index.php/Core/Setting/jsonSave
+ */
+export interface SaveSettingsRequest {
+  moduleName: string;
+  [key: string]: string | number | boolean;
+}
+
+// ============================================================================
 // Configuration and System Types
 // ============================================================================
 

@@ -23,6 +23,9 @@ import type {
   DeleteResponse,
   Tag,
   SearchResult,
+  SettingModule,
+  SettingDetailResponse,
+  SaveSettingsRequest,
   FrontendConfig,
   FrontendMessage,
   ApiResponse,
@@ -490,6 +493,43 @@ export const searchApi = {
 };
 
 // ============================================================================
+// Settings API
+// ============================================================================
+
+export const settingsApi = {
+  /**
+   * Get list of available setting modules
+   *
+   * @returns Array of setting modules
+   */
+  async getModules(): Promise<SettingModule[]> {
+    return get<SettingModule[]>(`/Core/Setting/jsonGetModules`);
+  },
+
+  /**
+   * Get settings for a specific module
+   *
+   * @param moduleName - Name of the module (e.g., "User")
+   * @returns Setting detail response with metadata and data
+   */
+  async getModuleSettings(moduleName: string): Promise<SettingDetailResponse> {
+    return get<SettingDetailResponse>(`/Core/Setting/jsonDetail`, {
+      moduleName,
+    });
+  },
+
+  /**
+   * Save settings for a module
+   *
+   * @param settings - Settings to save (must include moduleName)
+   * @returns Save response
+   */
+  async saveSettings(settings: SaveSettingsRequest): Promise<ApiResponse> {
+    return post<ApiResponse>(`/Core/Setting/jsonSave`, settings);
+  },
+};
+
+// ============================================================================
 // System API
 // ============================================================================
 
@@ -547,6 +587,7 @@ export const api = {
   project: projectApi,
   tag: tagApi,
   search: searchApi,
+  settings: settingsApi,
   system: systemApi,
 };
 
