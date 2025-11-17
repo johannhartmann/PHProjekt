@@ -21,10 +21,11 @@ return [
             'timecard' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/Timecard/:controller/:action',
+                    'route'    => '/Timecard[/:controller[/:action[/:path]]]',
                     'constraints' => [
                         'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'path'       => '.*',
                     ],
                     'defaults' => [
                         '__NAMESPACE__' => 'Application\Timecard\Controller',

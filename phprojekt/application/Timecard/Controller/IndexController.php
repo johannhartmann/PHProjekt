@@ -20,6 +20,23 @@ use Laminas\View\Model\JsonModel;
 class IndexController extends DefaultIndexController
 {
     /**
+     * Test action to verify routing - no authentication required
+     *
+     * @return JsonModel
+     */
+    public function testAction()
+    {
+        $response = [
+            'message' => 'Timecard routing is working!',
+            'controller' => get_class($this),
+            'action' => 'test',
+            'timestamp' => date('Y-m-d H:i:s'),
+        ];
+
+        return new JsonModel($response);
+    }
+
+    /**
      * Set current project ID - Timecard always uses INVISIBLE_ROOT
      *
      * @return void

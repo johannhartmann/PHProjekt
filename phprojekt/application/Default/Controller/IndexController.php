@@ -1098,4 +1098,87 @@ class IndexController extends AbstractActionController
 
         return $value;
     }
+
+    /**
+     * Legacy router action - handles ZF1-style URLs with /index.php prefix
+     *
+     * Parses URLs like: /index.php/Module/Controller/Action/param1/value1/param2/value2
+     * and forwards to the appropriate Laminas MVC controller
+     *
+     * @return mixed
+     */
+    public function legacyRouterAction()
+    {
+        // Get the path after /index.php
+        $path = $this->params()->fromRoute('path', '');
+
+        // Also check query string for remaining path
+        $queryString = $_SERVER['QUERY_STRING'] ?? '';
+
+        // Parse the path into parts
+        $parts = array_filter(explode('/', $path));
+
+        if (empty($parts)) {
+            // No path, redirect to home
+            return $this->redirect()->toRoute('home');
+        }
+
+        // Extract module, controller, action
+        $moduleName = ucfirst(array_shift($parts) ?? 'Default');
+        $controllerName = ucfirst(array_shift($parts) ?? 'Index');
+        $actionName = array_shift($parts) ?? 'index';
+
+        // Parse remaining parts as key/value parameters
+        $params = [];
+        while (count($parts) >= 2) {
+            $key = array_shift($parts);
+            $value = array_shift($parts);
+            $params[$key] = $value;
+        }
+
+        // Add any query string parameters
+        parse_str($queryString, $queryParams);
+        $params = array_merge($params, $queryParams);
+
+        // Build the controller class name
+        $controllerClass = "Application\\{$moduleName}\\Controller\\{$controllerName}Controller";
+
+        // Check if controller exists
+        if (!class_exists($controllerClass)) {
+            $response = $this->getResponse();
+            $response->setStatusCode(404);
+            $response->setContent("Controller not found: {$controllerClass}");
+            return $response;
+        }
+
+        // Get the service locator and create controller instance
+        $serviceLocator = $this->getEvent()->getApplication()->getServiceManager();
+
+        try {
+            $controller = $serviceLocator->get($controllerClass);
+        } catch (\Exception $e) {
+            $response = $this->getResponse();
+            $response->setStatusCode(500);
+            $response->setContent("Could not instantiate controller: " . $e->getMessage());
+            return $response;
+        }
+
+        // Build action method name
+        $actionMethodName = $actionName . 'Action';
+
+        // Check if action exists
+        if (!method_exists($controller, $actionMethodName)) {
+            $response = $this->getResponse();
+            $response->setStatusCode(404);
+            $response->setContent("Action not found: {$controllerClass}::{$actionMethodName}");
+            return $response;
+        }
+
+        // Forward request to the controller
+        return $this->forward()->dispatch($controllerClass, [
+            'action' => $actionName,
+            'module' => $moduleName,
+            '__NAMESPACE__' => "Application\\{$moduleName}\\Controller",
+        ] + $params);
+    }
 }
