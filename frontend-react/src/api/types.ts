@@ -131,6 +131,58 @@ export interface TimecardRunningBookingResponse {
   id: number;
 }
 
+/**
+ * Monthly day summary for calendar view
+ *
+ * Endpoint: GET /index.php/Timecard/index/jsonMonthList
+ * Source: Timecard/IndexController - inherited from Default
+ */
+export interface TimecardMonthDaySummary {
+  /** Date in YYYY-MM-DD format */
+  date: string;
+
+  /** Day of week (0=Sunday, 6=Saturday) */
+  week: number;
+
+  /** Total minutes worked on this day */
+  sumInMinutes: number;
+
+  /** Formatted hours (HH:MM) */
+  sumInHours: string;
+
+  /** 1 if has running booking, 0 otherwise */
+  openPeriod: 0 | 1;
+}
+
+/**
+ * Response from jsonMonthList endpoint
+ */
+export interface TimecardMonthListResponse {
+  type: 'success' | 'error';
+  data: TimecardMonthDaySummary[];
+  message?: string;
+}
+
+/**
+ * Request body for saving a timecard booking
+ */
+export interface TimecardSaveRequest {
+  /** Start date and time (YYYY-MM-DD HH:MM:SS) */
+  startDatetime: string;
+
+  /** End time (HH:MM:SS), omit for running timer */
+  endTime?: string | null;
+
+  /** Project ID */
+  projectId: number;
+
+  /** Notes/description */
+  notes?: string;
+
+  /** Booking ID (0 for new, ID for update) */
+  timecardId?: number;
+}
+
 // ============================================================================
 // Project Module Types
 // ============================================================================

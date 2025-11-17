@@ -14,6 +14,8 @@ import type {
   TimecardDayListResponse,
   TimecardFavoriteProject,
   TimecardRunningBookingResponse,
+  TimecardMonthDaySummary,
+  TimecardMonthListResponse,
   Project,
   ProjectListResponse,
   ProjectTreeNode,
@@ -282,13 +284,21 @@ export const timecardApi = {
   /**
    * Save a timecard booking
    *
+   * @param id - Booking ID (0 for new, >0 for update)
    * @param booking - Booking data
    * @returns Save response
    */
   async saveBooking(
-    booking: Partial<TimecardBooking> & { id?: number; startDatetime: string }
+    id: number,
+    booking: {
+      startDatetime: string;
+      endTime?: string | null;
+      projectId: number;
+      notes?: string;
+      timecardId?: number;
+    }
   ): Promise<SaveResponse> {
-    return post<SaveResponse>(`/Timecard/index/jsonSave`, booking);
+    return post<SaveResponse>(`/Timecard/index/jsonSave/nodeId/1/id/${id}`, booking);
   },
 
   /**
@@ -298,7 +308,36 @@ export const timecardApi = {
    * @returns Delete response
    */
   async deleteBooking(id: number): Promise<DeleteResponse> {
-    return post<DeleteResponse>(`/Default/index/jsonDelete`, { id });
+    return post<DeleteResponse>(`/Timecard/index/jsonDelete/id/${id}`, {});
+  },
+
+  /**
+   * Get monthly summary of booked hours
+   *
+   * @param year - Year (YYYY)
+   * @param month - Month (1-12)
+   * @returns Monthly summary data
+   */
+  async getMonthSummary(
+    year: number,
+    month: number
+  ): Promise<TimecardMonthDaySummary[]> {
+    const response = await get<TimecardMonthListResponse>(
+      `/Timecard/index/jsonMonthList/year/${year}/month/${month}`
+    );
+    return response.data || [];
+  },
+
+  /**
+   * Export bookings to CSV
+   *
+   * @param year - Year (YYYY)
+   * @param month - Month (1-12)
+   * @param csrfToken - CSRF token for security
+   */
+  exportToCSV(year: number, month: number, csrfToken: string): void {
+    const url = `/index.php/Timecard/index/csvList/nodeId/1/year/${year}/month/${month}/csrfToken/${csrfToken}`;
+    window.open(url, '_blank');
   },
 };
 
