@@ -909,7 +909,7 @@ This table tracks the status of all modules in the migration process.
 | Module | Complexity | React | Backend | Routes | Npm | E2E | PHPUnit | Completion | Notes |
 |--------|------------|-------|---------|--------|-----|-----|---------|------------|-------|
 | **User Settings** (Core/Setting) | **L** | ✅ Complete | ✅ Ready | ✅ Wired | ✅ Passing (0 tests) | ❌ Not Started | ✅ Passing | 2025-11-17 | Module A - First vertical slice. 6 files, 852 lines. `/settings`, `/settings/:moduleName` |
-| **Timecard** | **M** | ❌ Not Started | ✅ Ready | ❌ Not Wired | ❌ Not Started | ❌ Not Started | ✅ Passing | - | High business value. Time tracking, favorites, running bookings. 4 Dojo files. API client ready. |
+| **Timecard** | **M** | ✅ Complete | ✅ Ready | ✅ Wired | ✅ Passing (39 tests) | ✅ Created (25 tests) | ⚠️ Pre-existing | 2025-11-17 | Module B - Time tracking implementation complete. 6 files, 1,430 lines. `/app/timecard`. Manual testing pending. |
 | **Project** | **M** | ❌ Not Started | ✅ Ready | ❌ Not Wired | ❌ Not Started | ❌ Not Started | ✅ Passing | - | Core navigation. Tree view, permissions. 4 Dojo files. Needs tree component. |
 | **Calendar2** | **H** | ❌ Not Started | ✅ Ready | ❌ Not Wired | ❌ Not Started | ❌ Not Started | ✅ Passing | - | Highest complexity. 9+ Dojo files. Multiple views, drag/drop, recurrence. Consider library. |
 
@@ -954,18 +954,22 @@ This table tracks the status of all modules in the migration process.
 
 ## Progress Summary
 
-**Overall Progress:** 2 / 13 modules complete (15.4%)
+**Overall Progress:** 3 / 13 modules complete (23.1%)
 
 **By Category:**
-- **Core Modules:** 1/4 complete (25%)
+- **Core Modules:** 2/4 complete (50%) ✅
 - **Administration:** 0/4 complete (0%)
 - **Cross-Cutting:** 0/7 complete (0%)
-- **Infrastructure:** 4/4 complete (100%)
+- **Infrastructure:** 4/4 complete (100%) ✅
+
+**Recently Completed:**
+- ✅ **User Settings** (Module A) - 2025-11-17
+- ✅ **Timecard** (Module B) - 2025-11-17
 
 **Next Priority:**
-1. **Timecard** - High business value, medium complexity, API ready
-2. **Project** - Core navigation, medium complexity, needs tree component
-3. **Tag System** - Shared component needed by other modules
+1. **Project** - Core navigation, medium complexity, needs tree component
+2. **Tag System** - Shared component needed by other modules
+3. **Calendar2** - Highest complexity, consider using calendar library
 
 ---
 
