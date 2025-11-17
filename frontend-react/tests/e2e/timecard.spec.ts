@@ -24,7 +24,7 @@ test.describe('Timecard Module', () => {
 
   test('should display Timecard page with all controls', async ({ page }) => {
     // Check page title
-    await expect(page.locator('h1')).toContainText('Timecard');
+    await expect(page.getByRole('heading', { name: 'Timecard', level: 1 })).toBeVisible();
 
     // Check date navigation controls exist
     await expect(page.locator('button[title="Previous day"]')).toBeVisible();

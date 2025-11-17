@@ -12,9 +12,29 @@
 
 namespace Application\Timecard;
 
+use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
+    'router' => [
+        'routes' => [
+            'timecard' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/Timecard/:controller/:action',
+                    'constraints' => [
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ],
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application\Timecard\Controller',
+                        'controller'    => 'Index',
+                        'action'        => 'index',
+                    ],
+                ],
+            ],
+        ],
+    ],
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
@@ -25,6 +45,9 @@ return [
             'Timecard\Index' => Controller\IndexController::class,
             'Timecard\Timecard' => Controller\TimecardController::class,
             'Timecard\Caldav' => Controller\CaldavController::class,
+            'Index' => Controller\IndexController::class,
+            'Timecard' => Controller\TimecardController::class,
+            'Caldav' => Controller\CaldavController::class,
         ],
     ],
 ];
