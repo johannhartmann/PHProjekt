@@ -22,6 +22,52 @@ PHProjekt 6 is a collaborative project management suite with calendar, project t
 
 ---
 
+## ⚠️ CRITICAL: Testing and Backend Server
+
+**NEVER skip tests or ask users to do manual testing!**
+
+### Starting the PHP Backend for Tests
+
+The backend server is trivial to start - DO NOT create mocks or manual test checklists:
+
+```bash
+cd /home/user/PHProjekt/phprojekt/htdocs && php -S localhost:8080
+```
+
+That's it. The server runs on port 8080 and serves both:
+- Legacy Dojo app: `http://localhost:8080/index.php`
+- API endpoints: `http://localhost:8080/index.php/Module/Controller/Action`
+
+### Running All Tests
+
+**Always run ALL tests - unit AND E2E:**
+
+```bash
+# 1. Start PHP backend (in background or separate terminal)
+cd /home/user/PHProjekt/phprojekt/htdocs && php -S localhost:8080 &
+
+# 2. Run frontend unit tests
+cd /home/user/PHProjekt/frontend-react
+npm test -- --run
+
+# 3. Run E2E tests (requires backend)
+npm run test:e2e
+
+# 4. Run backend PHPUnit tests
+cd /home/user/PHProjekt/phprojekt
+vendor/bin/phpunit --no-coverage
+```
+
+**Test Requirements:**
+- ✅ ALL frontend unit tests must pass (100%)
+- ✅ ALL E2E tests must pass (requires backend running)
+- ✅ Backend tests should pass (pre-existing failures are documented)
+- ❌ NEVER create manual test checklists
+- ❌ NEVER suggest mocking the backend for E2E tests
+- ❌ NEVER skip E2E tests because "backend is needed"
+
+---
+
 ## Directory Map
 
 ### Backend Code (`phprojekt/`)
