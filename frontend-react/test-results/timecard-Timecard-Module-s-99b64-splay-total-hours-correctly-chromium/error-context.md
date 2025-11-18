@@ -81,13 +81,13 @@
           - heading "Timecard" [level=1] [ref=e78]
           - generic [ref=e79]:
             - button "‹" [ref=e80] [cursor=pointer]
-            - textbox [ref=e81] [cursor=pointer]: 2025-11-17
+            - textbox [ref=e81] [cursor=pointer]: 2025-11-18
             - button "›" [ref=e82] [cursor=pointer]
             - button "Today" [ref=e83] [cursor=pointer]
         - paragraph [ref=e85]: "Error: HTTP 404: Not Found"
         - generic [ref=e86]:
           - generic [ref=e87]:
-            - heading "Bookings for Monday, November 17, 2025" [level=2] [ref=e88]
+            - heading "Bookings for Tuesday, November 18, 2025" [level=2] [ref=e88]
             - generic [ref=e90]:
               - paragraph [ref=e91]: No bookings for this day.
               - paragraph [ref=e92]: Click "New" to create a booking.
@@ -96,7 +96,7 @@
             - generic [ref=e96]:
               - generic [ref=e97]:
                 - generic [ref=e98]: Start Date & Time *
-                - textbox "Start Date & Time *" [ref=e99] [cursor=pointer]: 2025-11-17T14:55
+                - textbox "Start Date & Time *" [ref=e99] [cursor=pointer]: 2025-11-18T08:12
               - generic [ref=e100]:
                 - generic [ref=e101]: End Time(leave empty for running timer)
                 - textbox "End Time(leave empty for running timer)" [ref=e102] [cursor=pointer]
