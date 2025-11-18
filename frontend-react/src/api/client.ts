@@ -39,9 +39,9 @@ import type {
 
 /**
  * API Base URL
- * Defaults to /index.php for compatibility with existing backend
+ * Uses clean URLs for Laminas MVC routing (no /index.php prefix)
  */
-const API_BASE_URL = '/index.php';
+const API_BASE_URL = '';
 
 /**
  * API Client configuration
@@ -237,7 +237,7 @@ export const timecardApi = {
    */
   async getDayBookings(date: string): Promise<TimecardBooking[]> {
     const response = await get<TimecardDayListResponse>(
-      `/Timecard/index/jsonDayList`,
+      `/Timecard/Index/jsonDayList`,
       { date }
     );
     return response.data || [];
@@ -250,7 +250,7 @@ export const timecardApi = {
    */
   async getFavoriteProjects(): Promise<TimecardFavoriteProject[]> {
     const response = await get<TimecardFavoriteProject[]>(
-      `/Timecard/index/jsonGetFavoritesProjects`
+      `/Timecard/Index/jsonGetFavoritesProjects`
     );
     return response || [];
   },
@@ -298,7 +298,7 @@ export const timecardApi = {
       timecardId?: number;
     }
   ): Promise<SaveResponse> {
-    return post<SaveResponse>(`/Timecard/index/jsonSave/nodeId/1/id/${id}`, booking);
+    return post<SaveResponse>(`/Timecard/Index/jsonSave/nodeId/1/id/${id}`, booking);
   },
 
   /**
@@ -336,7 +336,7 @@ export const timecardApi = {
    * @param csrfToken - CSRF token for security
    */
   exportToCSV(year: number, month: number, csrfToken: string): void {
-    const url = `/index.php/Timecard/index/csvList/nodeId/1/year/${year}/month/${month}/csrfToken/${csrfToken}`;
+    const url = `/Timecard/Index/csvList/nodeId/1/year/${year}/month/${month}/csrfToken/${csrfToken}`;
     window.open(url, '_blank');
   },
 };
@@ -401,7 +401,7 @@ export const projectApi = {
   async saveProject(
     project: Partial<Project> & { projectId: number }
   ): Promise<SaveResponse> {
-    return post<SaveResponse>(`/Project/index/jsonSave`, project);
+    return post<SaveResponse>(`/Project/Index/jsonSave`, project);
   },
 
   /**

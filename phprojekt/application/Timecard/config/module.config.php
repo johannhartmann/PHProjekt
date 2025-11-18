@@ -50,4 +50,9 @@ return [
             'Caldav' => Controller\CaldavController::class,
         ],
     ],
+    'view_manager' => [
+        'strategies' => [
+            'ViewJsonStrategy',
+        ],
+    ],
 ];
