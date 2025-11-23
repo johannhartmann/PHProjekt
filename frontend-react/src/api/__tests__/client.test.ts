@@ -49,10 +49,11 @@ describe('API Client', () => {
       await timecardApi.getDayBookings('2025-11-16');
 
       expect(mockFetch).toHaveBeenCalledWith(
-        '/index.php/Timecard/index/jsonDayList?date=2025-11-16',
+        '/index.php/Timecard/Index/jsonDayList?date=2025-11-16',
         expect.objectContaining({
           method: 'GET',
           credentials: 'same-origin',
+          signal: expect.any(AbortSignal),
         })
       );
     });
@@ -74,13 +75,14 @@ describe('API Client', () => {
       await timecardApi.saveBooking(bookingId, bookingData);
 
       expect(mockFetch).toHaveBeenCalledWith(
-        '/index.php/Timecard/index/jsonSave/nodeId/1/id/1',
+        '/index.php/Timecard/Index/jsonSave/nodeId/1/id/1',
         expect.objectContaining({
           method: 'POST',
           body: JSON.stringify(bookingData),
           headers: expect.objectContaining({
             'Content-Type': 'application/json',
           }),
+          signal: expect.any(AbortSignal),
         })
       );
     });
