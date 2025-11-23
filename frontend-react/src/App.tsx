@@ -45,10 +45,16 @@ import './App.css';
  * - /api-test : API client test page
  *
  * All routes use the ShellLayout wrapper for consistent navigation.
+ *
+ * Note: basename is set to /app for production (when served from PHP backend at /app/)
+ * but empty for development (Vite dev server at root)
  */
 function App() {
+  // Use /app basename in production, root in development
+  const basename = import.meta.env.MODE === 'production' ? '/app' : '';
+
   return (
-    <BrowserRouter basename="/app">
+    <BrowserRouter basename={basename}>
       <Routes>
         <Route element={<ShellLayout />}>
           {/* Dashboard */}

@@ -15,8 +15,8 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Timecard Module', () => {
   test.beforeEach(async ({ page }) => {
-    // Navigate to Timecard page
-    await page.goto('/app/timecard');
+    // Navigate to Timecard page (dev server runs at root, not /app/)
+    await page.goto('/timecard');
 
     // Wait for page to load
     await page.waitForSelector('h1:has-text("Timecard")');
