@@ -15,6 +15,7 @@ import { Modules } from './pages/admin/Modules';
 import { Settings } from './pages/admin/Settings';
 import { UserSettingsPage } from './features/settings/UserSettingsPage';
 import { TimecardDayPage } from './features/timecard/TimecardDayPage';
+import { SimpleTest } from './pages/SimpleTest';
 import './App.css';
 
 /**
@@ -84,6 +85,7 @@ function App() {
           {/* Development Tools */}
           <Route path="health" element={<Health />} />
           <Route path="api-test" element={<ApiTest />} />
+          <Route path="test" element={<SimpleTest />} />
 
           {/* Fallback route - redirect to home */}
           <Route path="*" element={<Navigate to="/" replace />} />
