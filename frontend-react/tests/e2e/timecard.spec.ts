@@ -15,8 +15,9 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Timecard Module', () => {
   test.beforeEach(async ({ page }) => {
-    // Navigate to Timecard page
-    await page.goto('/app/timecard');
+    // Navigate to Timecard page (baseURL includes /app/)
+    // Use relative path without leading slash for proper baseURL resolution
+    await page.goto('timecard');
 
     // Wait for page to load
     await page.waitForSelector('h1:has-text("Timecard")');

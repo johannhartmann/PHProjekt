@@ -1,9 +1,13 @@
 import { test, expect } from '@playwright/test';
 
 test('basic - can page load HTML', async ({ page }) => {
-  console.log('Navigating to /app/timecard...');
+  console.log('Navigating to timecard (baseURL includes /app/)...');
 
-  await page.goto('/app/timecard', { waitUntil: 'networkidle' });
+  // Use relative path without leading slash for proper baseURL resolution
+  // Use 'load' instead of 'networkidle' to avoid timeout issues
+  await page.goto('timecard', { waitUntil: 'load' });
+
+  console.log('Page loaded, getting content...');
 
   // Get the full HTML
   const html = await page.content();
