@@ -37,7 +37,8 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'npm run dev',
+    // Use preview (production build) instead of dev for more stable testing
+    command: 'npm run preview',
     // Check the actual URL where Vite is ready (includes /app/)
     url: 'http://localhost:3000/app/',
     reuseExistingServer: !process.env.CI,

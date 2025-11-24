@@ -7,17 +7,18 @@ test('basic - can page load HTML', async ({ page }) => {
   // Use 'load' instead of 'networkidle' to avoid timeout issues
   await page.goto('timecard', { waitUntil: 'load' });
 
-  console.log('Page loaded, getting content...');
+  console.log('Page loaded, waiting for React to render...');
 
-  // Get the full HTML
-  const html = await page.content();
-  console.log('HTML length:', html.length);
-  console.log('HTML preview:', html.substring(0, 1000));
+  // Try to wait for the h1 with a generous timeout
+  await page.waitForSelector('h1:has-text("Timecard")', { timeout: 30000 });
 
-  // Check title
-  const title = await page.title();
-  console.log('Page title:', title);
-  expect(title).toBe('PHProjekt');
+  console.log('Found Timecard heading!');
+
+  // Check that the heading is visible
+  const heading = page.getByRole('heading', { name: 'Timecard', level: 1 });
+  await expect(heading).toBeVisible();
+
+  console.log('Test passed!');
 
   // Check for root div
   const rootExists = await page.locator('#root').count();
