@@ -3,10 +3,9 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 
 // https://vite.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig({
   plugins: [react()],
-  // Use root path for development, /app/ for production build
-  base: mode === 'production' ? '/app/' : '/',
+  base: '/app/',
   build: {
     outDir: '../phprojekt/htdocs/app',
     emptyOutDir: true,
@@ -29,4 +28,4 @@ export default defineConfig(({ mode }) => ({
       },
     },
   },
-}))
+})
